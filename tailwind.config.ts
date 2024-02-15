@@ -36,10 +36,20 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "signup-fade-out": {
+          from: { opacity: "1" },
+          to: { opacity: "0" },
+        },
+        "signup-fade-in": {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "signup-fade-out": "signup-fade-out 0.5s ease-out",
+        "signup-fade-in": "signup-fade-in 0.5s ease-out",
       },
     },
   },
