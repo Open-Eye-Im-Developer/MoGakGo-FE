@@ -8,6 +8,7 @@ import {
 } from "@/app/_common/shadcn/ui/tabs";
 import CardFront from "./CardFront";
 import CardBack from "./CardBack";
+import { useState } from "react";
 import ChatCard from "./ChatCard";
 
 const messages = [
@@ -58,6 +59,12 @@ const messages = [
 ];
 
 function CardContainer() {
+  const [activeCard, setActiveCard] = useState(false);
+
+  const handleFlip = () => {
+    setActiveCard(!activeCard);
+  };
+
   return (
     <Tabs defaultValue="card" className="h-[550px] w-[330px] sm:w-[450px]">
       <TabsList className="grid w-full grid-cols-2">
@@ -66,7 +73,8 @@ function CardContainer() {
       </TabsList>
       <TabsContent value="card" className="group h-full [perspective:1000px]">
         <div
-          className={`relative h-full transition-all duration-500 [transform-style:preserve-3d]`}
+          onClick={handleFlip}
+          className={`relative h-full transition-all duration-500 [transform-style:preserve-3d] ${activeCard ? "[transform:rotateY(180deg)]" : ""}`}
         >
           <CardFront />
           <CardBack />
