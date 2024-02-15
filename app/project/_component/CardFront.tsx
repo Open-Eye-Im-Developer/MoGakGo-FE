@@ -58,8 +58,20 @@ export default function CardFront({}: CardFrontProps) {
           <p>🕡 16:00 ~ 18:00</p>
         </div>
         <div className="space-x-2">
-          <Button>수정</Button>
-          <Button>삭제</Button>
+          <Button
+            onClick={e => {
+              e.stopPropagation();
+            }}
+          >
+            수정
+          </Button>
+          <Button
+            onClick={e => {
+              e.stopPropagation();
+            }}
+          >
+            삭제
+          </Button>
         </div>
       </CardFooter>
     </Card>

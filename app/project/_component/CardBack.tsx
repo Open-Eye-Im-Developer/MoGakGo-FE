@@ -42,7 +42,13 @@ export default function CardBack({}: CardBackProps) {
                     </div>
                   </div>
                 </aside>
-                <Button size="sm" className="rounded-lg">
+                <Button
+                  size="sm"
+                  className="rounded-lg"
+                  onClick={e => {
+                    e.stopPropagation();
+                  }}
+                >
                   수락
                 </Button>
               </main>
