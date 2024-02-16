@@ -1,0 +1,31 @@
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "@/app/_common/shadcn/ui/form";
+import { Input } from "@/app/_common/shadcn/ui/input";
+import React from "react";
+
+interface FormTagProps extends IFormProps {}
+
+function FormPlace(props: FormTagProps) {
+  const { form } = props;
+
+  return (
+    <FormField
+      control={form.control}
+      name="place"
+      render={({ field }) => (
+        <FormItem>
+          <FormLabel className="text-base">📍 장소</FormLabel>
+          <FormControl>
+            <Input placeholder="장소를 입력하세요." {...field} />
+          </FormControl>
+        </FormItem>
+      )}
+    />
+  );
+}
+
+export default FormPlace;
