@@ -10,16 +10,25 @@ import {
 import { Progress } from "@/app/_common/shadcn/ui/progress";
 import Image from "next/image";
 import React from "react";
+import RotateButton from "./RotateButton";
 
-interface CardFrontProps {}
+interface CardFrontProps {
+  onRotate: () => void;
+}
 
-export default function CardFront({}: CardFrontProps) {
+export default function CardFront(props: CardFrontProps) {
   // TODO: 실제 사용자 데이터로 대체하기 & 프로젝트 분위기, 사용 언어, 관심 직무 태그 배치 및 데이터 연동하기
+  // TODO: 삭제, 수정 버튼 클릭 시 이벤트 연결하기 & 요청이 있을 경우 삭제하지 못하는 로직 추가하기
+  const { onRotate } = props;
+
   return (
     <Card className="absolute inset-0 left-0 top-0 shadow-md [backface-visibility:hidden]">
-      <CardHeader>
-        <CardDescription className="self-end text-lg font-bold text-[#a2a2a2]">
-          @zentechie7
+      <CardHeader className="px-4 pt-2">
+        <CardDescription className="flex justify-between text-lg font-bold text-[#a2a2a2]">
+          <span className="flex items-center gap-2">
+            <RotateButton onRotate={onRotate} />
+          </span>
+          <span className="flex items-center">@zentechie7</span>
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col items-center gap-10">
@@ -58,20 +67,8 @@ export default function CardFront({}: CardFrontProps) {
           <p>🕡 16:00 ~ 18:00</p>
         </div>
         <div className="space-x-2">
-          <Button
-            onClick={e => {
-              e.stopPropagation();
-            }}
-          >
-            수정
-          </Button>
-          <Button
-            onClick={e => {
-              e.stopPropagation();
-            }}
-          >
-            삭제
-          </Button>
+          <Button>수정</Button>
+          <Button>삭제</Button>
         </div>
       </CardFooter>
     </Card>

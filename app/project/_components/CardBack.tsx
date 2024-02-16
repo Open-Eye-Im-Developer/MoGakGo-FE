@@ -9,17 +9,23 @@ import {
 import { Separator } from "@/app/_common/shadcn/ui/separator";
 import Image from "next/image";
 import React from "react";
+import RotateButton from "./RotateButton";
 
-interface CardBackProps {}
+interface CardBackProps {
+  onRotate: () => void;
+}
 
-export default function CardBack({}: CardBackProps) {
+export default function CardBack(props: CardBackProps) {
   // TODO: 실제 사용자 데이터로 대체하기 & 사용 언어, 관심 직무 태그 배치 및 데이터 연동하기
+  const { onRotate } = props;
+
   return (
     <Card className="absolute inset-0 left-0 top-0 overflow-hidden shadow-md [backface-visibility:hidden] [transform:rotateY(180deg)]">
-      <CardHeader className="border-b bg-white py-4">
-        <CardTitle className="text-lg font-bold">요청 목록</CardTitle>
+      <CardHeader className="flex flex-row items-center justify-between border-b bg-white px-4 py-2">
+        <CardTitle className="w-fit text-lg font-bold">요청 목록</CardTitle>
+        <RotateButton onRotate={onRotate} />
       </CardHeader>
-      <CardContent className="flex h-full min-h-0 flex-col overflow-y-scroll px-0 pb-20 pt-5 ">
+      <CardContent className="flex h-full min-h-0 flex-col overflow-y-scroll px-0 pb-20 pt-5">
         <div className="flex flex-col justify-center gap-3 px-5">
           {Array.from({ length: 15 }).map((_, index) => (
             <>
@@ -42,13 +48,7 @@ export default function CardBack({}: CardBackProps) {
                     </div>
                   </div>
                 </aside>
-                <Button
-                  size="sm"
-                  className="rounded-lg"
-                  onClick={e => {
-                    e.stopPropagation();
-                  }}
-                >
+                <Button size="sm" className="rounded-lg">
                   수락
                 </Button>
               </main>

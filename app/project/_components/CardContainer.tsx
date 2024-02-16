@@ -73,11 +73,10 @@ function CardContainer() {
       </TabsList>
       <TabsContent value="card" className="group h-full [perspective:1000px]">
         <div
-          onClick={handleFlip}
           className={`relative h-full transition-all duration-500 [transform-style:preserve-3d] ${activeCard ? "[transform:rotateY(180deg)]" : ""}`}
         >
-          <CardFront />
-          <CardBack />
+          <CardFront onRotate={handleFlip} />
+          <CardBack onRotate={handleFlip} />
         </div>
       </TabsContent>
       <TabsContent value="chat" className="h-full">
