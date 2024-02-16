@@ -9,8 +9,14 @@ function Map() {
     const { offsetWidth: width, offsetHeight: height } = document.body;
     const x = width / 2 - pageX;
     const y = height / 2 - pageY;
+    const isZoomIn = event.currentTarget.style.transform.includes("scale");
+    if (isZoomIn) {
+      event.currentTarget.classList.remove("touch-none");
+      event.currentTarget.style.transform = "";
+    } else {
       event.currentTarget.classList.add("touch-none");
       event.currentTarget.style.transform = `scale(2.5) translate(${x}px, ${y}px)`;
+    }
   };
 
   return (
