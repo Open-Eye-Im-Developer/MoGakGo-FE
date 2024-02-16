@@ -1,7 +1,5 @@
 /** @type {import('next').NextConfig} */
-import pkg from "next-pwa";
-
-const withPWA = pkg;
+import withPWA from "next-pwa";
 
 const nextConfig = withPWA({
   dest: "public",
