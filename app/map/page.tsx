@@ -19,6 +19,7 @@ function Map() {
       if (tagName !== "path") return;
       event.currentTarget.classList.add("touch-none");
       event.currentTarget.style.transform = `scale(2.5) translate(${x}px, ${y}px)`;
+        parentElement.classList.add("animate-map-bounce");
     }
   };
 
