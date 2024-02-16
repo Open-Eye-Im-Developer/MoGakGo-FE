@@ -1,7 +1,8 @@
 import { ThemeProvider } from "@/app/_common/components/theme-provider";
-import type { Metadata } from "next";
 
 import ClientProvider from "./_common/components/ClientProvider";
+
+import type { Metadata } from "next";
 
 import "./globals.css";
 
@@ -17,6 +18,8 @@ export default function RootLayout({
 }>) {
   return (
     <html suppressHydrationWarning={true}>
+      <link rel="manifest" href="/manifest.json" />
+      <meta name="theme-color" content="#ffffff" />
       <body>
         <ClientProvider>
           <ThemeProvider
