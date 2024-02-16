@@ -21,7 +21,7 @@ import {
 } from "@/app/_common/shadcn/ui/card";
 import CardBack from "./CardBack";
 
-function ProjectCreateDialog() {
+function ProjectDialog() {
   const [open, setOpen] = useState(false);
   const [activeCard, setActiveCard] = useState(false);
 
@@ -59,4 +59,4 @@ function ProjectCreateDialog() {
   );
 }
 
-export default ProjectCreateDialog;
+export default ProjectDialog;
