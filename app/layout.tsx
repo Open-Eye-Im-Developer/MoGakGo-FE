@@ -1,5 +1,8 @@
 import { ThemeProvider } from "@/app/_common/components/theme-provider";
 import type { Metadata } from "next";
+
+import ClientProvider from "./_common/components/ClientProvider";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -13,16 +16,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html>
+    <html suppressHydrationWarning={true}>
       <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <ClientProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </ClientProvider>
       </body>
     </html>
   );

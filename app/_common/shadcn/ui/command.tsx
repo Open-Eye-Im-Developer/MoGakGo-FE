@@ -1,9 +1,9 @@
 "use client"
 
 import * as React from "react"
-import { type DialogProps } from "@radix-ui/react-dialog"
-import { Command as CommandPrimitive } from "cmdk"
 import { Search } from "lucide-react"
+import { Command as CommandPrimitive } from "cmdk"
+import { type DialogProps } from "@radix-ui/react-dialog"
 
 import { cn } from "@/app/_common/shadcn/utils"
 import { Dialog, DialogContent } from "@/app/_common/shadcn/ui/dialog"

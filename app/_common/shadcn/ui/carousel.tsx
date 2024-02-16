@@ -1,10 +1,10 @@
 "use client"
 
 import * as React from "react"
+import { ArrowLeft, ArrowRight } from "lucide-react"
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react"
-import { ArrowLeft, ArrowRight } from "lucide-react"
 
 import { cn } from "@/app/_common/shadcn/utils"
 import { Button } from "@/app/_common/shadcn/ui/button"
