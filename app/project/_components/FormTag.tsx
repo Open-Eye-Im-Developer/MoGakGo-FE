@@ -6,11 +6,15 @@ import {
 } from "@/app/_common/shadcn/ui/form";
 import { Input } from "@/app/_common/shadcn/ui/input";
 import React from "react";
+import useTagSelect from "../_hooks/useTagSelect";
+import { IconCircleX } from "@tabler/icons-react";
+import { Badge } from "@/app/_common/shadcn/ui/badge";
 
 interface FormTagProps extends IFormProps {}
 
 function FormTag(props: FormTagProps) {
   const { form } = props;
+  const { ref, tagList, handleAddTag, handleRemoveTag } = useTagSelect();
 
   return (
     <FormField
@@ -25,9 +29,23 @@ function FormTag(props: FormTagProps) {
           <FormControl>
             <>
               <Input
-                placeholder="조용한, 수다스러운, 할거하는, ... (최대 3개)"
+                ref={ref}
+                placeholder="조용한, 수다스러운, 할거하는 (최대 3개)"
                 className="w-full"
+                onKeyDown={handleAddTag}
               />
+              <aside className="flex flex-wrap gap-1">
+                {tagList.map(tag => (
+                  <Badge
+                    key={tag}
+                    onClick={() => handleRemoveTag(tag)}
+                    className="gap-1"
+                  >
+                    <p className="text-sm">{tag}</p>
+                    <IconCircleX size={18} />
+                  </Badge>
+                ))}
+              </aside>
             </>
           </FormControl>
         </FormItem>
