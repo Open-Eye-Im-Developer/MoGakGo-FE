@@ -1,7 +1,13 @@
 import React from "react";
 import Image from "next/image";
+import { IconMoodPuzzled } from "@tabler/icons-react";
 
 import { Progress } from "@/app/_common/shadcn/ui/progress";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/app/_common/shadcn/ui/popover";
 import {
   Card,
   CardContent,
@@ -18,6 +24,8 @@ interface CardFrontProps {
   onRotate: () => void;
 }
 
+const badgeList = ["조용한", "수다스러운이이", "각자도생"];
+
 export default function CardFront(props: CardFrontProps) {
   // TODO: 실제 사용자 데이터로 대체하기 & 프로젝트 분위기, 사용 언어, 관심 직무 태그 배치 및 데이터 연동하기
   // TODO: 삭제, 수정 버튼 클릭 시 이벤트 연결하기 & 요청이 있을 경우 삭제하지 못하는 로직 추가하기
@@ -29,6 +37,17 @@ export default function CardFront(props: CardFrontProps) {
         <CardDescription className="flex justify-between text-lg font-bold text-[#a2a2a2]">
           <span className="flex items-center gap-2">
             <RotateButton onRotate={onRotate} />
+            <Popover>
+              <PopoverTrigger>
+                <IconMoodPuzzled />
+              </PopoverTrigger>
+              <PopoverContent className="max-w-[130px]">
+                <h1 className="mb-2 text-sm font-bold">🏷️ 분위기 태그</h1>
+                {badgeList.map(bagde => (
+                  <Badge key={bagde}>{bagde}</Badge>
+                ))}
+              </PopoverContent>
+            </Popover>
           </span>
           <span className="flex items-center">@zentechie7</span>
         </CardDescription>
