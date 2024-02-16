@@ -1,12 +1,14 @@
 import React from "react";
+
+import { Input } from "@/app/_common/shadcn/ui/input";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from "@/app/_common/shadcn/ui/card";
-import { Input } from "@/app/_common/shadcn/ui/input";
 import { Button } from "@/app/_common/shadcn/ui/button";
+
 import ChatBox from "./ChatBox";
 
 interface ChatCardProps {

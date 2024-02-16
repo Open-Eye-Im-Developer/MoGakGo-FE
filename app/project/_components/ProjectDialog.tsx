@@ -1,24 +1,24 @@
 "use client";
 
-import { Button } from "@/app/_common/shadcn/ui/button";
+import React, { useState } from "react";
+import { IconPlus } from "@tabler/icons-react";
+
 import {
   Dialog,
   DialogContent,
   DialogOverlay,
-  DialogTitle,
   DialogTrigger,
-  DialogHeader,
   DialogPortal,
 } from "@/app/_common/shadcn/ui/dialog";
-import { IconPlus } from "@tabler/icons-react";
-import React, { useState } from "react";
-import ProjectCreateForm from "./ProjectCreateForm";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from "@/app/_common/shadcn/ui/card";
+import { Button } from "@/app/_common/shadcn/ui/button";
+
+import ProjectCreateForm from "./ProjectCreateForm";
 import CardBack from "./CardBack";
 
 function ProjectDialog() {
@@ -44,7 +44,7 @@ function ProjectDialog() {
           onClick={handleFlip}
           className={`relative h-full w-full transition-all duration-500 [transform-style:preserve-3d] ${activeCard ? "[transform:rotateY(180deg)]" : ""}`}
         >
-          <Card className="absolute h-full inset-0 left-0 top-0 shadow-md [backface-visibility:hidden] flex flex-col ">
+          <Card className="absolute inset-0 left-0 top-0 flex h-full flex-col shadow-md [backface-visibility:hidden] ">
             <CardHeader>
               <CardTitle>프로젝트 카드 생성</CardTitle>
             </CardHeader>

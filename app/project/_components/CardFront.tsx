@@ -1,5 +1,7 @@
-import { Badge } from "@/app/_common/shadcn/ui/badge";
-import { Button } from "@/app/_common/shadcn/ui/button";
+import React from "react";
+import Image from "next/image";
+
+import { Progress } from "@/app/_common/shadcn/ui/progress";
 import {
   Card,
   CardContent,
@@ -7,9 +9,9 @@ import {
   CardFooter,
   CardHeader,
 } from "@/app/_common/shadcn/ui/card";
-import { Progress } from "@/app/_common/shadcn/ui/progress";
-import Image from "next/image";
-import React from "react";
+import { Button } from "@/app/_common/shadcn/ui/button";
+import { Badge } from "@/app/_common/shadcn/ui/badge";
+
 import RotateButton from "./RotateButton";
 
 interface CardFrontProps {

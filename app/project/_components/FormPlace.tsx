@@ -1,11 +1,12 @@
+import React from "react";
+
+import { Input } from "@/app/_common/shadcn/ui/input";
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
 } from "@/app/_common/shadcn/ui/form";
-import { Input } from "@/app/_common/shadcn/ui/input";
-import React from "react";
 
 interface FormTagProps extends IFormProps {}
 

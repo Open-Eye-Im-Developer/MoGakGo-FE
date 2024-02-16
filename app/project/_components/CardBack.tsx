@@ -1,14 +1,16 @@
-import { Badge } from "@/app/_common/shadcn/ui/badge";
-import { Button } from "@/app/_common/shadcn/ui/button";
+import React from "react";
+import Image from "next/image";
+
+import { Separator } from "@/app/_common/shadcn/ui/separator";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from "@/app/_common/shadcn/ui/card";
-import { Separator } from "@/app/_common/shadcn/ui/separator";
-import Image from "next/image";
-import React from "react";
+import { Button } from "@/app/_common/shadcn/ui/button";
+import { Badge } from "@/app/_common/shadcn/ui/badge";
+
 import RotateButton from "./RotateButton";
 
 interface CardBackProps {
@@ -27,7 +29,7 @@ export default function CardBack(props: CardBackProps) {
       </CardHeader>
       <CardContent className="flex h-full min-h-0 flex-col overflow-y-scroll px-0 pb-20 pt-5">
         <div className="flex flex-col justify-center gap-3 px-5">
-          {Array.from({ length: 15 }).map((_, index) => (
+          {Array.from({ length: 15 }).map(() => (
             <>
               <main className="flex items-center justify-between">
                 <aside className="flex items-center gap-3">

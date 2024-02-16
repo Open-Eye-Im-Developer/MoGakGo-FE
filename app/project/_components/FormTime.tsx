@@ -1,4 +1,5 @@
-import { FormField, FormItem, FormLabel } from "@/app/_common/shadcn/ui/form";
+import React from "react";
+
 import {
   Select,
   SelectContent,
@@ -6,7 +7,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/app/_common/shadcn/ui/select";
-import React from "react";
+import { FormField, FormItem, FormLabel } from "@/app/_common/shadcn/ui/form";
+
 import useTime from "../_hooks/useTime";
 
 interface FormTimeProps extends IFormProps {

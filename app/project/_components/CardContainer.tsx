@@ -1,15 +1,17 @@
 "use client";
 
+import { useState } from "react";
+
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from "@/app/_common/shadcn/ui/tabs";
+
+import ChatCard from "./ChatCard";
 import CardFront from "./CardFront";
 import CardBack from "./CardBack";
-import { useState } from "react";
-import ChatCard from "./ChatCard";
 
 const messages = [
   {

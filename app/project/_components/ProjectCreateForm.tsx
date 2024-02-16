@@ -1,15 +1,17 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "@/app/_common/shadcn/ui/button";
-import { Form, FormMessage } from "@/app/_common/shadcn/ui/form";
-import { Separator } from "@/app/_common/shadcn/ui/separator";
+import { useForm } from "react-hook-form";
 import { DialogClose } from "@radix-ui/react-dialog";
-import FormPlace from "./FormPlace";
-import FormTag from "./FormTag";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import { Separator } from "@/app/_common/shadcn/ui/separator";
+import { Form, FormMessage } from "@/app/_common/shadcn/ui/form";
+import { Button } from "@/app/_common/shadcn/ui/button";
+
 import FormTime from "./FormTime";
+import FormTag from "./FormTag";
+import FormPlace from "./FormPlace";
 
 const formSchema = z
   .object({
@@ -53,7 +55,7 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
   });
 
   // TODO: 서버로 form 데이터 전송하는 로직 추가
-  const handleOnSubmit = (values: z.infer<typeof formSchema>) => {
+  const handleOnSubmit = () => {
     onClose && onClose(false);
   };
 

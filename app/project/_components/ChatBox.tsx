@@ -1,5 +1,6 @@
-import { cn } from "@/app/_common/shadcn/utils";
 import React from "react";
+
+import { cn } from "@/app/_common/shadcn/utils";
 
 interface ChatBoxProps {
   direction: "flex-row-reverse" | "flex-row";

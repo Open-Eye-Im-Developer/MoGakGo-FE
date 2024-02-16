@@ -1,14 +1,16 @@
+import React from "react";
+import { IconCircleX } from "@tabler/icons-react";
+
+import { Input } from "@/app/_common/shadcn/ui/input";
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
 } from "@/app/_common/shadcn/ui/form";
-import { Input } from "@/app/_common/shadcn/ui/input";
-import React from "react";
-import useTagSelect from "../_hooks/useTagSelect";
-import { IconCircleX } from "@tabler/icons-react";
 import { Badge } from "@/app/_common/shadcn/ui/badge";
+
+import useTagSelect from "../_hooks/useTagSelect";
 
 interface FormTagProps extends IFormProps {}
 
@@ -20,7 +22,7 @@ function FormTag(props: FormTagProps) {
     <FormField
       control={form.control}
       name="tags"
-      render={({ field }) => (
+      render={() => (
         <FormItem>
           <FormLabel className="text-base">
             <span>🏷 태그</span>
