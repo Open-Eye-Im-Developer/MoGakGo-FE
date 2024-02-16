@@ -4,7 +4,7 @@ const shadowColor = "#A4B88F";
 
 function MapComponent() {
   return (
-    <div className="w-full">
+    <div className="w-full md:w-4/5 lg:w-3/5">
       <svg
         viewBox="0 0 1476 1304"
         fill="none"
