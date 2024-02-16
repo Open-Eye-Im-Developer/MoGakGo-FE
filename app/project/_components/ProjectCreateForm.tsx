@@ -101,9 +101,13 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
           </main>
         </section>
         <footer className="flex justify-end gap-1">
-          <Button type="submit">생성</Button>
+          <Button type="submit" onClick={e => e.stopPropagation()}>
+            생성
+          </Button>
           <DialogClose asChild>
-            <Button type="button">취소</Button>
+            <Button type="button" onClick={e => e.stopPropagation()}>
+              취소
+            </Button>
           </DialogClose>
         </footer>
       </form>

@@ -33,6 +33,7 @@ function FormTag(props: FormTagProps) {
                 placeholder="조용한, 수다스러운, 할거하는 (최대 3개)"
                 className="w-full"
                 onKeyDown={handleAddTag}
+                onClick={e => e.stopPropagation()}
               />
               <aside className="flex flex-wrap gap-1">
                 {tagList.map(tag => (

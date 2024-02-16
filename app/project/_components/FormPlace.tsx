@@ -20,7 +20,11 @@ function FormPlace(props: FormTagProps) {
         <FormItem>
           <FormLabel className="text-base">📍 장소</FormLabel>
           <FormControl>
-            <Input placeholder="장소를 입력하세요." {...field} />
+            <Input
+              placeholder="장소를 입력하세요."
+              onClick={(e) => e.stopPropagation()}
+              {...field}
+            />
           </FormControl>
         </FormItem>
       )}
