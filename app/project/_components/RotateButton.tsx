@@ -12,7 +12,7 @@ function RotateButton(props: RotateButtonProps) {
   return (
     <Button
       variant="ghost"
-      className="mt-0 flex items-center justify-center p-0 text-[#a2a2a2]"
+      className="mt-0 flex items-center justify-center p-2 text-[#a2a2a2]"
       onClick={onRotate}
     >
       <IconRotate360 />
