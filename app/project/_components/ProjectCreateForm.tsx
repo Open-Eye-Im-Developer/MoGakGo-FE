@@ -54,7 +54,7 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
     },
   });
 
-  // TODO: 서버로 form 데이터 전송하는 로직 추가
+  // TODO: 서버로 form 데이터 전송하는 로직 추가 & form의 시간정보 처리
   const handleOnSubmit = () => {
     onClose && onClose(false);
   };
@@ -96,20 +96,18 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
                 />
               </div>
               {form.formState.errors.startMinute && (
-                <FormMessage>종료 시각이 시작 시각보다 이릅니다.</FormMessage>
+                <FormMessage>
+                  {form.formState.errors.startMinute.message}
+                </FormMessage>
               )}
             </aside>
             <FormTag form={form} />
           </main>
         </section>
         <footer className="flex justify-end gap-1">
-          <Button type="submit" onClick={e => e.stopPropagation()}>
-            생성
-          </Button>
+          <Button type="submit">생성</Button>
           <DialogClose asChild>
-            <Button type="button" onClick={e => e.stopPropagation()}>
-              취소
-            </Button>
+            <Button type="button">취소</Button>
           </DialogClose>
         </footer>
       </form>
