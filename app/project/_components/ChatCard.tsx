@@ -18,7 +18,7 @@ interface ChatCardProps {
   }[];
 }
 
-export default function ChatCard(props: ChatCardProps) {
+function ChatCard(props: ChatCardProps) {
   const { messages } = props;
 
   return (
@@ -60,3 +60,5 @@ export default function ChatCard(props: ChatCardProps) {
     </Card>
   );
 }
+
+export default ChatCard;
