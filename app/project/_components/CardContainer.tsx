@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-
 import {
   Tabs,
   TabsContent,
@@ -9,6 +7,7 @@ import {
   TabsTrigger,
 } from "@/app/_common/shadcn/ui/tabs";
 
+import useFlip from "../_hooks/useFlip";
 import ChatCard from "./ChatCard";
 import CardFront from "./CardFront";
 import CardBack from "./CardBack";
@@ -61,11 +60,7 @@ const messages = [
 ];
 
 function CardContainer() {
-  const [activeCard, setActiveCard] = useState(false);
-
-  const handleFlip = () => {
-    setActiveCard(!activeCard);
-  };
+  const { flipped, handleFlip } = useFlip();
 
   return (
     <Tabs defaultValue="card" className="h-[550px] w-[330px] sm:w-[450px]">
@@ -75,7 +70,7 @@ function CardContainer() {
       </TabsList>
       <TabsContent value="card" className="group h-full [perspective:1000px]">
         <div
-          className={`relative h-full transition-all duration-500 [transform-style:preserve-3d] ${activeCard ? "[transform:rotateY(180deg)]" : ""}`}
+          className={`relative h-full transition-all duration-500 [transform-style:preserve-3d] ${flipped ? "[transform:rotateY(180deg)]" : ""}`}
         >
           <CardFront onRotate={handleFlip} />
           <CardBack onRotate={handleFlip} />
