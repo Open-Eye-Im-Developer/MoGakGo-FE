@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import { IconMoodPuzzled } from "@tabler/icons-react";
@@ -15,13 +17,13 @@ import {
   CardFooter,
   CardHeader,
 } from "@/app/_common/shadcn/ui/card";
-import { Button } from "@/app/_common/shadcn/ui/button";
 import { Badge } from "@/app/_common/shadcn/ui/badge";
 
 import RotateButton from "./RotateButton";
+import ProjectRemoveDialog from "./ProjectRemoveDialog";
 
 interface CardFrontProps {
-  onRotate: () => void;
+    onRotate: () => void;
 }
 
 const badgeList = ["조용한", "수다스러운이이", "각자도생"];
@@ -87,10 +89,7 @@ export default function CardFront(props: CardFrontProps) {
           <p className="font-bold">📍 맥심플랜트 이태원점</p>
           <p>🕡 16:00 ~ 18:00</p>
         </div>
-        <div className="space-x-2">
-          <Button>수정</Button>
-          <Button>삭제</Button>
-        </div>
+        <ProjectRemoveDialog />
       </CardFooter>
     </Card>
   );
