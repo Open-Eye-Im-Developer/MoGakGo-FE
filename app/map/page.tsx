@@ -4,6 +4,8 @@ import { MouseEvent } from "react";
 
 import MapComponent from "@/app/_common/components/MapComponent";
 
+import REGION_CODE from "@/app/_common/constants/regionCode";
+
 function Map() {
   let previousRegion: SVGElement | null = null;
   const handleRegionClick = (event: MouseEvent<HTMLDivElement>) => {
@@ -12,9 +14,10 @@ function Map() {
     const x = width / 2 - pageX;
     const y = height / 2 - pageY;
     const isZoomIn = event.currentTarget.style.transform.includes("scale");
-    const { tagName, parentElement } = event.target as SVGElement | HTMLElement;
+    const target = event.target as SVGElement | HTMLElement;
+
     if (isZoomIn) {
-      if (tagName === "path") return;
+      if (target.tagName === "path") return;
       event.currentTarget.classList.remove("touch-none");
       event.currentTarget.style.transform = "";
       if (previousRegion instanceof SVGElement) {
@@ -22,12 +25,14 @@ function Map() {
         previousRegion = null;
       }
     } else {
-      if (tagName !== "path") return;
+      if (target.tagName !== "path") return;
+      const currentRegion = target.closest(".region");
+      console.log(currentRegion && REGION_CODE[currentRegion.id]);
       event.currentTarget.classList.add("touch-none");
       event.currentTarget.style.transform = `scale(2.5) translate(${x}px, ${y}px)`;
-      if (!previousRegion && parentElement instanceof SVGElement) {
-        previousRegion = parentElement;
-        parentElement.classList.add("animate-map-bounce");
+      if (!previousRegion && currentRegion instanceof SVGElement) {
+        previousRegion = currentRegion;
+        currentRegion.classList.add("animate-map-bounce");
       }
     }
   };
