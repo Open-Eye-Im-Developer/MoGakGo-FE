@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { IconMoodPuzzled } from "@tabler/icons-react";
 
+import { cn } from "@/app/_common/shadcn/utils";
 import { Progress } from "@/app/_common/shadcn/ui/progress";
 import {
   Popover,
@@ -23,7 +24,8 @@ import RotateButton from "./RotateButton";
 import ProjectRemoveDialog from "./ProjectRemoveDialog";
 
 interface CardFrontProps {
-    onRotate: () => void;
+  initialRotate?: boolean;
+  onRotate: () => void;
 }
 
 const badgeList = ["조용한", "수다스러운이이", "각자도생"];
@@ -31,10 +33,15 @@ const badgeList = ["조용한", "수다스러운이이", "각자도생"];
 export default function CardFront(props: CardFrontProps) {
   // TODO: 실제 사용자 데이터로 대체하기 & 프로젝트 분위기, 사용 언어, 관심 직무 태그 배치 및 데이터 연동하기
   // TODO: 삭제, 수정 버튼 클릭 시 이벤트 연결하기 & 요청이 있을 경우 삭제하지 못하는 로직 추가하기
-  const { onRotate } = props;
+  const { initialRotate, onRotate } = props;
 
   return (
-    <Card className="absolute inset-0 left-0 top-0 shadow-md [backface-visibility:hidden]">
+    <Card
+      className={cn(
+        `absolute inset-0 left-0 top-0 shadow-md [backface-visibility:hidden]`,
+        initialRotate ? "[transform:rotateY(180deg)]" : "",
+      )}
+    >
       <CardHeader className="px-4 pt-2">
         <CardDescription className="flex justify-between text-lg font-bold text-[#a2a2a2]">
           <span className="flex items-center gap-2">
@@ -84,13 +91,15 @@ export default function CardFront(props: CardFrontProps) {
           </div>
         </div>
       </CardContent>
-      <CardFooter className="flex items-center justify-between">
-        <div>
-          <p className="font-bold">📍 맥심플랜트 이태원점</p>
-          <p>🕡 16:00 ~ 18:00</p>
-        </div>
-        <ProjectRemoveDialog />
-      </CardFooter>
+      {!initialRotate && (
+        <CardFooter className="flex items-center justify-between">
+          <div>
+            <p className="font-bold">📍 맥심플랜트 이태원점</p>
+            <p>🕡 16:00 ~ 18:00</p>
+          </div>
+          <ProjectRemoveDialog />
+        </CardFooter>
+      )}
     </Card>
   );
 }

@@ -21,7 +21,7 @@ import { Button } from "@/app/_common/shadcn/ui/button";
 import useFlip from "../_hooks/useFlip";
 import RotateButton from "./RotateButton";
 import ProjectCreateForm from "./ProjectCreateForm";
-import CardBack from "./CardBack";
+import CardFront from "./CardFront";
 
 function ProjectDialog() {
   const [open, setOpen] = useState(false);
@@ -50,7 +50,7 @@ function ProjectDialog() {
                 <ProjectCreateForm onClose={setOpen} />
               </CardContent>
             </Card>
-            <CardBack onRotate={handleFlip} />
+            <CardFront onRotate={handleFlip} initialRotate />
           </div>
         </DialogContent>
       </DialogPortal>
