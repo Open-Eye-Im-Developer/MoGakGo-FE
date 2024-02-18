@@ -2,6 +2,8 @@ import dayjs from "dayjs";
 
 import { ThemeProvider } from "@/app/_common/components/theme-provider";
 
+import ClientProvider from "./_common/components/ClientProvider";
+
 import type { Metadata } from "next";
 
 import "./globals.css";
@@ -21,16 +23,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html>
+    <html suppressHydrationWarning={true}>
+      <link rel="manifest" href="/manifest.json" />
+      <meta name="theme-color" content="#ffffff" />
       <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <ClientProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </ClientProvider>
       </body>
     </html>
   );
