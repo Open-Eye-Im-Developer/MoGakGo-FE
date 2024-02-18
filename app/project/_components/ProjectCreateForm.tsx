@@ -73,7 +73,7 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
         className="flex h-full w-full flex-col justify-between space-y-5"
       >
         <section>
-          <main className="flex flex-col gap-7">
+          <main className="flex flex-col gap-5">
             <FormPlace form={form} />
             <aside className="flex flex-col gap-5">
               <div className="flex justify-between gap-3">
