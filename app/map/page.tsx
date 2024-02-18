@@ -17,12 +17,10 @@ function Map() {
     const isRegion = target.tagName === "path";
 
     if (isZoomIn) {
-      if (isRegion) return;
+      if (isRegion || !(previousRegion.current instanceof SVGElement)) return;
 
       map.classList.remove("touch-none");
       map.style.transform = "";
-      if (previousRegion instanceof SVGElement) {
-      }
       previousRegion.current.classList.remove("animate-map-bounce");
       previousRegion.current = null;
     } else {
