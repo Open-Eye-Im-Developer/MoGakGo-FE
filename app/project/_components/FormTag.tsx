@@ -16,7 +16,7 @@ interface FormTagProps extends IFormProps {}
 
 function FormTag(props: FormTagProps) {
   const { form } = props;
-  const { ref, tagList, handleAddTag, handleRemoveTag } = useTagSelect();
+  const { ref, tagList, handleAddTag, handleRemoveTag } = useTagSelect(form);
 
   return (
     <FormField
@@ -35,7 +35,6 @@ function FormTag(props: FormTagProps) {
                 placeholder="조용한, 수다스러운, 할거하는 (최대 3개)"
                 className="w-full"
                 onKeyDown={handleAddTag}
-                onClick={e => e.stopPropagation()}
               />
               <aside className="flex flex-wrap gap-1">
                 {tagList.map(tag => (

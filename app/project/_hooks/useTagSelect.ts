@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 
-function useTagSelect() {
+function useTagSelect(form: IFormProps["form"]) {
   const ref = useRef<HTMLInputElement>(null);
   const [tagList, setTagList] = useState<string[]>([]);
 
@@ -16,10 +16,13 @@ function useTagSelect() {
 
     if (ref.current) {
       const tag = ref.current?.value || "";
-      
+
       if (key === "Enter") {
         if (!isValid(tag)) return;
         setTagList(prev => [...prev, tag]);
+        const formattedTagList = tagList.map(t => ({ content: t }));
+        formattedTagList.push({ content: tag });
+        form.setValue("tags", formattedTagList);
         ref.current!.value = "";
       }
     }
@@ -27,6 +30,12 @@ function useTagSelect() {
 
   const handleRemoveTag = (tag: string) => {
     setTagList(prev => prev.filter(t => t !== tag));
+    
+    const currentTagList = form.getValues("tags");
+    form.setValue(
+      "tags",
+      currentTagList.filter((t: { content: string }) => t.content !== tag),
+    );
   };
 
   return { ref, tagList, handleAddTag, handleRemoveTag };
