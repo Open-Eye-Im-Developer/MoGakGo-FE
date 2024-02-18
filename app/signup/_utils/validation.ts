@@ -32,7 +32,6 @@ export const WantedJobLabelEnum = z.enum([
 
 export const SignupFormSchema = z.object({
   username: z.string().min(2).max(20),
-  // TODO: 처음에 하나도 선택하지 않았을때 error로 처리하지 않도록 수정
   wanted_job: z.array(WantedJobLabelEnum).refine(value => value.length > 0, {
     message: "최소 1개의 관심 직무를 선택해주세요.",
   }),

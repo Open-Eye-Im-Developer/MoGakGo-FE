@@ -45,7 +45,12 @@ function SignupSecondStep({
         <small className="xs text-gray-500">
           마이페이지에서 갱신이 가능합니다.
         </small>
-        <Button size={"lg"} className="w-full" onClick={handleNextStep}>
+        <Button
+          type="button"
+          size={"lg"}
+          className="w-full"
+          onClick={handleNextStep}
+        >
           다음
         </Button>
       </section>

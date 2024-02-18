@@ -26,7 +26,7 @@ function SignupForm() {
     resolver: zodResolver(SignupFormSchema),
     defaultValues: {
       username: "",
-      wanted_job: ["BACKEND"],
+      wanted_job: [],
       bio: "",
       github_id: "example",
       avatar_url: "/images/cat.webp",
