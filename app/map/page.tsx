@@ -41,12 +41,11 @@ function Map() {
       if (!isRegion) return;
 
       const currentRegion = target.closest(".region");
-      console.log(currentRegion && REGION_CODE[currentRegion.id]);
-      if (!previousRegion && currentRegion instanceof SVGElement) {
-        previousRegion = currentRegion;
+      if (currentRegion instanceof SVGElement) {
         map.classList.add("touch-none");
         zoomRegion(REGION_CODE[currentRegion.id]);
         currentRegion.classList.add("animate-map-bounce");
+        previousRegion = currentRegion;
       }
     }
   };
