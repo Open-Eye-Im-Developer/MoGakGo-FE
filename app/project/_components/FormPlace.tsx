@@ -8,10 +8,20 @@ import {
   FormLabel,
 } from "@/app/_common/shadcn/ui/form";
 
+import useDebounceSearch from "../_hooks/useDebounceSearch";
+import PlaceList from "./PlaceList";
+
 interface FormTagProps extends IFormProps {}
 
 function FormPlace(props: FormTagProps) {
   const { form } = props;
+  const {
+    placeInput,
+    handleChangePlace,
+    handleClickPlace,
+    placeList,
+    overlay,
+  } = useDebounceSearch();
 
   return (
     <FormField
@@ -21,11 +31,19 @@ function FormPlace(props: FormTagProps) {
         <FormItem>
           <FormLabel className="text-base">📍 장소</FormLabel>
           <FormControl>
-            <Input
-              placeholder="장소를 입력하세요."
-              onClick={(e) => e.stopPropagation()}
-              {...field}
-            />
+            <>
+              <Input
+                {...field}
+                placeholder="장소를 입력하세요."
+                value={placeInput || ""}
+                onChangeCapture={handleChangePlace}
+              />
+              <PlaceList
+                placeList={placeList}
+                isOverlayered={overlay}
+                onClickPlace={handleClickPlace}
+              />
+            </>
           </FormControl>
         </FormItem>
       )}
