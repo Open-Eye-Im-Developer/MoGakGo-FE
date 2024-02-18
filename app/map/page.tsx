@@ -28,14 +28,16 @@ function Map() {
     const x = width / 2 - pageX;
     const y = height / 2 - pageY;
     const isZoomIn = event.currentTarget.style.transform.includes("scale");
+    const map = document.querySelector("#map-wrap") as HTMLDivElement;
+    const isZoomIn = map.style.transform.includes("scale");
     const target = event.target as SVGElement | HTMLElement;
     const isRegion = target.tagName === "path";
 
     if (isZoomIn) {
-      event.currentTarget.classList.remove("touch-none");
-      event.currentTarget.style.transform = "";
       if (isRegion) return;
 
+      map.classList.remove("touch-none");
+      map.style.transform = "";
       if (previousRegion instanceof SVGElement) {
         previousRegion.classList.remove("animate-map-bounce");
         previousRegion = null;
@@ -45,10 +47,10 @@ function Map() {
 
       const currentRegion = target.closest(".region");
       console.log(currentRegion && REGION_CODE[currentRegion.id]);
-      event.currentTarget.classList.add("touch-none");
       event.currentTarget.style.transform = `scale(2.5) translate(${x}px, ${y}px)`;
       if (!previousRegion && currentRegion instanceof SVGElement) {
         previousRegion = currentRegion;
+        map.classList.add("touch-none");
         currentRegion.classList.add("animate-map-bounce");
       }
     }
@@ -56,6 +58,7 @@ function Map() {
 
   return (
     <div
+      id="map-wrap"
       onClick={handleRegionClick}
       className="flex h-screen w-screen items-center justify-center p-4 transition-all duration-1000"
     >
