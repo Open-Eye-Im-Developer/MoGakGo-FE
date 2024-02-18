@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import REGION_CODE from "../constants/regionCode";
 
 const strokeColor = "white";
@@ -10,6 +12,10 @@ interface Props {
 }
 
 function MapComponent({ regionCode }: Props) {
+  useEffect(() => {
+    regionCode && zoomInRegion(regionCode);
+  }, [regionCode]);
+
   const zoomInRegion = (regionCode: string) => {
     const map = document.querySelector("#map-wrap") as HTMLDivElement;
     const regionName = Object.keys(REGION_CODE).find(
