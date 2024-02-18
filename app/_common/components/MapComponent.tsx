@@ -1,9 +1,27 @@
+import REGION_CODE from "../constants/regionCode";
+
 const strokeColor = "white";
 const mainColor = "#E8F7D9";
 const shadowColor = "#A4B88F";
 const textColor = "black";
 
 function MapComponent() {
+  const zoomInRegion = (regionCode: string) => {
+    const map = document.querySelector("#map-wrap") as HTMLDivElement;
+    const regionName = Object.keys(REGION_CODE).find(
+      region => REGION_CODE[region] === regionCode,
+    );
+    const region = document.querySelector(`#${regionName}`);
+
+    if (!region || !map) return;
+
+    const { bottom, top, right, left } = region.getBoundingClientRect();
+    const { offsetWidth: width, offsetHeight: height } = document.body;
+    map.classList.add("touch-none");
+    map.style.transform = `scale(2.5) translate(${width / 2 - (right + left) / 2}px, ${height / 2 - (bottom + top) / 2}px)`;
+    region.classList.add("animate-map-bounce");
+  };
+
   return (
     <div className="w-full md:w-4/5 lg:w-3/5">
       <svg
