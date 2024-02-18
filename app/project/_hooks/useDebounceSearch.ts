@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function useDebounceSearch() {
+function useDebounceSearch(form: IFormProps["form"]) {
   const [placeInput, setPlaceInput] = useState<string>("");
   const [placeList, setPlaceList] = useState<PlaceItem[]>([]);
   const [overlay, setOverlay] = useState<boolean>(false);
@@ -14,6 +14,7 @@ function useDebounceSearch() {
   const handleClickPlace = async (place: PlaceItem) => {
     setOverlay(false);
     setPlaceInput(place.place_name);
+    form.setValue("place", place.place_name);
   };
 
   useEffect(() => {
