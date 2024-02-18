@@ -23,11 +23,6 @@ function Map() {
 
   let previousRegion: SVGElement | null = null;
   const handleRegionClick = (event: MouseEvent<HTMLDivElement>) => {
-    const { pageX, pageY } = event;
-    const { offsetWidth: width, offsetHeight: height } = document.body;
-    const x = width / 2 - pageX;
-    const y = height / 2 - pageY;
-    const isZoomIn = event.currentTarget.style.transform.includes("scale");
     const map = document.querySelector("#map-wrap") as HTMLDivElement;
     const isZoomIn = map.style.transform.includes("scale");
     const target = event.target as SVGElement | HTMLElement;
@@ -47,10 +42,10 @@ function Map() {
 
       const currentRegion = target.closest(".region");
       console.log(currentRegion && REGION_CODE[currentRegion.id]);
-      event.currentTarget.style.transform = `scale(2.5) translate(${x}px, ${y}px)`;
       if (!previousRegion && currentRegion instanceof SVGElement) {
         previousRegion = currentRegion;
         map.classList.add("touch-none");
+        zoomRegion(REGION_CODE[currentRegion.id]);
         currentRegion.classList.add("animate-map-bounce");
       }
     }
