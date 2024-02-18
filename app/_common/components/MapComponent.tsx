@@ -5,7 +5,11 @@ const mainColor = "#E8F7D9";
 const shadowColor = "#A4B88F";
 const textColor = "black";
 
-function MapComponent() {
+interface Props {
+  regionCode: string;
+}
+
+function MapComponent({ regionCode }: Props) {
   const zoomInRegion = (regionCode: string) => {
     const map = document.querySelector("#map-wrap") as HTMLDivElement;
     const regionName = Object.keys(REGION_CODE).find(
