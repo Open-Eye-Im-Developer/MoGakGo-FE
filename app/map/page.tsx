@@ -1,6 +1,6 @@
 "use client";
 
-import { MouseEvent } from "react";
+import { MouseEvent, useRef, useState } from "react";
 
 import MapComponent from "@/app/_common/components/MapComponent";
 
@@ -8,8 +8,8 @@ import REGION_CODE from "@/app/_common/constants/regionCode";
 
 function Map() {
   const [regionCode, setRegionCode] = useState("");
+  const previousRegion = useRef<SVGElement | null>(null);
 
-  let previousRegion: SVGElement | null = null;
   const handleRegionClick = (event: MouseEvent<HTMLDivElement>) => {
     const map = document.querySelector("#map-wrap") as HTMLDivElement;
     const isZoomIn = map.style.transform.includes("scale");
@@ -22,16 +22,16 @@ function Map() {
       map.classList.remove("touch-none");
       map.style.transform = "";
       if (previousRegion instanceof SVGElement) {
-        previousRegion.classList.remove("animate-map-bounce");
-        previousRegion = null;
       }
+      previousRegion.current.classList.remove("animate-map-bounce");
+      previousRegion.current = null;
     } else {
       if (!isRegion) return;
 
       const currentRegion = target.closest(".region");
       if (currentRegion instanceof SVGElement) {
-        previousRegion = currentRegion;
         setRegionCode(REGION_CODE[currentRegion.id]);
+        previousRegion.current = currentRegion;
       }
     }
   };
