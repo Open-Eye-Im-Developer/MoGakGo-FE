@@ -7,6 +7,7 @@ import MapComponent from "@/app/_common/components/MapComponent";
 import REGION_CODE from "@/app/_common/constants/regionCode";
 
 function Map() {
+  const [regionCode, setRegionCode] = useState("");
 
   let previousRegion: SVGElement | null = null;
   const handleRegionClick = (event: MouseEvent<HTMLDivElement>) => {
@@ -30,6 +31,7 @@ function Map() {
       const currentRegion = target.closest(".region");
       if (currentRegion instanceof SVGElement) {
         previousRegion = currentRegion;
+        setRegionCode(REGION_CODE[currentRegion.id]);
       }
     }
   };
@@ -40,7 +42,7 @@ function Map() {
       onClick={handleRegionClick}
       className="flex h-screen w-screen items-center justify-center p-4 transition-all duration-1000"
     >
-      <MapComponent />
+      <MapComponent regionCode={regionCode} />
     </div>
   );
 }
