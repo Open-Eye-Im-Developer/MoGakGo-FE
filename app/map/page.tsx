@@ -29,17 +29,20 @@ function Map() {
     const y = height / 2 - pageY;
     const isZoomIn = event.currentTarget.style.transform.includes("scale");
     const target = event.target as SVGElement | HTMLElement;
+    const isRegion = target.tagName === "path";
 
     if (isZoomIn) {
-      if (target.tagName === "path") return;
       event.currentTarget.classList.remove("touch-none");
       event.currentTarget.style.transform = "";
+      if (isRegion) return;
+
       if (previousRegion instanceof SVGElement) {
         previousRegion.classList.remove("animate-map-bounce");
         previousRegion = null;
       }
     } else {
-      if (target.tagName !== "path") return;
+      if (!isRegion) return;
+
       const currentRegion = target.closest(".region");
       console.log(currentRegion && REGION_CODE[currentRegion.id]);
       event.currentTarget.classList.add("touch-none");
