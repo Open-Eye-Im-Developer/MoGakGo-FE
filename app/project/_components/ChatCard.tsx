@@ -22,8 +22,8 @@ function ChatCard(props: ChatCardProps) {
   const { messages } = props;
 
   return (
-    <Card className="overflow-hidden shadow-md">
-      <CardHeader className="border-b bg-white py-4">
+    <Card className="card overflow-hidden border-none shadow-md">
+      <CardHeader className="border-b py-4">
         <CardTitle className="text-base">📍 맥심플랜트 이태원점</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col p-0 px-0">

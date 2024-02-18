@@ -22,10 +22,10 @@ function CardBack(props: CardBackProps) {
   const { onRotate } = props;
 
   return (
-    <Card className="absolute inset-0 left-0 top-0 overflow-hidden shadow-md [backface-visibility:hidden] [transform:rotateY(180deg)]">
-      <CardHeader className="flex flex-row items-center justify-between border-b bg-white px-4 py-2">
-        <CardTitle className="flex grow flex-row items-center justify-between text-lg font-bold">
-          <p>요청 목록</p>
+    <Card className="card absolute inset-0 left-0 top-0 overflow-hidden border-none shadow-md [backface-visibility:hidden] [transform:rotateY(180deg)]">
+      <CardHeader className="flex flex-row items-center justify-between border-b px-4 py-2">
+        <CardTitle className="flex grow flex-row items-center justify-between pt-1 text-lg font-bold">
+          <p className="pl-2">요청 목록</p>
           <RotateButton onRotate={onRotate} />
         </CardTitle>
       </CardHeader>

@@ -41,7 +41,7 @@ function ProjectDialog() {
           <div
             className={`relative h-full w-full transition-all duration-500 [transform-style:preserve-3d] ${flipped ? "[transform:rotateY(180deg)]" : ""}`}
           >
-            <Card className="absolute inset-0 left-0 top-0 flex h-full flex-col shadow-md [backface-visibility:hidden] ">
+            <Card className="card absolute inset-0 left-0 top-0 flex h-full flex-col border-none px-1 pt-1 shadow-md [backface-visibility:hidden]">
               <CardHeader className="flex flex-row items-center justify-between border-b px-4 py-2">
                 <CardTitle className="flex grow flex-row items-center justify-between text-lg">
                   <p>프로젝트 카드 생성</p>
