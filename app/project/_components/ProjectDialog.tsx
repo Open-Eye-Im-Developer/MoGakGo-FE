@@ -43,8 +43,10 @@ function ProjectDialog() {
           >
             <Card className="absolute inset-0 left-0 top-0 flex h-full flex-col shadow-md [backface-visibility:hidden] ">
               <CardHeader className="flex flex-row items-center justify-between border-b px-4 py-2">
-                <CardTitle className="text-lg">프로젝트 카드 생성</CardTitle>
-                <RotateButton onRotate={handleFlip} />
+                <CardTitle className="flex grow flex-row items-center justify-between text-lg">
+                  <p>프로젝트 카드 생성</p>
+                  <RotateButton onRotate={handleFlip} />
+                </CardTitle>
               </CardHeader>
               <CardContent className="grow pt-6">
                 <ProjectCreateForm onClose={setOpen} />

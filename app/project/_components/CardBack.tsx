@@ -24,8 +24,10 @@ function CardBack(props: CardBackProps) {
   return (
     <Card className="absolute inset-0 left-0 top-0 overflow-hidden shadow-md [backface-visibility:hidden] [transform:rotateY(180deg)]">
       <CardHeader className="flex flex-row items-center justify-between border-b bg-white px-4 py-2">
-        <CardTitle className="w-fit text-lg font-bold">요청 목록</CardTitle>
-        <RotateButton onRotate={onRotate} />
+        <CardTitle className="flex grow flex-row items-center justify-between text-lg font-bold">
+          <p>요청 목록</p>
+          <RotateButton onRotate={onRotate} />
+        </CardTitle>
       </CardHeader>
       <CardContent className="flex h-full min-h-0 flex-col overflow-y-scroll px-0 pb-20 pt-5">
         <div className="flex flex-col justify-center gap-3 px-5">
