@@ -7,16 +7,21 @@ interface PositionState {
 }
 
 interface PositionAction {
-  setPosition: (position: PositionState) => void;
+  setPosition: () => void;
   getPosition: () => PositionState;
 }
 
 const usePositionStore = create(
   persist<PositionState & PositionAction>(
     (set, get) => ({
-      setPosition: ({ longitude, latitude }) => set({ longitude, latitude }),
       longitude: 0,
       latitude: 0,
+      setPosition: () => {
+        navigator.geolocation.getCurrentPosition((position) => {
+          const { longitude, latitude } = position.coords;
+          set({ longitude, latitude });
+        });
+      },
       getPosition: () => {
         const { longitude, latitude } = get();
         return { longitude, latitude };
