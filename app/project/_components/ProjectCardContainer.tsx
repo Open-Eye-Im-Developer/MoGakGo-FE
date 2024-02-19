@@ -8,9 +8,9 @@ import {
 } from "@/app/_common/shadcn/ui/tabs";
 
 import useFlip from "../_hooks/useFlip";
-import ChatCard from "./ChatCard";
-import CardFront from "./CardFront";
-import CardBack from "./CardBack";
+import ProjectChatCard from "./ProjectChatCard";
+import ProjectCardFront from "./ProjectCardFront";
+import ProjectCardBack from "./ProjectCardBack";
 
 const messages = [
   {
@@ -59,7 +59,7 @@ const messages = [
   },
 ];
 
-function CardContainer() {
+function ProjectCardContainer() {
   const { flipped, handleFlip } = useFlip();
 
   return (
@@ -72,15 +72,15 @@ function CardContainer() {
         <div
           className={`relative h-full transition-all duration-500 [transform-style:preserve-3d] ${flipped ? "[transform:rotateY(180deg)]" : ""}`}
         >
-          <CardFront onRotate={handleFlip} />
-          <CardBack onRotate={handleFlip} />
+          <ProjectCardFront onRotate={handleFlip} />
+          <ProjectCardBack onRotate={handleFlip} />
         </div>
       </TabsContent>
       <TabsContent value="chat" className="h-full">
-        <ChatCard messages={messages} />
+        <ProjectChatCard messages={messages} />
       </TabsContent>
     </Tabs>
   );
 }
 
-export default CardContainer;
+export default ProjectCardContainer;

@@ -18,7 +18,7 @@ interface ChatCardProps {
   }[];
 }
 
-function ChatCard(props: ChatCardProps) {
+function ProjectChatCard(props: ChatCardProps) {
   const { messages } = props;
 
   return (
@@ -61,4 +61,4 @@ function ChatCard(props: ChatCardProps) {
   );
 }
 
-export default ChatCard;
+export default ProjectChatCard;

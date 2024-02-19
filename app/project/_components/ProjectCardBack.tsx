@@ -17,7 +17,7 @@ interface CardBackProps {
   onRotate: () => void;
 }
 
-function CardBack(props: CardBackProps) {
+function ProjectCardBack(props: CardBackProps) {
   // TODO: 실제 사용자 데이터로 대체하기 & 사용 언어, 관심 직무 태그 배치 및 데이터 연동하기
   const { onRotate } = props;
 
@@ -65,4 +65,4 @@ function CardBack(props: CardBackProps) {
   );
 }
 
-export default CardBack;
+export default ProjectCardBack;
