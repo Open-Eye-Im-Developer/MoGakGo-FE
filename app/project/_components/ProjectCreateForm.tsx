@@ -5,24 +5,29 @@ import { useForm } from "react-hook-form";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { ToastAction } from "@/app/_common/shadcn/ui/toast";
 import { Separator } from "@/app/_common/shadcn/ui/separator";
 import { Form, FormMessage } from "@/app/_common/shadcn/ui/form";
 import { Button } from "@/app/_common/shadcn/ui/button";
 
+import formatTime from "../_utils/formatTime";
+import usePopupToast from "../_hooks/usePopupToast";
 import FormTime from "./FormTime";
 import FormTag from "./FormTag";
 import FormPlace from "./FormPlace";
 
 const formSchema = z
   .object({
-    place: z.string().min(2, {
+    place: z.string().min(1, {
       message: "장소를 설정하세요.",
     }),
     startHour: z.string(),
     startMinute: z.string(),
     endHour: z.string(),
     endMinute: z.string(),
-    tags: z.undefined(),
+    tags: z.any(),
+    lat: z.number(),
+    lng: z.number(),
   })
   .refine(
     data => {
@@ -43,6 +48,9 @@ interface ProjectCreateFormProps {
 
 function ProjectCreateForm(props: ProjectCreateFormProps) {
   const { onClose } = props;
+  const { showToast } = usePopupToast(
+    <ToastAction altText="다시 시도">다시 시도</ToastAction>,
+  );
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -55,8 +63,42 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
   });
 
   // TODO: 서버로 form 데이터 전송하는 로직 추가 & form의 시간정보 처리
-  const handleOnSubmit = () => {
-    onClose && onClose(false);
+  const handleOnSubmit = async (values: z.infer<typeof formSchema>) => {
+    const { startHour, startMinute, endHour, endMinute, ...rest } = values;
+    const { meetStartTime, meetEndTime } = formatTime(
+      startHour,
+      startMinute,
+      endHour,
+      endMinute,
+    );
+
+    // TODO: meetLat, meetLng를 사용자 위치 정보(geolocation)로 변경
+    const formattedValues = {
+      creatorId: 2,
+      meetStartTime,
+      meetEndTime,
+      meetLat: 37.63338336616322, // rest.lat
+      meetLng: 127.0783098757533, // rest.lng
+      meetDetail: rest.place,
+      tags: rest.tags,
+    };
+
+    const response = await fetch("/api/project/create", {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ formattedValues }),
+    });
+
+    const { data, status } = await response.json();
+
+    showToast(data, status);
+
+    if (status === 201) {
+      onClose && onClose(false);
+    }
   };
 
   const handleOnPressEnter = (e: React.KeyboardEvent<HTMLFormElement>) => {

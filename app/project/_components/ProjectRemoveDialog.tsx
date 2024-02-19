@@ -2,6 +2,7 @@
 
 import React from "react";
 
+import { ToastAction } from "@/app/_common/shadcn/ui/toast";
 import { Button } from "@/app/_common/shadcn/ui/button";
 import {
   AlertDialog,
@@ -17,8 +18,21 @@ import {
   AlertDialogTrigger,
 } from "@/app/_common/shadcn/ui/alert-dialog";
 
-// TODO: 삭제 버튼 클릭 시 서버 이벤트 연결하기 & 요청이 있을 경우 삭제하지 못하는 로직 추가하기
+import usePopupToast from "../_hooks/usePopupToast";
+
+// TODO: 요청이 있을 경우 삭제하지 못하는 로직 추가하기 & 서버에서 카드 id를 받아와서 삭제 요청하기
 function ProjectRemoveDialog() {
+  const { showToast } = usePopupToast(
+    <ToastAction altText="다시 시도">다시 시도</ToastAction>,
+  );
+  const handleRemoveProject = async () => {
+    const response = await fetch("/api/project/delete?id=10", {
+      method: "DELETE",
+    });
+    const { data, status } = await response.json();
+    showToast(data, status);
+  };
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -34,7 +48,9 @@ function ProjectRemoveDialog() {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter className="flex flex-row items-center gap-2 self-end">
-          <AlertDialogAction>삭제</AlertDialogAction>
+          <AlertDialogAction onClick={handleRemoveProject}>
+            삭제
+          </AlertDialogAction>
           <AlertDialogCancel className="mt-0">취소</AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>
