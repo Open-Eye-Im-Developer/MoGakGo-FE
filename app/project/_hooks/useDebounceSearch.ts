@@ -22,7 +22,7 @@ function useDebounceSearch(form: IFormProps["form"]) {
   useEffect(() => {
     if (overlay) {
       const timer = setTimeout(async () => {
-        const response = await fetch(`/api/searchPlace?keyword=${placeInput}`);
+        const response = await fetch(`/api/place/search?keyword=${placeInput}`);
         const data = await response.json();
         setPlaceList(data.data);
       }, 500);
