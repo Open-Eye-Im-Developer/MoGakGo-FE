@@ -1,49 +1,42 @@
 import { SignupRequest } from "@/app/signup/_type/signup.types";
-import { GithubUrlResponse } from "@/app/login/_types/login.types";
+import {
+  GithubUrlResponse,
+  reIssueAccessTokenResponse,
+} from "@/app/login/_types/login.types";
 
 import { getCookie } from "../utils/cookie";
 import { instance } from "../api/instance";
 
 export const postSignup = async (request: SignupRequest) => {
-  const { username, wanted_job, bio, github_url, github_id, avatar_url } =
-    request;
+  const { username, wanted_job } = request;
 
   await instance.post("/signup", {
     username,
     wanted_job,
-    bio,
-    github_id,
-    avatar_url,
-    github_url,
   });
 };
 
-export const postLogin = async () => {
-  const { data } = await instance.post("/login");
-
-  return data;
-};
-
+// TODO: CORS 에러 해결하기
 export const getGithubLoginUrl = async () => {
-  const { data } = await instance.get<GithubUrlResponse>("/login");
-
-  return data;
-};
-
-export const getUser = async () => {
-  const accessToken = getCookie("accessToken");
-
-  const { data } = await instance.get("/user", {
+  const { data } = await instance.get<GithubUrlResponse>("/oauth2/login", {
     headers: {
-      Authorization: `Bearer ${accessToken}`,
+      ignoreGlobalCatch: true,
     },
   });
 
   return data;
 };
 
-export const getAccessToken = async () => {
-  const { data } = await instance.get(`/accessToken`);
+export const getUser = async () => {
+  const { data } = await instance.get("/user");
 
   return data;
+};
+
+export const reIssueAccessToken = async () => {
+  const refreshToken = getCookie("refreshToken");
+
+  return await instance.post<reIssueAccessTokenResponse>("/auth/reissue", {
+    refreshToken,
+  });
 };

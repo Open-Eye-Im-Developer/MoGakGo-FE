@@ -1,9 +1,10 @@
 import { persist } from "zustand/middleware";
 import { create } from "zustand";
 
-import { setCookie } from "@/app/_common/utils/cookie";
+import { getCookie } from "@/app/_common/utils/cookie";
 
 import { User } from "../_type/signup.types";
+import { setAccessToken } from "./setAccessToken";
 
 interface AuthState {
   accessToken: string;
@@ -31,17 +32,13 @@ export const useAuthStore = create(
         created_at: "",
         deleted_at: "",
       },
-      getAccessToken: async () => get().accessToken,
+      getAccessToken: () => {
+        return get().accessToken ?? getCookie("accessToken");
+      },
       setAccessToken: accessToken => {
-        if (!accessToken) {
-          return;
-        }
+        setAccessToken(accessToken);
 
-        const expireDate = 1000 * 60 * 60;
-
-        setCookie("accessToken", accessToken, expireDate);
-
-        set({ accessToken });
+        return set(() => ({ accessToken }));
       },
       setAuthentication: authenticated => set({ authenticated }),
       setUser: user => set({ user }),

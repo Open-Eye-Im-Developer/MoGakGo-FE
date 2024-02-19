@@ -13,7 +13,8 @@ import {
 } from "@/app/_common/shadcn/ui/form";
 import { Checkbox } from "@/app/_common/shadcn/ui/checkbox";
 
-import { WANTED_JOB } from "../_utils/DUMMY_DATA";
+import { WANTED_JOB } from "@/app/_common/constants/wantedJob.constants";
+
 import { SignupRequest } from "../_type/signup.types";
 import SignupHeader from "./SignupHeader";
 import SignupCompleteModal from "./SignupCompleteModal";

@@ -27,10 +27,6 @@ function SignupForm() {
     defaultValues: {
       username: "",
       wanted_job: [],
-      bio: "",
-      github_id: "example",
-      avatar_url: "/images/cat.webp",
-      github_url: "example.github.com",
     },
   });
 

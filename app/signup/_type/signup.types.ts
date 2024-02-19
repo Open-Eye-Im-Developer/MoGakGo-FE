@@ -1,4 +1,7 @@
-import { WANTED_JOB } from "../_utils/DUMMY_DATA";
+import {
+  WANTED_JOB,
+  WantedJobType,
+} from "@/app/_common/constants/wantedJob.constants";
 
 type Region =
   | "종로구"
@@ -53,9 +56,7 @@ export interface UserWantedJob {
   wanted_job: WantedJob[];
 }
 
-type UserAndWantedJob = User & UserWantedJob;
-
-export type SignupRequest = Pick<
-  UserAndWantedJob,
-  "username" | "bio" | "github_id" | "github_url" | "avatar_url" | "wanted_job"
->;
+export interface SignupRequest {
+  username: string;
+  wanted_job: WantedJobType[];
+}
