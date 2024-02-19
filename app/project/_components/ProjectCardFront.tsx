@@ -66,7 +66,7 @@ function ProjectCardFront(props: CardFrontProps) {
         <div className="flex flex-col items-center gap-5">
           <div className="relative rounded-xl">
             <Image
-              src="/profileImage.jpg"
+              src="/images/profileImage.jpg"
               alt="프로필 이미지"
               width={150}
               height={150}
@@ -85,7 +85,7 @@ function ProjectCardFront(props: CardFrontProps) {
           </div>
         </div>
         <div className="flex w-full items-center justify-center">
-          <Image src="/grass.png" alt="잔디력" width={50} height={50} />
+          <Image src="/images/grass.png" alt="잔디력" width={50} height={50} />
           <div className="mr-10 w-40">
             <Progress value={50} />
             <span className="text-xs text-[#868686]">50%</span>

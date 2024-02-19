@@ -36,7 +36,7 @@ function ProjectCardBack(props: CardBackProps) {
               <main className="flex items-center justify-between">
                 <aside className="flex items-center gap-3">
                   <Image
-                    src="/profileImage.jpg"
+                    src="/images/profileImage.jpg"
                     alt="프로필 이미지"
                     width={60}
                     height={60}
