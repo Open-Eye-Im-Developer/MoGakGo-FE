@@ -25,8 +25,19 @@ const usePositionStore = create(
       setPosition: () => {
         navigator.geolocation.getCurrentPosition((position) => {
           const { longitude, latitude } = position.coords;
-          if (!longitude || !latitude) set({ longitude, latitude, isGPSOn: false });
-          else set({ longitude, latitude, isGPSOn: true });
+          if (!longitude || !latitude) {
+            set({ longitude: 0, latitude: 0, isGPSOn: false });
+            errorCallback({
+              code: 2,
+              message: "",
+              PERMISSION_DENIED: 1,
+              POSITION_UNAVAILABLE: 2,
+              TIMEOUT: 3,
+            });
+            return;
+          }
+
+          set({ longitude, latitude, isGPSOn: true });
         }, errorCallback, options);
       },
       getPosition: () => {
