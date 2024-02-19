@@ -1,3 +1,7 @@
+import "./globals.css";
+
+import { Toaster } from "sonner";
+
 import { ThemeProvider } from "@/app/_common/components/theme-provider";
 
 import ClientProvider from "./_common/components/ClientProvider";
@@ -29,6 +33,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             {children}
+            <Toaster position="bottom-right" closeButton />
           </ThemeProvider>
         </ClientProvider>
       </body>
