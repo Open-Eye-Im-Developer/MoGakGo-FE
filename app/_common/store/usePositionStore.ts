@@ -1,16 +1,9 @@
 import { persist } from "zustand/middleware";
 import { create } from "zustand";
 
+import { Coordinate, PositionState } from "@/app/_common/types/position";
+
 import getGeolocation from "@/app/_common/utils/getGeolocation";
-
-interface Coordinate {
-  longitude: number;
-  latitude: number;
-}
-
-interface PositionState extends Coordinate {
-  isGPSOn: boolean;
-}
 
 interface PositionAction {
   setPosition: () => void;
