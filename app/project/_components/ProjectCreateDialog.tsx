@@ -23,7 +23,7 @@ import RotateButton from "./RotateButton";
 import ProjectCreateForm from "./ProjectCreateForm";
 import CardFront from "./CardFront";
 
-function ProjectDialog() {
+function ProjectCreateDialog() {
   const [open, setOpen] = useState(false);
   const { flipped, handleFlip } = useFlip();
 
@@ -60,4 +60,4 @@ function ProjectDialog() {
   );
 }
 
-export default ProjectDialog;
+export default ProjectCreateDialog;
