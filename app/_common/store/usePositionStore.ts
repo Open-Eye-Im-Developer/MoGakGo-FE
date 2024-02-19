@@ -20,7 +20,7 @@ const usePositionStore = create(
         navigator.geolocation.getCurrentPosition((position) => {
           const { longitude, latitude } = position.coords;
           set({ longitude, latitude });
-        }, errorCallback);
+        }, errorCallback, options);
       },
       getPosition: () => {
         const { longitude, latitude } = get();
@@ -48,6 +48,11 @@ const errorCallback = (error: GeolocationPositionError) => {
       console.error("알 수 없는 오류가 발생했습니다.");
       break;
   }
+};
+
+const options = {
+  maximumAge: 300000,
+  timeout: 15000
 };
 
 export default usePositionStore;
