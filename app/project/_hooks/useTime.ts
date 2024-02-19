@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-export default function useTime() {
+function useTime() {
   const hours = useCallback(() => {
     const currentHour = new Date().getHours();
     const hourData = [];
@@ -20,3 +20,5 @@ export default function useTime() {
 
   return { hours, minutes };
 }
+
+export default useTime;
