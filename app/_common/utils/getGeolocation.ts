@@ -2,6 +2,11 @@ import { PositionState } from "@/app/_common/types/position";
 
 type Parameter = (state: PositionState) => void;
 
+const options = {
+  maximumAge: 300000,
+  timeout: 15000
+};
+
 const getGeolocation = (callback: Parameter) => navigator.geolocation.getCurrentPosition((position) => {
   const { longitude, latitude } = position.coords;
   if (!longitude || !latitude) {
@@ -35,11 +40,6 @@ const errorCallback = (error: GeolocationPositionError) => {
       console.error("알 수 없는 오류가 발생했습니다.");
       break;
   }
-};
-
-const options = {
-  maximumAge: 300000,
-  timeout: 15000
 };
 
 export default getGeolocation;
