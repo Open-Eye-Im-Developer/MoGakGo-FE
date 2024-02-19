@@ -2,8 +2,8 @@ import { persist } from "zustand/middleware";
 import { create } from "zustand";
 
 interface PositionState {
-  longitude: string;
-  latitude: string;
+  longitude: number;
+  latitude: number;
 }
 
 interface PositionAction {
@@ -14,9 +14,9 @@ interface PositionAction {
 const usePositionStore = create(
   persist<PositionState & PositionAction>(
     (set, get) => ({
-      longitude: "",
-      latitude: "",
       setPosition: ({ longitude, latitude }) => set({ longitude, latitude }),
+      longitude: 0,
+      latitude: 0,
       getPosition: () => {
         const { longitude, latitude } = get();
         return { longitude, latitude };
