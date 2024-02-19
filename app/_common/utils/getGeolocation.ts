@@ -1,3 +1,8 @@
+import { PositionState } from "@/app/_common/types/position";
+
+type Parameter = (state: PositionState) => void;
+
+const getGeolocation = (callback: Parameter) => navigator.geolocation.getCurrentPosition((position) => {
 const errorCallback = (error: GeolocationPositionError) => {
   switch (error.code) {
     case error.PERMISSION_DENIED:
@@ -21,7 +26,6 @@ const options = {
   timeout: 15000
 };
 
-const getGeolocation = (callback) => navigator.geolocation.getCurrentPosition((position) => {
   const { longitude, latitude } = position.coords;
   if (!longitude || !latitude) {
     callback({ longitude: 0, latitude: 0, isGPSOn: false });
