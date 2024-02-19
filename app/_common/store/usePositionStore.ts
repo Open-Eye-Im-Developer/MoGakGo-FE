@@ -2,24 +2,31 @@ import { persist } from "zustand/middleware";
 import { create } from "zustand";
 
 interface PositionState {
+interface Coordinate {
   longitude: number;
   latitude: number;
 }
 
+interface PositionState extends Coordinate {
+  isGPSOn: boolean;
+}
+
 interface PositionAction {
   setPosition: () => void;
-  getPosition: () => PositionState;
+  getPosition: () => Coordinate;
 }
 
 const usePositionStore = create(
   persist<PositionState & PositionAction>(
     (set, get) => ({
+      isGPSOn: false,
       longitude: 0,
       latitude: 0,
       setPosition: () => {
         navigator.geolocation.getCurrentPosition((position) => {
           const { longitude, latitude } = position.coords;
-          set({ longitude, latitude });
+          if (!longitude || !latitude) set({ longitude, latitude, isGPSOn: false });
+          else set({ longitude, latitude, isGPSOn: true });
         }, errorCallback, options);
       },
       getPosition: () => {
