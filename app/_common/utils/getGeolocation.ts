@@ -4,25 +4,29 @@ type Parameter = (state: PositionState) => void;
 
 const options = {
   maximumAge: 300000,
-  timeout: 15000
+  timeout: 15000,
 };
 
-const getGeolocation = (callback: Parameter) => navigator.geolocation.getCurrentPosition((position) => {
-  const { longitude, latitude } = position.coords;
-  if (!longitude || !latitude) {
-    callback({ longitude: 0, latitude: 0, isGPSOn: false });
-    errorCallback({
-      code: 2,
-      message: "",
-      PERMISSION_DENIED: 1,
-      POSITION_UNAVAILABLE: 2,
-      TIMEOUT: 3,
-    });
-    return;
-  }
-
-  callback({ longitude, latitude, isGPSOn: true });
-}, errorCallback, options);
+export const getGeolocation = (callback: Parameter) =>
+  navigator.geolocation.getCurrentPosition(
+    position => {
+      const { longitude, latitude } = position.coords;
+      if (!longitude || !latitude) {
+        callback({ longitude: 0, latitude: 0, isGPSOn: false });
+        errorCallback({
+          code: 2,
+          message: "",
+          PERMISSION_DENIED: 1,
+          POSITION_UNAVAILABLE: 2,
+          TIMEOUT: 3,
+        });
+        return;
+      }
+      callback({ longitude, latitude, isGPSOn: true });
+    },
+    errorCallback,
+    options,
+  );
 
 const errorCallback = (error: GeolocationPositionError) => {
   switch (error.code) {
@@ -34,12 +38,12 @@ const errorCallback = (error: GeolocationPositionError) => {
       console.error("가져온 위치 정보를 사용할 수 없습니다.");
       break;
     case error.TIMEOUT:
-      console.error("위치 정보를 가져오기 위한 요청이 허용 시간을 초과했습니다");
+      console.error(
+        "위치 정보를 가져오기 위한 요청이 허용 시간을 초과했습니다",
+      );
       break;
     default:
       console.error("알 수 없는 오류가 발생했습니다.");
       break;
   }
 };
-
-export default getGeolocation;
