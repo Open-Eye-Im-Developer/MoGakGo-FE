@@ -7,13 +7,13 @@ import { Button } from "@/app/_common/shadcn/ui/button";
 
 // import { getFCMToken } from "../_api";
 import ModalDenied from "./ModalDenied";
+
 function AllowBox() {
   const { toast } = useToast();
-  const [isModalShow, setIsModalShow] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const handleClickAllowButton = () => {
-    if (Notification.permission === "denied") return setIsModalShow(true);
-
+    if (Notification.permission === "denied") return setShowModal(true);
     Notification.requestPermission().then(permission => {
       if (permission === "granted") {
         // getFCMToken();
@@ -23,8 +23,6 @@ function AllowBox() {
       }
     });
   };
-
-  if (!Notification) return;
 
   return (
     <div
@@ -40,7 +38,7 @@ function AllowBox() {
             알림 켜기
           </Button>
         </AlertDialogTrigger>
-        {isModalShow && <ModalDenied />}
+        {showModal && <ModalDenied />}
       </AlertDialog>
     </div>
   );
