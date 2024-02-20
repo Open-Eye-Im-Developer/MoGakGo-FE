@@ -7,6 +7,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/app/_common/shadcn/ui/form";
 import { Badge } from "@/app/_common/shadcn/ui/badge";
 
@@ -32,7 +33,7 @@ function FormTag(props: FormTagProps) {
             <>
               <Input
                 ref={ref}
-                placeholder="조용한, 수다스러운, 할거하는 (최대 3개)"
+                placeholder="e.g. 조용한, 수다스러운 (최대 3개)"
                 className="w-full"
                 onKeyDown={handleAddTag}
               />
@@ -50,6 +51,7 @@ function FormTag(props: FormTagProps) {
               </aside>
             </>
           </FormControl>
+          <FormMessage />
         </FormItem>
       )}
     />
