@@ -1,6 +1,7 @@
 import { Toaster } from "@/app/_common/shadcn/ui/toaster";
 
 import { ThemeProvider } from "@/app/_common/components/theme-provider";
+import ClientProvider from "@/app/_common/components/ClientProvider";
 
 import type { Metadata } from "next";
 
@@ -17,17 +18,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html>
+    <html suppressHydrationWarning={true}>
       <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
-        <Toaster />
+        <ClientProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+            <Toaster />
+          </ThemeProvider>
+        </ClientProvider>
       </body>
     </html>
   );
