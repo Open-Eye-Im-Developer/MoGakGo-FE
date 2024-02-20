@@ -1,3 +1,5 @@
+import { Toaster } from "@/app/_common/shadcn/ui/toaster";
+
 import { ThemeProvider } from "@/app/_common/components/theme-provider";
 
 import type { Metadata } from "next";
@@ -25,6 +27,7 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   );
