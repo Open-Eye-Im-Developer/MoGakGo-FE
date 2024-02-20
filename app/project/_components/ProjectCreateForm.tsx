@@ -18,9 +18,7 @@ import FormPlace from "./FormPlace";
 
 const formSchema = z
   .object({
-    place: z.string().min(1, {
-      message: "장소를 설정하세요.",
-    }),
+    place: z.string().min(1),
     startHour: z.string(),
     startMinute: z.string(),
     endHour: z.string(),
@@ -31,16 +29,34 @@ const formSchema = z
   })
   .refine(
     data => {
-      if (data.startHour === data.endHour) {
-        return data.startMinute < data.endMinute;
+      const startHour = Number(data.startHour);
+      const endHour = Number(data.endHour);
+      const startMinute = Number(data.startMinute);
+      const endMinute = Number(data.endMinute);
+
+      if (startHour === new Date().getHours()) {
+        if (
+          startMinute >= new Date().getMinutes() &&
+          startHour <= endHour &&
+          startMinute < endMinute
+        )
+          return true;
+        return false;
+      } else if (startHour > new Date().getHours()) {
+        if (startHour <= endHour && startMinute < endMinute) return true;
+        return false;
       }
-      return data.startHour < data.endHour;
+      return false;
     },
     {
       message: "종료 시각이 시작 시각보다 이릅니다.",
       path: ["startMinute"],
     },
-  );
+  )
+  .refine(data => data.tags.length <= 3 && data.tags.length > 0, {
+    message: "태그는 1개 이상 3개 이하로 설정해야 합니다.",
+    path: ["tags"],
+  });
 
 interface ProjectCreateFormProps {
   onClose: (open: boolean) => void;
@@ -59,6 +75,7 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
       startMinute: "0",
       endHour: new Date().getHours().toString(),
       endMinute: "0",
+      tags: [],
     },
   });
 
@@ -83,6 +100,7 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
       tags: rest.tags,
     };
 
+    // TODO: 사용자 위치 정보(geolocation)을 전송하여, 범위에 맞는 장소 찾기
     const response = await fetch("/api/project/create", {
       method: "POST",
       headers: {
