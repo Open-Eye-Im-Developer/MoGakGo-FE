@@ -14,6 +14,7 @@ export const instance = axios.create({
     Accept: "application/json",
     Authorization: `Bearer ${accessToken}`,
   },
+  validateStatus: status => status < 500,
 });
 
 instance.interceptors.request.use(
