@@ -1,7 +1,7 @@
 import { persist } from "zustand/middleware";
 import { create } from "zustand";
 
-import { Coordinate, PositionState } from "@/app/_common/types/types.position";
+import { Coordinate, PositionState } from "@/app/_common/types/position.types";
 
 import { getGeolocation } from "@/app/_common/utils/getGeolocation";
 

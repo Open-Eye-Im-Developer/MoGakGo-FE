@@ -1,4 +1,4 @@
-import { PositionState } from "@/app/_common/types/position";
+import { PositionState } from "@/app/_common/types/position.types";
 
 type Parameter = (state: PositionState) => void;
 
