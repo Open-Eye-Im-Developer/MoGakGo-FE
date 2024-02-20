@@ -3,11 +3,11 @@ import { IconRotate360 } from "@tabler/icons-react";
 
 import { Button } from "@/app/_common/shadcn/ui/button";
 
-interface RotateButtonProps {
+interface ButtonRotateProps {
   onRotate: () => void;
 }
 
-function RotateButton(props: RotateButtonProps) {
+function ButtonRotate(props: ButtonRotateProps) {
   const { onRotate } = props;
   return (
     <Button
@@ -20,4 +20,4 @@ function RotateButton(props: RotateButtonProps) {
   );
 }
 
-export default RotateButton;
+export default ButtonRotate;

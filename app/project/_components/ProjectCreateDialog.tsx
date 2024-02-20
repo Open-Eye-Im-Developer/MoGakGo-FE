@@ -19,9 +19,9 @@ import {
 import { Button } from "@/app/_common/shadcn/ui/button";
 
 import useFlip from "../_hooks/useFlip";
-import RotateButton from "./RotateButton";
 import ProjectCreateForm from "./ProjectCreateForm";
 import ProjectCardFront from "./ProjectCardFront";
+import ButtonRotate from "./ButtonRotate";
 
 function ProjectCreateDialog() {
   const [open, setOpen] = useState(false);
@@ -45,7 +45,7 @@ function ProjectCreateDialog() {
               <CardHeader className="flex flex-row items-center justify-between border-b px-4 py-2">
                 <CardTitle className="flex grow flex-row items-center justify-between text-lg">
                   <p>프로젝트 카드 생성</p>
-                  <RotateButton onRotate={handleFlip} />
+                  <ButtonRotate onRotate={handleFlip} />
                 </CardTitle>
               </CardHeader>
               <CardContent className="grow pt-6">

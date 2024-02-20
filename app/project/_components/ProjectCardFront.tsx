@@ -20,8 +20,8 @@ import {
 } from "@/app/_common/shadcn/ui/card";
 import { Badge } from "@/app/_common/shadcn/ui/badge";
 
-import RotateButton from "./RotateButton";
 import ProjectRemoveDialog from "./ProjectRemoveDialog";
+import ButtonRotate from "./ButtonRotate";
 
 interface CardFrontProps {
   initialRotate?: boolean;
@@ -46,7 +46,7 @@ function ProjectCardFront(props: CardFrontProps) {
       <CardHeader className="px-5 pt-4">
         <CardDescription className="flex justify-between text-lg font-bold text-[#a2a2a2]">
           <span className="flex items-center gap-2">
-            <RotateButton onRotate={onRotate} />
+            <ButtonRotate onRotate={onRotate} />
             <Popover>
               <PopoverTrigger>
                 <IconMoodPuzzled />

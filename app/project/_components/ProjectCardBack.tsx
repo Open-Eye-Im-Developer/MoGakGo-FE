@@ -11,7 +11,7 @@ import {
 import { Button } from "@/app/_common/shadcn/ui/button";
 import { Badge } from "@/app/_common/shadcn/ui/badge";
 
-import RotateButton from "./RotateButton";
+import ButtonRotate from "./ButtonRotate";
 
 interface CardBackProps {
   onRotate: () => void;
@@ -26,7 +26,7 @@ function ProjectCardBack(props: CardBackProps) {
       <CardHeader className="flex flex-row items-center justify-between border-b px-4 py-2">
         <CardTitle className="flex grow flex-row items-center justify-between pt-1 text-lg font-bold">
           <p className="pl-2">요청 목록</p>
-          <RotateButton onRotate={onRotate} />
+          <ButtonRotate onRotate={onRotate} />
         </CardTitle>
       </CardHeader>
       <CardContent className="flex h-full min-h-0 flex-col overflow-y-scroll px-0 pb-20 pt-5">
