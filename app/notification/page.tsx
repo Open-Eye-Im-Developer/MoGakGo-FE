@@ -2,20 +2,15 @@
 import React from "react";
 
 import StackNavigator from "../_common/components/StackNavigator";
-import { NotificationType } from "./_types/notification";
-import Notification from "./_components/Notification";
-import useGetNotifications from "./_api/useGetNotifications";
-function Page() {
-  const { data: notificaitons } = useGetNotifications();
+import NotificationList from "./_components/NotificationList";
+import AllowBox from "./_components/AllowBox";
 
+function Page() {
   return (
     <>
       <StackNavigator title={"알림"} />
-      {notificaitons?.map((notification: NotificationType, index: number) => (
-        <div key={index.toString()}>
-          <Notification notification={notification} />
-        </div>
-      ))}
+      <AllowBox />
+      <NotificationList />
     </>
   );
 }

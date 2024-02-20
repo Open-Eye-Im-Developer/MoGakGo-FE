@@ -20,7 +20,7 @@ function Notification({ notification }: Props) {
   const { name, profile_image } = sender;
   const { detail, created_at } = data;
   return (
-    <div className="m-2 flex justify-between border-b p-2 px-4">
+    <div className="m-2 flex cursor-pointer justify-between border-b p-2 px-3">
       <div className="flex gap-4">
         <Avatar>
           <AvatarImage src={profile_image} />

@@ -1,14 +1,13 @@
-"use client";
-
-import React from "react";
 import { useRouter } from "next/navigation";
 import { IconChevronLeft } from "@tabler/icons-react";
+
 function StackNavigator({ title }: { title: string }) {
   const router = useRouter();
 
   const handleClickPrevButton = () => {
     router.back();
   };
+
   return (
     <div>
       <div className="m-2 flex justify-between p-2 py-6">
