@@ -1,5 +1,7 @@
 import dayjs from "dayjs";
 
+import { Toaster } from "@/app/_common/shadcn/ui/toaster";
+
 import { ThemeProvider } from "@/app/_common/components/theme-provider";
 
 import ClientProvider from "./_common/components/ClientProvider";
@@ -37,6 +39,7 @@ export default function RootLayout({
             {children}
           </ThemeProvider>
         </ClientProvider>
+        <Toaster />
       </body>
     </html>
   );
