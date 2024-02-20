@@ -7,7 +7,7 @@ import { getGeolocation } from "@/app/_common/utils/getGeolocation";
 
 interface PositionAction {
   setPosition: () => void;
-  validatePosition: () => void;
+  validatePosition: () => boolean;
   getPosition: () => Coordinate;
 }
 
