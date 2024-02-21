@@ -1,12 +1,12 @@
-const formatTime = (sh: string, sm: string, eh: string, em: string) => {
+const formatTime = (startHour: string, startMinute: string, endHour: string, endMinute: string) => {
   const startTime = new Date();
   const endTime = new Date();
 
-  startTime.setUTCHours(Number(sh));
-  startTime.setMinutes(Number(sm));
+  startTime.setUTCHours(Number(startHour));
+  startTime.setMinutes(Number(startMinute));
 
-  endTime.setUTCHours(Number(eh));
-  endTime.setMinutes(Number(em));
+  endTime.setUTCHours(Number(endHour));
+  endTime.setMinutes(Number(endMinute));
 
   const meetStartTime = startTime.toISOString().split(".")[0];
   const meetEndTime = endTime.toISOString().split(".")[0];

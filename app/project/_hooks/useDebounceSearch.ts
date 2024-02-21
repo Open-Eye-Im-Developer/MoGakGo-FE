@@ -15,8 +15,8 @@ function useDebounceSearch(form: IFormProps["form"]) {
     setOverlay(false);
     setPlaceInput(place.place_name);
     form.setValue("place", place.place_name);
-    form.setValue("lat", Number(place.y));
-    form.setValue("lng", Number(place.x));
+    form.setValue("latitude", Number(place.y));
+    form.setValue("longitude", Number(place.x));
   };
 
   useEffect(() => {

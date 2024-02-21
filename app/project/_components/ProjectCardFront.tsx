@@ -53,8 +53,8 @@ function ProjectCardFront(props: CardFrontProps) {
               </PopoverTrigger>
               <PopoverContent className="max-w-[130px]">
                 <h1 className="mb-2 text-sm font-bold">🏷️ 분위기 태그</h1>
-                {badgeList.map(bagde => (
-                  <Badge key={bagde}>{bagde}</Badge>
+                {badgeList.map(badge => (
+                  <Badge key={badge}>{badge}</Badge>
                 ))}
               </PopoverContent>
             </Popover>
