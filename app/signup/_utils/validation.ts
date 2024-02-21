@@ -31,7 +31,7 @@ export const WantedJobLabelEnum = z.enum([
 
 export const SignupFormSchema = z.object({
   username: z.string().min(2).max(20),
-  wanted_job: z.array(WantedJobLabelEnum).refine(value => value.length > 0, {
+  wantedJobs: z.array(WantedJobLabelEnum).refine(value => value.length > 0, {
     message: "최소 1개의 관심 직무를 선택해주세요.",
   }),
 });

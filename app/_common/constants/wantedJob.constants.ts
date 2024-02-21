@@ -27,7 +27,7 @@ export type WantedJobType =
   | "GRAPHICS";
 
 interface WantedJob {
-  id: string;
+  id: WantedJobType;
   label: string;
 }
 

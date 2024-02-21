@@ -27,6 +27,8 @@ interface SignupFinalStepProps {
 function SignupFinalStep({ className, form }: SignupFinalStepProps) {
   const { formState, control } = form;
 
+  // console.log(getValues("wantedJobs"));
+
   return (
     <section className={cn(className)}>
       <SignupHeader
@@ -37,7 +39,7 @@ function SignupFinalStep({ className, form }: SignupFinalStepProps) {
       <div className="mt-5 space-y-8">
         <FormField
           control={control}
-          name="wanted_job"
+          name="wantedJobs"
           render={() => (
             <>
               <FormItem className="relative flex h-[558px] flex-col flex-wrap space-y-0">
@@ -45,7 +47,7 @@ function SignupFinalStep({ className, form }: SignupFinalStepProps) {
                   <FormField
                     key={item.id}
                     control={control}
-                    name="wanted_job"
+                    name="wantedJobs"
                     render={({ field }) => {
                       return (
                         <FormItem

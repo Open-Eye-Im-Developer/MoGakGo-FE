@@ -5,21 +5,18 @@ import { reIssueAccessToken } from "@/app/_common/api/auth";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const SERVER_VERSION = "/api/v1";
 
-const accessToken = process.env.NEXT_PUBLIC_ACCESS_TOKEN;
-
 export const instance = axios.create({
   baseURL: `${BASE_URL}${SERVER_VERSION}`,
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
-    Authorization: `Bearer ${accessToken}`,
+    Authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`,
   },
+  validateStatus: status => status < 500,
 });
 
 instance.interceptors.request.use(
   config => {
-    // getLoginUrl과 같이 예외처리가 필요한 api 호출 시
-    // ignoreGlobalCatch: true로 설정
     if (config.headers.ignoreGlobalCatch) {
       config.headers["Content-Type"] = "application/json";
       config.headers.Accept = "application/json";
@@ -38,6 +35,7 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   response => {
+    console.log(response);
     return response;
   },
   // 에러 처리
@@ -58,6 +56,8 @@ instance.interceptors.response.use(
 
     if (reissue.data.accessToken) {
       config.headers.Authorization = `Bearer ${reissue.data.accessToken}`;
+
+      return instance(config);
     }
 
     return instance(config);

@@ -1,24 +1,24 @@
-import { persist } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
 import { create } from "zustand";
 
-import { getCookie } from "@/app/_common/utils/cookie";
-
-import { User } from "../_type/signup.types";
+import { SignUpUser } from "../_type/signup.types";
 import { setAccessToken } from "./setAccessToken";
 
 interface AuthState {
   accessToken: string;
   authenticated: boolean;
-  user: User;
+  user: SignUpUser;
 }
 
 interface AuthAction {
   setAccessToken: (accessToken: string) => void;
+  getAccessToken: () => string;
+  setUser: (user: SignUpUser) => void;
+  getUser: () => SignUpUser;
   setAuthentication: (val: boolean) => void;
-  setUser: (user: User) => void;
 }
 
-export const useAuthStore = create(
+export const useSignUpStore = create(
   persist<AuthAction & AuthState>(
     (set, get) => ({
       accessToken: "",
@@ -26,26 +26,28 @@ export const useAuthStore = create(
       user: {
         id: "",
         username: "",
-        github_id: "",
-        github_url: "",
-        avatar_url: "",
-        created_at: "",
-        deleted_at: "",
-      },
-      getAccessToken: () => {
-        return get().accessToken ?? getCookie("accessToken");
+        githubId: "",
+        githubUrl: "",
+        avatarUrl: "",
+        bio: "",
+        jandiRate: 0,
+        achievementTitle: "",
+        developLanguages: [],
+        wantedJobs: [],
       },
       setAccessToken: accessToken => {
         setAccessToken(accessToken);
 
         return set(() => ({ accessToken }));
       },
-      setAuthentication: authenticated => set({ authenticated }),
+      getAccessToken: () => get().accessToken,
       setUser: user => set({ user }),
       getUser: () => get().user,
+      setAuthentication: authenticated => set({ authenticated }),
     }),
     {
-      name: "auth-store", // name of the item in the storage (must be unique)
+      name: "auth-store",
+      storage: createJSONStorage(() => sessionStorage),
     },
   ),
 );

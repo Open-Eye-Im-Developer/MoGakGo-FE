@@ -9,26 +9,27 @@ import { FormItem } from "@/app/_common/shadcn/ui/form";
 import { Button } from "@/app/_common/shadcn/ui/button";
 import { AspectRatio } from "@/app/_common/shadcn/ui/aspect-ratio";
 
-import { SignupRequest } from "../_type/signup.types";
+import { SignUpUser, SignupRequest } from "../_type/signup.types";
 import SignupHeader from "./SignupHeader";
 
 interface SignupFirstStepProps {
   className?: ComponentProps<typeof cn>;
   handleNextStep: () => void;
   form: UseFormReturn<SignupRequest, SignupRequest>;
+  user: SignUpUser;
 }
 
 function SignupFirstStep({
   className,
   handleNextStep,
-  form,
+  user,
 }: SignupFirstStepProps) {
-  const { setValue } = form;
+  // const { setValue } = form;
 
   const setUserName = () => {
     handleNextStep();
 
-    setValue("username", "mibu119");
+    // setValue("username", "mibu119");
   };
 
   return (
@@ -48,7 +49,7 @@ function SignupFirstStep({
               <Image
                 width={200}
                 height={200}
-                src="/images/cat.webp"
+                src={user.avatarUrl}
                 alt="Image"
                 className="rounded-md object-cover"
               />
@@ -59,7 +60,7 @@ function SignupFirstStep({
           <Label htmlFor="username" className="text-xs text-gray-400">
             github 이름
           </Label>
-          <Input disabled id="username" value={"mibu119"} />
+          <Input disabled id="username" value={user.username} />
         </section>
       </section>
       <footer className="mt-5 flex flex-col items-center gap-2">

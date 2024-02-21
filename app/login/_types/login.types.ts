@@ -1,5 +1,7 @@
+import { Url } from "url";
+
 export interface GithubUrlResponse {
-  loginUrl: string;
+  loginUrl: Url;
 }
 
 export interface reIssueAccessTokenRequest {

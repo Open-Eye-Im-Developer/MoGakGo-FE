@@ -34,29 +34,35 @@ type Region =
 
 type WantedJob = (typeof WANTED_JOB)[number]["id"];
 
-export interface User {
+export interface SignUpUser {
   id: string;
   username: string;
-  github_id: string;
-  avatar_url: string;
-  github_url: string;
+  githubId: string;
+  avatarUrl: string;
+  githubUrl: string;
   bio?: string;
-  jandi_rating?: number;
+  jandiRate?: number;
+  achievementTitle?: string;
+  developLanguages?: string[];
+  wantedJobs?: WantedJobType[];
+}
+
+export interface User extends SignUpUser {
   region?: Region;
   region_authentication_at?: string;
   available_join_count?: number;
   available_like_count?: number;
-  created_at: string;
-  deleted_at: string;
+  created_at?: string;
+  deleted_at?: string;
 }
 
 export interface UserWantedJob {
   id: string;
-  user_id: string;
-  wanted_job: WantedJob[];
+  userId: string;
+  wantedJobs: WantedJob[];
 }
 
 export interface SignupRequest {
   username: string;
-  wanted_job: WantedJobType[];
+  wantedJobs: WantedJobType[];
 }

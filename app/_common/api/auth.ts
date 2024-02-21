@@ -1,4 +1,4 @@
-import { SignupRequest } from "@/app/signup/_type/signup.types";
+import { SignUpUser, SignupRequest } from "@/app/signup/_type/signup.types";
 import {
   GithubUrlResponse,
   reIssueAccessTokenResponse,
@@ -7,12 +7,12 @@ import {
 import { getCookie } from "../utils/cookie";
 import { instance } from "../api/instance";
 
-export const postSignup = async (request: SignupRequest) => {
-  const { username, wanted_job } = request;
+export const patchSignup = async (request: SignupRequest) => {
+  const { username, wantedJobs } = request;
 
-  await instance.post("/signup", {
+  await instance.patch("/user/sign", {
     username,
-    wanted_job,
+    wantedJobs,
   });
 };
 
@@ -27,8 +27,8 @@ export const getGithubLoginUrl = async () => {
   return data;
 };
 
-export const getUser = async () => {
-  const { data } = await instance.get("/user");
+export const getSignUpUser = async () => {
+  const { data } = await instance.get<SignUpUser>("/user");
 
   return data;
 };
@@ -39,4 +39,8 @@ export const reIssueAccessToken = async () => {
   return await instance.post<reIssueAccessTokenResponse>("/auth/reissue", {
     refreshToken,
   });
+};
+
+export const deleteUser = async () => {
+  return await instance.delete("/user");
 };
