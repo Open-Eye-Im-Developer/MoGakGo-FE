@@ -1,0 +1,14 @@
+@tailwind utilities;
+@layer utilities {
+  .first {
+    fill: #ff5555;
+  }
+
+  .second {
+    fill: #ff8888;
+  }
+
+  .third {
+    fill: #ffbbbb;
+  }
+}
