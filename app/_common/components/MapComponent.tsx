@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 
+import RankInfo from "@/app/map/_components/RankInfo";
+
+import "@/app/map/styles/map.css";
 import REGION_CODE from "../constants/regionCode";
-import "../styles/map.css";
 
 const strokeColor = "white";
 const textColor = "black";
@@ -47,6 +49,7 @@ function MapComponent({ regionCode, regionRank }: Props) {
 
   return (
     <div className="absolute w-full p-4 md:w-4/5 lg:w-3/5">
+      {regionRank && <RankInfo />}
       <svg
         viewBox="0 0 1476 1305"
         fill="none"
