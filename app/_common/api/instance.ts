@@ -1,7 +1,5 @@
 import axios from "axios";
 
-import { reIssueAccessToken } from "@/app/_common/api/auth";
-
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const SERVER_VERSION = "/api/v1";
 
@@ -10,56 +8,31 @@ export const instance = axios.create({
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
-    Authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`,
   },
-  validateStatus: status => status < 500,
+  // validateStatus: status => status < 500, // 서버에서 보내주는 에러를 data 처리하여 일단 주석처리함.
 });
 
 instance.interceptors.request.use(
   config => {
-    if (config.headers.ignoreGlobalCatch) {
-      config.headers["Content-Type"] = "application/json";
-      config.headers.Accept = "application/json";
-      config.baseURL = `${BASE_URL}`;
+    const accessToken =
+      localStorage.getItem("accessToken") ??
+      sessionStorage.getItem("accessToken");
 
-      return config;
-    }
+    config.headers.Authorization = `Bearer ${accessToken}`;
 
     return config;
   },
-  (error: Error) => {
-    console.log(error.message);
+  error => {
     return Promise.reject(error);
   },
 );
 
 instance.interceptors.response.use(
   response => {
-    console.log(response);
     return response;
   },
   // 에러 처리
   async error => {
-    const { config, response } = error;
-
-    // 토큰 자동 재발급 필요 외 다른 에러
-    if (
-      config.url === `/auth/reissue` ||
-      response?.status !== 402 ||
-      config.sent
-    ) {
-      return Promise.reject(error);
-    }
-
-    config.sent = true;
-    const reissue = await reIssueAccessToken();
-
-    if (reissue.data.accessToken) {
-      config.headers.Authorization = `Bearer ${reissue.data.accessToken}`;
-
-      return instance(config);
-    }
-
-    return instance(config);
+    return Promise.reject(error);
   },
 );

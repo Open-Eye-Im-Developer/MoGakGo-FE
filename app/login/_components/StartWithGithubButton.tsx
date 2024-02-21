@@ -5,16 +5,12 @@ import { IconBrandGithub } from "@tabler/icons-react";
 
 import { Button } from "@/app/_common/shadcn/ui/button";
 
-import { useQueryGithubLoginUrl } from "../_hooks/useQueryGithubLoginUrl";
-
 function StartWithGithubButton() {
-  const { response } = useQueryGithubLoginUrl();
-
   return (
     <Button className="w-full py-6">
       <Link
         className="flex w-full justify-center gap-x-2"
-        href={response ? response.loginUrl : "/"}
+        href={"http://3.38.76.76:8080/oauth2/authorization/github"}
       >
         <IconBrandGithub />
         깃허브로 시작하기

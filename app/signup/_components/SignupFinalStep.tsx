@@ -22,9 +22,14 @@ import SignupCompleteModal from "./SignupCompleteModal";
 interface SignupFinalStepProps {
   className: ComponentProps<typeof cn>;
   form: UseFormReturn<SignupRequest, SignupRequest>;
+  newAccessToken: string;
 }
 
-function SignupFinalStep({ className, form }: SignupFinalStepProps) {
+function SignupFinalStep({
+  className,
+  form,
+  newAccessToken,
+}: SignupFinalStepProps) {
   const { formState, control } = form;
 
   // console.log(getValues("wantedJobs"));
@@ -86,7 +91,10 @@ function SignupFinalStep({ className, form }: SignupFinalStepProps) {
             </>
           )}
         />
-        <SignupCompleteModal isValid={formState.isValid} />
+        <SignupCompleteModal
+          isValid={formState.isValid}
+          newAccessToken={newAccessToken}
+        />
       </div>
     </section>
   );

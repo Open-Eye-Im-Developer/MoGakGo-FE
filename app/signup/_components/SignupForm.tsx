@@ -1,6 +1,5 @@
 "use client";
 
-import { useStore } from "zustand";
 import { z } from "zod";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
@@ -12,7 +11,6 @@ import { cn } from "@/app/_common/shadcn/utils";
 import { Form } from "@/app/_common/shadcn/ui/form";
 
 import { SignupFormSchema } from "../_utils/validation";
-import { useSignUpStore } from "../_store/useSignUpStore";
 import { useQuerySignUpUser } from "../_hooks/useQuerySignUpUser";
 import { useMutationSignup } from "../_hooks/useMutationSignup";
 import SignupSecondStep from "./SignupSecondStep";
@@ -20,26 +18,20 @@ import SignupFirstStep from "./SignupFirstStep";
 import SignupFinalStep from "./SignupFinalStep";
 
 function SignupForm() {
-  // TODO: 유틸 or hook으로 만들기
-  const setAccessToken = useStore(
-    useSignUpStore,
-    state => state.setAccessToken,
-  );
+  const newAccessToken = useSearchParams().get("accessToken");
 
-  const searchParams = useSearchParams();
-  const accessToken = searchParams.get("accessToken");
-
-  if (!accessToken) {
-    toast.error("인증 코드가 없습니다.", { position: "bottom-center" });
+  if (!newAccessToken) {
+    toast.error("인증 코드를 확인할 수 없습니다. 다시 시도해주세요.", {
+      position: "bottom-center",
+    });
     redirect("/login");
   }
 
   useEffect(() => {
-    sessionStorage.setItem("accessToken", accessToken);
-  }, [setAccessToken, accessToken]);
+    sessionStorage.setItem("accessToken", newAccessToken);
+  }, [newAccessToken]);
 
   const { data: userData } = useQuerySignUpUser();
-  console.log(userData); // TODO: remove
 
   const [nextStep, setNextStep] = useState(0);
 
@@ -59,16 +51,10 @@ function SignupForm() {
     },
   });
 
-  const { mutate } = useMutationSignup();
+  const signUp = useMutationSignup(newAccessToken);
 
   const onSubmit = (data: z.infer<typeof SignupFormSchema>) => {
-    if (!accessToken) return toast.error("accessToken이 없습니다.");
-
-    mutate(data);
-
-    console.log(data);
-
-    setAccessToken(accessToken);
+    signUp.mutate(data);
   };
 
   if (!userData) return <div>loading...</div>;
@@ -96,6 +82,7 @@ function SignupForm() {
             className={cn(
               `${nextStep === 2 ? "animate-signup-fade-in" : "hidden animate-signup-fade-out opacity-0"}`,
             )}
+            newAccessToken={newAccessToken}
           />
         </form>
       </Form>

@@ -1,28 +1,23 @@
 import { SignUpUser, SignupRequest } from "@/app/signup/_type/signup.types";
-import {
-  GithubUrlResponse,
-  reIssueAccessTokenResponse,
-} from "@/app/login/_types/login.types";
+import { reIssueAccessTokenResponse } from "@/app/login/_types/login.types";
 
 import { getCookie } from "../utils/cookie";
 import { instance } from "../api/instance";
 
-export const patchSignup = async (request: SignupRequest) => {
-  const { username, wantedJobs } = request;
-
-  await instance.patch("/user/sign", {
-    username,
-    wantedJobs,
-  });
-};
-
-// TODO: CORS 에러 해결하기
-export const getGithubLoginUrl = async () => {
-  const { data } = await instance.get<GithubUrlResponse>("/oauth2/login", {
+export const patchSignup = async ({ username, wantedJobs }: SignupRequest) => {
+  const { data } = await instance.patch("/user/sign", {
     headers: {
       ignoreGlobalCatch: true,
     },
+    username,
+    wantedJobs,
   });
+
+  return data;
+};
+
+export const deleteUser = async () => {
+  const { data } = await instance.delete("/user");
 
   return data;
 };
@@ -36,11 +31,12 @@ export const getSignUpUser = async () => {
 export const reIssueAccessToken = async () => {
   const refreshToken = getCookie("refreshToken");
 
-  return await instance.post<reIssueAccessTokenResponse>("/auth/reissue", {
-    refreshToken,
-  });
-};
+  const { data } = await instance.post<reIssueAccessTokenResponse>(
+    "/auth/reissue",
+    {
+      refreshToken,
+    },
+  );
 
-export const deleteUser = async () => {
-  return await instance.delete("/user");
+  return data;
 };

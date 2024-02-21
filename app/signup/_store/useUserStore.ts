@@ -5,16 +5,19 @@ import { User } from "../_type/signup.types";
 
 interface UserState {
   user: User;
+  accessToken: string;
 }
 
 interface UserAction {
   setUser: (user: User) => void;
   getUser: () => User;
+  setAccessToken: (accessToken: string) => void;
 }
 
 export const useUserStore = create(
   persist<UserAction & UserState>(
     (set, get) => ({
+      accessToken: "",
       user: {
         id: "",
         username: "",
@@ -24,6 +27,7 @@ export const useUserStore = create(
       },
       setUser: user => set({ user }),
       getUser: () => get().user,
+      setAccessToken: accessToken => set({ accessToken }),
     }),
     {
       name: "user-store",

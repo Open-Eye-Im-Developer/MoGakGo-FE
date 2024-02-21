@@ -15,10 +15,20 @@ import {
 
 interface SignupCompleteModalProps {
   isValid: boolean;
+  newAccessToken: string;
 }
 
-function SignupCompleteModal({ isValid }: SignupCompleteModalProps) {
+function SignupCompleteModal({
+  isValid,
+  newAccessToken,
+}: SignupCompleteModalProps) {
   const router = useRouter();
+
+  const onCompleted = () => {
+    localStorage.setItem("accessToken", newAccessToken);
+    sessionStorage.removeItem("accessToken");
+    router.push("/");
+  };
 
   return (
     <AlertDialog>
@@ -45,12 +55,7 @@ function SignupCompleteModal({ isValid }: SignupCompleteModalProps) {
           카드 컴포넌트는 여기 들어갑니다.
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogAction
-            type="button"
-            onClick={() => {
-              router.push("/");
-            }}
-          >
+          <AlertDialogAction type="button" onClick={onCompleted}>
             완료
           </AlertDialogAction>
         </AlertDialogFooter>

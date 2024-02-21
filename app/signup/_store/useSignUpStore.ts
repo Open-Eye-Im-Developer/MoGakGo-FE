@@ -1,28 +1,25 @@
-import { createJSONStorage, persist } from "zustand/middleware";
+import { persist } from "zustand/middleware";
 import { create } from "zustand";
 
 import { SignUpUser } from "../_type/signup.types";
-import { setAccessToken } from "./setAccessToken";
 
 interface AuthState {
   accessToken: string;
-  authenticated: boolean;
+  refreshToken: string;
   user: SignUpUser;
 }
 
 interface AuthAction {
   setAccessToken: (accessToken: string) => void;
-  getAccessToken: () => string;
+  setRefreshToken: (refreshToken: string) => void;
   setUser: (user: SignUpUser) => void;
-  getUser: () => SignUpUser;
-  setAuthentication: (val: boolean) => void;
 }
 
 export const useSignUpStore = create(
   persist<AuthAction & AuthState>(
-    (set, get) => ({
+    set => ({
       accessToken: "",
-      authenticated: false,
+      refreshToken: "",
       user: {
         id: "",
         username: "",
@@ -35,19 +32,12 @@ export const useSignUpStore = create(
         developLanguages: [],
         wantedJobs: [],
       },
-      setAccessToken: accessToken => {
-        setAccessToken(accessToken);
-
-        return set(() => ({ accessToken }));
-      },
-      getAccessToken: () => get().accessToken,
+      setAccessToken: accessToken => set(() => ({ accessToken })),
+      setRefreshToken: refreshToken => set(() => ({ refreshToken })),
       setUser: user => set({ user }),
-      getUser: () => get().user,
-      setAuthentication: authenticated => set({ authenticated }),
     }),
     {
       name: "auth-store",
-      storage: createJSONStorage(() => sessionStorage),
     },
   ),
 );
