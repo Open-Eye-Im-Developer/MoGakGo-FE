@@ -36,6 +36,14 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "map-bounce": {
+          "0%": {
+            transform: "translateY(0)",
+          },
+          "100%": {
+            transform: "translateY(-1.5%)",
+          },
+        },
         "signup-fade-out": {
           from: { opacity: "1" },
           to: { opacity: "0" },
@@ -48,6 +56,7 @@ const config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "map-bounce": "map-bounce 1.2s linear infinite alternate",
         "signup-fade-out": "signup-fade-out 0.5s ease-out",
         "signup-fade-in": "signup-fade-in 0.5s ease-out",
       },
