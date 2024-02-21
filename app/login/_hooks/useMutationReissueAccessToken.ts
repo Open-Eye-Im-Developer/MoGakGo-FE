@@ -2,7 +2,8 @@ import { useMutation } from "@tanstack/react-query";
 
 // import { reIssueAccessToken } from "@/app/_common/api/auth";
 
-import { setAccessToken } from "@/app/signup/_store/setAccessToken";
+import { useUserStore } from "@/app/signup/_store/useUserStore";
+import { reIssueAccessToken } from "@/app/_common/api/auth";
 
 import { reIssueAccessTokenResponse } from "./../_types/login.types";
 
@@ -11,10 +12,10 @@ import { reIssueAccessTokenResponse } from "./../_types/login.types";
 // import { useQueryGithubLoginUrl } from "./useQueryGithubLoginUrl";
 
 export const useMutationReIssueAccessToken = () => {
-  // const { isSuccess: isLoginSuccess } = useQueryGithubLoginUrl();
+  const { setAccessToken } = useUserStore();
 
   const { mutate } = useMutation<reIssueAccessTokenResponse>({
-    // mutationFn: async () => await reIssueAccessToken(),
+    mutationFn: reIssueAccessToken,
     onSuccess: data => {
       setAccessToken(data.accessToken);
     },
