@@ -59,7 +59,7 @@ function Map() {
         onClick={handleRegionClick}
         className="absolute z-0 flex h-screen w-screen items-center justify-center transition-all duration-1000"
       >
-        <MapComponent regionCode={regionCode} />
+        <MapComponent regionCode={regionCode} regionRank={rank} />
       </div>
       <Carousel
         className={cn(

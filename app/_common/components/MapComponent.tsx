@@ -9,9 +9,14 @@ const textColor = "black";
 
 interface Props {
   regionCode: string;
+  regionRank?: string[];
 }
 
-function MapComponent({ regionCode }: Props) {
+function MapComponent({ regionCode, regionRank }: Props) {
+  useEffect(() => {
+    if (!regionRank) return;
+  }, [regionRank]);
+
   useEffect(() => {
     regionCode && zoomInRegion(regionCode);
   }, [regionCode]);
