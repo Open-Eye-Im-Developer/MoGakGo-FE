@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 
 import REGION_CODE from "../constants/regionCode";
+import "../styles/map.css";
 
 const strokeColor = "white";
 const textColor = "black";
@@ -13,6 +14,15 @@ interface Props {
 function MapComponent({ regionCode, regionRank }: Props) {
   useEffect(() => {
     if (!regionRank) return;
+
+    regionRank.forEach((regionName, index) => {
+      const region = document
+        .querySelector(`#${regionName}`)
+        ?.querySelector(".land");
+      const className =
+        index === 0 ? "first" : index === 1 ? "second" : "third";
+      region?.classList.add(className);
+    });
   }, [regionRank]);
 
   useEffect(() => {
