@@ -1,5 +1,6 @@
 "use client";
 
+import { toast } from "sonner";
 import { MouseEvent, useRef, useState } from "react";
 
 import REGION_CODE from "@/app/_common/constants/regionCode";
@@ -20,7 +21,10 @@ function Map() {
   const [regionCode, setRegionCode] = useState("");
   const previousRegion = useRef<SVGElement | null>(null);
   const [isListShow, setIsListShow] = useState(false);
-  const { data: rank } = useGetRank();
+  const { data: rank, isError, isLoading, error } = useGetRank();
+
+  if (isLoading) toast.info("잠시만 기다려주세요.");
+  if (isError) toast.error(error.message);
 
   const handleRegionClick = (event: MouseEvent<HTMLDivElement>) => {
     const map = document.querySelector("#map-wrap") as HTMLDivElement;
