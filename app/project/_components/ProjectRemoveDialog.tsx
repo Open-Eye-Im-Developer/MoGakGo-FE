@@ -20,14 +20,18 @@ import {
 
 import usePopupToast from "../_hooks/usePopupToast";
 
-// TODO: 요청이 있을 경우 삭제하지 못하는 로직 추가하기 & 서버에서 카드 id를 받아와서 삭제 요청하기
+// TODO: 요청이 있을 경우 삭제하지 못하는 로직 추가하기 & 서버에서 카드 id를 받아와서 취소 요청하기
 function ProjectRemoveDialog() {
   const { showToast } = usePopupToast(
     <ToastAction altText="다시 시도">다시 시도</ToastAction>,
   );
   const handleRemoveProject = async () => {
-    const response = await fetch("/api/project/delete?id=10", {
-      method: "DELETE",
+    const response = await fetch("/api/project/cancel", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: 65 }),
     });
     const { data, status } = await response.json();
     showToast(data, status);
