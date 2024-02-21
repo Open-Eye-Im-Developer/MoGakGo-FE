@@ -14,11 +14,13 @@ import {
   CarouselPrevious,
 } from "../_common/shadcn/ui/carousel";
 import MapComponent from "../_common/components/MapComponent";
+import useGetRank from "./_api/useGetRank";
 
 function Map() {
   const [regionCode, setRegionCode] = useState("");
   const previousRegion = useRef<SVGElement | null>(null);
   const [isListShow, setIsListShow] = useState(false);
+  const { data: rank } = useGetRank();
 
   const handleRegionClick = (event: MouseEvent<HTMLDivElement>) => {
     const map = document.querySelector("#map-wrap") as HTMLDivElement;
