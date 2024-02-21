@@ -2,18 +2,30 @@ import { useQuery } from "@tanstack/react-query";
 
 import { getRank } from "@/app/_common/api/project";
 
-const useGetRank = () => {
-  const { data, isLoading, ...rest } = useQuery({
-    queryKey: ['region-rank'],
-    queryFn: getRank,
-    select: (data): string[] => {
-      // 만약 400번대면 그대로 return
-      const { densityRankByRegion } = data;
-      return densityRankByRegion.map(region => region.toLowerCase());
-    }
-  });
+import { checkInstanceOfResponseError } from "@/app/_common/utils/checkInstanceOfResponseError";
 
-  return { data, isLoading, ...rest };
+const useGetRank = () => {
+  const response = useQuery({
+    queryKey: ["region-rank"],
+    queryFn: getRank,
+  });
+  const { data, isLoading } = response;
+
+  if (isLoading || !data) return { ...response };
+
+  if (checkInstanceOfResponseError(data)) {
+    return {
+      ...response,
+      data: undefined,
+      isError: true,
+      error: data,
+    };
+  } else {
+    return {
+      ...response,
+      data: data.densityRankByRegion.map(region => region.toLowerCase()),
+    };
+  }
 };
 
 export default useGetRank;
