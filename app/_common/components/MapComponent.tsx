@@ -31,7 +31,7 @@ function MapComponent({ regionCode, regionRank }: Props) {
     regionCode && zoomInRegion(regionCode);
   }, [regionCode]);
 
-  const zoomInRegion = (regionCode: string) => {
+  const zoomInRegion = (regionCode: number) => {
     const map = document.querySelector("#map-wrap") as HTMLDivElement;
     const regionName = Object.keys(REGION_CODE).find(
       region => REGION_CODE[region] === regionCode,

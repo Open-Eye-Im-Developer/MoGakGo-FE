@@ -18,7 +18,7 @@ import MapComponent from "../_common/components/MapComponent";
 import useGetRank from "./_api/useGetRank";
 
 function Map() {
-  const [regionCode, setRegionCode] = useState("");
+  const [regionCode, setRegionCode] = useState(0);
   const previousRegion = useRef<SVGElement | null>(null);
   const [isListShow, setIsListShow] = useState(false);
   const { data: rank, isError, isLoading, error } = useGetRank();
