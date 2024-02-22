@@ -20,6 +20,7 @@ export const MyLocationAuthFormSchema = z.object({
 });
 
 function MyLocationAuth() {
+  // TODO: token 없거나, 만료시에 로그인 페이지로 이동
   const router = useRouter();
   const { validatePosition } = usePositionStore();
   // const { user } = useAuthStore();
@@ -43,7 +44,7 @@ function MyLocationAuth() {
 
     mutate({
       // TODO: user 정보 저장 후 user.id로 변경
-      userId: 2,
+      userId: 20,
       areaCode: code.areaCode,
     });
 

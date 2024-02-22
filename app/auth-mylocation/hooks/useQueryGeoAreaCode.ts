@@ -5,25 +5,25 @@ import { usePositionStore } from "@/app/_common/store/usePositionStore";
 import { getGeoAreaCode } from "@/app/_common/api/location";
 
 const useQueryGeoAreaCode = () => {
-  const { getPosition, setPosition, validatePosition, isGPSOn } =
-    usePositionStore();
-
-  console.log(getPosition());
+  const { getPosition, isGPSOn } = usePositionStore();
 
   useEffect(() => {
-    setPosition();
-  }, [setPosition]);
+    getPosition();
+  }, [getPosition]);
 
   const { latitude, longitude } = getPosition();
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ["geoAreaCode"],
-    queryFn: () => getGeoAreaCode({ latitude, longitude }),
+    queryFn: () =>
+      getGeoAreaCode({
+        latitude,
+        longitude,
+      }),
     enabled: isGPSOn,
-    retry: validatePosition(),
   });
 
-  return { data, isLoading, isError };
+  return { data, isLoading, isError, error };
 };
 
 export default useQueryGeoAreaCode;

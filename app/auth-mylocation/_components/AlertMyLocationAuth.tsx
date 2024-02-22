@@ -1,10 +1,23 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 
+import { usePositionStore } from "@/app/_common/store/usePositionStore";
 import { Button } from "@/app/_common/shadcn/ui/button";
 
 function AlertMyLocationAuth() {
+  const { setPosition } = usePositionStore();
   const router = useRouter();
+
+  const handleSetPosition = async () => {
+    setPosition();
+
+    router.push("/auth-mylocation");
+  };
+
+  const handleprefetchQuery = async () => {
+    setPosition();
+  };
+
   return (
     <div className="flex flex-col gap-6">
       <header>
@@ -18,7 +31,7 @@ function AlertMyLocationAuth() {
         매칭 서비스를 제공하고 있어요. 만약 위치 기반을 허용하지 않았다면,
         허용으로 변경해주세요.
       </p>
-      <Button onClick={() => router.push("/auth-mylocation")}>
+      <Button onClick={handleSetPosition} onMouseEnter={handleprefetchQuery}>
         인증하러 가기
       </Button>
     </div>
