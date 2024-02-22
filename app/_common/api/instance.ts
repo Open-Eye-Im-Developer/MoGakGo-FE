@@ -1,6 +1,5 @@
+import { redirect } from "next/navigation";
 import axios from "axios";
-
-// import { reIssueAccessToken } from "@/app/_common/api/auth";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const SERVER_VERSION = "/api/v1";
@@ -14,7 +13,6 @@ export const instance = axios.create({
     Accept: "application/json",
     Authorization: `Bearer ${accessToken}`,
   },
-  validateStatus: status => status < 500,
 });
 
 instance.interceptors.request.use(
@@ -29,8 +27,11 @@ instance.interceptors.request.use(
 
     return config;
   },
-  (error: Error) => {
-    console.log(error.name);
+  error => {
+    if (error.response.status === 401) {
+      redirect("/login");
+    }
+
     return Promise.reject(error);
   },
 );
@@ -39,27 +40,13 @@ instance.interceptors.response.use(
   response => {
     return response;
   },
-  // 에러 처리
-  async error => {
-    const { config, response } = error;
+  error => {
+    const { response } = error;
 
-    // 토큰 자동 재발급 필요 외 다른 에러
-    if (
-      config.url === `/auth/reissue` ||
-      response?.status !== 402 ||
-      config.sent
-    ) {
-      return Promise.reject(error);
+    if (response.status === 401) {
+      redirect("/login");
     }
 
-    // TODO: reIssueAccessToken 호출 추가 후 주석해제
-    // config.sent = true;
-    // const reissue = await reIssueAccessToken();
-
-    // if (reissue.data.accessToken) {
-    //   config.headers.Authorization = `Bearer ${reissue.data.accessToken}`;
-    // }
-
-    return instance(config);
+    return Promise.reject(error);
   },
 );

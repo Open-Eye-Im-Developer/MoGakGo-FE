@@ -16,6 +16,7 @@ export const getGeoAreaCode = async ({ latitude, longitude }: Coordinate) => {
       latitude,
       longitude,
     },
+    validateStatus: status => status < 500,
   });
 
   return data;
