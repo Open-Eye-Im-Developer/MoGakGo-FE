@@ -30,6 +30,10 @@ function Map() {
   useEffect(() => {
     if (data) {
       setRegionCode(data.areaCode);
+      const regionName = Object.keys(REGION_CODE).find(
+        region => REGION_CODE[region] === data.areaCode,
+      );
+      previousRegion.current = document.querySelector(`#${regionName}`);
     }
   }, [data]);
 
