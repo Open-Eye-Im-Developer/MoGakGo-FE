@@ -1,4 +1,4 @@
-import { persist } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
 import { create } from "zustand";
 
 import { Coordinate, PositionState } from "@/app/_common/types/position.types";
@@ -30,6 +30,7 @@ export const usePositionStore = create(
     }),
     {
       name: "position-store",
+      storage: createJSONStorage(() => sessionStorage),
     },
   ),
 );
