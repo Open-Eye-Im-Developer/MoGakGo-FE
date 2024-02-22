@@ -6,6 +6,7 @@ import { MouseEvent, useEffect, useRef, useState } from "react";
 import REGION_CODE from "@/app/_common/constants/regionCode";
 
 import ProjectCardContainer from "../project/_components/ProjectCardContainer";
+import { usePositionStore } from "../_common/store/usePositionStore";
 import { cn } from "../_common/shadcn/utils";
 import {
   Carousel,
@@ -23,6 +24,7 @@ function Map() {
   const previousRegion = useRef<SVGElement | null>(null);
   const [isListShow, setIsListShow] = useState(false);
   const { data: rank, isError, isLoading, error } = useGetRank();
+  const { validatePosition } = usePositionStore();
 
   if (isLoading) toast.info("잠시만 기다려주세요.");
   if (isError) toast.error(error.message);
@@ -40,6 +42,8 @@ function Map() {
   if (isLoading) toast.info("로딩 중 입니다.");
 
   const handleRegionClick = (event: MouseEvent<HTMLDivElement>) => {
+    if (!validatePosition()) return;
+
     const map = document.querySelector("#map-wrap") as HTMLDivElement;
     const isZoomIn = map.style.transform.includes("scale");
     const target = event.target as SVGElement | HTMLElement;
