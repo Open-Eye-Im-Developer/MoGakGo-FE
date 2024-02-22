@@ -2,8 +2,6 @@ import { toast } from "sonner";
 
 import { PositionState } from "@/app/_common/types/position.types";
 
-import { Button } from "../shadcn/ui/button";
-
 type Parameter = (state: PositionState) => void;
 
 const options = {
@@ -39,8 +37,11 @@ const errorCallback = (error: GeolocationPositionError) => {
         description: "GPS 사용 요청을 허용해야 서비스 이용이 가능합니다.",
         // TODO: 허용 안내 모달 팝업
         action: {
-          label: <Button variant="destructive">이동</Button>,
+          label: "허용 방법",
           onClick: () => console.log("허용 안내 모달 팝업"),
+        },
+        actionButtonStyle: {
+          backgroundColor: "#DC143C",
         },
       });
       break;
