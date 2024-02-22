@@ -29,10 +29,11 @@ function Map() {
 
   useEffect(() => {
     if (data) {
-      if (data?.statusCode >= 400) toast.error(data?.message);
-      else setRegionCode(data.areaCode);
+      setRegionCode(data.areaCode);
     }
   }, [data]);
+
+  if (isLoading) toast.info("로딩 중 입니다.");
 
   const handleRegionClick = (event: MouseEvent<HTMLDivElement>) => {
     const map = document.querySelector("#map-wrap") as HTMLDivElement;
