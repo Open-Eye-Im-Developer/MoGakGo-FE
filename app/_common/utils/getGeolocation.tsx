@@ -1,4 +1,8 @@
+import { toast } from "sonner";
+
 import { PositionState } from "@/app/_common/types/position.types";
+
+import { Button } from "../shadcn/ui/button";
 
 type Parameter = (state: PositionState) => void;
 
@@ -31,19 +35,30 @@ export const getGeolocation = (callback: Parameter) =>
 const errorCallback = (error: GeolocationPositionError) => {
   switch (error.code) {
     case error.PERMISSION_DENIED:
-      // TODO: 재허용이나 GPS 허용 안내 모달 or 문구 or 리다이랙션 추가
-      console.error("사용자가 Geolocation API의 사용 요청을 거부했습니다");
+      toast.error("GPS 사용 요청이 거부되었습니다.", {
+        description: "GPS 사용 요청을 허용해야 서비스 이용이 가능합니다.",
+        // TODO: 허용 안내 모달 팝업
+        action: {
+          label: <Button variant="destructive">이동</Button>,
+          onClick: () => console.log("허용 안내 모달 팝업"),
+        },
+      });
       break;
     case error.POSITION_UNAVAILABLE:
-      console.error("가져온 위치 정보를 사용할 수 없습니다.");
+      toast.error("가져온 위치 정보를 사용할 수 없습니다.", {
+        description: "잠시 후 다시 이용해주세요.",
+      });
       break;
     case error.TIMEOUT:
-      console.error(
-        "위치 정보를 가져오기 위한 요청이 허용 시간을 초과했습니다",
-      );
+      toast.error("위치 정보를 가져오기 위한 요청이 허용 시간을 초과했습니다", {
+        description: "잠시 후 다시 이용해주세요.",
+      });
       break;
     default:
-      console.error("알 수 없는 오류가 발생했습니다.");
+      toast.error(
+        "알 수 없는 오류가 발생했습니다. 새로고침을 한 후 다시 시도해주세요.",
+        { description: "잠시 후 다시 이용해주세요" },
+      );
       break;
   }
 };
