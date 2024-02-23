@@ -1,16 +1,15 @@
 "use client";
 
 import { z } from "zod";
-import { toast } from "sonner";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
-import { redirect, useSearchParams } from "next/navigation";
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { cn } from "@/app/_common/shadcn/utils";
 import { Form } from "@/app/_common/shadcn/ui/form";
 
 import { SignupFormSchema } from "../_utils/validation";
+import { useSearchTokens } from "../_hooks/useSearchTokens";
 import { useQuerySignUpUser } from "../_hooks/useQuerySignUpUser";
 import { useMutationSignup } from "../_hooks/useMutationSignup";
 import SignupSecondStep from "./SignupSecondStep";
@@ -18,18 +17,7 @@ import SignupFirstStep from "./SignupFirstStep";
 import SignupFinalStep from "./SignupFinalStep";
 
 function SignupForm() {
-  const newAccessToken = useSearchParams().get("accessToken");
-
-  if (!newAccessToken) {
-    toast.error("인증 코드를 확인할 수 없습니다. 다시 시도해주세요.", {
-      position: "bottom-center",
-    });
-    redirect("/login");
-  }
-
-  useEffect(() => {
-    sessionStorage.setItem("accessToken", newAccessToken);
-  }, [newAccessToken]);
+  const { newAccessToken, newRefreshToken } = useSearchTokens("session");
 
   const { data: userData } = useQuerySignUpUser();
 
@@ -51,7 +39,7 @@ function SignupForm() {
     },
   });
 
-  const signUp = useMutationSignup(newAccessToken);
+  const signUp = useMutationSignup(newAccessToken, newRefreshToken);
 
   const onSubmit = (data: z.infer<typeof SignupFormSchema>) => {
     signUp.mutate(data);
@@ -83,6 +71,7 @@ function SignupForm() {
               `${nextStep === 2 ? "animate-signup-fade-in" : "hidden animate-signup-fade-out opacity-0"}`,
             )}
             newAccessToken={newAccessToken}
+            newRefreshToken={newRefreshToken}
           />
         </form>
       </Form>

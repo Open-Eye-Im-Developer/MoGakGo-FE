@@ -1,33 +1,32 @@
 import { persist } from "zustand/middleware";
 import { create } from "zustand";
 
-import { User } from "../_type/signup.types";
+import { User } from "../types/user";
 
-interface UserState {
+interface AuthState {
   user: User;
-  accessToken: string;
 }
 
-interface UserAction {
+interface AuthAction {
   setUser: (user: User) => void;
-  getUser: () => User;
-  setAccessToken: (accessToken: string) => void;
 }
 
 export const useUserStore = create(
-  persist<UserAction & UserState>(
-    (set, get) => ({
-      accessToken: "",
+  persist<AuthAction & AuthState>(
+    set => ({
       user: {
-        id: "",
+        id: 0,
         username: "",
         githubId: "",
         githubUrl: "",
         avatarUrl: "",
+        bio: "",
+        jandiRate: 0,
+        achievementTitle: "",
+        developLanguages: [],
+        wantedJobs: [],
       },
       setUser: user => set({ user }),
-      getUser: () => get().user,
-      setAccessToken: accessToken => set({ accessToken }),
     }),
     {
       name: "user-store",

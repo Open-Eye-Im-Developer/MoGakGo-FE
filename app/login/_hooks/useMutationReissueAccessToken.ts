@@ -1,23 +1,22 @@
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 
-// import { reIssueAccessToken } from "@/app/_common/api/auth";
-
-import { useUserStore } from "@/app/signup/_store/useUserStore";
 import { reIssueAccessToken } from "@/app/_common/api/auth";
 
-import { reIssueAccessTokenResponse } from "./../_types/login.types";
-
-// import { getLoginSuccess } from "@/app/_common/api/auth";
-
-// import { useQueryGithubLoginUrl } from "./useQueryGithubLoginUrl";
-
 export const useMutationReIssueAccessToken = () => {
-  const { setAccessToken } = useUserStore();
+  const router = useRouter();
 
-  const { mutate } = useMutation<reIssueAccessTokenResponse>({
+  const { mutate } = useMutation({
     mutationFn: reIssueAccessToken,
     onSuccess: data => {
-      setAccessToken(data.accessToken);
+      localStorage.setItem("accessToken", data.accessToken);
+    },
+    onError: error => {
+      console.error(error.message);
+
+      toast.error("인증이 만료되었습니다. 재로그인이 필요합니다.");
+      router.push("/login");
     },
   });
 

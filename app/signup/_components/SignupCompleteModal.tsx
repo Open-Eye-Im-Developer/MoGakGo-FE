@@ -15,18 +15,12 @@ import {
 
 interface SignupCompleteModalProps {
   isValid: boolean;
-  newAccessToken: string;
 }
 
-function SignupCompleteModal({
-  isValid,
-  newAccessToken,
-}: SignupCompleteModalProps) {
+function SignupCompleteModal({ isValid }: SignupCompleteModalProps) {
   const router = useRouter();
 
   const onCompleted = () => {
-    localStorage.setItem("accessToken", newAccessToken);
-    sessionStorage.removeItem("accessToken");
     router.push("/");
   };
 

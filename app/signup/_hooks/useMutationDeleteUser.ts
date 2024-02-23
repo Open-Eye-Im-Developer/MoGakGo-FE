@@ -2,9 +2,8 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
+import { useUserStore } from "@/app/_common/store/useUserStore";
 import { deleteUser } from "@/app/_common/api/auth";
-
-import { useSignUpStore } from "../_store/useSignUpStore";
 
 export const useMutationDeleteUser = () => {
   const queryClient = useQueryClient();
@@ -14,8 +13,8 @@ export const useMutationDeleteUser = () => {
     mutationFn: deleteUser,
     onSuccess: () => {
       localStorage.removeItem("accessToken");
-      sessionStorage.removeItem("accessToken");
-      useSignUpStore.persist.clearStorage();
+      localStorage.removeItem("refreshToken");
+      useUserStore.persist.clearStorage();
 
       toast.error("회원탈퇴가 완료되었습니다.");
 

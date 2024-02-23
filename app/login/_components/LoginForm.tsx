@@ -5,6 +5,8 @@ import Link from "next/link";
 import StartWithGithubButton from "./StartWithGithubButton";
 
 function LoginForm() {
+  // TODO: 로그인 페이지를 url 변경으로 직접 들어가지 못하도록 next/redirects 설정
+
   return (
     <div className="flex min-h-[360px] w-full flex-col justify-between gap-y-3">
       <section className="text-center text-3xl">로고</section>

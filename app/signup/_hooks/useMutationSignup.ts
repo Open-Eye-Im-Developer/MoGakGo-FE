@@ -1,22 +1,28 @@
-import { toast } from "sonner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
+import { useUserStore } from "@/app/_common/store/useUserStore";
 import { patchSignup } from "@/app/_common/api/auth";
 
-import { SignUpUser } from "../_type/signup.types";
-import { useSignUpStore } from "../_store/useSignUpStore";
+import { SignUpUser } from "../_type/signup";
 
-export const useMutationSignup = (accessToken: string) => {
+export const useMutationSignup = (
+  accessToken: string,
+  refreshToken: string,
+) => {
   const queryClient = useQueryClient();
-  const { setAccessToken, setUser } = useSignUpStore();
+  const { setUser } = useUserStore();
 
   const { mutate } = useMutation({
     mutationFn: patchSignup,
-    onSuccess: ({ data }: { data: SignUpUser }) => {
-      toast.success("회원가입이 완료되었습니다.");
+    onSuccess: (data: SignUpUser) => {
+      const { id, username, githubId, avatarUrl, githubUrl } = data;
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
 
-      setUser(data);
-      setAccessToken(accessToken);
+      sessionStorage.removeItem("accessToken");
+      sessionStorage.removeItem("refreshToken");
+
+      setUser({ id, username, githubId, avatarUrl, githubUrl });
 
       queryClient.invalidateQueries({
         queryKey: ["user"],

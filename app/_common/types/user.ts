@@ -1,9 +1,8 @@
-import {
-  WANTED_JOB,
-  WantedJobType,
-} from "@/app/_common/constants/wantedJob.constants";
+import { SignUpUser } from "@/app/signup/_type/signup";
 
-type Region =
+import { WANTED_JOB } from "../constants/wantedJob.constants";
+
+export type Region =
   | "종로구"
   | "중구"
   | "용산구"
@@ -32,20 +31,7 @@ type Region =
   | "분당구"
   | "기타";
 
-type WantedJob = (typeof WANTED_JOB)[number]["id"];
-
-export interface SignUpUser {
-  id: string;
-  username: string;
-  githubId: string;
-  avatarUrl: string;
-  githubUrl: string;
-  bio?: string;
-  jandiRate?: number;
-  achievementTitle?: string;
-  developLanguages?: string[];
-  wantedJobs?: WantedJobType[];
-}
+export type WantedJobs = (typeof WANTED_JOB)[number]["id"];
 
 export interface User extends SignUpUser {
   region?: Region;
@@ -59,10 +45,5 @@ export interface User extends SignUpUser {
 export interface UserWantedJob {
   id: string;
   userId: string;
-  wantedJobs: WantedJob[];
-}
-
-export interface SignupRequest {
-  username: string;
-  wantedJobs: WantedJobType[];
+  wantedJobs: WantedJobs[];
 }

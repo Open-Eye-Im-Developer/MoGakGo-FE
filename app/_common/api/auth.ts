@@ -1,14 +1,10 @@
 import { SignUpUser, SignupRequest } from "@/app/signup/_type/signup.types";
 import { reIssueAccessTokenResponse } from "@/app/login/_types/login.types";
 
-import { getCookie } from "../utils/cookie";
 import { instance } from "../api/instance";
 
 export const patchSignup = async ({ username, wantedJobs }: SignupRequest) => {
   const { data } = await instance.patch("/user/sign", {
-    headers: {
-      ignoreGlobalCatch: true,
-    },
     username,
     wantedJobs,
   });
@@ -28,9 +24,11 @@ export const getSignUpUser = async () => {
   return data;
 };
 
-export const reIssueAccessToken = async () => {
-  const refreshToken = getCookie("refreshToken");
-
+export const reIssueAccessToken = async ({
+  refreshToken,
+}: {
+  refreshToken: string | null;
+}) => {
   const { data } = await instance.post<reIssueAccessTokenResponse>(
     "/auth/reissue",
     {

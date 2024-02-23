@@ -15,7 +15,7 @@ import { Checkbox } from "@/app/_common/shadcn/ui/checkbox";
 
 import { WANTED_JOB } from "@/app/_common/constants/wantedJob.constants";
 
-import { SignupRequest } from "../_type/signup.types";
+import { SignupRequest } from "../_type/signup";
 import SignupHeader from "./SignupHeader";
 import SignupCompleteModal from "./SignupCompleteModal";
 
@@ -23,16 +23,11 @@ interface SignupFinalStepProps {
   className: ComponentProps<typeof cn>;
   form: UseFormReturn<SignupRequest, SignupRequest>;
   newAccessToken: string;
+  newRefreshToken: string;
 }
 
-function SignupFinalStep({
-  className,
-  form,
-  newAccessToken,
-}: SignupFinalStepProps) {
+function SignupFinalStep({ className, form }: SignupFinalStepProps) {
   const { formState, control } = form;
-
-  // console.log(getValues("wantedJobs"));
 
   return (
     <section className={cn(className)}>
@@ -91,10 +86,7 @@ function SignupFinalStep({
             </>
           )}
         />
-        <SignupCompleteModal
-          isValid={formState.isValid}
-          newAccessToken={newAccessToken}
-        />
+        <SignupCompleteModal isValid={formState.isValid} />
       </div>
     </section>
   );
