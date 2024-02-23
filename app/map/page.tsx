@@ -5,6 +5,7 @@ import { MouseEvent, useRef, useState } from "react";
 import REGION_CODE from "@/app/_common/constants/regionCode";
 
 import ProjectCardContainer from "../project/_components/ProjectCardContainer";
+import { cn } from "../_common/shadcn/utils";
 import {
   Carousel,
   CarouselContent,
@@ -17,6 +18,7 @@ import MapComponent from "../_common/components/MapComponent";
 function Map() {
   const [regionCode, setRegionCode] = useState("");
   const previousRegion = useRef<SVGElement | null>(null);
+  const [isListShow, setIsListShow] = useState(false);
 
   const handleRegionClick = (event: MouseEvent<HTMLDivElement>) => {
     const map = document.querySelector("#map-wrap") as HTMLDivElement;
@@ -36,10 +38,16 @@ function Map() {
 
       const currentRegion = target.closest(".region");
       if (currentRegion instanceof SVGElement) {
+        setIsListShow(true);
         setRegionCode(REGION_CODE[currentRegion.id]);
         previousRegion.current = currentRegion;
       }
     }
+  };
+
+  const handleCancelCard = (event: MouseEvent<HTMLDivElement>) => {
+    if (!(event.target instanceof HTMLDivElement)) return;
+    if (event.target.id === "carousel-wrap") setIsListShow(false);
   };
 
   return (
@@ -52,6 +60,11 @@ function Map() {
         <MapComponent regionCode={regionCode} />
       </div>
       <Carousel
+        className={cn(
+          "h-screen w-screen transition-opacity duration-300",
+          isListShow ? "visible opacity-100" : "invisible opacity-0",
+        )}
+        onClick={handleCancelCard}
       >
         <div
           id="carousel-wrap"
