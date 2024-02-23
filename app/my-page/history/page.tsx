@@ -10,7 +10,7 @@ function HistoryPage() {
   const [currentTab, setCurrentTab] = useState("all");
 
   return (
-    <div className="container max-h-full max-w-2xl space-y-4 bg-gray-50 dark:bg-gray-950">
+    <div className="container max-h-full min-h-screen max-w-2xl space-y-4 bg-gray-50 dark:bg-gray-950">
       <Tabs
         defaultValue={currentTab}
         className="space-y-4"

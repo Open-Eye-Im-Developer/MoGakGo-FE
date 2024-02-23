@@ -15,7 +15,7 @@ interface MyPageLayoutProps {
 
 function MyPageLayout({ data }: MyPageLayoutProps) {
   return (
-    <div className="container flex max-w-2xl flex-col gap-8 bg-gray-50 dark:bg-gray-950">
+    <div className="container flex min-h-screen max-w-2xl flex-col gap-8 bg-gray-50 dark:bg-gray-950">
       <div className="flex max-w-2xl flex-col items-center gap-1.5">
         <div className="relative h-52 w-52">
           {/* 프로필 */}
