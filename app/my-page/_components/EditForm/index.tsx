@@ -9,7 +9,7 @@ import { Button } from "@/app/_common/shadcn/ui/button";
 import { UserType } from "../../types";
 import { editFormSchema } from "../../_util/validation";
 import WantedJobsField from "./WantedJobsField";
-import UsernameField from "./usernameField";
+import UsernameField from "./UsernameField";
 import DevelopLanuagesField from "./DevelopLanguagesField";
 import BioField from "./BioField";
 import AchievementField from "./AchievementField";
