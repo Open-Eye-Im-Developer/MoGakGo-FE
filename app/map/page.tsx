@@ -43,18 +43,24 @@ function Map() {
   };
 
   return (
-    <div
-      id="map-wrap"
-      onClick={handleRegionClick}
-      className="relative z-0 flex h-screen w-screen items-center justify-center transition-all duration-1000"
-    >
-      <MapComponent regionCode={regionCode} />
-      <Carousel className="h-full w-full">
-        <div className="flex h-full w-full flex-col items-center justify-center overflow-hidden">
+    <div className="relative h-screen w-screen">
+      <div
+        id="map-wrap"
+        onClick={handleRegionClick}
+        className="absolute z-0 flex h-screen w-screen items-center justify-center transition-all duration-1000"
+      >
+        <MapComponent regionCode={regionCode} />
+      </div>
+      <Carousel
+      >
+        <div
+          id="carousel-wrap"
+          className="flex h-full w-full flex-col items-center justify-center overflow-hidden"
+        >
           <CarouselContent>
             {Array.from({ length: 5 }).map((_, index) => (
               <CarouselItem key={index}>
-                <div className="mb-20 flex aspect-square items-center justify-center">
+                <div className="mb-20 flex items-center justify-center">
                   <ProjectCardContainer />
                 </div>
               </CarouselItem>
