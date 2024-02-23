@@ -6,10 +6,11 @@ import { useRouter } from "next/navigation";
 import { IconAlertCircle } from "@tabler/icons-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { CODE_TO_REGION_NAME } from "@/app/auth-mylocation/_utils/codeToRegionName";
 import { usePositionStore } from "@/app/_common/store/usePositionStore";
 import { Form } from "@/app/_common/shadcn/ui/form";
 import { Button } from "@/app/_common/shadcn/ui/button";
+
+import { CODE_TO_REGION_NAME } from "@/app/_common/constants/codeToRegionName";
 
 import useQueryGeoAreaCode from "../hooks/useQueryGeoAreaCode";
 import { useMutationAuthMyLocation } from "../hooks/useMutationAuthMyLocation";
@@ -52,6 +53,10 @@ function MyLocationAuth() {
     console.log(getValues(["userId", "areaCode"]));
   };
 
+  const handleBack = () => {
+    router.back();
+  };
+
   if (isLoading || !code) return <div>loading...</div>;
 
   return (
@@ -85,7 +90,7 @@ function MyLocationAuth() {
           <section className="flex items-end justify-between">
             <small
               className="cursor-pointer align-bottom text-gray-400  hover:underline hover:underline-offset-4"
-              onClick={() => router.back()}
+              onClick={handleBack}
             >
               나중에 하기
             </small>

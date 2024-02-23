@@ -8,13 +8,13 @@ function AlertMyLocationAuth() {
   const { setPosition } = usePositionStore();
   const router = useRouter();
 
-  const handleSetPosition = async () => {
+  const handleSetPosition = () => {
     setPosition();
 
     router.push("/auth-mylocation");
   };
 
-  const handleprefetchQuery = async () => {
+  const handleprefetchQuery = () => {
     setPosition();
   };
 
