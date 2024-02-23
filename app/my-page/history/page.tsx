@@ -10,7 +10,7 @@ function HistoryPage() {
   const [currentTab, setCurrentTab] = useState("all");
 
   return (
-    <div className="container max-h-full min-h-screen max-w-2xl space-y-4 bg-gray-50 dark:bg-gray-950">
+    <main className="container max-h-full min-h-screen max-w-2xl space-y-4 bg-gray-50 dark:bg-gray-950">
       <Tabs
         defaultValue={currentTab}
         className="space-y-4"
@@ -24,12 +24,12 @@ function HistoryPage() {
         </TabsList>
       </Tabs>
       {/* TODO: currentTab 기준으로 필터링 */}
-      <div className="flex flex-col gap-2">
+      <section className="flex flex-col gap-2">
         {Array.from({ length: 4 }).map((_, i) => (
           <TempCard key={i} />
         ))}
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }
 
