@@ -41,7 +41,7 @@ function ProjectCardFront(props: CardFrontProps) {
   return (
     <Card
       className={cn(
-        `card absolute inset-0 left-0 top-0 border-none shadow-md [backface-visibility:hidden]`,
+        `card absolute inset-0 left-0 top-0 border-none shadow-md`,
         initialRotate ? "[transform:rotateY(180deg)]" : "",
       )}
     >

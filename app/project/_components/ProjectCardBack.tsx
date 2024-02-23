@@ -13,6 +13,8 @@ import { Badge } from "@/app/_common/shadcn/ui/badge";
 
 import ButtonRotate from "./ButtonRotate";
 
+import "../_styles/card.css";
+
 interface CardBackProps {
   onRotate: () => void;
 }
