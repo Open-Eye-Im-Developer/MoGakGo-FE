@@ -1,7 +1,6 @@
-import { Toaster } from "@/app/_common/shadcn/ui/toaster";
-
-import { ThemeProvider } from "@/app/_common/components/theme-provider";
-import ClientProvider from "@/app/_common/components/ClientProvider";
+import { Toaster } from "./_common/shadcn/ui/toaster";
+import { ThemeProvider } from "./_common/components/theme-provider";
+import ClientProvider from "./_common/components/ClientProvider";
 
 import type { Metadata } from "next";
 
