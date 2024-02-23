@@ -33,7 +33,7 @@ function MapComponent({ regionCode }: Props) {
   };
 
   return (
-    <div className="absolute z-[-1] w-full p-4 md:w-4/5 lg:w-3/5">
+    <div className="absolute w-full p-4 md:w-4/5 lg:w-3/5">
       <svg
         viewBox="0 0 1476 1305"
         fill="none"
