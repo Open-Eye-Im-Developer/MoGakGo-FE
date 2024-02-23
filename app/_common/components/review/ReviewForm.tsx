@@ -24,7 +24,6 @@ function ReviewForm() {
 
   const handleClickRating: MouseEventHandler<HTMLLIElement> = event => {
     form.setValue("rating", parseInt(event.currentTarget.id) + 1);
-    console.log(form.watch("rating"));
   };
 
   return (
