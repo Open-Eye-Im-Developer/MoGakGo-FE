@@ -25,7 +25,7 @@ function ProjectRemoveDialog() {
   const { showToast } = usePopupToast(
     <ToastAction altText="다시 시도">다시 시도</ToastAction>,
   );
-  const handleRemoveProject = async () => {
+  const handleCancelProject = async () => {
     const response = await fetch("/api/project/cancel", {
       method: "PATCH",
       headers: {
@@ -52,7 +52,7 @@ function ProjectRemoveDialog() {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter className="flex flex-row items-center gap-2 self-end">
-          <AlertDialogAction onClick={handleRemoveProject}>
+          <AlertDialogAction onClick={handleCancelProject}>
             삭제
           </AlertDialogAction>
           <AlertDialogCancel className="mt-0">취소</AlertDialogCancel>
