@@ -16,9 +16,11 @@ interface Props {
 
 function Notification({ notification }: Props) {
   dayjs.extend(relativeTime);
+
   const { sender, data } = notification;
   const { name, profile_image } = sender;
   const { detail, created_at } = data;
+
   return (
     <div className="m-2 flex cursor-pointer justify-between border-b p-2 px-3">
       <div className="flex gap-4">

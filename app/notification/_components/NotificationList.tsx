@@ -1,3 +1,4 @@
+"use client";
 import { NotificationType } from "../_types/notification";
 import Notification from "../_components/Notification";
 import useGetNotifications from "../_api/useGetNotifications";
@@ -11,7 +12,7 @@ function NotificationList() {
         [...notificaitons]
           .reverse()
           .map((notification: NotificationType, index: number) => (
-            <div key={index.toString()}>
+            <div key={index}>
               <Notification notification={notification} />
             </div>
           ))

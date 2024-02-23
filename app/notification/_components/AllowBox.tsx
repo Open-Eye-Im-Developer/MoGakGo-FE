@@ -1,7 +1,8 @@
-import { twMerge } from "tailwind-merge";
+"use client";
 import { useState } from "react";
 import { AlertDialog, AlertDialogTrigger } from "@radix-ui/react-alert-dialog";
 
+import { cn } from "@/app/_common/shadcn/utils";
 import { useToast } from "@/app/_common/shadcn/ui/use-toast";
 import { Button } from "@/app/_common/shadcn/ui/button";
 
@@ -26,7 +27,7 @@ function AllowBox() {
 
   return (
     <div
-      className={twMerge(
+      className={cn(
         "align-center m-4 flex justify-between rounded-lg bg-primary p-6 font-medium",
         Notification.permission === "granted" && "hidden",
       )}
