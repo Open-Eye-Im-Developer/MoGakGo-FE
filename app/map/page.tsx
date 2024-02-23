@@ -38,7 +38,7 @@ function Map() {
     <div
       id="map-wrap"
       onClick={handleRegionClick}
-      className="flex h-screen w-screen items-center justify-center p-4 transition-all duration-1000"
+      className="relative z-0 flex h-screen w-screen items-center justify-center transition-all duration-1000"
     >
       <MapComponent regionCode={regionCode} />
     </div>
