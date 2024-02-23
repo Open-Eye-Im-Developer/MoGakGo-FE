@@ -1,6 +1,8 @@
 import { useToast } from "@/app/_common/shadcn/ui/use-toast";
 import { ToastActionElement } from "@/app/_common/shadcn/ui/toast";
 
+import STATUS_CODE from "../_constants/statusMessage";
+
 interface Data {
   timestamp: string;
   status: number;
@@ -14,16 +16,10 @@ function usePopupToast(
   const { toast } = useToast();
 
   const showToast = (data: Data, statusCode: number) => {
-    if (statusCode === 201 || statusCode === 204) {
+    if (statusCode === 201 || statusCode === 204 || statusCode === 200) {
       toast({
-        title:
-          statusCode === 201
-            ? "프로젝트 카드가 생성되었습니다."
-            : "프로젝트 카드가 삭제되었습니다.",
-        description:
-          statusCode === 201
-            ? "🎉 설레이는 매칭을 기다려봐요!"
-            : "👋 다음에 또 만나요!",
+        title: STATUS_CODE[statusCode].title,
+        description: STATUS_CODE[statusCode].description,
       });
     } else {
       toast({
