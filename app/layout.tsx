@@ -1,5 +1,6 @@
 import { ThemeProvider } from "@/app/_common/components/theme-provider";
 
+import { Toaster } from "./_common/shadcn/ui/toaster";
 import ClientProvider from "./_common/components/ClientProvider";
 
 import type { Metadata } from "next";
@@ -29,6 +30,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             {children}
+            <Toaster />
           </ThemeProvider>
         </ClientProvider>
       </body>
