@@ -1,4 +1,3 @@
-import { ComponentProps } from "react";
 import {
   IconMoodSad,
   IconMoodSadDizzy,
@@ -14,22 +13,26 @@ type RatingType = "sad-dizzy" | "sad" | "smile" | "happy" | "xd";
 
 interface RatingItemProps {
   type: RatingType;
-  content: string;
-  className?: ComponentProps<typeof cn>;
+  checked?: boolean;
+  onChangeChecked: () => void;
 }
 
-function RatingItem({ type, content, className }: RatingItemProps) {
+function RatingItem({ type, checked, onChangeChecked }: RatingItemProps) {
   return (
-    <li className={cn("flex cursor-pointer flex-col items-center", className)}>
-      <RatingIcon
-        type={type}
-        width={50}
-        height={50}
-        strokeWidth={1.5}
-        className="text-primary text-opacity-60 hover:text-secondary"
-      />
-      <small className="text-[0.7rem] text-gray-600">{content}</small>
-    </li>
+    <RatingIcon
+      onChange={onChangeChecked}
+      type={type}
+      width={50}
+      height={50}
+      strokeWidth={1.5}
+      className={cn(
+        `${
+          checked
+            ? "text-secondary"
+            : "text-primary text-opacity-60 hover:text-secondary"
+        }`,
+      )}
+    />
   );
 }
 
@@ -39,6 +42,7 @@ function RatingIcon(props: {
   height: number;
   strokeWidth: number;
   className: string;
+  onChange: () => void;
 }) {
   let IconComponent: (props: TablerIconsProps) => JSX.Element;
 
