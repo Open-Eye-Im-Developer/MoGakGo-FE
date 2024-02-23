@@ -13,7 +13,11 @@ interface PlaceListProps {
 function PlaceList(props: PlaceListProps) {
   const { placeList, isOverlayered, onClickPlace } = props;
 
-  return isOverlayered ? (
+  if (!isOverlayered) {
+    return null;
+  }
+
+  return (
     <div className="relative w-full">
       {placeList && (
         <div className="h-fit rounded-lg border p-3">
@@ -38,7 +42,7 @@ function PlaceList(props: PlaceListProps) {
         </div>
       )}
     </div>
-  ) : null;
+  );
 }
 
 export default PlaceList;

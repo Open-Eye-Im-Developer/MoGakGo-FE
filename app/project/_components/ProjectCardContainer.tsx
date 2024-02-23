@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/app/_common/shadcn/utils";
 import {
   Tabs,
   TabsContent,
@@ -24,7 +25,10 @@ function ProjectCardContainer() {
       </TabsList>
       <TabsContent value="card" className="group h-full [perspective:1000px]">
         <div
-          className={`relative h-full transition-all duration-500 [transform-style:preserve-3d] ${flipped ? "[transform:rotateY(180deg)]" : ""}`}
+          className={cn(
+            `relative h-full transition-all duration-500 [transform-style:preserve-3d]`,
+            `${flipped ? "[transform:rotateY(180deg)]" : ""}`,
+          )}
         >
           <ProjectCardFront onRotate={handleFlip} />
           <ProjectCardBack onRotate={handleFlip} />
