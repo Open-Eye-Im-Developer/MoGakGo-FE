@@ -2,9 +2,17 @@
 
 import { MouseEvent, useRef, useState } from "react";
 
-import MapComponent from "@/app/_common/components/MapComponent";
-
 import REGION_CODE from "@/app/_common/constants/regionCode";
+
+import ProjectCardContainer from "../project/_components/ProjectCardContainer";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "../_common/shadcn/ui/carousel";
+import MapComponent from "../_common/components/MapComponent";
 
 function Map() {
   const [regionCode, setRegionCode] = useState("");
@@ -41,6 +49,21 @@ function Map() {
       className="relative z-0 flex h-screen w-screen items-center justify-center transition-all duration-1000"
     >
       <MapComponent regionCode={regionCode} />
+      <Carousel className="h-full w-full">
+        <div className="flex h-full w-full flex-col items-center justify-center overflow-hidden">
+          <CarouselContent>
+            {Array.from({ length: 5 }).map((_, index) => (
+              <CarouselItem key={index}>
+                <div className="mb-20 flex aspect-square items-center justify-center">
+                  <ProjectCardContainer />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </div>
+        <CarouselPrevious className="left-10 hidden md:inline-flex" />
+        <CarouselNext className="right-10 hidden md:inline-flex" />
+      </Carousel>
     </div>
   );
 }
