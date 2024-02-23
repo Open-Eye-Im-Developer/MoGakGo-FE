@@ -62,6 +62,7 @@ export const WantedJobLabelEnum = z.enum([
 
 export const DUMMY_USER_DATA: UserType = {
   username: "bel1c10ud",
+  avatarUrl: "",
   bio: undefined,
   developLanguages: [],
   wantedJobs: ["FRONTEND", "FULLSTACK"],

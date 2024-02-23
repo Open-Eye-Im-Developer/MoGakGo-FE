@@ -34,8 +34,8 @@ function MyPageLayout({ data }: MyPageLayoutProps) {
               {WANTED_JOB.find(el => el.id === job)?.label}
             </Badge>
           ))}
-          {data.developLanguages.map((lang, i) => (
-            <Badge key={i}>{lang}</Badge>
+          {data.developLanguages.map(lang => (
+            <Badge key={lang}>{lang}</Badge>
           ))}
         </div>
         <div className="text-xs text-gray-400">
@@ -43,14 +43,8 @@ function MyPageLayout({ data }: MyPageLayoutProps) {
         </div>
       </div>
       <div className="flex w-full justify-center gap-4">
-        <div className="flex flex-col items-center ">
-          <div className="text-xl font-bold">123</div>
-          <div className="text-xs text-gray-400">나를 찔러보기 한 사람</div>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="text-xl font-bold">5</div>
-          <div className="text-xs text-gray-400">내 찔러보기 한 사람</div>
-        </div>
+        <PokeCount count={123} label="나를 찔러보기 한 사람" />
+        <PokeCount count={5} label="내가 찔러보기 한 사람" />
       </div>
       <div className="flex w-full flex-col gap-4">
         <div className="text-xl font-bold">🌲나의 잔디력</div>
@@ -85,6 +79,20 @@ function MyPageLayout({ data }: MyPageLayoutProps) {
           전체 매칭 기록 보기
         </Button>
       </Link>
+    </div>
+  );
+}
+
+interface PokeCountProps {
+  count: number;
+  label: string;
+}
+
+function PokeCount({ count, label }: PokeCountProps) {
+  return (
+    <div className="flex flex-col items-center ">
+      <div className="text-xl font-bold">{count}</div>
+      <div className="text-xs text-gray-400">{label}</div>
     </div>
   );
 }

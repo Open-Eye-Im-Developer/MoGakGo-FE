@@ -2,8 +2,10 @@ import { z } from "zod";
 
 import { WantedJobLabelEnum } from "../constants";
 
-export const formSchema = z.object({
+export const editFormSchema = z.object({
   username: z.string().min(1, { message: "닉네임은 최소 1자 이상 입니다." }),
+  avatar: z.instanceof(File).optional(),
+  isResetAvator: z.boolean().optional(),
   bio: z.string().max(50).optional(),
   developLanguages: z.array(z.string()),
   wantedJobs: z

@@ -28,8 +28,14 @@ export type WantedJobIds =
 
 export interface UserType {
   username: string;
+  avatarUrl: string;
   bio?: string;
   developLanguages: string[];
   wantedJobs: WantedJobIds[];
   achievementId: string;
+}
+
+export interface EditFormType extends Omit<UserType, "avatarUrl"> {
+  avatar?: File;
+  isResetAvator?: boolean;
 }
