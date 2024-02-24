@@ -20,7 +20,7 @@ import MapComponent from "../_common/components/MapComponent";
 import useGetRank from "./_api/useGetRank";
 
 function Map() {
-  const { data, isLoading, isError, error } = useQueryGeoAreaCode();
+  const { data, isError, error } = useQueryGeoAreaCode();
   const [regionCode, setRegionCode] = useState(0);
   const previousRegion = useRef<SVGElement | null>(null);
   const [isListShow, setIsListShow] = useState(false);
@@ -32,6 +32,7 @@ function Map() {
 
   useEffect(() => {
     if (data) {
+      toast.info("내가 위치한 지역으로 이동합니다.");
       setRegionCode(data.areaCode);
       const regionName = Object.keys(REGION_CODE).find(
         region => REGION_CODE[region] === data.areaCode,
@@ -40,7 +41,6 @@ function Map() {
     }
   }, [data]);
 
-  if (isLoading) toast.info("로딩 중 입니다.");
   if (isError) toast.info(error?.message);
 
   const handleRegionClick = (event: MouseEvent<HTMLDivElement>) => {
