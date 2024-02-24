@@ -7,13 +7,15 @@ import { getGeoAreaCode } from "@/app/_common/api/location";
 import { checkInstanceOfResponseError } from "@/app/_common/utils/checkInstanceOfResponseError";
 
 const useQueryGeoAreaCode = () => {
-  const { getPosition, isAllowGPS } = usePositionStore();
+  const { getPosition, isAllowGPS, setPosition } = usePositionStore();
 
   useEffect(() => {
     getPosition();
   }, [getPosition]);
 
   const { latitude, longitude } = getPosition();
+
+  if (!isAllowGPS() || (!latitude && !longitude)) setPosition();
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["geoAreaCode"],
