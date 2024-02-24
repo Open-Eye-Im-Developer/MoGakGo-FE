@@ -28,7 +28,7 @@ const REGION_CODE: RegionCode = {
   gangnam: "11680", // 강남구
   songpa: "11710", // 송파구
   gangdong: "11740", // 강동구
-  pangyo: "41135", // 판교(분당구)
+  bundang: "41135", // 판교(분당구)
 };
 
 export default REGION_CODE;
