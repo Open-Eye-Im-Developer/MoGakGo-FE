@@ -69,6 +69,7 @@ function Map() {
         setIsListShow(true);
         setRegionCode(REGION_CODE[currentRegion.id]);
         previousRegion.current = currentRegion;
+        getProjectList(currentRegion.id);
       }
     }
   };
@@ -76,6 +77,13 @@ function Map() {
   const handleCancelCard = (event: MouseEvent<HTMLDivElement>) => {
     if (!(event.target instanceof HTMLDivElement)) return;
     if (event.target.id === "carousel-wrap") setIsListShow(false);
+  };
+
+  const getProjectList = async (regionName: string) => {
+    const region = regionName.toUpperCase();
+    const response = await fetch(`api/project/list/${region}`);
+    const json = await response.json();
+    console.log(json);
   };
 
   return (
