@@ -33,7 +33,7 @@ function MapComponent({ regionCode }: Props) {
   };
 
   return (
-    <div className="w-full md:w-4/5 lg:w-3/5">
+    <div className="absolute w-full p-4 md:w-4/5 lg:w-3/5">
       <svg
         viewBox="0 0 1476 1305"
         fill="none"
@@ -885,8 +885,8 @@ function MapComponent({ regionCode }: Props) {
               />
             </g>
           </g>
-          <g id="pangyo" className="region">
-            <g id="pangyo_2">
+          <g id="bundang" className="region">
+            <g id="bundang_2">
               <path
                 d="M1455.78 1051C1460.98 1048.6 1462.61 1041.33 1462.78 1038L1462.78 1002C1462.61 1005.33 1460.98 1012.6 1455.78 1015C1449.28 1018 1456.78 1025.5 1449.78 1032C1442.78 1038.5 1441.28 1037.5 1442.28 1048C1443 1055.59 1447.91 1051.42 1451.89 1052.69L1455.78 1051Z"
                 fill="#A4B98F"
