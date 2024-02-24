@@ -9,7 +9,9 @@ const options = {
   timeout: 15000,
 };
 
-export const getGeolocation = (callback: Parameter) =>
+export const getGeolocation = (callback: Parameter) => {
+  if (typeof navigator === "undefined") return;
+
   navigator.geolocation.getCurrentPosition(
     position => {
       const { longitude, latitude } = position.coords;
@@ -29,6 +31,7 @@ export const getGeolocation = (callback: Parameter) =>
     errorCallback,
     options,
   );
+};
 
 const errorCallback = (error: GeolocationPositionError) => {
   switch (error.code) {
