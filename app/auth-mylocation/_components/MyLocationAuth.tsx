@@ -22,7 +22,7 @@ export const MyLocationAuthFormSchema = z.object({
 
 function MyLocationAuth() {
   const router = useRouter();
-  const { validatePosition } = usePositionStore();
+  const { isAllowGPS } = usePositionStore();
 
   const { data: code, isLoading } = useQueryGeoAreaCode();
 
@@ -70,7 +70,7 @@ function MyLocationAuth() {
           <section className="flex flex-col gap-2 px-5">
             <p className="px-1">내 현재 위치</p>
             <div className="rounded-md border border-primary bg-primary p-3 text-white">
-              {!validatePosition()
+              {!isAllowGPS()
                 ? "현재 위치를 확인할 수 없습니다."
                 : code.areaCode
                   ? `${CODE_TO_REGION_NAME[code.areaCode]}`

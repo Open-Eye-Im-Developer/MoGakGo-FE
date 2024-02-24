@@ -5,7 +5,7 @@ import { usePositionStore } from "@/app/_common/store/usePositionStore";
 import { getGeoAreaCode } from "@/app/_common/api/location";
 
 const useQueryGeoAreaCode = () => {
-  const { getPosition, isGPSOn } = usePositionStore();
+  const { getPosition, isAllowGPS } = usePositionStore();
 
   useEffect(() => {
     getPosition();
@@ -20,7 +20,7 @@ const useQueryGeoAreaCode = () => {
         latitude,
         longitude,
       }),
-    enabled: isGPSOn,
+    enabled: isAllowGPS(),
   });
 
   return { data, isLoading, isError, error };
