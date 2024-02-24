@@ -6,6 +6,7 @@ import { MouseEvent, useEffect, useRef, useState } from "react";
 import REGION_CODE from "@/app/_common/constants/regionCode";
 
 import ProjectCardContainer from "../project/_components/ProjectCardContainer";
+import useQueryGeoAreaCode from "../auth-mylocation/hooks/useQueryGeoAreaCode";
 import { usePositionStore } from "../_common/store/usePositionStore";
 import { cn } from "../_common/shadcn/utils";
 import {
