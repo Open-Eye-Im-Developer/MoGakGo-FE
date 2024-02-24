@@ -21,10 +21,8 @@ export const MyLocationAuthFormSchema = z.object({
 });
 
 function MyLocationAuth() {
-  // TODO: token 없거나, 만료시에 로그인 페이지로 이동
   const router = useRouter();
   const { validatePosition } = usePositionStore();
-  // const { user } = useAuthStore();
 
   const { data: code, isLoading } = useQueryGeoAreaCode();
 

@@ -5,9 +5,8 @@ interface GeoAreaCode {
   areaCode: number;
 }
 
-export interface CertificateArea {
+export interface CertificateArea extends GeoAreaCode {
   userId: number;
-  areaCode: number;
 }
 
 export const getGeoAreaCode = async ({ latitude, longitude }: Coordinate) => {
