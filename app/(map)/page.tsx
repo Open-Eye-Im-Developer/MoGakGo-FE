@@ -20,7 +20,7 @@ import MapComponent from "../_common/components/MapComponent";
 import useGetRank from "./_api/useGetRank";
 
 function Map() {
-  const { data, isLoading } = useQueryGeoAreaCode();
+  const { data, isLoading, isError, error } = useQueryGeoAreaCode();
   const [regionCode, setRegionCode] = useState(0);
   const previousRegion = useRef<SVGElement | null>(null);
   const [isListShow, setIsListShow] = useState(false);
@@ -41,6 +41,7 @@ function Map() {
   }, [data]);
 
   if (isLoading) toast.info("로딩 중 입니다.");
+  if (isError) toast.info(error?.message);
 
   const handleRegionClick = (event: MouseEvent<HTMLDivElement>) => {
     if (!isAllowGPS()) return;
