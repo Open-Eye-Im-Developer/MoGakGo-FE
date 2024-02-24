@@ -26,24 +26,15 @@ function RatingItem({ type, checked, onChangeChecked }: RatingItemProps) {
       height={50}
       strokeWidth={1.5}
       className={cn(
-        `${
-          checked
-            ? "text-secondary"
-            : "text-primary text-opacity-60 hover:text-secondary"
-        }`,
+        checked
+          ? "text-secondary"
+          : "text-primary text-opacity-60 hover:text-secondary",
       )}
     />
   );
 }
 
-function RatingIcon(props: {
-  type: RatingType;
-  width: number;
-  height: number;
-  strokeWidth: number;
-  className: string;
-  onChange: () => void;
-}) {
+function RatingIcon(props: TablerIconsProps) {
   let IconComponent: (props: TablerIconsProps) => JSX.Element;
 
   switch (props.type) {
