@@ -3,12 +3,12 @@ interface RegionCode {
 }
 
 const REGION_CODE: RegionCode = {
-  jongro: 11110, // 종로구
+  jongno: 11110, // 종로구
   jung: 11140, // 중구
   yongsan: 11170, // 용산구
   seongdong: 11200, // 성동구
   gwangjin: 11215, // 광진구
-  dongdaemoon: 11230, // 동대문구
+  dongdaemun: 11230, // 동대문구
   jungnang: 11260, // 중랑구
   seongbuk: 11290, // 성북구
   gangbuk: 11305, // 강북구
@@ -28,7 +28,7 @@ const REGION_CODE: RegionCode = {
   gangnam: 11680, // 강남구
   songpa: 11710, // 송파구
   gangdong: 11740, // 강동구
-  pangyo: 41135, // 판교(분당구)
+  bundang: 41135, // 판교(분당구)
 };
 
 export default REGION_CODE;
