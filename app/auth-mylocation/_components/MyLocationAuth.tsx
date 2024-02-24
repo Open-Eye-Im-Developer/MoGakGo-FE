@@ -24,7 +24,7 @@ function MyLocationAuth() {
   const router = useRouter();
   const { isAllowGPS } = usePositionStore();
 
-  const { data: code, isLoading } = useQueryGeoAreaCode();
+  const { data: code, isLoading, isError } = useQueryGeoAreaCode();
 
   const { mutate } = useMutationAuthMyLocation();
 
@@ -39,7 +39,7 @@ function MyLocationAuth() {
   const { handleSubmit, formState, getValues } = form;
 
   const onSubmit = () => {
-    if (!code) return;
+    if (!code || !isError) return;
 
     mutate({
       // TODO: user 정보 저장 후 user.id로 변경
@@ -55,7 +55,7 @@ function MyLocationAuth() {
     router.back();
   };
 
-  if (isLoading || !code) return <div>loading...</div>;
+  if (isLoading) return <div>loading...</div>;
 
   return (
     <Form {...form}>
@@ -72,7 +72,7 @@ function MyLocationAuth() {
             <div className="rounded-md border border-primary bg-primary p-3 text-white">
               {!isAllowGPS()
                 ? "현재 위치를 확인할 수 없습니다."
-                : code.areaCode
+                : code && !isError
                   ? `${CODE_TO_REGION_NAME[code.areaCode]}`
                   : "현재 위치는 서비스 지역이 아닙니다."}
             </div>
