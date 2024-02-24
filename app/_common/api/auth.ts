@@ -1,4 +1,4 @@
-import { SignUpUser, SignupRequest } from "@/app/signup/_type/signup.types";
+import { SignUpUser, SignupRequest } from "@/app/signup/_type/signup";
 import { reIssueAccessTokenResponse } from "@/app/login/_types/login.types";
 
 import { instance } from "../api/instance";

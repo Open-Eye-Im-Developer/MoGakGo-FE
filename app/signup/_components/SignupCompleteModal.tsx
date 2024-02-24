@@ -20,7 +20,7 @@ interface SignupCompleteModalProps {
 function SignupCompleteModal({ isValid }: SignupCompleteModalProps) {
   const router = useRouter();
 
-  const onCompleted = () => {
+  const handleCompleted = () => {
     router.push("/");
   };
 
@@ -49,7 +49,7 @@ function SignupCompleteModal({ isValid }: SignupCompleteModalProps) {
           카드 컴포넌트는 여기 들어갑니다.
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogAction type="button" onClick={onCompleted}>
+          <AlertDialogAction type="button" onClick={handleCompleted}>
             완료
           </AlertDialogAction>
         </AlertDialogFooter>

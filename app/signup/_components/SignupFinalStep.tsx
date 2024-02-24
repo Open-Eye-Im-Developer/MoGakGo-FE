@@ -66,7 +66,7 @@ function SignupFinalStep({ className, form }: SignupFinalStepProps) {
                                 return checked
                                   ? field.onChange([...field.value, item.id])
                                   : field.onChange(
-                                      field.value?.filter(
+                                      field.value.filter(
                                         value => value !== item.id,
                                       ),
                                     );

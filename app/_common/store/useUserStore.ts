@@ -9,11 +9,12 @@ interface AuthState {
 
 interface AuthAction {
   setUser: (user: User) => void;
+  getUser: () => User;
 }
 
 export const useUserStore = create(
   persist<AuthAction & AuthState>(
-    set => ({
+    (set, get) => ({
       user: {
         id: 0,
         username: "",
@@ -27,6 +28,7 @@ export const useUserStore = create(
         wantedJobs: [],
       },
       setUser: user => set({ user }),
+      getUser: () => get().user,
     }),
     {
       name: "user-store",

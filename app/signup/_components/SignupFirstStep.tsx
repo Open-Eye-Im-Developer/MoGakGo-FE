@@ -9,7 +9,7 @@ import { FormItem } from "@/app/_common/shadcn/ui/form";
 import { Button } from "@/app/_common/shadcn/ui/button";
 import { AspectRatio } from "@/app/_common/shadcn/ui/aspect-ratio";
 
-import { SignUpUser, SignupRequest } from "../_type/signup.types";
+import { SignUpUser, SignupRequest } from "../_type/signup";
 import SignupHeader from "./SignupHeader";
 
 interface SignupFirstStepProps {
@@ -24,12 +24,8 @@ function SignupFirstStep({
   handleNextStep,
   user,
 }: SignupFirstStepProps) {
-  // const { setValue } = form;
-
   const setUserName = () => {
     handleNextStep();
-
-    // setValue("username", "mibu119");
   };
 
   return (

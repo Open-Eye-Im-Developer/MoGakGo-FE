@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { getSignUpUser } from "@/app/_common/api/auth";
 
-import { SignUpUser } from "../_type/signup.types";
+import { SignUpUser } from "../_type/signup";
 
 export const useQuerySignUpUser = () => {
   const { data, isLoading } = useQuery<SignUpUser>({
