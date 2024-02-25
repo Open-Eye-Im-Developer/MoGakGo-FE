@@ -1,9 +1,11 @@
 // 매칭 요청 조회 Route Handler
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const id = request.nextUrl.searchParams.get("id");
+
   // TODO: 프로젝트 아이디 받아와서 호출하기 (현재는 임시로 64 또는 65로 설정)
-  const url = new URL("http://3.38.76.76:8080/api/v1/projects/65/requests");
+  const url = new URL(`http://3.38.76.76:8080/api/v1/projects/${id}/requests`);
   const params = {
     pageSize: "5",
   };
