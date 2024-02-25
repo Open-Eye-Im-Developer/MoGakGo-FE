@@ -11,10 +11,16 @@ import ModalDenied from "./ModalDenied";
 
 function AllowBox() {
   const { toast } = useToast();
+
   const [showModal, setShowModal] = useState<boolean>(false);
 
+  const permission = () => {
+    if (typeof Notification === "undefined") return "granted";
+    return Notification.permission;
+  };
+
   const handleClickAllowButton = () => {
-    if (Notification.permission === "denied") return setShowModal(true);
+    if (permission() === "denied") return setShowModal(true);
     Notification.requestPermission().then(permission => {
       if (permission === "granted") {
         getFCMToken();
@@ -29,7 +35,7 @@ function AllowBox() {
     <div
       className={cn(
         "align-center m-4 flex justify-between rounded-lg bg-primary p-6 font-medium",
-        Notification.permission === "granted" && "hidden",
+        permission() === "granted" && "hidden",
       )}
     >
       <div className="my-auto text-white">PUSH 알림 켜기</div>
