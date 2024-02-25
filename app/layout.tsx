@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import "dayjs/locale/ko";
 
 import { Toaster } from "@/app/_common/shadcn/ui/toaster";
 
@@ -9,8 +10,6 @@ import ClientProvider from "./_common/components/ClientProvider";
 import type { Metadata } from "next";
 
 import "./globals.css";
-
-import "dayjs/locale/ko";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -37,6 +36,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             {children}
+            <Toaster />
           </ThemeProvider>
         </ClientProvider>
         <Toaster />

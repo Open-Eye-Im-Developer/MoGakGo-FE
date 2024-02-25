@@ -2,3 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+@layer utilities {
+  .card {
+    backdrop-filter: blur(5px);
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 26px;
+    box-shadow:
+      35px 35px 68px 0px rgba(120, 120, 120, 0.5),
+      inset -5px -5px 16px 0px rgba(120, 120, 120, 0.6),
+      inset 0px 11px 28px 0px rgb(255, 255, 255);
+  }
+}
