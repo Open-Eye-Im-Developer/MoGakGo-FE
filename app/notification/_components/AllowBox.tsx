@@ -6,7 +6,7 @@ import { cn } from "@/app/_common/shadcn/utils";
 import { useToast } from "@/app/_common/shadcn/ui/use-toast";
 import { Button } from "@/app/_common/shadcn/ui/button";
 
-// import { getFCMToken } from "../_api";
+import { getFCMToken } from "../_api";
 import ModalDenied from "./ModalDenied";
 
 function AllowBox() {
@@ -17,7 +17,7 @@ function AllowBox() {
     if (Notification.permission === "denied") return setShowModal(true);
     Notification.requestPermission().then(permission => {
       if (permission === "granted") {
-        // getFCMToken();
+        getFCMToken();
         toast({
           description: "PUSH 알림을 허용했어요",
         });
