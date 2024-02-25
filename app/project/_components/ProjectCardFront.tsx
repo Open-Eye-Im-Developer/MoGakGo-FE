@@ -97,7 +97,7 @@ function ProjectCardFront(props: CardFrontProps) {
             <p className="font-bold">📍 맥심플랜트 이태원점</p>
             <p>🕡 16:00 ~ 18:00</p>
           </div>
-          <ProjectRemoveDialog />
+          <ProjectRemoveDialog isMatchedProject={false} />
         </CardFooter>
       )}
     </Card>
