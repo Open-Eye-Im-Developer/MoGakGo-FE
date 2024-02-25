@@ -1,52 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 
-interface RequestListData {
-  id: number;
-  senderPreview: {
-    id: number;
-    username: string;
-    githubId: string;
-    avatarUrl: string;
-    githubUrl: string;
-    bio: string;
-    jandiRate: number;
-    achievementTitle: string;
-    developLanguages: string[];
-    wantedJobs: string[];
-  };
-  requestStatus: string;
-}
-
-interface SuccessData {
-  data: RequestListData[] extends Array<infer U> ? U : never;
-  hasNext: boolean;
-  numberOfElements: number;
-  size: number;
-}
-
-interface ErrorData {
-  timestamp: string;
-  statusCode: number;
-  code: string;
-  message: string;
-}
-
-interface ResponseData {
-  data: SuccessData | ErrorData;
-  status: string;
-}
-
-function useGetRequestListQuery() {
+// TODO: 프로젝트 카드 생성자가 아닌 사용자가 요청한 프로젝트 목록을 가져오지 못하도록 예외 처리
+function useGetRequestListQuery(id: number) {
   const queryFunction = async () => {
-    // await new Promise(resolve => setTimeout(resolve, 3000));
-    const response = await fetch("/api/project/request/find");
-    const data: ResponseData = await response.json();
+    const response = await fetch(`/api/project/request/find?id=${id}`);
+    const data: RequestListResponseData = await response.json();
     return data;
   };
 
   return useQuery({
     queryKey: ["requestList"] as const,
     queryFn: queryFunction,
+    refetchInterval: 7000,
   });
 }
 
