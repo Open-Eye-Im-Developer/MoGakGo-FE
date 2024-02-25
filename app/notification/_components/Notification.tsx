@@ -10,11 +10,11 @@ import {
 
 import { NotificationType } from "../_types/notification";
 
-interface Props {
+interface NotificationProps {
   notification: NotificationType;
 }
 
-function Notification({ notification }: Props) {
+function Notification({ notification }: NotificationProps) {
   dayjs.extend(relativeTime);
 
   const { sender, data } = notification;
