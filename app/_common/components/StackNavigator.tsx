@@ -2,7 +2,11 @@
 import { useRouter } from "next/navigation";
 import { IconChevronLeft } from "@tabler/icons-react";
 
-function StackNavigator({ title }: { title: string }) {
+interface StackNavigatorProps {
+  title: string;
+}
+
+function StackNavigator({ title }: StackNavigatorProps) {
   const router = useRouter();
 
   const handleClickPrevButton = () => {

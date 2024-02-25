@@ -12,9 +12,7 @@ function NotificationList() {
         [...notificaitons]
           .reverse()
           .map((notification: NotificationType, index: number) => (
-            <div key={index}>
-              <Notification notification={notification} />
-            </div>
+            <Notification notification={notification} key={index} />
           ))
       ) : (
         <AnnounceEmptyNotificaiton />
