@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React from "react";
 import Image from "next/image";
@@ -12,9 +12,9 @@ import {
   CardTitle,
 } from "@/app/_common/shadcn/ui/card";
 import { Button } from "@/app/_common/shadcn/ui/button";
-import { Badge } from "@/app/_common/shadcn/ui/badge";
 
 import ButtonRotate from "./ButtonRotate";
+import BadgeAdditional from "./BadgeAdditional";
 
 interface CardBackProps {
   requestList?: RequestListResponseData;
@@ -43,7 +43,7 @@ function ProjectCardBack(props: CardBackProps) {
       description:
         data.status === 200
           ? "매칭이 되었어요! 채팅방으로 가볼까요?"
-          : data.message,
+          : data.data.message,
       variant: data.status === 200 ? "default" : "destructive",
     });
   };
@@ -91,26 +91,24 @@ function ProjectCardBack(props: CardBackProps) {
                         <div className="flex items-center gap-2">
                           <p className="text-lg font-semibold">{username}</p>
                           <p className="text-xs text-[#F76A6A]">
-                            {achievementTitle || "칭호 없음"}
+                            {achievementTitle || "null"}
                           </p>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Badge className="h-5 text-[10px]">
-                            {wantedJobs.length}
-                          </Badge>
-                          <Badge className="h-5 text-[10px]">
-                            {developLanguages.length}
-                          </Badge>
                         </div>
                       </div>
                     </aside>
-                    <Button
-                      size="sm"
-                      className="rounded-lg"
-                      onClick={() => handleAccept(id)}
-                    >
-                      수락
-                    </Button>
+                    <aside className="flex items-center gap-2">
+                      <BadgeAdditional
+                        wantedJobs={wantedJobs}
+                        developLanguages={developLanguages}
+                      />
+                      <Button
+                        size="sm"
+                        className="rounded-lg"
+                        onClick={() => handleAccept(id)}
+                      >
+                        수락
+                      </Button>
+                    </aside>
                   </main>
                   <Separator className="bg-black" />
                 </aside>
