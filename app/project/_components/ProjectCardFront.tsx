@@ -23,6 +23,8 @@ import { Badge } from "@/app/_common/shadcn/ui/badge";
 import ProjectRemoveDialog from "./ProjectRemoveDialog";
 import ButtonRotate from "./ButtonRotate";
 
+import "../_styles/card.css";
+
 interface CardFrontProps {
   initialRotate?: boolean;
   onRotate: () => void;

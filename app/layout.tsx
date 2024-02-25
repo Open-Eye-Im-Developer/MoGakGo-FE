@@ -1,11 +1,11 @@
+import "./globals.css";
+
 import { ThemeProvider } from "@/app/_common/components/theme-provider";
 
 import { Toaster } from "./_common/shadcn/ui/toaster";
 import ClientProvider from "./_common/components/ClientProvider";
 
 import type { Metadata } from "next";
-
-import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",
