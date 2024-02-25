@@ -22,8 +22,8 @@ function ProjectChatCard(props: ChatCardProps) {
   const { messages } = props;
 
   return (
-    <Card className="card overflow-hidden border-none shadow-md">
-      <CardHeader className="border-b py-4">
+    <Card className="glass-morphism overflow-hidden border-none shadow-md">
+      <CardHeader className="border-b border-black py-4">
         <CardTitle className="text-base">📍 맥심플랜트 이태원점</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col p-0 px-0">
@@ -52,7 +52,7 @@ function ProjectChatCard(props: ChatCardProps) {
             }
           })}
         </section>
-        <div className="flex h-24 grow items-center gap-2 border-t px-5">
+        <div className="flex h-24 grow items-center gap-2 border-t border-black px-5">
           <Input type="text" placeholder="대화를 입력하세요." />
           <Button>전송</Button>
         </div>

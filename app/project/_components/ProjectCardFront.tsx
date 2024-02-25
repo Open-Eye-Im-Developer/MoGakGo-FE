@@ -39,20 +39,20 @@ function ProjectCardFront(props: CardFrontProps) {
   return (
     <Card
       className={cn(
-        `card absolute inset-0 left-0 top-0 border-none shadow-md [backface-visibility:hidden]`,
+        `glass-morphism absolute inset-0 left-0 top-0 border-none shadow-md [backface-visibility:hidden]`,
         initialRotate ? "[transform:rotateY(180deg)]" : "",
       )}
     >
       <CardHeader className="px-5 pt-4">
-        <CardDescription className="flex justify-between text-lg font-bold text-[#a2a2a2]">
-          <span className="flex items-center gap-2">
+        <CardDescription className="flex justify-between text-lg font-bold text-black">
+          <span className="flex items-center">
             <ButtonRotate onRotate={onRotate} />
             <Popover>
-              <PopoverTrigger>
+              <PopoverTrigger className="rounded-md p-2 hover:bg-[#5454543e]">
                 <IconMoodPuzzled />
               </PopoverTrigger>
-              <PopoverContent className="max-w-[130px]">
-                <h1 className="mb-2 text-sm font-bold">🏷️ 분위기 태그</h1>
+              <PopoverContent className="glass-morphism max-w-[130px]">
+                <h1 className="text-md mb-2 font-bold">🏷️ 분위기 태그</h1>
                 {badgeList.map(badge => (
                   <Badge key={badge}>{badge}</Badge>
                 ))}
@@ -64,13 +64,12 @@ function ProjectCardFront(props: CardFrontProps) {
       </CardHeader>
       <CardContent className="flex flex-col items-center gap-10">
         <div className="flex flex-col items-center gap-5">
-          <div className="relative rounded-xl">
+          <div className="relative overflow-hidden rounded-xl shadow-lg">
             <Image
               src="/images/profileImage.jpg"
               alt="프로필 이미지"
               width={150}
               height={150}
-              className="rounded-2xl shadow-2xl"
             />
           </div>
           <div className="flex flex-col items-center gap-[6px]">
@@ -78,7 +77,7 @@ function ProjectCardFront(props: CardFrontProps) {
               <h1 className="text-xl font-bold">Coggie</h1>
               <h3 className="text-xs text-[#F76A6A]">응애 개발자</h3>
             </div>
-            <p className="text-[#868686]">나도 잘 하고 싶어요.</p>
+            <p>나도 잘 하고 싶어요.</p>
             <div className="flex flex-wrap items-center justify-center gap-1">
               <Badge>Frontend</Badge>
             </div>
@@ -88,7 +87,7 @@ function ProjectCardFront(props: CardFrontProps) {
           <Image src="/images/grass.png" alt="잔디력" width={50} height={50} />
           <div className="mr-10 w-40">
             <Progress value={50} />
-            <span className="text-xs text-[#868686]">50%</span>
+            <span className="text-xs">50%</span>
           </div>
         </div>
       </CardContent>
