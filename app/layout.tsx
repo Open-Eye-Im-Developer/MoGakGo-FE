@@ -1,10 +1,8 @@
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
 
-import { Toaster } from "@/app/_common/shadcn/ui/toaster";
-
-import { ThemeProvider } from "@/app/_common/components/theme-provider";
-
+import { Toaster } from "./_common/shadcn/ui/toaster";
+import { ThemeProvider } from "./_common/components/theme-provider";
 import ClientProvider from "./_common/components/ClientProvider";
 
 import type { Metadata } from "next";
