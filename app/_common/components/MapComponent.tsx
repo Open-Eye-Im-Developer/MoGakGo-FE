@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 
-import RankInfo from "@/app/map/_components/RankInfo";
+import RankInfo from "@/app/(map)/_components/RankInfo";
 
-import "@/app/map/_styles/map.css";
+import "@/app/(map)/_styles/map.css";
 import REGION_CODE from "../constants/regionCode";
 
 const strokeColor = "white";
