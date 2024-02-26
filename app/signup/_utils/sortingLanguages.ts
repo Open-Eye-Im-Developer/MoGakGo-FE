@@ -13,3 +13,11 @@ export const sortingLanguages = (data: Language[]) => {
     percentage: parseFloat(((item.byteSize / totalLines) * 100).toFixed(2)),
   }));
 };
+
+export const getLanguageLogo: { [key: string]: string } = {
+  TypeScript: "/images/TSIcon.webp",
+  JavaScript: "/images/JSIcon.webp",
+  Java: "/images/Java.webp",
+  CSS: "/images/CSSIcon.webp",
+  Python: "/images/Python.webp",
+};
