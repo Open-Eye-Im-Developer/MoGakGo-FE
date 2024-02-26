@@ -12,10 +12,3 @@ export interface Project {
   projectTags: string[];
   meetingInfo: MeetingInfo;
 }
-
-export interface ProjectList {
-  data: Project[];
-  hasNext: boolean;
-  numberOfElements: number;
-  size: number;
-}

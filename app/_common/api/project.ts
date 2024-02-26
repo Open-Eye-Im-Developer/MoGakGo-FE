@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 
-import { ResponseError } from "../types/response.types";
-import { ProjectList } from "../types/project";
+import { ResponseData, ResponseError } from "../types/response.types";
+import { Project } from "../types/project";
 import { instance } from "./instance";
 
 interface RegionRank {
@@ -23,9 +23,11 @@ export const getRank = async (): Promise<
 
 export const getProjectCard = async (
   region: string,
-): Promise<ProjectList | ResponseError | undefined> => {
+): Promise<ResponseData<Project> | ResponseError | undefined> => {
   try {
-    const { data } = await instance.get<ProjectList>(`projects/${region}`);
+    const { data } = await instance.get<ResponseData<Project>>(
+      `projects/${region}`,
+    );
     return data;
   } catch (error) {
     if (error instanceof AxiosError) {

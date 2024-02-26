@@ -4,3 +4,10 @@ export interface ResponseError {
   code: string;
   message: string;
 }
+
+export interface ResponseData<T> {
+  data: T[];
+  hasNext: boolean;
+  numberOfElements: number;
+  size: number;
+}
