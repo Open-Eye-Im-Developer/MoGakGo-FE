@@ -59,9 +59,11 @@ function ProjectCardBack(props: CardBackProps) {
         </CardTitle>
       </CardHeader>
       <CardContent className="flex h-full min-h-0 flex-col items-center justify-center overflow-y-scroll px-0 pb-20 pt-5">
-        {requestList?.status !== 200 && (
-          <div className="text-xl">요청이 없어요 🥲</div>
-        )}
+        {requestList?.status !== 200 ||
+          (Array.isArray(requestList?.data) &&
+            requestList?.data.length === 0 && (
+              <div className="text-xl">요청이 없어요 🥲</div>
+            ))}
         {Array.isArray(requestList?.data) && (
           <div className="flex h-full w-full flex-col gap-3 px-5">
             {requestList?.data.map(
