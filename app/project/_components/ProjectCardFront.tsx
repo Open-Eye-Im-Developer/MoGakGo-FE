@@ -20,8 +20,9 @@ import {
 } from "@/app/_common/shadcn/ui/card";
 import { Badge as Tag } from "@/app/_common/shadcn/ui/badge";
 
+import { Project } from "@/app/_common/types/project";
+
 import formatMeetingTime from "../_utils/formatMeetingTime";
-import { Project } from "../_types/type";
 import ProjectRemoveDialog from "./ProjectRemoveDialog";
 import ButtonRotate from "./ButtonRotate";
 

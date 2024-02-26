@@ -8,7 +8,8 @@ import {
   TabsTrigger,
 } from "@/app/_common/shadcn/ui/tabs";
 
-import { Project } from "../_types/type";
+import { Project } from "@/app/_common/types/project";
+
 import useFlip from "../_hooks/useFlip";
 import TEST_MESSAGES from "../_constants/messages";
 import ProjectChatCard from "./ProjectChatCard";
