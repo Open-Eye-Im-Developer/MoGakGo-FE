@@ -1,5 +1,6 @@
 "use client";
 
+import { toast } from "sonner";
 import { MouseEvent, useRef, useState } from "react";
 
 import REGION_CODE from "@/app/_common/constants/regionCode";
@@ -14,11 +15,16 @@ import {
   CarouselPrevious,
 } from "../_common/shadcn/ui/carousel";
 import MapComponent from "../_common/components/MapComponent";
+import useGetRank from "./_api/useGetRank";
 
 function Map() {
   const [regionCode, setRegionCode] = useState("");
   const previousRegion = useRef<SVGElement | null>(null);
   const [isListShow, setIsListShow] = useState(false);
+  const { data: rank, isError, isLoading, error } = useGetRank();
+
+  if (isLoading) toast.info("잠시만 기다려주세요.");
+  if (isError) toast.error(error.message);
 
   const handleRegionClick = (event: MouseEvent<HTMLDivElement>) => {
     const map = document.querySelector("#map-wrap") as HTMLDivElement;
@@ -57,7 +63,10 @@ function Map() {
         onClick={handleRegionClick}
         className="absolute z-0 flex h-screen w-screen items-center justify-center transition-all duration-1000"
       >
-        <MapComponent regionCode={regionCode} />
+        <MapComponent
+          regionCode={regionCode}
+          regionRank={Array.isArray(rank) ? rank : undefined}
+        />
       </div>
       <Carousel
         className={cn(
