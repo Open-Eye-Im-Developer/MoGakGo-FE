@@ -8,6 +8,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@/app/_common/shadcn/utils";
 import { Form } from "@/app/_common/shadcn/ui/form";
 
+import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
+
+import { useQueryDevelopLanguages } from "@/app/_common/hooks/queries/useQueryDevelopLanguages";
+
 import { SignupFormSchema } from "../_utils/validation";
 import { useSearchTokens } from "../_hooks/useSearchTokens";
 import { useQuerySignUpUser } from "../_hooks/useQuerySignUpUser";
@@ -20,6 +24,7 @@ function SignupForm() {
   const { newAccessToken, newRefreshToken } = useSearchTokens("session");
 
   const { data: userData } = useQuerySignUpUser();
+  const { data: languages } = useQueryDevelopLanguages();
 
   const [nextStep, setNextStep] = useState(0);
 
@@ -39,13 +44,22 @@ function SignupForm() {
     },
   });
 
-  const signUp = useMutationSignup(newAccessToken, newRefreshToken);
+  const signUp = useMutationSignup(
+    newAccessToken,
+    newRefreshToken,
+    languages ?? [],
+  );
 
   const onSubmit = (data: z.infer<typeof SignupFormSchema>) => {
     signUp.mutate(data);
   };
 
-  if (!userData) return <div>loading...</div>;
+  if (!userData || !languages)
+    return (
+      <div className="grid h-screen w-screen place-content-center">
+        <LoadingSpinner width="100" height="100" />
+      </div>
+    );
 
   return (
     <main className="p-4">
@@ -64,6 +78,7 @@ function SignupForm() {
               `${nextStep === 1 ? "block animate-signup-fade-in opacity-100" : "hidden"} ${nextStep === 2 && "animate-signup-fade-out"})}`,
             )}
             handleNextStep={handleNextStep}
+            languages={languages}
           />
           <SignupFinalStep
             form={form}

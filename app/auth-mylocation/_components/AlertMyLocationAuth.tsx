@@ -2,14 +2,17 @@ import React from "react";
 import { useRouter } from "next/navigation";
 
 import { usePositionStore } from "@/app/_common/store/usePositionStore";
+import { useModalStore } from "@/app/_common/store/useModalStore";
 import { Button } from "@/app/_common/shadcn/ui/button";
 
 function AlertMyLocationAuth() {
   const { setPosition } = usePositionStore();
+  const { setOpen } = useModalStore();
   const router = useRouter();
 
   const handleSetPosition = () => {
     setPosition();
+    setOpen(false);
 
     router.push("/auth-mylocation");
   };
