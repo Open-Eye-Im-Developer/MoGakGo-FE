@@ -20,15 +20,21 @@ import MapComponent from "../_common/components/MapComponent";
 import useGetRank from "./_api/useGetRank";
 
 function Map() {
-  const { data, isError, error } = useQueryGeoAreaCode();
+  const { data, isError: isGeoError, error: geoError } = useQueryGeoAreaCode();
   const [regionCode, setRegionCode] = useState(0);
   const previousRegion = useRef<SVGElement | null>(null);
   const [isListShow, setIsListShow] = useState(false);
-  const { data: rank, isError, isLoading, error } = useGetRank();
+  const {
+    data: rank,
+    isError: isRankError,
+    isLoading,
+    error: rankError,
+  } = useGetRank();
   const { isAllowGPS } = usePositionStore();
 
   if (isLoading) toast.info("잠시만 기다려주세요.");
-  if (isError) toast.error(error.message);
+  if (isGeoError) toast.error(geoError?.message);
+  if (isRankError) toast.error(rankError.message);
 
   useEffect(() => {
     if (data) {
@@ -40,8 +46,6 @@ function Map() {
       previousRegion.current = document.querySelector(`#${regionName}`);
     }
   }, [data]);
-
-  if (isError) toast.info(error?.message);
 
   const handleRegionClick = (event: MouseEvent<HTMLDivElement>) => {
     if (!isAllowGPS()) return;
