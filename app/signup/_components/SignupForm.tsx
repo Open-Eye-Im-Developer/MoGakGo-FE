@@ -5,10 +5,12 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { useModalStore } from "@/app/_common/store/useModalStore";
 import { cn } from "@/app/_common/shadcn/utils";
 import { Form } from "@/app/_common/shadcn/ui/form";
 
 import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
+import CustomModal from "@/app/_common/components/CustomModal";
 
 import { useQueryDevelopLanguages } from "@/app/_common/hooks/queries/useQueryDevelopLanguages";
 
@@ -19,6 +21,7 @@ import { useMutationSignup } from "../_hooks/useMutationSignup";
 import SignupSecondStep from "./SignupSecondStep";
 import SignupFirstStep from "./SignupFirstStep";
 import SignupFinalStep from "./SignupFinalStep";
+import SignupCompleteModal from "./SignupCompleteModal";
 
 function SignupForm() {
   const { newAccessToken, newRefreshToken } = useSearchTokens("session");
@@ -31,6 +34,8 @@ function SignupForm() {
   const handleNextStep = () => {
     setNextStep(next => (next < 2 ? next + 1 : next));
   };
+
+  const { signup, setSignupOpen } = useModalStore();
 
   const form = useForm<z.infer<typeof SignupFormSchema>>({
     resolver: zodResolver(SignupFormSchema),
@@ -62,35 +67,42 @@ function SignupForm() {
     );
 
   return (
-    <main className="p-4">
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <SignupFirstStep
-            form={form}
-            className={cn(
-              `${nextStep === 1 && "animate-signup-fade-out"} ${nextStep !== 0 && "hidden opacity-0"}`,
-            )}
-            handleNextStep={handleNextStep}
-            user={userData}
-          />
-          <SignupSecondStep
-            className={cn(
-              `${nextStep === 1 ? "block animate-signup-fade-in opacity-100" : "hidden"} ${nextStep === 2 && "animate-signup-fade-out"})}`,
-            )}
-            handleNextStep={handleNextStep}
-            languages={languages}
-          />
-          <SignupFinalStep
-            form={form}
-            className={cn(
-              `${nextStep === 2 ? "animate-signup-fade-in" : "hidden animate-signup-fade-out opacity-0"}`,
-            )}
-            newAccessToken={newAccessToken}
-            newRefreshToken={newRefreshToken}
-          />
-        </form>
-      </Form>
-    </main>
+    <>
+      <CustomModal open={signup} setOpen={setSignupOpen}>
+        <SignupCompleteModal />
+      </CustomModal>
+
+      <main className="overscroll-y-none px-4">
+        <Form {...form}>
+          <form className="h-screen" onSubmit={form.handleSubmit(onSubmit)}>
+            <SignupFirstStep
+              form={form}
+              className={cn(
+                `${nextStep === 1 && "animate-signup-fade-out"} ${nextStep !== 0 && "hidden opacity-0"}`,
+              )}
+              handleNextStep={handleNextStep}
+              user={userData}
+            />
+            <SignupSecondStep
+              className={cn(
+                `${nextStep === 1 ? "animate-signup-fade-in opacity-100" : "hidden"} ${nextStep === 2 && "animate-signup-fade-out"})}`,
+              )}
+              handleNextStep={handleNextStep}
+              languages={languages}
+            />
+            <SignupFinalStep
+              form={form}
+              className={cn(
+                `${nextStep === 2 ? "animate-signup-fade-in" : "hidden animate-signup-fade-out opacity-0"}`,
+              )}
+              newAccessToken={newAccessToken}
+              newRefreshToken={newRefreshToken}
+              setSignupOpen={setSignupOpen}
+            />
+          </form>
+        </Form>
+      </main>
+    </>
   );
 }
 

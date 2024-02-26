@@ -19,14 +19,19 @@ function SignupSecondStep({
   languages,
 }: SignupSecondStepProps) {
   return (
-    <section className={cn(className)}>
+    <section
+      className={cn(
+        "scroll-none flex h-full w-full flex-col overflow-y-auto",
+        className,
+      )}
+    >
       <SignupHeader
         step="2"
         subTitle="Github 주 언어"
         description="현재 깃허브 계정에서 주로 사용하는 언어입니다."
       />
       <LanguagesList languages={languages} className="mt-2" />
-      <section className="mt-5 flex flex-col items-center gap-2">
+      <section className="mb-4 mt-auto flex flex-col items-center gap-2">
         <small className="xs text-gray-500">
           마이페이지에서 갱신이 가능합니다.
         </small>
