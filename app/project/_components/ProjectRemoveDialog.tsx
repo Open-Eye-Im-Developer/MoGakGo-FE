@@ -42,10 +42,10 @@ function ProjectRemoveDialog(props: ProjectRemoveDialogProps) {
   );
 
   const titleComponent = isMatchedProject
-    ? "정말 프로젝트를 취소하시겠어요?"
+    ? "정말 매칭을 취소하시겠어요?"
     : "정말 프로젝트를 삭제하시겠어요?";
   const descriptionComponent = isMatchedProject
-    ? "한 번 취소된 프로젝트는 되돌릴 수 없어요!"
+    ? "한 번 취소된 매칭은 되돌릴 수 없어요!"
     : "한 번 삭제된 프로젝트는 되돌릴 수 없어요!";
 
   const handleCancelProject = async () => {
