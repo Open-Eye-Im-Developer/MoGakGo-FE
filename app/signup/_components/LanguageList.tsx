@@ -5,7 +5,7 @@ import { cn } from "@/app/_common/shadcn/utils";
 import { Progress } from "@/app/_common/shadcn/ui/progress";
 import { AspectRatio } from "@/app/_common/shadcn/ui/aspect-ratio";
 
-import { sortingLanguages } from "../_utils/sortingLanguages";
+import { getLanguageLogo, sortingLanguages } from "../_utils/sortingLanguages";
 
 export interface Language {
   // image: string;
@@ -31,7 +31,7 @@ function LanguagesList({ languages, className }: LanguagesListProps) {
                 <Image
                   width={46}
                   height={46}
-                  src={"/images/TSIcon.webp"}
+                  src={getLanguageLogo[language]}
                   alt="개발 언어 로고"
                 />
               </AspectRatio>
