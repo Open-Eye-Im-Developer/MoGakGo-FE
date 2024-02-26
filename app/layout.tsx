@@ -1,7 +1,6 @@
 import { Toaster as Sonner } from "sonner";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
-
 import "./globals.css";
 
 import { Toaster } from "./_common/shadcn/ui/toaster";
