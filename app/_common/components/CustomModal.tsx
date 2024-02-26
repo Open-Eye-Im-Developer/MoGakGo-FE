@@ -1,21 +1,27 @@
 "use client";
 
+import { ComponentProps } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 
+import { cn } from "../shadcn/utils";
 import { DialogContentNoClose } from "../shadcn/ui/dialog";
 
 interface CustomModalProps {
   children: React.ReactNode;
   open: boolean;
+  className?: ComponentProps<typeof cn>;
   setOpen: (open: boolean) => void;
 }
 
-function CustomModal({ children, ...props }: CustomModalProps) {
+function CustomModal({ children, className, ...props }: CustomModalProps) {
   return (
-    <Dialog.Root open={props.open} onOpenChange={props.setOpen}>
+    <Dialog.Root onOpenChange={props.setOpen} {...props}>
       <Dialog.Portal>
         <DialogContentNoClose
-          className="flex max-w-[450px] flex-col gap-10 p-5"
+          className={cn(
+            "flex max-h-[650px] max-w-[300px] flex-col rounded-md px-4 py-2",
+            className,
+          )}
           onPointerDownOutside={(event: Event) => {
             event.preventDefault();
           }}
