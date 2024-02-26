@@ -1,8 +1,19 @@
 /** @type {import('next').NextConfig} */
 import withPWA from "next-pwa";
 
-const nextConfig = withPWA({
+const nextPWAConfig = withPWA({
   dest: "public",
+  images: {
+    domains: ["avatars.githubusercontent.com"],
+  },
 });
 
-export default nextConfig;
+const nextConfig = {
+  images: {
+    domains: ["avatars.githubusercontent.com"],
+  },
+};
+
+export default process.env.NODE_ENV === "development"
+  ? nextConfig
+  : nextPWAConfig;
