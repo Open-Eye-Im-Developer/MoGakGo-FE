@@ -9,7 +9,7 @@ const strokeColor = "white";
 const textColor = "black";
 
 interface Props {
-  regionCode: string;
+  regionCode: number;
   regionRank?: string[];
 }
 
