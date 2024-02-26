@@ -28,7 +28,7 @@ export const MyLocationAuthFormSchema = z.object({
 function MyLocationAuth() {
   const router = useRouter();
   const { validatePosition } = usePositionStore();
-  const { open, setOpen } = useModalStore();
+  const { authLocation, setAuthLocationOpen } = useModalStore();
   const { user } = useAuthStore();
 
   const { data: code, isLoading } = useQueryGeoAreaCode();
@@ -61,12 +61,12 @@ function MyLocationAuth() {
     router.push("/");
   };
 
-  if (isLoading || !code) return <div>loading...</div>;
+  if (isLoading) return <div>loading...</div>;
 
   return (
     <>
       {
-        <CustomModal open={open} setOpen={setOpen}>
+        <CustomModal open={authLocation} setOpen={setAuthLocationOpen}>
           <AlertMyLocationAuth />
         </CustomModal>
       }
@@ -84,7 +84,7 @@ function MyLocationAuth() {
               <div className="rounded-md border border-primary bg-primary p-3 text-white">
                 {!validatePosition()
                   ? "현재 위치를 확인할 수 없습니다."
-                  : code.areaCode
+                  : code?.areaCode
                     ? `${CODE_TO_REGION_NAME[code.areaCode]}`
                     : "현재 위치는 서비스 지역이 아닙니다."}
               </div>
