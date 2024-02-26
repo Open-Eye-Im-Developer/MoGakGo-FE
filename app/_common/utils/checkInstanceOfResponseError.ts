@@ -1,4 +1,4 @@
-import { ResponseError } from "../types/response.types";
+import { ResponseError } from "../types/response";
 
 export const checkInstanceOfResponseError = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

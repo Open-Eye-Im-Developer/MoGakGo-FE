@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 
-import { ResponseData, ResponseError } from "../types/response.types";
+import { ResponseData, ResponseError } from "../types/response";
 import { Project } from "../types/project";
 import { instance } from "./instance";
 
