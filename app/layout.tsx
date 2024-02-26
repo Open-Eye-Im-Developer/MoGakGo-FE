@@ -1,3 +1,6 @@
+import "./globals.css";
+import { Toaster as Sonner } from "sonner";
+
 import { Toaster } from "./_common/shadcn/ui/toaster";
 import { ThemeProvider } from "./_common/components/theme-provider";
 import ClientProvider from "./_common/components/ClientProvider";
@@ -30,6 +33,7 @@ export default function RootLayout({
           >
             {children}
             <Toaster />
+            <Sonner richColors position="bottom-center" />
           </ThemeProvider>
         </ClientProvider>
       </body>
