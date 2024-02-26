@@ -20,6 +20,7 @@ import {
 } from "@/app/_common/shadcn/ui/card";
 import { Badge } from "@/app/_common/shadcn/ui/badge";
 
+import { Project } from "../_types/type";
 import ProjectRemoveDialog from "./ProjectRemoveDialog";
 import ButtonRotate from "./ButtonRotate";
 
@@ -28,6 +29,7 @@ import "../_styles/card.css";
 interface CardFrontProps {
   initialRotate?: boolean;
   onRotate: () => void;
+  project: Project;
 }
 
 const badgeList = ["조용한", "수다스러운이이", "각자도생"];
@@ -36,7 +38,7 @@ function ProjectCardFront(props: CardFrontProps) {
   // TODO: 실제 사용자 데이터로 대체하기 & 프로젝트 분위기, 사용 언어, 관심 직무 태그 배치 및 데이터 연동하기
   // TODO: 삭제, 수정 버튼 클릭 시 이벤트 연결하기 & 요청이 있을 경우 삭제하지 못하는 로직 추가하기
   // TODO: 사용자(제안자, 요청자)타입에 따라 Footer의 버튼 조건부 렌더링 추가하기(나가기, 삭제, 요청)
-  const { initialRotate, onRotate } = props;
+  const { initialRotate, onRotate, project } = props;
 
   return (
     <Card

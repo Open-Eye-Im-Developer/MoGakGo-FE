@@ -8,6 +8,8 @@ import { cn } from "@/app/_common/shadcn/utils";
 
 import useQueryGeoAreaCode from "@/app/auth-mylocation/hooks/useQueryGeoAreaCode";
 
+import { Project } from "@/app/project/_types/type";
+
 import REGION_CODE from "@/app/_common/constants/regionCode";
 
 import useGetRank from "../_api/useGetRank";
@@ -20,6 +22,114 @@ import {
   CarouselPrevious,
 } from "../../_common/shadcn/ui/carousel";
 import MapComponent from "../../_common/components/MapComponent";
+
+const mockup: Project[] = [
+  {
+    projectId: 0,
+    creator: {
+      id: 1,
+      username: "거루",
+      githubId: "tidavid1",
+      avatarUrl: "https://avatars.githubusercontent.com/u/85854384?v=4",
+      githubUrl: "https://github.com/tidavid1",
+      bio: "안녕하세요",
+      jandiRate: 0.5,
+      achievementTitle: "이세계 개발자",
+      developLanguages: ["JAVA", "KOTLIN"],
+      wantedJobs: ["BACKEND", "FRONTEND"],
+    },
+    projectTags: ["수다스러운", "재밌는"],
+    meetingInfo: {
+      meetStartTime: "2024-02-26T03:56:57.760Z",
+      meetEndTime: "2024-02-26T03:56:57.760Z",
+      meetDetail: "맥심플랜트 이태원점",
+    },
+  },
+  {
+    projectId: 1,
+    creator: {
+      id: 2,
+      username: "거루",
+      githubId: "tidavid1",
+      avatarUrl: "https://avatars.githubusercontent.com/u/85854384?v=4",
+      githubUrl: "https://github.com/tidavid1",
+      bio: "안녕하세요",
+      jandiRate: 0.5,
+      achievementTitle: "이세계 개발자",
+      developLanguages: ["JAVA", "KOTLIN"],
+      wantedJobs: ["BACKEND", "FRONTEND"],
+    },
+    projectTags: ["수다스러운", "재밌는"],
+    meetingInfo: {
+      meetStartTime: "2024-02-26T03:56:57.760Z",
+      meetEndTime: "2024-02-26T03:56:57.760Z",
+      meetDetail: "맥심플랜트 이태원점",
+    },
+  },
+  {
+    projectId: 2,
+    creator: {
+      id: 3,
+      username: "거루",
+      githubId: "tidavid1",
+      avatarUrl: "https://avatars.githubusercontent.com/u/85854384?v=4",
+      githubUrl: "https://github.com/tidavid1",
+      bio: "안녕하세요",
+      jandiRate: 0.5,
+      achievementTitle: "이세계 개발자",
+      developLanguages: ["JAVA", "KOTLIN"],
+      wantedJobs: ["BACKEND", "FRONTEND"],
+    },
+    projectTags: ["수다스러운", "재밌는"],
+    meetingInfo: {
+      meetStartTime: "2024-02-26T03:56:57.760Z",
+      meetEndTime: "2024-02-26T03:56:57.760Z",
+      meetDetail: "맥심플랜트 이태원점",
+    },
+  },
+  {
+    projectId: 3,
+    creator: {
+      id: 4,
+      username: "거루",
+      githubId: "tidavid1",
+      avatarUrl: "https://avatars.githubusercontent.com/u/85854384?v=4",
+      githubUrl: "https://github.com/tidavid1",
+      bio: "안녕하세요",
+      jandiRate: 0.5,
+      achievementTitle: "이세계 개발자",
+      developLanguages: ["JAVA", "KOTLIN"],
+      wantedJobs: ["BACKEND", "FRONTEND"],
+    },
+    projectTags: ["수다스러운", "재밌는"],
+    meetingInfo: {
+      meetStartTime: "2024-02-26T03:56:57.760Z",
+      meetEndTime: "2024-02-26T03:56:57.760Z",
+      meetDetail: "맥심플랜트 이태원점",
+    },
+  },
+  {
+    projectId: 4,
+    creator: {
+      id: 5,
+      username: "거루",
+      githubId: "tidavid1",
+      avatarUrl: "https://avatars.githubusercontent.com/u/85854384?v=4",
+      githubUrl: "https://github.com/tidavid1",
+      bio: "안녕하세요",
+      jandiRate: 0.5,
+      achievementTitle: "이세계 개발자",
+      developLanguages: ["JAVA", "KOTLIN"],
+      wantedJobs: ["BACKEND", "FRONTEND"],
+    },
+    projectTags: ["수다스러운", "재밌는"],
+    meetingInfo: {
+      meetStartTime: "2024-02-26T03:56:57.760Z",
+      meetEndTime: "2024-02-26T03:56:57.760Z",
+      meetDetail: "맥심플랜트 이태원점",
+    },
+  },
+];
 
 function Map() {
   const { data, isError: isGeoError, error: geoError } = useQueryGeoAreaCode();
@@ -110,10 +220,10 @@ function Map() {
           className="flex h-full w-full flex-col items-center justify-center"
         >
           <CarouselContent>
-            {Array.from({ length: 5 }).map((_, index) => (
+            {mockup.map((project, index) => (
               <CarouselItem key={index}>
                 <div className="mb-20 flex items-center justify-center">
-                  <ProjectCardContainer />
+                  <ProjectCardContainer project={project} />
                 </div>
               </CarouselItem>
             ))}
