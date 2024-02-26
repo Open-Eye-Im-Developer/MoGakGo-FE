@@ -1,17 +1,4 @@
-import { WantedJobIds } from "@/app/my-page/types";
-
-interface Creator {
-  id: number;
-  username: string;
-  githubId: string;
-  avatarUrl: string;
-  githubUrl: string;
-  bio: string;
-  jandiRate: number;
-  achievementTitle: string;
-  developLanguages: string[];
-  wantedJobs: WantedJobIds[];
-}
+import { Creator } from "./profile";
 
 interface MeetingInfo {
   meetStartTime: string;
