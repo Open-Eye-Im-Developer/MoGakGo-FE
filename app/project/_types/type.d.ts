@@ -1,5 +1,3 @@
-import { WantedJobIds } from "@/app/my-page/types";
-
 interface Form {
   place: string;
   startHour: string;
@@ -30,37 +28,4 @@ interface IFormProps {
 
 interface IPlaceResponseProps {
   documents: PlaceItem[];
-}
-
-interface Creator {
-  id: number;
-  username: string;
-  githubId: string;
-  avatarUrl: string;
-  githubUrl: string;
-  bio: string;
-  jandiRate: number;
-  achievementTitle: string;
-  developLanguages: string[];
-  wantedJobs: WantedJobIds[];
-}
-
-interface MeetingInfo {
-  meetStartTime: string;
-  meetEndTime: string;
-  meetDetail: string;
-}
-
-interface Project {
-  projectId: number;
-  creator: Creator;
-  projectTags: string[];
-  meetingInfo: MeetingInfo;
-}
-
-interface ProjectListResponse {
-  data: Project[];
-  hasNext: boolean;
-  numberOfElements: number;
-  size: number;
 }
