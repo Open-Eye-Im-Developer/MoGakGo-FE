@@ -3,25 +3,27 @@
 import { toast } from "sonner";
 import { MouseEvent, useEffect, useRef, useState } from "react";
 
-import { Project } from "@/app/project/_types/type";
+import ProjectCardContainer from "@/app/project/_components/ProjectCardContainer";
 import { usePositionStore } from "@/app/_common/store/usePositionStore";
 import { cn } from "@/app/_common/shadcn/utils";
-
-import useQueryGeoAreaCode from "@/app/auth-mylocation/hooks/useQueryGeoAreaCode";
-
-
-import REGION_CODE from "@/app/_common/constants/regionCode";
-
-import useGetRank from "../_api/useGetRank";
-import ProjectCardContainer from "../../project/_components/ProjectCardContainer";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "../../_common/shadcn/ui/carousel";
-import MapComponent from "../../_common/components/MapComponent";
+} from "@/app/_common/shadcn/ui/carousel";
+
+import MapComponent from "@/app/_common/components/MapComponent";
+
+import useQueryGeoAreaCode from "@/app/auth-mylocation/hooks/useQueryGeoAreaCode";
+
+import REGION_CODE from "@/app/_common/constants/regionCode";
+
+import { Project } from "@/app/_common/types/project";
+
+import useGetRank from "../_api/useGetRank";
+
 
 const mockup: Project[] = [
   {
