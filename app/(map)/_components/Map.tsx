@@ -3,12 +3,12 @@
 import { toast } from "sonner";
 import { MouseEvent, useEffect, useRef, useState } from "react";
 
+import { Project } from "@/app/project/_types/type";
 import { usePositionStore } from "@/app/_common/store/usePositionStore";
 import { cn } from "@/app/_common/shadcn/utils";
 
 import useQueryGeoAreaCode from "@/app/auth-mylocation/hooks/useQueryGeoAreaCode";
 
-import { Project } from "@/app/project/_types/type";
 
 import REGION_CODE from "@/app/_common/constants/regionCode";
 
@@ -142,6 +142,7 @@ function Map() {
     error: rankError,
   } = useGetRank();
   const { isAllowGPS } = usePositionStore();
+  const [projectList, setProjectList] = useState(mockup);
 
   if (isGeoError) toast.error(geoError?.message);
   if (isRankError) toast.error(rankError.message);
@@ -220,8 +221,8 @@ function Map() {
           className="flex h-full w-full flex-col items-center justify-center"
         >
           <CarouselContent>
-            {mockup.map((project, index) => (
-              <CarouselItem key={index}>
+            {projectList.map(project => (
+              <CarouselItem key={project.projectId}>
                 <div className="mb-20 flex items-center justify-center">
                   <ProjectCardContainer project={project} />
                 </div>
