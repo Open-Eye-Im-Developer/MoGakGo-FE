@@ -211,7 +211,7 @@ function Map() {
       </div>
       <Carousel
         className={cn(
-          "h-screen w-screen transition-opacity duration-300",
+          "h-screen w-screen transition-opacity delay-1000 duration-300",
           isListShow ? "visible opacity-100" : "invisible opacity-0",
         )}
         onClick={handleCancelCard}
