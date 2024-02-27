@@ -1,9 +1,10 @@
 import { useRouter } from "next/navigation";
 
-import ProjectCardFront from "@/app/project/_components/ProjectCardFront";
 import { usePositionStore } from "@/app/_common/store/usePositionStore";
 import { useModalStore } from "@/app/_common/store/useModalStore";
 import { Button } from "@/app/_common/shadcn/ui/button";
+
+import ProfileCard from "./ProfileCard";
 
 function SignupCompleteModal() {
   const router = useRouter();
@@ -18,10 +19,6 @@ function SignupCompleteModal() {
     setAuthLocationOpen(true);
   };
 
-  const onRotate = () => {
-    console.log("rotate");
-  };
-
   const handlePresetPosition = () => {
     setPosition();
   };
@@ -34,7 +31,7 @@ function SignupCompleteModal() {
           환영합니다! 회원가입이 완료되었습니다.
         </small>
       </header>
-      <ProjectCardFront onRotate={onRotate} />
+      <ProfileCard />
       <footer className="flex justify-end">
         <Button
           type="button"
