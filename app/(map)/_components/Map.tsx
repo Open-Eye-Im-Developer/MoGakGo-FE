@@ -55,6 +55,14 @@ function Map() {
     }
   }, [data]);
 
+  const zoomOut = () => {
+    if (!(previousRegion.current instanceof SVGElement)) return;
+    const map = document.querySelector("#map-wrap") as HTMLDivElement;
+    map.style.transform = "";
+    previousRegion.current.classList.remove("animate-map-bounce");
+    previousRegion.current = null;
+  };
+
   const handleRegionClick = (event: MouseEvent<HTMLDivElement>) => {
     if (!isAllowGPS()) return;
 
@@ -64,11 +72,8 @@ function Map() {
     const isRegion = target.tagName === "path";
 
     if (isZoomIn) {
-      if (isRegion || !(previousRegion.current instanceof SVGElement)) return;
-
-      map.style.transform = "";
-      previousRegion.current.classList.remove("animate-map-bounce");
-      previousRegion.current = null;
+      if (isRegion) return;
+      zoomOut();
     } else {
       if (!isRegion) return;
 
@@ -87,12 +92,8 @@ function Map() {
   };
 
   const handleEmptyCardClose = () => {
-    if (!(previousRegion.current instanceof SVGElement)) return;
     setIsListShow(false);
-    const map = document.querySelector("#map-wrap") as HTMLDivElement;
-    map.style.transform = "";
-    previousRegion.current.classList.remove("animate-map-bounce");
-    previousRegion.current = null;
+    zoomOut();
   };
 
   return (
