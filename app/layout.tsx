@@ -1,16 +1,14 @@
+import "./globals.css";
+
 import { Toaster as Sonner } from "sonner";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
-
-import "./globals.css";
 
 import { Toaster } from "./_common/shadcn/ui/toaster";
 import { ThemeProvider } from "./_common/components/theme-provider";
 import ClientProvider from "./_common/components/ClientProvider";
 
 import type { Metadata } from "next";
-
-import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",
