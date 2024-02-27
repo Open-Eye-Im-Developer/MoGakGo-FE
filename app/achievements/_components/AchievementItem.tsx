@@ -1,19 +1,12 @@
 import { cn } from "@/app/_common/shadcn/utils";
 
+import { calculateAchievement } from "../_utils/calculateAchievement";
 import { AchievementProgress } from "./AchievementProgress";
 import { Achievement } from "./AchievementList";
 
 interface AchievementItemProps {
   achievement: Achievement;
 }
-
-const calculateProgress = (nowGrade: number, total: number) => {
-  if (total === 0) {
-    throw new Error("Total cannot be zero");
-  }
-  const percentage = (nowGrade / total) * 100;
-  return Math.floor(percentage);
-};
 
 function AchievementItem({
   achievement: { title, description, total, nowGrade, isCompleted },
@@ -35,7 +28,7 @@ function AchievementItem({
       </header>
       <section className="text-right">
         <AchievementProgress
-          value={calculateProgress(nowGrade, total)}
+          value={calculateAchievement(nowGrade, total)}
           className="bg-secondary bg-opacity-30 dark:bg-slate-50 dark:bg-opacity-50"
           defaultChecked={isCompleted}
         />
