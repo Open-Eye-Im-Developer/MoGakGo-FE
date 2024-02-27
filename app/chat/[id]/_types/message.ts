@@ -1,8 +1,8 @@
 export interface MessageType {
   id: string;
   content: string;
-  SenderId: string;
-  ReceiverId: string;
+  senderId: string;
+  receiverId: string;
   createdAt: string;
 }
 

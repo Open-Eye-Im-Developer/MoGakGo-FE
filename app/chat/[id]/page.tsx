@@ -2,7 +2,7 @@ import StackNavigator from "../../_common/components/StackNavigator";
 import ProjectInfo from "./_components/ProjectInfo";
 import Profile from "./_components/Profile";
 import MessageList from "./_components/MessageList";
-function page() {
+function ChattingRoomPage() {
   return (
     <>
       <StackNavigator
@@ -18,4 +18,4 @@ function page() {
   );
 }
 
-export default page;
+export default ChattingRoomPage;

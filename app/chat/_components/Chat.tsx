@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import ActicityCard from "@/app/_common/components/ActivityCard";
+import ActivityCard from "@/app/_common/components/ActivityCard";
 
 import { ChatType } from "../types/chat";
 import { ProfileType } from "../[id]/_types/message";
@@ -26,11 +26,11 @@ function Chat({ chat }: ChatProps) {
 
   return (
     <Link href={`/chat/${chatRoomId}`} key={projectId}>
-      <ActicityCard
+      <ActivityCard
         name={matchedUser.username}
-        profile_image={matchedUser.avatarUrl}
+        profileImage={matchedUser.avatarUrl}
         detail={lastMessage}
-        created_at={lastMessageCreatedAt}
+        createdAt={lastMessageCreatedAt}
       />
     </Link>
   );
