@@ -29,12 +29,10 @@ function Map() {
   const {
     data: rank,
     isError: isRankError,
-    isLoading,
     error: rankError,
   } = useGetRank();
   const { isAllowGPS } = usePositionStore();
 
-  if (isLoading) toast.info("잠시만 기다려주세요.");
   if (isGeoError) toast.error(geoError?.message);
   if (isRankError) toast.error(rankError.message);
 
