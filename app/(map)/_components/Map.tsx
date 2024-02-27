@@ -90,6 +90,15 @@ function Map() {
     if (event.target.id === "carousel-wrap") setIsListShow(false);
   };
 
+  const handleEmptyCardClose = () => {
+    if (!(previousRegion.current instanceof SVGElement)) return;
+    setIsListShow(false);
+    const map = document.querySelector("#map-wrap") as HTMLDivElement;
+    map.style.transform = "";
+    previousRegion.current.classList.remove("animate-map-bounce");
+    previousRegion.current = null;
+  };
+
   return (
     <div className="relative h-screen w-screen overflow-hidden touch-none">
       <div
@@ -129,6 +138,7 @@ function Map() {
                 <p>조회할 수 있는 카드 리스트가 없습니다.</p>
                 <Button
                   className="mt-2 bg-primary"
+                  onClick={handleEmptyCardClose}
                 >
                   <IconRotateClockwise2 className="mr-1 h-5 w-5" />
                   돌아가기
