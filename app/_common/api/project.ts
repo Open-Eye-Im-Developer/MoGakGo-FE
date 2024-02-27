@@ -26,7 +26,7 @@ export const getProjectCard = async (
 ): Promise<ResponseData<Project> | ResponseError | undefined> => {
   try {
     const { data } = await instance.get<ResponseData<Project>>(
-      `projects/${region}`,
+      `projects/${region}?cursorId=1&pageSize=5&sortOrder=ASC`,
     );
     return data;
   } catch (error) {

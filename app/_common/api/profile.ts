@@ -9,7 +9,7 @@ export const getProfileCard = async (
 ): Promise<ResponseData<Creator> | ResponseError | undefined> => {
   try {
     const { data } = await instance.get<ResponseData<Creator>>(
-      `profiles/${region}`,
+      `profiles/${region}?cursorId=1&pageSize=5&sortOrder=ASC`,
     );
     return data;
   } catch (error) {
