@@ -3,10 +3,18 @@ import { useQuery } from "@tanstack/react-query";
 import { getProjectCard } from "@/app/_common/api/project";
 import { getProfileCard } from "@/app/_common/api/profile";
 
+import REGION_CODE from "@/app/_common/constants/regionCode";
+
 import { checkInstanceOfResponseError } from "@/app/_common/utils/checkInstanceOfResponseError";
 
 // TODO: 페이지네이션 구현
-const useGetCardList = (region: string) => {
+const useGetCardList = (regionCode: string) => {
+  const regionName =
+    Object.keys(REGION_CODE).find(
+      region => REGION_CODE[region] === regionCode,
+    ) ?? "";
+  const region = regionName.toUpperCase();
+
   const projectResponse = useQuery({
     queryKey: ["project-list", region] as const,
     queryFn: () => getProjectCard(region),
