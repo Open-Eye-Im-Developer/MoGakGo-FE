@@ -2,6 +2,7 @@
 
 import { toast } from "sonner";
 import { MouseEvent, useEffect, useRef, useState } from "react";
+import { IconRotateClockwise2 } from "@tabler/icons-react";
 
 import ProjectCardContainer from "@/app/project/_components/ProjectCardContainer";
 import { usePositionStore } from "@/app/_common/store/usePositionStore";
@@ -13,6 +14,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/app/_common/shadcn/ui/carousel";
+import { Button } from "@/app/_common/shadcn/ui/button";
 
 import MapComponent from "@/app/_common/components/MapComponent";
 
@@ -111,19 +113,29 @@ function Map() {
           id="carousel-wrap"
           className="flex h-full w-full flex-col items-center justify-center"
         >
-          <CarouselContent>
-            {cardList ? (
-              cardList.projectList.map((project: Project) => (
+          {cardList ? (
+            <CarouselContent>
+              {cardList.projectList.map((project: Project) => (
                 <CarouselItem key={project.projectId}>
                   <div className="mb-20 flex items-center justify-center">
                     <ProjectCardContainer project={project} />
                   </div>
                 </CarouselItem>
-              ))
-            ) : (
-              <div>정보 없음</div>
-            )}
-          </CarouselContent>
+              ))}
+            </CarouselContent>
+          ) : (
+            <div className="card h-[550px] w-[330px] bg-white/40 opacity-[0.99] backdrop-blur-md sm:w-[450px]">
+              <div className="flex h-full w-full flex-col items-center justify-center text-center">
+                <p>조회할 수 있는 카드 리스트가 없습니다.</p>
+                <Button
+                  className="mt-2 bg-primary"
+                >
+                  <IconRotateClockwise2 className="mr-1 h-5 w-5" />
+                  돌아가기
+                </Button>
+              </div>
+            </div>
+          )}
         </div>
         <CarouselPrevious className="left-10 hidden md:inline-flex" />
         <CarouselNext className="right-10 hidden md:inline-flex" />
