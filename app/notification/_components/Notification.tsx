@@ -2,11 +2,7 @@ import React from "react";
 import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/app/_common/shadcn/ui/avatar";
+import Profile from "@/app/chat/[id]/_components/Profile";
 
 import { NotificationType } from "../_types/notification";
 
@@ -23,18 +19,14 @@ function Notification({ notification }: NotificationProps) {
 
   return (
     <div className="m-2 flex cursor-pointer justify-between border-b p-2 px-3">
-      <div className="flex gap-4">
-        <Avatar>
-          <AvatarImage src={profile_image} />
-          <AvatarFallback>{name.charAt(0)}</AvatarFallback>
-        </Avatar>
+      <Profile name={name} imageUrl={profile_image}>
         <div>
           <div className="font-medium">{name}</div>
           <span className="text-gray-500">{detail}</span>
         </div>
-      </div>
+      </Profile>
       <div className="min-w-fit text-center text-sm text-gray-500">
-        <div>{dayjs(created_at).fromNow()}</div>
+        {dayjs(created_at).fromNow()}
       </div>
     </div>
   );
