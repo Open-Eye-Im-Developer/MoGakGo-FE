@@ -42,7 +42,6 @@ function MapComponent({ regionCode, regionRank }: Props) {
 
     const { bottom, top, right, left } = region.getBoundingClientRect();
     const { offsetWidth: width, offsetHeight: height } = document.body;
-    map.classList.add("touch-none");
     map.style.transform = `scale(2.5) translate(${width / 2 - (right + left) / 2}px, ${height / 2 - (bottom + top) / 2}px)`;
     region.classList.add("animate-map-bounce");
   };

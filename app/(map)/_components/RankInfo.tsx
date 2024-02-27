@@ -1,6 +1,6 @@
 function RankInfo() {
   return (
-    <aside className="absolute bottom-0 left-0 text-[0.65rem] text-primary">
+    <aside className="absolute bottom-0 left-4 text-[0.65rem] text-primary">
       <div>프로젝트 밀집도 순위</div>
       <ul>
         <li className="flex items-center">
