@@ -27,11 +27,11 @@ export const MyLocationAuthFormSchema = z.object({
 
 function MyLocationAuth() {
   const router = useRouter();
-  const { validatePosition } = usePositionStore();
+  const { isAllowGPS } = usePositionStore();
   const { authLocation, setAuthLocationOpen } = useModalStore();
   const { user } = useAuthStore();
 
-  const { data: code, isLoading } = useQueryGeoAreaCode();
+  const { data: code, isLoading, isError } = useQueryGeoAreaCode();
 
   const { mutate } = useMutationAuthMyLocation();
 
@@ -46,7 +46,7 @@ function MyLocationAuth() {
   const { handleSubmit, formState } = form;
 
   const onSubmit = () => {
-    if (!code) return;
+    if (!code || !isError) return;
 
     mutate({
       userId: user.id,
@@ -82,9 +82,9 @@ function MyLocationAuth() {
             <section className="flex flex-col gap-2 px-5">
               <p className="px-1">내 현재 위치</p>
               <div className="rounded-md border border-primary bg-primary p-3 text-white">
-                {!validatePosition()
+                {!isAllowGPS()
                   ? "현재 위치를 확인할 수 없습니다."
-                  : code?.areaCode
+                  : code? && !isError
                     ? `${CODE_TO_REGION_NAME[code.areaCode]}`
                     : "현재 위치는 서비스 지역이 아닙니다."}
               </div>

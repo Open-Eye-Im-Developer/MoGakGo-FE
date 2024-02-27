@@ -1,13 +1,17 @@
 "use client";
 
 import { toast } from "sonner";
-import { MouseEvent, useRef, useState } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
+
+import { usePositionStore } from "@/app/_common/store/usePositionStore";
+import { cn } from "@/app/_common/shadcn/utils";
+
+import useQueryGeoAreaCode from "@/app/auth-mylocation/hooks/useQueryGeoAreaCode";
 
 import REGION_CODE from "@/app/_common/constants/regionCode";
 
 import useGetRank from "../_api/useGetRank";
 import ProjectCardContainer from "../../project/_components/ProjectCardContainer";
-import { cn } from "../../_common/shadcn/utils";
 import {
   Carousel,
   CarouselContent,
@@ -18,15 +22,34 @@ import {
 import MapComponent from "../../_common/components/MapComponent";
 
 function Map() {
-  const [regionCode, setRegionCode] = useState("");
+  const { data, isError: isGeoError, error: geoError } = useQueryGeoAreaCode();
+  const [regionCode, setRegionCode] = useState(0);
   const previousRegion = useRef<SVGElement | null>(null);
   const [isListShow, setIsListShow] = useState(false);
-  const { data: rank, isError, isLoading, error } = useGetRank();
+  const {
+    data: rank,
+    isError: isRankError,
+    error: rankError,
+  } = useGetRank();
+  const { isAllowGPS } = usePositionStore();
 
-  if (isLoading) toast.info("잠시만 기다려주세요.");
-  if (isError) toast.error(error.message);
+  if (isGeoError) toast.error(geoError?.message);
+  if (isRankError) toast.error(rankError.message);
+
+  useEffect(() => {
+    if (data) {
+      toast.info("내가 위치한 지역으로 이동합니다.");
+      setRegionCode(data.areaCode);
+      const regionName = Object.keys(REGION_CODE).find(
+        region => REGION_CODE[region] === data.areaCode,
+      );
+      previousRegion.current = document.querySelector(`#${regionName}`);
+    }
+  }, [data]);
 
   const handleRegionClick = (event: MouseEvent<HTMLDivElement>) => {
+    if (!isAllowGPS()) return;
+
     const map = document.querySelector("#map-wrap") as HTMLDivElement;
     const isZoomIn = map.style.transform.includes("scale");
     const target = event.target as SVGElement | HTMLElement;
