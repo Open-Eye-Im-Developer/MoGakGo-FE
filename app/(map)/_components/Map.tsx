@@ -23,115 +23,7 @@ import REGION_CODE from "@/app/_common/constants/regionCode";
 import { Project } from "@/app/_common/types/project";
 
 import useGetRank from "../_api/useGetRank";
-
-// TODO: api 실 데이터 받아온 후 삭제
-const mockup: Project[] = [
-  {
-    projectId: 0,
-    creator: {
-      id: 1,
-      username: "거루",
-      githubId: "tidavid1",
-      avatarUrl: "https://avatars.githubusercontent.com/u/85854384?v=4",
-      githubUrl: "https://github.com/tidavid1",
-      bio: "안녕하세요",
-      jandiRate: 0.5,
-      achievementTitle: "이세계 개발자",
-      developLanguages: ["JAVA", "KOTLIN"],
-      wantedJobs: ["BACKEND", "FRONTEND"],
-    },
-    projectTags: ["수다스러운", "재밌는"],
-    meetingInfo: {
-      meetStartTime: "2024-02-26T03:56:57.760Z",
-      meetEndTime: "2024-02-26T03:56:57.760Z",
-      meetDetail: "맥심플랜트 이태원점",
-    },
-  },
-  {
-    projectId: 1,
-    creator: {
-      id: 2,
-      username: "거루",
-      githubId: "tidavid1",
-      avatarUrl: "https://avatars.githubusercontent.com/u/85854384?v=4",
-      githubUrl: "https://github.com/tidavid1",
-      bio: "안녕하세요",
-      jandiRate: 0.5,
-      achievementTitle: "이세계 개발자",
-      developLanguages: ["JAVA", "KOTLIN"],
-      wantedJobs: ["BACKEND", "FRONTEND"],
-    },
-    projectTags: ["수다스러운", "재밌는"],
-    meetingInfo: {
-      meetStartTime: "2024-02-26T03:56:57.760Z",
-      meetEndTime: "2024-02-26T03:56:57.760Z",
-      meetDetail: "맥심플랜트 이태원점",
-    },
-  },
-  {
-    projectId: 2,
-    creator: {
-      id: 3,
-      username: "거루",
-      githubId: "tidavid1",
-      avatarUrl: "https://avatars.githubusercontent.com/u/85854384?v=4",
-      githubUrl: "https://github.com/tidavid1",
-      bio: "안녕하세요",
-      jandiRate: 0.5,
-      achievementTitle: "이세계 개발자",
-      developLanguages: ["JAVA", "KOTLIN"],
-      wantedJobs: ["BACKEND", "FRONTEND"],
-    },
-    projectTags: ["수다스러운", "재밌는"],
-    meetingInfo: {
-      meetStartTime: "2024-02-26T03:56:57.760Z",
-      meetEndTime: "2024-02-26T03:56:57.760Z",
-      meetDetail: "맥심플랜트 이태원점",
-    },
-  },
-  {
-    projectId: 3,
-    creator: {
-      id: 4,
-      username: "거루",
-      githubId: "tidavid1",
-      avatarUrl: "https://avatars.githubusercontent.com/u/85854384?v=4",
-      githubUrl: "https://github.com/tidavid1",
-      bio: "안녕하세요",
-      jandiRate: 0.5,
-      achievementTitle: "이세계 개발자",
-      developLanguages: ["JAVA", "KOTLIN"],
-      wantedJobs: ["BACKEND", "FRONTEND"],
-    },
-    projectTags: ["수다스러운", "재밌는"],
-    meetingInfo: {
-      meetStartTime: "2024-02-26T03:56:57.760Z",
-      meetEndTime: "2024-02-26T03:56:57.760Z",
-      meetDetail: "맥심플랜트 이태원점",
-    },
-  },
-  {
-    projectId: 4,
-    creator: {
-      id: 5,
-      username: "거루",
-      githubId: "tidavid1",
-      avatarUrl: "https://avatars.githubusercontent.com/u/85854384?v=4",
-      githubUrl: "https://github.com/tidavid1",
-      bio: "안녕하세요",
-      jandiRate: 0.5,
-      achievementTitle: "이세계 개발자",
-      developLanguages: ["JAVA", "KOTLIN"],
-      wantedJobs: ["BACKEND", "FRONTEND"],
-    },
-    projectTags: ["수다스러운", "재밌는"],
-    meetingInfo: {
-      meetStartTime: "2024-02-26T03:56:57.760Z",
-      meetEndTime: "2024-02-26T03:56:57.760Z",
-      meetDetail: "맥심플랜트 이태원점",
-    },
-  },
-];
+import useGetCardList from "../_api/useGetCardList";
 
 function Map() {
   const { data, isError: isGeoError, error: geoError } = useQueryGeoAreaCode();
@@ -144,10 +36,15 @@ function Map() {
     error: rankError,
   } = useGetRank();
   const { isAllowGPS } = usePositionStore();
-  const [projectList] = useState(mockup);
+  const {
+    data: cardList,
+    isError: isListError,
+    error: listError,
+  } = useGetCardList(regionCode);
 
   if (isGeoError) toast.error(geoError?.message);
   if (isRankError) toast.error(rankError.message);
+  if (isListError) toast.error(listError?.message);
 
   useEffect(() => {
     if (data) {
@@ -215,13 +112,17 @@ function Map() {
           className="flex h-full w-full flex-col items-center justify-center"
         >
           <CarouselContent>
-            {projectList.map(project => (
-              <CarouselItem key={project.projectId}>
-                <div className="mb-20 flex items-center justify-center">
-                  <ProjectCardContainer project={project} />
-                </div>
-              </CarouselItem>
-            ))}
+            {cardList ? (
+              cardList.projectList.map((project: Project) => (
+                <CarouselItem key={project.projectId}>
+                  <div className="mb-20 flex items-center justify-center">
+                    <ProjectCardContainer project={project} />
+                  </div>
+                </CarouselItem>
+              ))
+            ) : (
+              <div>정보 없음</div>
+            )}
           </CarouselContent>
         </div>
         <CarouselPrevious className="left-10 hidden md:inline-flex" />
