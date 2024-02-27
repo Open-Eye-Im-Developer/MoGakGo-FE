@@ -8,7 +8,7 @@ import REGION_CODE from "@/app/_common/constants/regionCode";
 import { checkInstanceOfResponseError } from "@/app/_common/utils/checkInstanceOfResponseError";
 
 // TODO: 페이지네이션 구현
-const useGetCardList = (regionCode: string) => {
+const useGetCardList = (regionCode: number) => {
   const regionName =
     Object.keys(REGION_CODE).find(
       region => REGION_CODE[region] === regionCode,
