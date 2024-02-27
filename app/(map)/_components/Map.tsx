@@ -3,13 +3,10 @@
 import { toast } from "sonner";
 import { MouseEvent, useEffect, useRef, useState } from "react";
 
-import ProjectCardContainer from "@/app/project/_components/ProjectCardContainer";
 import { usePositionStore } from "@/app/_common/store/usePositionStore";
 import { cn } from "@/app/_common/shadcn/utils";
 import {
   Carousel,
-  CarouselContent,
-  CarouselItem,
   CarouselNext,
   CarouselPrevious,
 } from "@/app/_common/shadcn/ui/carousel";
@@ -20,11 +17,10 @@ import useQueryGeoAreaCode from "@/app/auth-mylocation/hooks/useQueryGeoAreaCode
 
 import REGION_CODE from "@/app/_common/constants/regionCode";
 
-import { Project } from "@/app/_common/types/project";
-
 import useGetRank from "../_api/useGetRank";
 import useGetCardList from "../_api/useGetCardList";
 import EmptyCardList from "./EmptyCardList";
+import CardList from "./CardList";
 
 function Map() {
   const { data, isError: isGeoError, error: geoError } = useQueryGeoAreaCode();
@@ -120,15 +116,7 @@ function Map() {
           className="flex h-full w-full flex-col items-center justify-center"
         >
           {cardList ? (
-            <CarouselContent>
-              {cardList.projectList.map((project: Project) => (
-                <CarouselItem key={project.projectId}>
-                  <div className="mb-20 flex items-center justify-center">
-                    <ProjectCardContainer project={project} />
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
+            <CardList cardList={cardList} />
           ) : (
             <EmptyCardList onClick={handleEmptyCardClose} />
           )}
