@@ -36,15 +36,21 @@ const useGetCardList = (regionCode: string) => {
     return { data: undefined, isLoading: true, isError: false, error: null };
   }
 
-  if (
-    checkInstanceOfResponseError(projectResponse.data) ||
-    checkInstanceOfResponseError(profileResponse.data)
-  ) {
+  if (checkInstanceOfResponseError(projectResponse.data)) {
     return {
       data: undefined,
       isLoading: false,
       isError: true,
       error: projectResponse.data,
+    };
+  }
+
+  if (checkInstanceOfResponseError(profileResponse.data)) {
+    return {
+      data: undefined,
+      isLoading: false,
+      isError: true,
+      error: profileResponse.data,
     };
   }
 
