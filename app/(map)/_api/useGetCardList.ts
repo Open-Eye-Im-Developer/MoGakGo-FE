@@ -10,11 +10,13 @@ const useGetCardList = (region: string) => {
   const projectResponse = useQuery({
     queryKey: ["project-list", region] as const,
     queryFn: () => getProjectCard(region),
+    enabled: !!region,
   });
 
   const profileResponse = useQuery({
     queryKey: ["profile-list", region] as const,
     queryFn: () => getProfileCard(region),
+    enabled: !!region,
   });
 
   if (
