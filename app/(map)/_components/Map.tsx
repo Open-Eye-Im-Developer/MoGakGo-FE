@@ -5,17 +5,17 @@ import { MouseEvent, useRef, useState } from "react";
 
 import REGION_CODE from "@/app/_common/constants/regionCode";
 
-import ProjectCardContainer from "../project/_components/ProjectCardContainer";
-import { cn } from "../_common/shadcn/utils";
+import useGetRank from "../_api/useGetRank";
+import ProjectCardContainer from "../../project/_components/ProjectCardContainer";
+import { cn } from "../../_common/shadcn/utils";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "../_common/shadcn/ui/carousel";
-import MapComponent from "../_common/components/MapComponent";
-import useGetRank from "./_api/useGetRank";
+} from "../../_common/shadcn/ui/carousel";
+import MapComponent from "../../_common/components/MapComponent";
 
 function Map() {
   const [regionCode, setRegionCode] = useState("");
