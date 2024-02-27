@@ -61,6 +61,7 @@ function Map() {
     map.style.transform = "";
     previousRegion.current.classList.remove("animate-map-bounce");
     previousRegion.current = null;
+    setRegionCode(0);
   };
 
   const handleRegionClick = (event: MouseEvent<HTMLDivElement>) => {
