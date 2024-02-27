@@ -32,11 +32,7 @@ function Map() {
   const [regionCode, setRegionCode] = useState(0);
   const previousRegion = useRef<SVGElement | null>(null);
   const [isListShow, setIsListShow] = useState(false);
-  const {
-    data: rank,
-    isError: isRankError,
-    error: rankError,
-  } = useGetRank();
+  const { data: rank, isError: isRankError, error: rankError } = useGetRank();
   const { isAllowGPS } = usePositionStore();
   const {
     data: cardList,
@@ -100,11 +96,11 @@ function Map() {
   };
 
   return (
-    <div className="relative h-screen w-screen overflow-hidden touch-none">
+    <div className="relative h-screen w-screen touch-none overflow-hidden">
       <div
         id="map-wrap"
         onClick={handleRegionClick}
-        className="absolute z-0 flex h-screen w-screen items-center justify-center transition-all duration-1000 touch-none"
+        className="absolute z-0 flex h-screen w-screen touch-none items-center justify-center transition-all duration-1000"
       >
         <MapComponent
           regionCode={regionCode}
