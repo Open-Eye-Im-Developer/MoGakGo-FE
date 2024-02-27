@@ -84,7 +84,7 @@ function MyLocationAuth() {
               <div className="rounded-md border border-primary bg-primary p-3 text-white">
                 {!isAllowGPS()
                   ? "현재 위치를 확인할 수 없습니다."
-                  : code? && !isError
+                  : code && !isError
                     ? `${CODE_TO_REGION_NAME[code.areaCode]}`
                     : "현재 위치는 서비스 지역이 아닙니다."}
               </div>
