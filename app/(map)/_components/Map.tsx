@@ -35,7 +35,6 @@ function Map() {
     if (isZoomIn) {
       if (isRegion || !(previousRegion.current instanceof SVGElement)) return;
 
-      map.classList.remove("touch-none");
       map.style.transform = "";
       previousRegion.current.classList.remove("animate-map-bounce");
       previousRegion.current = null;
@@ -57,11 +56,11 @@ function Map() {
   };
 
   return (
-    <div className="relative h-screen w-screen">
+    <div className="relative h-screen w-screen overflow-hidden touch-none">
       <div
         id="map-wrap"
         onClick={handleRegionClick}
-        className="absolute z-0 flex h-screen w-screen items-center justify-center transition-all duration-1000"
+        className="absolute z-0 flex h-screen w-screen items-center justify-center transition-all duration-1000 touch-none"
       >
         <MapComponent
           regionCode={regionCode}
@@ -77,7 +76,7 @@ function Map() {
       >
         <div
           id="carousel-wrap"
-          className="flex h-full w-full flex-col items-center justify-center overflow-hidden"
+          className="flex h-full w-full flex-col items-center justify-center"
         >
           <CarouselContent>
             {Array.from({ length: 5 }).map((_, index) => (
