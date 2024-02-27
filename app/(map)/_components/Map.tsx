@@ -2,7 +2,6 @@
 
 import { toast } from "sonner";
 import { MouseEvent, useEffect, useRef, useState } from "react";
-import { IconRotateClockwise2 } from "@tabler/icons-react";
 
 import ProjectCardContainer from "@/app/project/_components/ProjectCardContainer";
 import { usePositionStore } from "@/app/_common/store/usePositionStore";
@@ -14,7 +13,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/app/_common/shadcn/ui/carousel";
-import { Button } from "@/app/_common/shadcn/ui/button";
 
 import MapComponent from "@/app/_common/components/MapComponent";
 
@@ -26,6 +24,7 @@ import { Project } from "@/app/_common/types/project";
 
 import useGetRank from "../_api/useGetRank";
 import useGetCardList from "../_api/useGetCardList";
+import EmptyCardList from "./EmptyCardList";
 
 function Map() {
   const { data, isError: isGeoError, error: geoError } = useQueryGeoAreaCode();
@@ -131,18 +130,7 @@ function Map() {
               ))}
             </CarouselContent>
           ) : (
-            <div className="card h-[550px] w-[330px] bg-white/40 opacity-[0.99] backdrop-blur-md sm:w-[450px]">
-              <div className="flex h-full w-full flex-col items-center justify-center text-center">
-                <p>조회할 수 있는 카드 리스트가 없습니다.</p>
-                <Button
-                  className="mt-2 bg-primary"
-                  onClick={handleEmptyCardClose}
-                >
-                  <IconRotateClockwise2 className="mr-1 h-5 w-5" />
-                  돌아가기
-                </Button>
-              </div>
-            </div>
+            <EmptyCardList onClick={handleEmptyCardClose} />
           )}
         </div>
         <CarouselPrevious className="left-10 hidden md:inline-flex" />
