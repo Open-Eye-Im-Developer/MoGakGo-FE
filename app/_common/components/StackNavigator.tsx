@@ -3,10 +3,10 @@ import { useRouter } from "next/navigation";
 import { IconChevronLeft } from "@tabler/icons-react";
 
 interface StackNavigatorProps {
-  title: string;
+  content: React.ReactNode;
 }
 
-function StackNavigator({ title }: StackNavigatorProps) {
+function StackNavigator({ content }: StackNavigatorProps) {
   const router = useRouter();
 
   const handleClickPrevButton = () => {
@@ -21,7 +21,7 @@ function StackNavigator({ title }: StackNavigatorProps) {
           className="min-w-[10%]"
           onClick={handleClickPrevButton}
         />
-        <h1 className="text-xl font-semibold">{title}</h1>
+        <h1 className="text-xl font-semibold">{content}</h1>
         <div className="min-w-[10%]"></div>
       </div>
     </div>
