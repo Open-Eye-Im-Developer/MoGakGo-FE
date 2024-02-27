@@ -3,6 +3,8 @@
 import { toast } from "sonner";
 import { MouseEvent, useRef, useState } from "react";
 
+import WithSearchTokens from "@/app/_common/components/WithSearchTokens";
+
 import REGION_CODE from "@/app/_common/constants/regionCode";
 
 import useGetRank from "../_api/useGetRank";
@@ -56,11 +58,11 @@ function Map() {
   };
 
   return (
-    <div className="relative h-screen w-screen overflow-hidden touch-none">
+    <div className="relative h-screen w-screen touch-none overflow-hidden">
       <div
         id="map-wrap"
         onClick={handleRegionClick}
-        className="absolute z-0 flex h-screen w-screen items-center justify-center transition-all duration-1000 touch-none"
+        className="absolute z-0 flex h-screen w-screen touch-none items-center justify-center transition-all duration-1000"
       >
         <MapComponent
           regionCode={regionCode}
@@ -95,4 +97,4 @@ function Map() {
   );
 }
 
-export default Map;
+export default WithSearchTokens(Map);

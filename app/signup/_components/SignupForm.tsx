@@ -8,8 +8,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@/app/_common/shadcn/utils";
 import { Form } from "@/app/_common/shadcn/ui/form";
 
+import { useSearchTokens } from "@/app/_common/hooks/useSearchTokens";
+
 import { SignupFormSchema } from "../_utils/validation";
-import { useSearchTokens } from "../_hooks/useSearchTokens";
 import { useQuerySignUpUser } from "../_hooks/useQuerySignUpUser";
 import { useMutationSignup } from "../_hooks/useMutationSignup";
 import SignupSecondStep from "./SignupSecondStep";
