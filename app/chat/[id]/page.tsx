@@ -7,7 +7,7 @@ function page() {
     <>
       <StackNavigator
         content={
-          <Profile imageUrl={"https://github.com/shadcn.png"} name={"e"}>
+          <Profile avatarUrl={"https://github.com/shadcn.png"} username={"e"}>
             <span>name</span>
           </Profile>
         }

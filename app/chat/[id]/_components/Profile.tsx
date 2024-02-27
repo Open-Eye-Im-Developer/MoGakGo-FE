@@ -1,21 +1,20 @@
+import { ProfileType } from "../_types/message";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from "../../../_common/shadcn/ui/avatar";
 
-interface ProfileType {
-  imageUrl: string;
-  name: string;
+export interface ProfileProps extends ProfileType {
   children?: React.ReactNode;
 }
 
-function Profile({ imageUrl, name, children }: ProfileType) {
+function Profile({ avatarUrl, username, children }: ProfileProps) {
   return (
     <div className="flex gap-4">
       <Avatar>
-        <AvatarImage src={imageUrl} />
-        <AvatarFallback>{name.charAt(0)}</AvatarFallback>
+        <AvatarImage src={avatarUrl} />
+        <AvatarFallback>{username.charAt(0)}</AvatarFallback>
       </Avatar>
       <div>{children}</div>
     </div>

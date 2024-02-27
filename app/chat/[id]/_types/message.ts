@@ -5,3 +5,8 @@ export interface MessageType {
   ReceiverId: string;
   createdAt: string;
 }
+
+export interface ProfileType {
+  avatarUrl: string;
+  username: string;
+}
