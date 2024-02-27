@@ -7,6 +7,6 @@ export interface NotificationType {
   };
   data: {
     detail: string;
-    created_at: string;
+    createdAt: string;
   };
 }

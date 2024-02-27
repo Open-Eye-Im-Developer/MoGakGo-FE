@@ -10,15 +10,15 @@ interface NotificationProps {
 
 function Notification({ notification }: NotificationProps) {
   const { sender, data } = notification;
-  const { name, profile_image } = sender;
-  const { detail, created_at } = data;
+  const { name, profileImage } = sender;
+  const { detail, createdAt } = data;
 
   return (
     <ActivityCard
       name={name}
-      profile_image={profile_image}
+      profileImage={profileImage}
       detail={detail}
-      created_at={created_at}
+      createdAt={createdAt}
     />
   );
 }

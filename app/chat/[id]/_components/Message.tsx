@@ -8,7 +8,7 @@ interface MessageProps {
 }
 
 function Message({ message }: MessageProps) {
-  const { id, content, SenderId, createdAt } = message;
+  const { id, content, senderId, createdAt } = message;
 
   const MYID = "1";
 
@@ -16,12 +16,12 @@ function Message({ message }: MessageProps) {
     <>
       <div
         key={id}
-        className={cn("flex", MYID === SenderId && "flex-row-reverse")}
+        className={cn("flex", MYID === senderId && "flex-row-reverse")}
       >
         <div
           className={cn(
             "m-2 w-fit rounded-lg bg-slate-300 p-3",
-            MYID === SenderId ? "rounded-tr-none" : "rounded-tl-none",
+            MYID === senderId ? "rounded-tr-none" : "rounded-tl-none",
           )}
         >
           {content}
