@@ -12,7 +12,9 @@ import {
   CarouselPrevious,
 } from "@/app/_common/shadcn/ui/carousel";
 
+import WithSearchTokens from "@/app/_common/components/WithSearchTokens";
 import MapComponent from "@/app/_common/components/MapComponent";
+
 
 import REGION_CODE from "@/app/_common/constants/regionCode";
 
@@ -127,4 +129,4 @@ function Map() {
   );
 }
 
-export default Map;
+export default WithSearchTokens(Map);
