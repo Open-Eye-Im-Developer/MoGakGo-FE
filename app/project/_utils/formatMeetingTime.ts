@@ -1,11 +1,17 @@
+import utc from "dayjs/plugin/utc";
+import tz from "dayjs/plugin/timezone";
+import dayjs from "dayjs";
+
+dayjs.extend(utc);
+dayjs.extend(tz);
+const timezone = "Europe/London";
+
 const formatMeetingTime = (isoStartTime: string, isoEndTime: string) => {
-  try {
-    const startTime = isoStartTime.split("T")[1].slice(0, 5);
-    const endTime = isoEndTime.split("T")[1].slice(0, 5);
-    return `${startTime} ~ ${endTime}`;
-  } catch (error) {
-    return "유효하지 않은 시간 입니다.";
-  }
+  if (!isoStartTime || !isoEndTime) return "유효하지 않은 시간 입니다.";
+
+  const startTime = dayjs(isoStartTime).tz(timezone).format("HH:mm");
+  const endTime = dayjs(isoEndTime).tz(timezone).format("HH:mm");
+  return `${startTime} ~ ${endTime}`;
 };
 
 export default formatMeetingTime;

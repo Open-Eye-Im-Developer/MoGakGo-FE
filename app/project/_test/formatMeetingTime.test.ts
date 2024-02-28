@@ -13,8 +13,8 @@ describe("formatMeetingTime 함수 테스트", () => {
 
   test("유효하지 않은 데이터인 경우 안내 문구로 반환이 되는가", () => {
     const mockData = {
-      startTime: "2024-02-19",
-      endTime: "2024-02-19",
+      startTime: "",
+      endTime: "",
     };
     expect(
       formatMeetingTime(mockData.startTime, mockData.endTime),
