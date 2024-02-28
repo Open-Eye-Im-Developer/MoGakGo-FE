@@ -29,7 +29,12 @@ function SignupFirstStep({
   };
 
   return (
-    <section className={cn("flex flex-col", className)}>
+    <section
+      className={cn(
+        "scroll-none flex h-full w-full flex-col overflow-y-auto",
+        className,
+      )}
+    >
       <SignupHeader
         step="1"
         subTitle="Github 계정 연동"
@@ -59,7 +64,7 @@ function SignupFirstStep({
           <Input disabled id="username" value={user.username} />
         </section>
       </section>
-      <footer className="mt-5 flex flex-col items-center gap-2">
+      <footer className="mb-4 mt-auto flex w-full flex-col items-center gap-2">
         <small className="text-xs text-gray-500">
           마이페이지에서 수정이 가능합니다.
         </small>
