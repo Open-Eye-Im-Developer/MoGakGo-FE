@@ -3,8 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import { getProjectCard } from "@/app/_common/api/project";
 import { getProfileCard } from "@/app/_common/api/profile";
 
-import { checkInstanceOfResponseError } from "@/app/_common/utils/checkInstanceOfResponseError";
-
 import { formatRegionName } from "../_utils/formatRegionName";
 
 // TODO: 페이지네이션 구현
@@ -32,23 +30,6 @@ const useGetCardList = (regionCode: number) => {
     return { data: undefined, isLoading: true, isError: false, error: null };
   }
 
-  if (checkInstanceOfResponseError(projectResponse.data)) {
-    return {
-      data: undefined,
-      isLoading: false,
-      isError: true,
-      error: projectResponse.data,
-    };
-  }
-
-  if (checkInstanceOfResponseError(profileResponse.data)) {
-    return {
-      data: undefined,
-      isLoading: false,
-      isError: true,
-      error: profileResponse.data,
-    };
-  }
 
   const { data: projectList } = projectResponse.data;
   const { data: profileList } = profileResponse.data;

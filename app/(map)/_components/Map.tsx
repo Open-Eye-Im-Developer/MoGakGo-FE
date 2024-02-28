@@ -34,15 +34,10 @@ function Map() {
   const [isListShow, setIsListShow] = useState(false);
   const { data: rank, isError: isRankError, error: rankError } = useGetRank();
   const { isAllowGPS } = usePositionStore();
-  const {
-    data: cardList,
-    isError: isListError,
-    error: listError,
-  } = useGetCardList(regionCode);
+  const { data: cardList } = useGetCardList(regionCode);
 
   if (isGeoError) toast.error(geoError?.message);
   if (isRankError) toast.error(rankError.message);
-  if (isListError) toast.error(listError?.message);
 
   useEffect(() => {
     if (areaCode) {
