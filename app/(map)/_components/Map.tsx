@@ -17,6 +17,7 @@ import MapComponent from "@/app/_common/components/MapComponent";
 
 import REGION_CODE from "@/app/_common/constants/regionCode";
 
+import { formatRegionName } from "../_utils/formatRegionName";
 import useGetRank from "../_api/useGetRank";
 import useGetCardList from "../_api/useGetCardList";
 import EmptyCardList from "./EmptyCardList";
@@ -47,9 +48,7 @@ function Map() {
     if (areaCode) {
       toast.info("내가 위치한 지역으로 이동합니다.");
       setRegionCode(areaCode);
-      const regionName = Object.keys(REGION_CODE).find(
-        region => REGION_CODE[region] === areaCode,
-      );
+      const regionName = formatRegionName(areaCode);
       previousRegion.current = document.querySelector(`#${regionName}`);
     }
   }, [areaCode]);
