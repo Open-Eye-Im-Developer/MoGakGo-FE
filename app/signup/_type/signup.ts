@@ -1,5 +1,12 @@
 import { WantedJobs } from "@/app/_common/types/user";
 
+export interface Language {
+  // TODO: 백엔드 서버에서 image 파일 구축이 완료되면 주석 해제
+  // image: string;
+  language: string;
+  byteSize: number;
+}
+
 export interface SignUpUser {
   id: number;
   username: string;
@@ -7,9 +14,9 @@ export interface SignUpUser {
   avatarUrl: string;
   githubUrl: string;
   bio?: string;
+  developLanguages?: Language[];
   jandiRate?: number;
   achievementTitle?: string;
-  developLanguages?: string[];
   wantedJobs?: WantedJobs[];
 }
 

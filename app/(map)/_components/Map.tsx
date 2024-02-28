@@ -3,6 +3,7 @@
 import { toast } from "sonner";
 import { MouseEvent, useEffect, useRef, useState } from "react";
 
+import useQueryGeoAreaCode from "@/app/auth-mylocation/_hooks/useQueryGeoAreaCode";
 import { usePositionStore } from "@/app/_common/store/usePositionStore";
 import { cn } from "@/app/_common/shadcn/utils";
 import {
@@ -12,8 +13,6 @@ import {
 } from "@/app/_common/shadcn/ui/carousel";
 
 import MapComponent from "@/app/_common/components/MapComponent";
-
-import useQueryGeoAreaCode from "@/app/auth-mylocation/hooks/useQueryGeoAreaCode";
 
 import REGION_CODE from "@/app/_common/constants/regionCode";
 
