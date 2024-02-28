@@ -12,7 +12,7 @@ export const getRank = async (): Promise<
   RegionRank | ResponseError | undefined
 > => {
   try {
-    const { data } = await instance.get<RegionRank>("projects/density/rank");
+    const { data } = await instance.get<RegionRank>("/projects/density/rank");
     return data;
   } catch (error) {
     if (error instanceof AxiosError) {
@@ -26,7 +26,7 @@ export const getProjectCard = async (
 ): Promise<ResponseData<Project> | ResponseError | undefined> => {
   try {
     const { data } = await instance.get<ResponseData<Project>>(
-      `projects/${region}?cursorId=1&pageSize=5&sortOrder=ASC`,
+      `/projects/${region}?cursorId=1&pageSize=5&sortOrder=ASC`,
     );
     return data;
   } catch (error) {
