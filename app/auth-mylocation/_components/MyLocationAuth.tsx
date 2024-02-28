@@ -12,6 +12,8 @@ import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { Form } from "@/app/_common/shadcn/ui/form";
 import { Button } from "@/app/_common/shadcn/ui/button";
 
+import MapComponent from "@/app/_common/components/MapComponent";
+import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
 import CustomModal from "@/app/_common/components/CustomModal";
 
 import { CODE_TO_REGION_NAME } from "@/app/_common/constants/codeToRegionName";
@@ -31,14 +33,14 @@ function MyLocationAuth() {
   const { isAuthLocation, setAuthLocationOpen } = useModalStore();
   const { user } = useAuthStore();
 
-  const { data: code, isLoading, isError } = useQueryGeoAreaCode();
+  const { data: areaCode, isLoading, isError } = useQueryGeoAreaCode();
 
   const { mutate } = useMutationAuthMyLocation();
 
   const form = useForm({
     values: {
-      areaCode: code && code.areaCode,
-      userId: 2,
+      areaCode: areaCode,
+      userId: user.id,
     },
     resolver: zodResolver(MyLocationAuthFormSchema),
   });
@@ -46,11 +48,11 @@ function MyLocationAuth() {
   const { handleSubmit, formState } = form;
 
   const onSubmit = () => {
-    if (!code || !isError) return;
+    if (!areaCode || !isError) return;
 
     mutate({
       userId: user.id,
-      areaCode: code.areaCode,
+      areaCode: areaCode,
     });
 
     // TODO: user 정보 저장 후 mutate 잘 되는지 확인 후 제거
@@ -61,7 +63,7 @@ function MyLocationAuth() {
     router.push("/");
   };
 
-  if (isLoading) return <div>loading...</div>;
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <>
@@ -84,11 +86,12 @@ function MyLocationAuth() {
               <div className="rounded-md border border-primary bg-primary p-3 text-white">
                 {!isAllowGPS()
                   ? "현재 위치를 확인할 수 없습니다."
-                  : code && !isError
-                    ? `${CODE_TO_REGION_NAME[code.areaCode]}`
+                  : areaCode && !isError
+                    ? `${CODE_TO_REGION_NAME[areaCode]}`
                     : "현재 위치는 서비스 지역이 아닙니다."}
               </div>
             </section>
+            {areaCode && <MapComponent regionCode={areaCode} />}
           </section>
           <footer className="mt-10 flex flex-col gap-2 p-4">
             <sub className="flex cursor-pointer items-center gap-1 text-gray-500 hover:text-primary">

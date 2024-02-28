@@ -4,6 +4,8 @@ import { useQuery } from "@tanstack/react-query";
 import { usePositionStore } from "@/app/_common/store/usePositionStore";
 import { getGeoAreaCode } from "@/app/_common/api/location";
 
+import { GeoAreaCode } from "@/app/_common/types/position";
+
 import { checkInstanceOfResponseError } from "@/app/_common/utils/checkInstanceOfResponseError";
 
 const useQueryGeoAreaCode = () => {
@@ -17,7 +19,7 @@ const useQueryGeoAreaCode = () => {
 
   if (!isAllowGPS() || (!latitude && !longitude)) setPosition();
 
-  const { data, isLoading, isError, error } = useQuery({
+  const { data, isLoading, isError, error } = useQuery<GeoAreaCode>({
     queryKey: ["geoAreaCode"],
     queryFn: () =>
       getGeoAreaCode({
