@@ -15,7 +15,6 @@ import {
 import WithSearchTokens from "@/app/_common/components/WithSearchTokens";
 import MapComponent from "@/app/_common/components/MapComponent";
 
-
 import REGION_CODE from "@/app/_common/constants/regionCode";
 
 import useGetRank from "../_api/useGetRank";
@@ -24,7 +23,11 @@ import EmptyCardList from "./EmptyCardList";
 import CardList from "./CardList";
 
 function Map() {
-  const { data, isError: isGeoError, error: geoError } = useQueryGeoAreaCode();
+  const {
+    data: areaCode,
+    isError: isGeoError,
+    error: geoError,
+  } = useQueryGeoAreaCode();
   const [regionCode, setRegionCode] = useState(0);
   const previousRegion = useRef<SVGElement | null>(null);
   const [isListShow, setIsListShow] = useState(false);
@@ -41,15 +44,15 @@ function Map() {
   if (isListError) toast.error(listError?.message);
 
   useEffect(() => {
-    if (data) {
+    if (areaCode) {
       toast.info("내가 위치한 지역으로 이동합니다.");
-      setRegionCode(data.areaCode);
+      setRegionCode(areaCode);
       const regionName = Object.keys(REGION_CODE).find(
-        region => REGION_CODE[region] === data.areaCode,
+        region => REGION_CODE[region] === areaCode,
       );
       previousRegion.current = document.querySelector(`#${regionName}`);
     }
-  }, [data]);
+  }, [areaCode]);
 
   const zoomOut = () => {
     if (!(previousRegion.current instanceof SVGElement)) return;
