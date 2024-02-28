@@ -1,13 +1,17 @@
 "use client";
 
 import { toast } from "sonner";
-import { MouseEvent, useRef, useState } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
+
+import { usePositionStore } from "@/app/_common/store/usePositionStore";
+import { cn } from "@/app/_common/shadcn/utils";
+
+import useQueryGeoAreaCode from "@/app/auth-mylocation/hooks/useQueryGeoAreaCode";
 
 import REGION_CODE from "@/app/_common/constants/regionCode";
 
 import useGetRank from "../_api/useGetRank";
 import ProjectCardContainer from "../../project/_components/ProjectCardContainer";
-import { cn } from "../../_common/shadcn/utils";
 import {
   Carousel,
   CarouselContent,
@@ -18,15 +22,34 @@ import {
 import MapComponent from "../../_common/components/MapComponent";
 
 function Map() {
-  const [regionCode, setRegionCode] = useState("");
+  const { data, isError: isGeoError, error: geoError } = useQueryGeoAreaCode();
+  const [regionCode, setRegionCode] = useState(0);
   const previousRegion = useRef<SVGElement | null>(null);
   const [isListShow, setIsListShow] = useState(false);
-  const { data: rank, isError, isLoading, error } = useGetRank();
+  const {
+    data: rank,
+    isError: isRankError,
+    error: rankError,
+  } = useGetRank();
+  const { isAllowGPS } = usePositionStore();
 
-  if (isLoading) toast.info("잠시만 기다려주세요.");
-  if (isError) toast.error(error.message);
+  if (isGeoError) toast.error(geoError?.message);
+  if (isRankError) toast.error(rankError.message);
+
+  useEffect(() => {
+    if (data) {
+      toast.info("내가 위치한 지역으로 이동합니다.");
+      setRegionCode(data.areaCode);
+      const regionName = Object.keys(REGION_CODE).find(
+        region => REGION_CODE[region] === data.areaCode,
+      );
+      previousRegion.current = document.querySelector(`#${regionName}`);
+    }
+  }, [data]);
 
   const handleRegionClick = (event: MouseEvent<HTMLDivElement>) => {
+    if (!isAllowGPS()) return;
+
     const map = document.querySelector("#map-wrap") as HTMLDivElement;
     const isZoomIn = map.style.transform.includes("scale");
     const target = event.target as SVGElement | HTMLElement;
@@ -35,7 +58,6 @@ function Map() {
     if (isZoomIn) {
       if (isRegion || !(previousRegion.current instanceof SVGElement)) return;
 
-      map.classList.remove("touch-none");
       map.style.transform = "";
       previousRegion.current.classList.remove("animate-map-bounce");
       previousRegion.current = null;
@@ -57,11 +79,11 @@ function Map() {
   };
 
   return (
-    <div className="relative h-screen w-screen">
+    <div className="relative h-screen w-screen overflow-hidden touch-none">
       <div
         id="map-wrap"
         onClick={handleRegionClick}
-        className="absolute z-0 flex h-screen w-screen items-center justify-center transition-all duration-1000"
+        className="absolute z-0 flex h-screen w-screen items-center justify-center transition-all duration-1000 touch-none"
       >
         <MapComponent
           regionCode={regionCode}
@@ -77,7 +99,7 @@ function Map() {
       >
         <div
           id="carousel-wrap"
-          className="flex h-full w-full flex-col items-center justify-center overflow-hidden"
+          className="flex h-full w-full flex-col items-center justify-center"
         >
           <CarouselContent>
             {Array.from({ length: 5 }).map((_, index) => (
