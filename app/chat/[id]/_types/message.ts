@@ -10,3 +10,7 @@ export interface ProfileType {
   avatarUrl: string;
   username: string;
 }
+
+export interface CustomMessageType extends MessageType {
+  isTime: boolean;
+}
