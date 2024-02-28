@@ -12,7 +12,7 @@ interface AuthAction {
   getUser: () => User;
 }
 
-export const useUserStore = create(
+export const useAuthStore = create(
   persist<AuthAction & AuthState>(
     (set, get) => ({
       user: {
@@ -24,14 +24,19 @@ export const useUserStore = create(
         bio: "",
         jandiRate: 0,
         achievementTitle: "",
-        developLanguages: [],
+        developLanguages: [
+          {
+            language: "",
+            byteSize: 0,
+          },
+        ],
         wantedJobs: [],
       },
       setUser: user => set({ user }),
       getUser: () => get().user,
     }),
     {
-      name: "user-store",
+      name: "auth-store",
     },
   ),
 );

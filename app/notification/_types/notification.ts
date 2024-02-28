@@ -3,10 +3,10 @@ export interface NotificationType {
   sender: {
     name: string;
     id?: string;
-    profile_image: string;
+    profileImage: string;
   };
   data: {
     detail: string;
-    created_at: string;
+    createdAt: string;
   };
 }

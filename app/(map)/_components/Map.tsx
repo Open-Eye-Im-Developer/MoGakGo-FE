@@ -1,45 +1,76 @@
 "use client";
 
 import { toast } from "sonner";
-import { MouseEvent, useRef, useState } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
+
+import useQueryGeoAreaCode from "@/app/auth-mylocation/_hooks/useQueryGeoAreaCode";
+import { usePositionStore } from "@/app/_common/store/usePositionStore";
+import { cn } from "@/app/_common/shadcn/utils";
+import {
+  Carousel,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/app/_common/shadcn/ui/carousel";
+
+import MapComponent from "@/app/_common/components/MapComponent";
 
 import WithSearchTokens from "@/app/_common/components/WithSearchTokens";
 
 import REGION_CODE from "@/app/_common/constants/regionCode";
 
 import useGetRank from "../_api/useGetRank";
-import ProjectCardContainer from "../../project/_components/ProjectCardContainer";
-import { cn } from "../../_common/shadcn/utils";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "../../_common/shadcn/ui/carousel";
-import MapComponent from "../../_common/components/MapComponent";
+import useGetCardList from "../_api/useGetCardList";
+import EmptyCardList from "./EmptyCardList";
+import CardList from "./CardList";
 
 function Map() {
-  const [regionCode, setRegionCode] = useState("");
+  const { data, isError: isGeoError, error: geoError } = useQueryGeoAreaCode();
+  const [regionCode, setRegionCode] = useState(0);
   const previousRegion = useRef<SVGElement | null>(null);
   const [isListShow, setIsListShow] = useState(false);
-  const { data: rank, isError, isLoading, error } = useGetRank();
+  const { data: rank, isError: isRankError, error: rankError } = useGetRank();
+  const { isAllowGPS } = usePositionStore();
+  const {
+    data: cardList,
+    isError: isListError,
+    error: listError,
+  } = useGetCardList(regionCode);
 
-  if (isLoading) toast.info("잠시만 기다려주세요.");
-  if (isError) toast.error(error.message);
+  if (isGeoError) toast.error(geoError?.message);
+  if (isRankError) toast.error(rankError.message);
+  if (isListError) toast.error(listError?.message);
+
+  useEffect(() => {
+    if (data) {
+      toast.info("내가 위치한 지역으로 이동합니다.");
+      setRegionCode(data.areaCode);
+      const regionName = Object.keys(REGION_CODE).find(
+        region => REGION_CODE[region] === data.areaCode,
+      );
+      previousRegion.current = document.querySelector(`#${regionName}`);
+    }
+  }, [data]);
+
+  const zoomOut = () => {
+    if (!(previousRegion.current instanceof SVGElement)) return;
+    const map = document.querySelector("#map-wrap") as HTMLDivElement;
+    map.style.transform = "";
+    previousRegion.current.classList.remove("animate-map-bounce");
+    previousRegion.current = null;
+    setRegionCode(0);
+  };
 
   const handleRegionClick = (event: MouseEvent<HTMLDivElement>) => {
+    if (!isAllowGPS()) return;
+
     const map = document.querySelector("#map-wrap") as HTMLDivElement;
     const isZoomIn = map.style.transform.includes("scale");
     const target = event.target as SVGElement | HTMLElement;
     const isRegion = target.tagName === "path";
 
     if (isZoomIn) {
-      if (isRegion || !(previousRegion.current instanceof SVGElement)) return;
-
-      map.style.transform = "";
-      previousRegion.current.classList.remove("animate-map-bounce");
-      previousRegion.current = null;
+      if (isRegion) return;
+      zoomOut();
     } else {
       if (!isRegion) return;
 
@@ -57,6 +88,11 @@ function Map() {
     if (event.target.id === "carousel-wrap") setIsListShow(false);
   };
 
+  const handleEmptyCardClose = () => {
+    setIsListShow(false);
+    zoomOut();
+  };
+
   return (
     <div className="relative h-screen w-screen touch-none overflow-hidden">
       <div
@@ -71,7 +107,7 @@ function Map() {
       </div>
       <Carousel
         className={cn(
-          "h-screen w-screen transition-opacity duration-300",
+          "h-screen w-screen transition-opacity delay-1000 duration-300",
           isListShow ? "visible opacity-100" : "invisible opacity-0",
         )}
         onClick={handleCancelCard}
@@ -80,15 +116,11 @@ function Map() {
           id="carousel-wrap"
           className="flex h-full w-full flex-col items-center justify-center"
         >
-          <CarouselContent>
-            {Array.from({ length: 5 }).map((_, index) => (
-              <CarouselItem key={index}>
-                <div className="mb-20 flex items-center justify-center">
-                  <ProjectCardContainer />
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
+          {cardList ? (
+            <CardList cardList={cardList} />
+          ) : (
+            <EmptyCardList onClick={handleEmptyCardClose} />
+          )}
         </div>
         <CarouselPrevious className="left-10 hidden md:inline-flex" />
         <CarouselNext className="right-10 hidden md:inline-flex" />

@@ -8,13 +8,19 @@ import {
   TabsTrigger,
 } from "@/app/_common/shadcn/ui/tabs";
 
+import { Project } from "@/app/_common/types/project";
+
 import useFlip from "../_hooks/useFlip";
 import TEST_MESSAGES from "../_constants/messages";
 import ProjectChatCard from "./ProjectChatCard";
 import ProjectCardFront from "./ProjectCardFront";
 import ProjectCardBack from "./ProjectCardBack";
 
-function ProjectCardContainer() {
+interface Props {
+  project: Project;
+}
+
+function ProjectCardContainer({ project }: Props) {
   const { flipped, handleFlip } = useFlip();
 
   return (
@@ -30,7 +36,7 @@ function ProjectCardContainer() {
             `${flipped ? "[transform:rotateY(180deg)]" : ""}`,
           )}
         >
-          <ProjectCardFront onRotate={handleFlip} />
+          <ProjectCardFront onRotate={handleFlip} project={project} />
           <ProjectCardBack onRotate={handleFlip} />
         </div>
       </TabsContent>

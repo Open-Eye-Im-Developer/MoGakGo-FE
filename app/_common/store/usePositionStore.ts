@@ -7,7 +7,7 @@ import { getGeolocation } from "@/app/_common/utils/getGeolocation";
 
 interface PositionAction {
   setPosition: () => void;
-  validatePosition: () => boolean;
+  isAllowGPS: () => boolean;
   getPosition: () => Coordinate;
 }
 
@@ -20,7 +20,7 @@ export const usePositionStore = create(
       setPosition: () => {
         getGeolocation(set);
       },
-      validatePosition: () => {
+      isAllowGPS: () => {
         return get().isGPSOn;
       },
       getPosition: () => {
