@@ -3,10 +3,9 @@
 import { toast } from "sonner";
 import { MouseEvent, useEffect, useRef, useState } from "react";
 
+import useQueryGeoAreaCode from "@/app/auth-mylocation/_hooks/useQueryGeoAreaCode";
 import { usePositionStore } from "@/app/_common/store/usePositionStore";
 import { cn } from "@/app/_common/shadcn/utils";
-
-import useQueryGeoAreaCode from "@/app/auth-mylocation/hooks/useQueryGeoAreaCode";
 
 import REGION_CODE from "@/app/_common/constants/regionCode";
 
@@ -26,11 +25,7 @@ function Map() {
   const [regionCode, setRegionCode] = useState(0);
   const previousRegion = useRef<SVGElement | null>(null);
   const [isListShow, setIsListShow] = useState(false);
-  const {
-    data: rank,
-    isError: isRankError,
-    error: rankError,
-  } = useGetRank();
+  const { data: rank, isError: isRankError, error: rankError } = useGetRank();
   const { isAllowGPS } = usePositionStore();
 
   if (isGeoError) toast.error(geoError?.message);
@@ -79,11 +74,11 @@ function Map() {
   };
 
   return (
-    <div className="relative h-screen w-screen overflow-hidden touch-none">
+    <div className="relative h-screen w-screen touch-none overflow-hidden">
       <div
         id="map-wrap"
         onClick={handleRegionClick}
-        className="absolute z-0 flex h-screen w-screen items-center justify-center transition-all duration-1000 touch-none"
+        className="absolute z-0 flex h-screen w-screen touch-none items-center justify-center transition-all duration-1000"
       >
         <MapComponent
           regionCode={regionCode}

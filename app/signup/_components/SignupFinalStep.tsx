@@ -56,49 +56,47 @@ function SignupFinalStep({
             control={control}
             name="wantedJobs"
             render={() => (
-              <>
-                <FormItem className="relative flex h-[520px] flex-col flex-wrap space-y-0">
-                  {WANTED_JOB.map(item => (
-                    <FormField
-                      key={item.id}
-                      control={control}
-                      name="wantedJobs"
-                      render={({ field }) => {
-                        return (
-                          <FormItem
-                            key={item.id}
-                            className="w-1/2 items-start space-x-3 space-y-0 p-2 text-primary"
-                          >
-                            <FormControl>
-                              <Checkbox
-                                className="border-primary"
-                                disabled={
-                                  field.value.length === 3 &&
-                                  !field.value.includes(item.id)
-                                }
-                                checked={field.value?.includes(item.id)}
-                                onCheckedChange={checked => {
-                                  return checked
-                                    ? field.onChange([...field.value, item.id])
-                                    : field.onChange(
-                                        field.value.filter(
-                                          value => value !== item.id,
-                                        ),
-                                      );
-                                }}
-                              />
-                            </FormControl>
-                            <FormLabel className="font-normal">
-                              {item.label}
-                            </FormLabel>
-                          </FormItem>
-                        );
-                      }}
-                    />
-                  ))}
-                  <FormMessage className="absolute bottom-0" />
-                </FormItem>
-              </>
+              <FormItem className="relative flex h-[520px] flex-col flex-wrap space-y-0">
+                {WANTED_JOB.map(item => (
+                  <FormField
+                    key={item.id}
+                    control={control}
+                    name="wantedJobs"
+                    render={({ field }) => {
+                      return (
+                        <FormItem
+                          key={item.id}
+                          className="w-1/2 items-start space-x-3 space-y-0 p-2 text-primary"
+                        >
+                          <FormControl>
+                            <Checkbox
+                              className="border-primary"
+                              disabled={
+                                field.value.length === 3 &&
+                                !field.value.includes(item.id)
+                              }
+                              checked={field.value?.includes(item.id)}
+                              onCheckedChange={checked => {
+                                return checked
+                                  ? field.onChange([...field.value, item.id])
+                                  : field.onChange(
+                                      field.value.filter(
+                                        value => value !== item.id,
+                                      ),
+                                    );
+                              }}
+                            />
+                          </FormControl>
+                          <FormLabel className="font-normal">
+                            {item.label}
+                          </FormLabel>
+                        </FormItem>
+                      );
+                    }}
+                  />
+                ))}
+                <FormMessage className="absolute bottom-0" />
+              </FormItem>
             )}
           />
           <footer className="my-4 flex flex-col items-center gap-2">

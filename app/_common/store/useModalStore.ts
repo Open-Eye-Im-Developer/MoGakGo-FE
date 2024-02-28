@@ -2,8 +2,8 @@ import { createJSONStorage, persist } from "zustand/middleware";
 import { create } from "zustand";
 
 interface ModalState {
-  signup: boolean;
-  authLocation: boolean;
+  isSignup: boolean;
+  isAuthLocation: boolean;
   setSignupOpen: (open: boolean) => void;
   setAuthLocationOpen: (open: boolean) => void;
 }
@@ -11,10 +11,10 @@ interface ModalState {
 export const useModalStore = create(
   persist<ModalState>(
     set => ({
-      signup: false,
-      authLocation: false,
-      setSignupOpen: (open: boolean) => set({ signup: open }),
-      setAuthLocationOpen: (open: boolean) => set({ authLocation: open }),
+      isSignup: false,
+      isAuthLocation: false,
+      setSignupOpen: (open: boolean) => set({ isSignup: open }),
+      setAuthLocationOpen: (open: boolean) => set({ isAuthLocation: open }),
     }),
     {
       name: "modal-store",

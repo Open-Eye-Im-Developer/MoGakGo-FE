@@ -35,7 +35,7 @@ function SignupForm() {
     setNextStep(next => (next < 2 ? next + 1 : next));
   };
 
-  const { signup, setSignupOpen } = useModalStore();
+  const { isSignup, setSignupOpen } = useModalStore();
 
   const form = useForm<z.infer<typeof SignupFormSchema>>({
     resolver: zodResolver(SignupFormSchema),
@@ -68,7 +68,7 @@ function SignupForm() {
 
   return (
     <>
-      <CustomModal open={signup} setOpen={setSignupOpen}>
+      <CustomModal open={isSignup} setOpen={setSignupOpen}>
         <SignupCompleteModal />
       </CustomModal>
 

@@ -16,11 +16,11 @@ import CustomModal from "@/app/_common/components/CustomModal";
 
 import { CODE_TO_REGION_NAME } from "@/app/_common/constants/codeToRegionName";
 
-import useQueryGeoAreaCode from "../hooks/useQueryGeoAreaCode";
-import { useMutationAuthMyLocation } from "../hooks/useMutationAuthMyLocation";
+import useQueryGeoAreaCode from "../_hooks/useQueryGeoAreaCode";
+import { useMutationAuthMyLocation } from "../_hooks/useMutationAuthMyLocation";
 import AlertMyLocationAuth from "./AlertMyLocationAuth";
 
-export const MyLocationAuthFormSchema = z.object({
+const MyLocationAuthFormSchema = z.object({
   userId: z.number(),
   areaCode: z.number().refine(value => CODE_TO_REGION_NAME[value]),
 });
@@ -28,7 +28,7 @@ export const MyLocationAuthFormSchema = z.object({
 function MyLocationAuth() {
   const router = useRouter();
   const { isAllowGPS } = usePositionStore();
-  const { authLocation, setAuthLocationOpen } = useModalStore();
+  const { isAuthLocation, setAuthLocationOpen } = useModalStore();
   const { user } = useAuthStore();
 
   const { data: code, isLoading, isError } = useQueryGeoAreaCode();
@@ -66,7 +66,7 @@ function MyLocationAuth() {
   return (
     <>
       {
-        <CustomModal open={authLocation} setOpen={setAuthLocationOpen}>
+        <CustomModal open={isAuthLocation} setOpen={setAuthLocationOpen}>
           <AlertMyLocationAuth />
         </CustomModal>
       }

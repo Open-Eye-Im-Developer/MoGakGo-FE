@@ -17,6 +17,7 @@ function AlertMyLocationAuth() {
     router.push("/auth-mylocation");
   };
 
+  // TODO: alert가 메인 페이지에서 띄워질 경우 사용
   // const handleprefetchQuery = () => {
   //   setPosition();
   // };
