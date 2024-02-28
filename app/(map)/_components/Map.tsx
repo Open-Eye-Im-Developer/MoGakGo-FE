@@ -32,12 +32,11 @@ function Map() {
   const [regionCode, setRegionCode] = useState(0);
   const previousRegion = useRef<SVGElement | null>(null);
   const [isListShow, setIsListShow] = useState(false);
-  const { data: rank, isError: isRankError, error: rankError } = useGetRank();
+  const { rank, isRankLoading } = useGetRank();
   const { isAllowGPS } = usePositionStore();
   const { data: cardList } = useGetCardList(regionCode);
 
   if (isGeoError) toast.error(geoError?.message);
-  if (isRankError) toast.error(rankError.message);
 
   useEffect(() => {
     if (areaCode) {

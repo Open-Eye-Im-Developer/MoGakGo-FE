@@ -8,17 +8,9 @@ interface RegionRank {
   densityRankByRegion: string[];
 }
 
-export const getRank = async (): Promise<
-  RegionRank | ResponseError | undefined
-> => {
-  try {
-    const { data } = await instance.get<RegionRank>("/projects/density/rank");
-    return data;
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      return error.response?.data;
-    }
-  }
+export const getRank = async (): Promise<RegionRank> => {
+  const { data } = await instance.get<RegionRank>("/projects/density/rank");
+  return data;
 };
 
 export const getProjectCard = async (
