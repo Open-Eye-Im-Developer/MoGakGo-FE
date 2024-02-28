@@ -14,6 +14,7 @@ import {
 
 import WithSearchTokens from "@/app/_common/components/WithSearchTokens";
 import MapComponent from "@/app/_common/components/MapComponent";
+import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
 
 import REGION_CODE from "@/app/_common/constants/regionCode";
 
@@ -91,6 +92,7 @@ function Map() {
 
   return (
     <div className="relative h-screen w-screen touch-none overflow-hidden">
+      {isRankLoading && <LoadingSpinner />}
       <div
         id="map-wrap"
         onClick={handleRegionClick}
