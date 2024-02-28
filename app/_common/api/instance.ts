@@ -1,8 +1,7 @@
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import axios from "axios";
 
-import { useReIssueToken } from "../hooks/useReIssueToken";
+import { reIssueAccessToken } from "./auth";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const SERVER_VERSION = "/api/v1";
@@ -26,48 +25,27 @@ instance.interceptors.request.use(config => {
 });
 
 instance.interceptors.response.use(
-  response => {
+  async response => {
+    const { config, status } = response;
+    const refreshToken = localStorage.getItem("refreshToken");
+
+    if (status === 401 || status === 404) {
+      if (status === 404) redirect("/login");
+
+      const newAccessToken = await reIssueAccessToken(refreshToken ?? "");
+
+      if (newAccessToken) {
+        localStorage.setItem("accessToken", newAccessToken);
+
+        config.headers.Authorization = `Bearer ${newAccessToken}`;
+
+        return instance(config);
+      }
+    }
+
     return response;
   },
   async error => {
-    const { config, response } = error;
-    const router = useRouter();
-
-    if (response?.status !== 401 || config.sent) {
-      return Promise.reject(error);
-    }
-
-    if (response?.status === 404) {
-      toast.error("인증이 만료되었습니다. 재로그인이 필요합니다.");
-
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
-
-      router.push("/login");
-
-      return Promise.reject(error);
-    }
-
-    config.sent = true;
-
-    const { reissue } = useReIssueToken();
-    const accessToken = await reissue();
-
-    if (!accessToken) {
-      toast.error("인증이 만료되었습니다. 재로그인이 필요합니다.");
-
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
-
-      router.push("/login");
-
-      return Promise.reject(error);
-    }
-
-    localStorage.setItem("accessToken", accessToken);
-
-    config.headers.Authorization = `Bearer ${accessToken}`;
-
-    return instance(config);
+    return Promise.reject(error);
   },
 );
