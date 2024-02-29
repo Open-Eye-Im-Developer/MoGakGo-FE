@@ -20,7 +20,7 @@ function MessageInput({ addNewMessage }: MessageInputProp) {
   const handleKeydownTextArea = (
     e: React.KeyboardEvent<HTMLTextAreaElement>,
   ) => {
-    if (e.key === "Enter" && !e.shiftKey) {
+    if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) {
       e.preventDefault();
       handleSubmit();
     }
