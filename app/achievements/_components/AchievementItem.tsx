@@ -13,9 +13,14 @@ import AchievementDrawer from "./AchievementDrawer";
 interface AchievementItemProps {
   achievement: Achievement;
   className?: ComponentProps<typeof cn>;
+  isRepresentative?: boolean;
 }
 
-function AchievementItem({ achievement, className }: AchievementItemProps) {
+function AchievementItem({
+  achievement,
+  className,
+  isRepresentative,
+}: AchievementItemProps) {
   const { id, title, isCompleted } = achievement;
   const [open, setOpen] = useState(false);
 
@@ -38,29 +43,45 @@ function AchievementItem({ achievement, className }: AchievementItemProps) {
         )}
         onClick={onOpenChange}
       >
-        <div className="w-[80px]">
-          <AspectRatio ratio={1 / 1} className="relative flex">
-            {!isCompleted && (
-              // <div className="absolute z-10 h-full w-full rounded-xl backdrop-blur-sm"></div>
-              <IconQuestionMark className="absolute z-10 h-full w-full rounded-xl bg-secondary text-white" />
-            )}
-            <Image
-              width={80}
-              height={80}
-              src="/images/cat.webp"
-              alt="업적 뱃지"
-              className="rounded-xl object-cover"
-            />
-          </AspectRatio>
-        </div>
-        <p
+        <div
           className={cn(
-            isCompleted ? "text-primary" : "text-gray-400",
-            "text-balance text-center text-sm",
+            !isRepresentative ? "w-[80px]" : "w-[100px]",
+            "rounded-xl bg-secondary",
           )}
         >
-          {title}
-        </p>
+          <AspectRatio
+            ratio={1 / 1}
+            className={cn(
+              !isCompleted ? "grid place-items-center" : "flex ",
+              "relative",
+            )}
+          >
+            {!isCompleted ? (
+              <IconQuestionMark
+                size={50}
+                className="absolute z-10  text-white"
+              />
+            ) : (
+              <Image
+                width={!isRepresentative ? 80 : 100}
+                height={!isRepresentative ? 80 : 100}
+                src="/images/cat.webp"
+                alt="업적 뱃지"
+                className="rounded-xl object-cover"
+              />
+            )}
+          </AspectRatio>
+        </div>
+        {!isRepresentative && (
+          <p
+            className={cn(
+              isCompleted ? "text-primary" : "text-gray-400",
+              "text-balance text-center text-sm",
+            )}
+          >
+            {title}
+          </p>
+        )}
       </li>
     </>
   );

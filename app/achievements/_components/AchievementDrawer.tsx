@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { IconQuestionMark } from "@tabler/icons-react";
 
+import { cn } from "@/app/_common/shadcn/utils";
 import {
   DrawerContent,
   Drawer,
@@ -36,18 +37,28 @@ function AchievementDrawer({
     <Drawer open={open} onOpenChange={onOpenChange}>
       <DrawerContent id={`${id}`}>
         <DrawerHeader className="place-content-center place-items-center gap-6">
-          <div className="w-[100px]">
-            <AspectRatio ratio={1 / 1} className="relative flex">
-              {!isCompleted && (
-                <IconQuestionMark className="absolute z-10 h-full w-full rounded-xl bg-secondary text-white" />
+          <div className="w-[100px] rounded-xl bg-secondary">
+            <AspectRatio
+              ratio={1 / 1}
+              className={cn(
+                !isCompleted ? "grid place-items-center" : "flex",
+                "relative",
               )}
-              <Image
-                width={100}
-                height={100}
-                src="/images/cat.webp"
-                alt="업적 뱃지"
-                className="rounded-xl object-cover"
-              />
+            >
+              {!isCompleted ? (
+                <IconQuestionMark
+                  size={70}
+                  className="absolute z-10 text-white"
+                />
+              ) : (
+                <Image
+                  width={100}
+                  height={100}
+                  src="/images/cat.webp"
+                  alt="업적 뱃지"
+                  className="rounded-xl object-cover"
+                />
+              )}
             </AspectRatio>
           </div>
           <DrawerTitle>{title}</DrawerTitle>
