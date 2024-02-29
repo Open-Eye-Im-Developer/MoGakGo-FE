@@ -69,7 +69,7 @@ function ProjectCardFront(props: CardFrontProps) {
       <CardHeader className="px-5 pt-4">
         <CardDescription className="flex justify-between text-lg font-bold text-black">
           <span className="flex items-center">
-            <ButtonRotate onRotate={onRotate} />
+            <ButtonRotate isDisabled={user.id !== id} onRotate={onRotate} />
             <Popover>
               <PopoverTrigger className="rounded-md p-2 hover:bg-[#5454543e]">
                 <IconMoodPuzzled />
