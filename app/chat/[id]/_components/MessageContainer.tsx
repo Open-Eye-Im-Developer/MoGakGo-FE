@@ -1,10 +1,7 @@
 "use client";
 
-import { randomBytes } from "crypto";
-
 import { useEffect, useState } from "react";
 
-import { DUMMY } from "../data";
 import { useScroll } from "../_hooks/useScroll";
 import { useCustomMessage } from "../_hooks/useCustomMessage";
 import UpScrollButton from "./UpScrollButton";
@@ -28,8 +25,6 @@ function MessageContainer() {
     if (!isScrollUpper) setExposureMessage("");
   }, [isScrollUpper]);
 
-  const handleClickButton = () => addNewMessage(DUMMY);
-
   return (
     <div className="relative mt-20 h-full w-full">
       <div
@@ -37,9 +32,8 @@ function MessageContainer() {
         ref={scrollRef}
         onScroll={handleScroll}
       >
-        <button onClick={handleClickButton}>test 용도의 임시 버튼</button>
         {messageList.map(message => (
-          <Message message={message} key={`message.id${randomBytes(128)}`} />
+          <Message message={message} key={message.id} />
         ))}
       </div>
       <UpScrollButton
