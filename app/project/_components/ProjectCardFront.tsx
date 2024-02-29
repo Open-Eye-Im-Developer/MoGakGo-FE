@@ -59,16 +59,16 @@ function ProjectCardFront(props: CardFrontProps) {
   return (
     <Card
       className={cn(
-        `card absolute inset-0 left-0 top-0 border-none shadow-md`,
+        `glass-morphism absolute inset-0 left-0 top-0 border-none shadow-md [backface-visibility:hidden]`,
         initialRotate ? "[transform:rotateY(180deg)]" : "",
       )}
     >
       <CardHeader className="px-5 pt-4">
-        <CardDescription className="flex justify-between text-lg font-bold text-[#a2a2a2]">
-          <span className="flex items-center gap-2">
+        <CardDescription className="flex justify-between text-lg font-bold text-black">
+          <span className="flex items-center">
             <ButtonRotate onRotate={onRotate} />
             <Popover>
-              <PopoverTrigger>
+              <PopoverTrigger className="rounded-md p-2 hover:bg-[#5454543e]">
                 <IconMoodPuzzled />
               </PopoverTrigger>
               <PopoverContent className="max-w-[130px]">
@@ -84,13 +84,12 @@ function ProjectCardFront(props: CardFrontProps) {
       </CardHeader>
       <CardContent className="flex flex-col items-center gap-10">
         <div className="flex flex-col items-center gap-5">
-          <div className="relative rounded-xl">
+          <div className="relative overflow-hidden rounded-xl shadow-lg">
             <Image
               src={avatarUrl}
               alt="프로필 이미지"
               width={150}
               height={150}
-              className="rounded-2xl shadow-2xl"
             />
           </div>
           <div className="flex flex-col items-center gap-[6px]">
@@ -120,7 +119,7 @@ function ProjectCardFront(props: CardFrontProps) {
             <p className="font-bold">📍 {meetDetail}</p>
             <p>🕡 {formatMeetingTime(meetStartTime, meetEndTime)}</p>
           </div>
-          <ProjectRemoveDialog />
+          <ProjectRemoveDialog isMatchedProject={false} />
         </CardFooter>
       )}
     </Card>

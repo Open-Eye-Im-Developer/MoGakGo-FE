@@ -29,3 +29,39 @@ interface IFormProps {
 interface IPlaceResponseProps {
   documents: PlaceItem[];
 }
+
+interface RequestList {
+  id: number;
+  senderPreview: {
+    id: number;
+    username: string;
+    githubId: string;
+    avatarUrl: string;
+    githubUrl: string;
+    bio: string;
+    jandiRate: number;
+    achievementTitle: string;
+    developLanguages: string[];
+    wantedJobs: string[];
+  };
+  requestStatus: string;
+}
+
+interface RequestListSuccessData {
+  data: RequestList[] extends Array<infer U> ? U : never;
+  hasNext: boolean;
+  numberOfElements: number;
+  size: number;
+}
+
+interface RequestListErrorData {
+  timestamp: string;
+  statusCode: number;
+  code: string;
+  message: string;
+}
+
+interface RequestListResponseData {
+  data: RequestListSuccessData | RequestListErrorData;
+  status: number;
+}

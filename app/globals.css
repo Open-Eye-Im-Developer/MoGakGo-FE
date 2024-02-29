@@ -13,4 +13,19 @@
       inset -5px -5px 16px 0px rgba(120, 120, 120, 0.6),
       inset 0px 11px 28px 0px rgb(255, 255, 255);
   }
+
+  .glass-morphism {
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 #35353574;
+    backdrop-filter: blur(7.5px);
+    -webkit-backdrop-filter: blur(7.5px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .neumorphism-shadow {
+    box-shadow:
+      35px 35px 68px 0px rgba(104, 104, 104, 0.5),
+      inset -8px -8px 16px 0px rgba(104, 104, 104, 0.6),
+      inset 0px 11px 28px 0px rgb(255, 255, 255);
+  }
 }
