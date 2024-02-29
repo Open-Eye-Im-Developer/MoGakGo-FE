@@ -1,8 +1,7 @@
 import StackNavigator from "../../_common/components/StackNavigator";
 import ProjectInfo from "./_components/ProjectInfo";
 import Profile from "./_components/Profile";
-import MessageList from "./_components/MessageList";
-import MessageInput from "./_components/MessageInput";
+import MessageContainer from "./_components/MessageContainer";
 function ChattingRoomPage() {
   return (
     <>
@@ -14,8 +13,7 @@ function ChattingRoomPage() {
         }
       />
       <ProjectInfo />
-      <MessageList />
-      <MessageInput />
+      <MessageContainer />
     </>
   );
 }

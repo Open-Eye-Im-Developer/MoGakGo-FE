@@ -1,9 +1,9 @@
 export interface MessageType {
-  id: string;
+  id?: string;
   content: string;
   senderId: string;
-  receiverId: string;
-  createdAt: string;
+  receiverId?: string;
+  createdAt?: string;
 }
 
 export interface ProfileType {

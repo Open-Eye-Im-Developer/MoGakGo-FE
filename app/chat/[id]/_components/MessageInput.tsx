@@ -1,11 +1,16 @@
 "use client";
-
 import { useState } from "react";
 
 import { cn } from "@/app/_common/shadcn/utils";
 import { buttonVariants } from "@/app/_common/shadcn/ui/button";
 
-function MessageInput() {
+import { MessageType } from "../_types/message";
+
+interface MessageInputProp {
+  addNewMessage: (newMessage: MessageType[]) => void;
+}
+
+function MessageInput({ addNewMessage }: MessageInputProp) {
   const [message, setMessage] = useState("");
 
   const handleChangeMessage = (message: string) => {
@@ -25,11 +30,18 @@ function MessageInput() {
     if (!/\S+/.test(message)) return;
     // post 요청
     // webSocket event 발행
+    const newMessage: MessageType = {
+      content: message,
+      senderId: "1",
+      receiverId: "2",
+      createdAt: new Date().toISOString(),
+    };
+    addNewMessage([newMessage]);
     setMessage("");
   };
 
   return (
-    <div className="absolute bottom-0 h-32 w-full bg-slate-100">
+    <div className="fixed bottom-0 h-32 w-full bg-slate-100">
       <textarea
         className="h-20 w-full overflow-scroll bg-slate-100 p-3 outline-none"
         onKeyDown={handleKeydownTextArea}
