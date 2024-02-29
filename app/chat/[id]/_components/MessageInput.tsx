@@ -30,6 +30,7 @@ function MessageInput({ addNewMessage }: MessageInputProp) {
     if (!/\S+/.test(message)) return;
     // post 요청
     // webSocket event 발행
+
     const newMessage: MessageType = {
       content: message,
       senderId: "1",

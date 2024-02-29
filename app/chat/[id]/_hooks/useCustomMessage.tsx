@@ -1,4 +1,5 @@
 import { useState } from "react";
+import dayjs from "dayjs";
 
 import { MessageType, CustomMessageType } from "../_types/message";
 
@@ -8,7 +9,10 @@ export const useCustomMessage = () => {
   const checkOption = (newList: CustomMessageType[], message: MessageType) => {
     const prevTime = newList[newList.length - 1]?.createdAt;
     const prevSender = newList[newList.length - 1]?.senderId;
-    return !(message.senderId === prevSender && message.createdAt === prevTime);
+    return !(
+      message.senderId === prevSender &&
+      dayjs(message.createdAt).isSame(dayjs(prevTime), "minute")
+    );
   };
 
   const addNewMessage = (newMessages: MessageType[]) => {

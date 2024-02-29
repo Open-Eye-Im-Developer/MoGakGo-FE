@@ -32,7 +32,7 @@ function Message({ message }: MessageProps) {
             !isTime && "hidden",
           )}
         >
-          {dayjs(createdAt).format("HH:MM")}
+          {dayjs(createdAt).format("HH:mm")}
         </div>
       </div>
     </>
