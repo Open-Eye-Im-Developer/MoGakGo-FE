@@ -54,7 +54,7 @@ function AchievementList() {
       <header className="grid w-full place-content-center place-items-center gap-3 rounded-none border-y border-gray-300 py-8">
         <h3 className="font-semibold">나의 대표 뱃지</h3>
         <small className="text-center text-xs text-gray-500">
-          <p>아직 획득한 업적이 없어요.</p>
+          {!ACHIEVEMENTS && <p>아직 획득한 업적이 없어요.</p>}
           <p>획득한 업적으로 &apos;대표 뱃지&apos;을 변경할 수 있어요.</p>
         </small>
         {myAchievement ? (
