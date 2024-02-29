@@ -5,13 +5,13 @@ import { Button } from "@/app/_common/shadcn/ui/button";
 
 import { ScrollUpperType } from "../_hooks/useScroll";
 
-interface UpperScrollType {
+interface UpperScrollButtonProps {
   isScrollUpper: ScrollUpperType;
   message: string;
   scrollToBottom: () => void;
 }
 
-function UpScrollButton(props: UpperScrollType) {
+function UpScrollButton(props: UpperScrollButtonProps) {
   const { isScrollUpper, message, scrollToBottom } = props;
 
   const exposureElement = () => {
