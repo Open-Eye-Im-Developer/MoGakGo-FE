@@ -1,6 +1,7 @@
 import AchievementItem from "./AchievementItem";
 
 export interface Achievement {
+  id: number;
   title: string;
   description: string;
   total: number;
@@ -10,6 +11,7 @@ export interface Achievement {
 
 const ACHIEVEMENTS: Achievement[] = [
   {
+    id: 1,
     title: "모각코도 한걸음부터",
     description: "접속 30일 이상 시 획득",
     total: 1,
@@ -17,6 +19,7 @@ const ACHIEVEMENTS: Achievement[] = [
     isCompleted: true,
   },
   {
+    id: 2,
     title: "너는 내 운명",
     description: "동일한 상대와 3회 이상 매칭될 시 획득",
     total: 3,
@@ -24,6 +27,7 @@ const ACHIEVEMENTS: Achievement[] = [
     isCompleted: false,
   },
   {
+    id: 3,
     title: "포획 실패는 존재합니다",
     description: "첫 포획 실패 시 획득",
     total: 1,
@@ -34,16 +38,22 @@ const ACHIEVEMENTS: Achievement[] = [
 
 function AchievementList() {
   return (
-    <ul className="mt-2 flex flex-col gap-4 p-4">
-      {ACHIEVEMENTS.sort((a, b) => {
-        if (a.isCompleted === b.isCompleted) {
-          return 0;
-        }
-        return a.isCompleted ? 1 : -1;
-      }).map((achievement, index) => (
-        <AchievementItem achievement={achievement} key={index} />
-      ))}
-    </ul>
+    <main className="flex flex-col items-center">
+      <header className="grid w-full place-content-center place-items-center gap-3 rounded-none border-y border-gray-300 py-8">
+        <h3 className="font-semibold">내 대표 업적</h3>
+        <AchievementItem achievement={ACHIEVEMENTS[2]} />
+      </header>
+      <ul className="mt-8 grid grid-cols-3 grid-rows-3 gap-4">
+        {ACHIEVEMENTS.sort((a, b) => {
+          if (a.isCompleted === b.isCompleted) {
+            return 0;
+          }
+          return a.isCompleted ? 1 : -1;
+        }).map((achievement, index) => (
+          <AchievementItem achievement={achievement} key={index} />
+        ))}
+      </ul>
+    </main>
   );
 }
 
