@@ -23,7 +23,7 @@ interface Props {
 
 function ProjectCardContainer({ project }: Props) {
   const { flipped, handleFlip } = useFlip();
-  const { data } = useGetRequestListQuery(85);
+  const { data } = useGetRequestListQuery(project.projectId);
 
   return (
     <Tabs defaultValue="card" className="h-[550px] w-[330px] sm:w-[450px]">
