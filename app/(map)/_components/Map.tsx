@@ -119,7 +119,9 @@ function Map() {
           id="carousel-wrap"
           className="flex h-full w-full flex-col items-center justify-center"
         >
-          {cardList ? (
+          {cardList &&
+          (cardList.projectList.length !== 0 ||
+            cardList.profileList.length !== 0) ? (
             <CardList cardList={cardList} />
           ) : (
             <EmptyCardList onClick={handleEmptyCardClose} />
