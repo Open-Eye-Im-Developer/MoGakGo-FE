@@ -26,14 +26,14 @@ function Message({ message }: MessageProps) {
         >
           {content}
         </div>
-        <div
+        <time
           className={cn(
             "flex flex-col justify-end py-2 text-xs",
             !isTime && "hidden",
           )}
         >
           {dayjs(createdAt).format("HH:mm")}
-        </div>
+        </time>
       </div>
     </>
   );

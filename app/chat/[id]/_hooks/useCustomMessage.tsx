@@ -4,7 +4,10 @@ import dayjs from "dayjs";
 import { MessageType, CustomMessageType } from "../_types/message";
 
 export const useCustomMessage = () => {
+  const MY_ID = "1";
+
   const [messageList, setMessageList] = useState<CustomMessageType[]>([]);
+  const [currentSender, setCurrentSender] = useState(MY_ID);
 
   const checkOption = (newList: CustomMessageType[], message: MessageType) => {
     const prevTime = newList[newList.length - 1]?.createdAt;
@@ -18,6 +21,7 @@ export const useCustomMessage = () => {
   const addNewMessage = (newMessages: MessageType[]) => {
     newMessages.forEach((message: MessageType) => {
       return setMessageList(prev => {
+        setCurrentSender(message.senderId);
         if (prev.length === 0) return [{ ...message, isTime: true }];
         return filterCustomMessages([...prev], message);
       });
@@ -38,5 +42,5 @@ export const useCustomMessage = () => {
     return newList;
   };
 
-  return { messageList, addNewMessage };
+  return { messageList, addNewMessage, currentSender };
 };
