@@ -18,6 +18,9 @@ function useTagSelect(form: IFormProps["form"]) {
       const tag = ref.current?.value || "";
 
       if (key === "Enter") {
+        if (e.nativeEvent.isComposing) {
+          return;
+        }
         if (!isValid(tag)) return;
         setTagList(prev => [...prev, tag]);
         const formattedTagList = tagList.map(t => ({ content: t }));
@@ -30,7 +33,7 @@ function useTagSelect(form: IFormProps["form"]) {
 
   const handleRemoveTag = (tag: string) => {
     setTagList(prev => prev.filter(t => t !== tag));
-    
+
     const currentTagList = form.getValues("tags");
     form.setValue(
       "tags",
