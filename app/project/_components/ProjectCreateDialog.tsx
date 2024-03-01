@@ -26,7 +26,7 @@ function ProjectCreateDialog() {
   const [open, setOpen] = useState(false);
   const { flipped, handleFlip } = useFlip();
 
-  // TODO: 프로젝트 생성 카드 뒷면을 실제 제안자의 프로필 카드로 변경
+  // TODO: 프로젝트 생성 카드 뒷면을 실제 제안자의 프로필 카드로 변경(현재는 주석 처리)
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
