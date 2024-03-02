@@ -10,6 +10,7 @@ import {
 
 import { Project } from "@/app/_common/types/project";
 
+import useGetRequestListQuery from "../_hooks/useGetRequestListQuery";
 import useFlip from "../_hooks/useFlip";
 import TEST_MESSAGES from "../_constants/messages";
 import ProjectChatCard from "./ProjectChatCard";
@@ -22,10 +23,11 @@ interface Props {
 
 function ProjectCardContainer({ project }: Props) {
   const { flipped, handleFlip } = useFlip();
+  const { data } = useGetRequestListQuery(85);
 
   return (
     <Tabs defaultValue="card" className="h-[550px] w-[330px] sm:w-[450px]">
-      <TabsList className="grid w-full grid-cols-2">
+      <TabsList className="glass-morphism grid w-full grid-cols-2">
         <TabsTrigger value="card">Card</TabsTrigger>
         <TabsTrigger value="chat">Chat</TabsTrigger>
       </TabsList>
@@ -37,7 +39,7 @@ function ProjectCardContainer({ project }: Props) {
           )}
         >
           <ProjectCardFront onRotate={handleFlip} project={project} />
-          <ProjectCardBack onRotate={handleFlip} />
+          <ProjectCardBack onRotate={handleFlip} requestList={data} />
         </div>
       </TabsContent>
       <TabsContent value="chat" className="h-full">
