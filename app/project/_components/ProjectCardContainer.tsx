@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import { cn } from "@/app/_common/shadcn/utils";
 import {
   Tabs,
@@ -10,6 +12,7 @@ import {
 
 import { Project } from "@/app/_common/types/project";
 
+import useInfiniteScroll from "../_hooks/useInfiniteScroll";
 import useGetRequestListQuery from "../_hooks/useGetRequestListQuery";
 import useFlip from "../_hooks/useFlip";
 import TEST_MESSAGES from "../_constants/messages";
@@ -23,7 +26,24 @@ interface Props {
 
 function ProjectCardContainer({ project }: Props) {
   const { flipped, handleFlip } = useFlip();
-  const { data } = useGetRequestListQuery(85);
+  const [requestList, setRequestList] = useState<RequestListResponseData>();
+  const { ref, cursorId } = useInfiniteScroll(requestList!);
+  const { data } = useGetRequestListQuery(98, cursorId);
+
+  useEffect(() => {
+    if (data && data.status === 200 && !("timestamp" in data.data)) {
+      setRequestList(prev => {
+        if (!prev || "timestamp" in data.data) return data;
+        const prevData = prev.data as RequestList[];
+        const currentData = data.data;
+        const updatedData = [...prevData, ...currentData];
+        return {
+          ...prev,
+          data: updatedData,
+        };
+      });
+    }
+  }, [data]);
 
   return (
     <Tabs defaultValue="card" className="h-[550px] w-[330px] sm:w-[450px]">
@@ -39,7 +59,11 @@ function ProjectCardContainer({ project }: Props) {
           )}
         >
           <ProjectCardFront onRotate={handleFlip} project={project} />
-          <ProjectCardBack onRotate={handleFlip} requestList={data} />
+          <ProjectCardBack
+            onRotate={handleFlip}
+            requestList={requestList}
+            ref={ref}
+          />
         </div>
       </TabsContent>
       <TabsContent value="chat" className="h-full">
