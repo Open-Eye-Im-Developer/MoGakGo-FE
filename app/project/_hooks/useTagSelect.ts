@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 
-function useTagSelect(form: IFormProps["form"]) {
+function useTagSelect(form: FormProps["form"]) {
   const ref = useRef<HTMLInputElement>(null);
   const [tagList, setTagList] = useState<string[]>([]);
 

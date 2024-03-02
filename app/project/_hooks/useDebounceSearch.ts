@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { usePositionStore } from "@/app/_common/store/usePositionStore";
 
-function useDebounceSearch(form: IFormProps["form"]) {
+function useDebounceSearch(form: FormProps["form"]) {
   const [placeInput, setPlaceInput] = useState<string>("");
   const [placeList, setPlaceList] = useState<PlaceItem[]>([]);
   const [overlay, setOverlay] = useState<boolean>(false);
