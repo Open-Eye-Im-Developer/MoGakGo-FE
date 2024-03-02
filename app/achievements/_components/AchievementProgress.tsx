@@ -20,7 +20,6 @@ const AchievementProgress = React.forwardRef<
     <ProgressPrimitive.Indicator
       className={cn(
         "h-full w-full flex-1 bg-secondary transition-all dark:bg-slate-50",
-        props.defaultChecked && "bg-primary",
       )}
       style={{ transform: `translateX(-${100 - (value || 0)}%)` }}
     />

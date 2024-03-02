@@ -1,14 +1,14 @@
 import dayjs from "dayjs";
 
-import { MessageType } from "../_types/message";
+import { CustomMessageType } from "../_types/message";
 import { cn } from "../../../_common/shadcn/utils";
 
 interface MessageProps {
-  message: MessageType;
+  message: CustomMessageType;
 }
 
 function Message({ message }: MessageProps) {
-  const { id, content, senderId, createdAt } = message;
+  const { id, content, senderId, createdAt, isTime } = message;
 
   const MYID = "1";
 
@@ -26,9 +26,14 @@ function Message({ message }: MessageProps) {
         >
           {content}
         </div>
-        <div className="flex flex-col justify-end py-2 text-xs">
-          {dayjs(createdAt).format("HH:MM")}
-        </div>
+        <time
+          className={cn(
+            "flex flex-col justify-end py-2 text-xs",
+            !isTime && "hidden",
+          )}
+        >
+          {dayjs(createdAt).format("HH:mm")}
+        </time>
       </div>
     </>
   );
