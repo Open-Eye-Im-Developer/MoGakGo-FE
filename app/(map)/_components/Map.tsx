@@ -35,7 +35,9 @@ function Map() {
   const [isListShow, setIsListShow] = useState(false);
   const { rank, isRankLoading } = useGetRank();
   const { isAllowGPS } = usePositionStore();
-  const { data: cardList } = useGetCardList(regionCode);
+  const {
+    cardList,
+  } = useGetCardList(regionCode);
 
   if (isGeoError) toast.error(geoError?.message);
 
@@ -114,9 +116,8 @@ function Map() {
           id="carousel-wrap"
           className="flex h-full w-full flex-col items-center justify-center"
         >
-          {cardList &&
-          (cardList.projectList.length !== 0 ||
-            cardList.profileList.length !== 0) ? (
+          {cardList.projectList.length !== 0 ||
+          cardList.profileList.length !== 0 ? (
             <CardList cardList={cardList} />
           ) : (
             <EmptyCardList onClick={handleEmptyCardClose} />
