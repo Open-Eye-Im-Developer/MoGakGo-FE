@@ -2,8 +2,8 @@ import Link from "next/link";
 
 import ActivityCard from "@/app/_common/components/ActivityCard";
 
-import { ChatType } from "../types/chat";
-import { ProfileType } from "../[id]/_types/message";
+import { ChatType } from "../_types/chat";
+import { ProfileType } from "../[id]/_types/chatRoom";
 
 interface ChatProps {
   chat: ChatType;
@@ -20,7 +20,7 @@ function Chat({ chat }: ChatProps) {
   } = chat;
 
   const MY_ID = 1;
-  const matchedUser = profiles.find(
+  const matchedUser = profiles?.find(
     profile => profile.userId !== MY_ID,
   ) as ProfileType;
 

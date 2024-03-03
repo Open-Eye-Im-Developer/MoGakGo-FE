@@ -1,4 +1,4 @@
-import { ChatType } from "./types/chat";
+import { ChatType } from "./_types/chat";
 
 export const DUMMY: ChatType[] = [
   {

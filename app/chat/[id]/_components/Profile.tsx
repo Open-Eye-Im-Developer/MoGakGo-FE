@@ -1,4 +1,4 @@
-import { ProfileType } from "../_types/message";
+import { ProfileType } from "../_types/chatRoom";
 import {
   Avatar,
   AvatarFallback,
