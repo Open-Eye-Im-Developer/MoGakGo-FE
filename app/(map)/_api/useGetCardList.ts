@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 import { getProjectCard } from "@/app/_common/api/project";
@@ -8,7 +8,7 @@ import { formatRegionName } from "../_utils/formatRegionName";
 
 const useGetCardList = (regionCode: number) => {
   const region = formatRegionName(regionCode).toUpperCase();
-  const [isGetProfile, setIsGetProfile] = useState(false);
+  const isGetProfile = useRef(false);
 
   const {
     data: projectList,
@@ -24,7 +24,7 @@ const useGetCardList = (regionCode: number) => {
     initialPageParam: 0,
     getNextPageParam: lastPage => {
       if (!lastPage.hasNext) {
-        setIsGetProfile(true);
+        isGetProfile.current = true;
         return;
       }
       const cursorId = lastPage.data[lastPage.data.length - 1].projectId;
@@ -47,13 +47,13 @@ const useGetCardList = (regionCode: number) => {
     initialPageParam: 0,
     getNextPageParam: lastPage => {
       if (!lastPage.hasNext) {
-        setIsGetProfile(false);
+        isGetProfile.current = false;
         return;
       }
       const cursorId = lastPage.data[lastPage.data.length - 1].id;
       return cursorId;
     },
-    enabled: !!region && isGetProfile,
+    enabled: !!region && isGetProfile.current,
   });
 
   const defaultValue = {
