@@ -28,18 +28,18 @@ function ProjectCardContainer({ project }: Props) {
   const { flipped, handleFlip } = useFlip();
   const [requestList, setRequestList] = useState<RequestListResponseData>();
   const { ref, cursorId } = useInfiniteScroll(requestList!);
-  const { data } = useGetRequestListQuery(98, cursorId);
+  const { data } = useGetRequestListQuery(project.projectId, cursorId);
 
   useEffect(() => {
     if (data && data.status === 200 && !("timestamp" in data.data)) {
       setRequestList(prev => {
         if (!prev || "timestamp" in data.data) return data;
-        const prevData = prev.data as RequestList[];
-        const currentData = data.data;
-        const updatedData = [...prevData, ...currentData];
+        const prevRequestList = prev.data as RequestList[];
+        const currentRequestList = data.data;
+        const upadtedRequestList = [...prevRequestList, ...currentRequestList];
         return {
           ...prev,
-          data: updatedData,
+          data: upadtedRequestList,
         };
       });
     }
