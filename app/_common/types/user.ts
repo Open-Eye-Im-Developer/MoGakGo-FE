@@ -47,3 +47,8 @@ export interface UserWantedJob {
   userId: string;
   wantedJobs: WantedJobs[];
 }
+
+export interface UserJandiRating {
+  userId: number;
+  jandiRate: number;
+}
