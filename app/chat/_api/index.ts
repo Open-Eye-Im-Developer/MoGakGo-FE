@@ -1,6 +1,6 @@
 import { instance } from "@/app/_common/api/instance";
 
-import { ChatType } from "../types/chat";
+import { ChatType } from "../_types/chat";
 
 export const getChats = async () => {
   const { data } = await instance.get<ChatType[]>("/chat");
