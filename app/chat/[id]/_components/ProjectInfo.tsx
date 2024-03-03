@@ -1,6 +1,8 @@
 import { useParams } from "next/navigation";
 import dayjs from "dayjs";
 
+import formatMeetingTime from "@/app/project/_utils/formatMeetingTime";
+
 import useGetChatInfo from "../_api/useGetChatInfo";
 import {
   Accordion,
@@ -17,9 +19,6 @@ function ProjectInfo() {
 
   const { meetDetail, meetStartTime, meetEndTime } = chatInfo;
 
-  const startTime = dayjs(meetStartTime);
-  const endTime = dayjs(meetEndTime);
-
   return (
     <Accordion
       className="absolute z-10 w-full bg-white"
@@ -31,10 +30,8 @@ function ProjectInfo() {
           📍 {meetDetail}
         </AccordionTrigger>
         <AccordionContent className="px-4 text-gray-500">
-          <div>
-            🕡 {startTime.format("HH:mm")}~{endTime.format("HH:mm")}
-          </div>
-          <div> 🕡{startTime.format("YYYY. MM. DD")}</div>
+          <div>🕡 {formatMeetingTime(meetStartTime, meetEndTime)}</div>
+          <div> 🕡 {dayjs(meetStartTime).format("YYYY. MM. DD")}</div>
         </AccordionContent>
       </AccordionItem>
     </Accordion>
