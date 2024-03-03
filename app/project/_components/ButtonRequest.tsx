@@ -10,7 +10,6 @@ interface ButtonReuqestProps {
   projectId: number;
 }
 
-// TODO: projectId, senderId 값은 실제 프로젝트의 id, 사용자 id로 변경해야 합니다.
 function ButtonRequest(props: ButtonReuqestProps) {
   const { projectId } = props;
   const { toast } = useToast();
