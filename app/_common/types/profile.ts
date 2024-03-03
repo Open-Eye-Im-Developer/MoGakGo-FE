@@ -12,3 +12,8 @@ export interface Creator {
   developLanguages: string[];
   wantedJobs: WantedJobIds[];
 }
+
+export interface Like {
+  userId: number;
+  likeCount: number;
+}

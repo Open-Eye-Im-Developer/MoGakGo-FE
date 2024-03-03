@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 
 import { ResponseData, ResponseError } from "../types/response";
-import { Project } from "../types/project";
+import { Project, ReqeustProjectSummary } from "../types/project";
 import { instance } from "./instance";
 
 interface RegionRank {
@@ -28,6 +28,42 @@ export const getProjectCard = async (
     const { data } = await instance.get<ResponseData<Project>>(
       `/projects/${region}?cursorId=1&pageSize=5&sortOrder=ASC`,
     );
+    return data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      return error.response?.data;
+    }
+  }
+};
+
+export const getProjectListByCreatorId = async (
+  creatorId?: number,
+): Promise<ResponseData<Project> | undefined> => {
+  if (typeof creatorId !== "number") return;
+
+  try {
+    const { data } = await instance.get<ResponseData<Project>>(
+      `/projects/list/${creatorId}?cursorId=1&pageSize=5&sortOrder=ASC`,
+    );
+
+    return data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      return error.response?.data;
+    }
+  }
+};
+
+export const getProjectRequestsByCreatorId = async (
+  creatorId?: number,
+): Promise<ResponseData<ReqeustProjectSummary> | undefined> => {
+  if (typeof creatorId !== "number") return;
+
+  try {
+    const { data } = await instance.get<ResponseData<ReqeustProjectSummary>>(
+      `/project-requests/${creatorId}?cursorId=1&pageSize=5&sortOrder=ASC`,
+    );
+
     return data;
   } catch (error) {
     if (error instanceof AxiosError) {

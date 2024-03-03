@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { Tabs, TabsList, TabsTrigger } from "@/app/_common/shadcn/ui/tabs";
 
-import TempCard from "../_components/TempCard";
+import CardSkeleton from "../_components/CardSkeleton";
 
 function HistoryPage() {
   const [currentTab, setCurrentTab] = useState("all");
@@ -26,7 +26,7 @@ function HistoryPage() {
       {/* TODO: currentTab 기준으로 필터링 */}
       <section className="flex flex-col gap-2">
         {Array.from({ length: 4 }).map((_, i) => (
-          <TempCard key={i} />
+          <CardSkeleton key={i} />
         ))}
       </section>
     </main>
