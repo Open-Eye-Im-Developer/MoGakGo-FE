@@ -76,13 +76,16 @@ const useGetCardList = (regionCode: number) => {
 
   if (isProfileLoading || !profileList) {
     return {
-      cardList: { projectList, profileList: [] },
+      cardList: { projectList: projectList.pages[0].data, profileList: [] },
       ...defaultValue,
     };
   }
 
   return {
-    cardList: { projectList, profileList },
+    cardList: {
+      projectList: projectList.pages[0].data,
+      profileList: profileList.pages[0].data,
+    },
     ...defaultValue,
   };
 };
