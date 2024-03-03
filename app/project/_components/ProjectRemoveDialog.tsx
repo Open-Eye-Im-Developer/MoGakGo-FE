@@ -22,13 +22,14 @@ import {
 import usePopupToast from "../_hooks/usePopupToast";
 
 interface ProjectRemoveDialogProps {
+  projectId: number;
   isMatchedProject: boolean;
 }
 
-// TODO: 요청이 있을 경우 삭제하지 못하는 로직 추가하기 & 서버에서 카드 id를 받아와서 "매칭 & 프로젝트 카드" 취소 요청하기
+// TODO: 요청이 있을 경우 삭제하지 못하는 로직 추가하기 & 서버에서 매칭 Id를 받아와서 "매칭" 취소 요청하기
 // TODO: 매칭 여부를 서버에서 받아와서 처리하기 & 매칭이 된 경우 달라져야 하는 버튼을 HOC로 만들어서 사용하기
 function ProjectRemoveDialog(props: ProjectRemoveDialogProps) {
-  const { isMatchedProject } = props;
+  const { projectId, isMatchedProject } = props;
   const { showToast } = usePopupToast(
     <ToastAction altText="다시 시도">다시 시도</ToastAction>,
   );
@@ -54,7 +55,7 @@ function ProjectRemoveDialog(props: ProjectRemoveDialogProps) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id: 65 }),
+      body: JSON.stringify({ id: projectId }),
     });
     const { data, status } = await response.json();
     showToast(data, status);
