@@ -11,7 +11,7 @@ import { FormField, FormItem, FormLabel } from "@/app/_common/shadcn/ui/form";
 
 import useTime from "../_hooks/useTime";
 
-interface FormTimeProps extends IFormProps {
+interface FormTimeProps extends FormProps {
   label: string;
   hourFieldName: string;
   minuteFieldName: string;

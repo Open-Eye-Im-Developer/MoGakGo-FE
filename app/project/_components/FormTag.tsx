@@ -13,7 +13,7 @@ import { Badge } from "@/app/_common/shadcn/ui/badge";
 
 import useTagSelect from "../_hooks/useTagSelect";
 
-interface FormTagProps extends IFormProps {}
+interface FormTagProps extends FormProps {}
 
 function FormTag(props: FormTagProps) {
   const { form } = props;

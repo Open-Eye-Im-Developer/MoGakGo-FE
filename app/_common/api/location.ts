@@ -1,3 +1,4 @@
+import { ResponseError } from "../types/response.types";
 import { Coordinate } from "../types/position.types";
 import { instance } from "./instance";
 
@@ -10,13 +11,16 @@ export interface CertificateArea extends GeoAreaCode {
 }
 
 export const getGeoAreaCode = async ({ latitude, longitude }: Coordinate) => {
-  const { data } = await instance.get<GeoAreaCode>("/geo/areacode", {
-    params: {
-      latitude,
-      longitude,
+  const { data } = await instance.get<GeoAreaCode | ResponseError>(
+    "/geo/areacode",
+    {
+      params: {
+        latitude,
+        longitude,
+      },
+      validateStatus: status => status < 500,
     },
-    validateStatus: status => status < 500,
-  });
+  );
 
   return data;
 };

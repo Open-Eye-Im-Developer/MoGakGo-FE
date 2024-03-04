@@ -6,3 +6,5 @@ export interface Coordinate {
 export interface PositionState extends Coordinate {
   isGPSOn: boolean;
 }
+
+export type GeoAreaCode = number;

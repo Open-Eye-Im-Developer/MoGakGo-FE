@@ -1,8 +1,7 @@
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import axios from "axios";
 
-import { useMutationReIssueAccessToken } from "@/app/login/_hooks/useMutationReissueAccessToken";
+import { reIssueAccessToken } from "./auth";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const SERVER_VERSION = "/api/v1";
@@ -15,53 +14,37 @@ export const instance = axios.create({
   },
 });
 
-instance.interceptors.request.use(
-  config => {
-    const accessToken =
-      localStorage.getItem("accessToken") ??
-      sessionStorage.getItem("accessToken");
+instance.interceptors.request.use(config => {
+  const accessToken =
+    localStorage.getItem("accessToken") ??
+    sessionStorage.getItem("accessToken");
 
-    config.headers.Authorization = `Bearer ${accessToken}`;
+  config.headers.Authorization = `Bearer ${accessToken}`;
 
-    return config;
-  },
-  error => {
-    const { config, status } = error;
-    const router = useRouter();
+  return config;
+});
 
-    const refreshToken =
-      localStorage.getItem("refreshToken") ??
-      sessionStorage.getItem("refreshToken");
+instance.interceptors.response.use(
+  async response => {
+    const { config, status } = response;
+    const refreshToken = localStorage.getItem("refreshToken");
 
-    if (status === 401) {
-      // accessToken 만료 시, accessToken 재발급 요청
-      useMutationReIssueAccessToken().mutate({ refreshToken });
+    if (status === 401 || status === 404) {
+      if (status === 404) redirect("/login");
 
-      return instance(config);
-    }
+      const newAccessToken = await reIssueAccessToken(refreshToken ?? "");
 
-    if (status === 404) {
-      if (config.url === "user" && config.method === "delete") {
-        toast.error("인증이 만료되었습니다. 재로그인이 필요합니다.");
+      if (newAccessToken) {
+        localStorage.setItem("accessToken", newAccessToken);
 
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("refreshToken");
+        config.headers.Authorization = `Bearer ${newAccessToken}`;
 
-        router.push("/login");
-
-        return Promise.reject(error);
+        return instance(config);
       }
     }
 
-    return Promise.reject(error);
-  },
-);
-
-instance.interceptors.response.use(
-  response => {
     return response;
   },
-  // 에러 처리
   async error => {
     return Promise.reject(error);
   },

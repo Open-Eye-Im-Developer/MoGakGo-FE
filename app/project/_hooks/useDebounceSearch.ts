@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-function useDebounceSearch(form: IFormProps["form"]) {
+import { usePositionStore } from "@/app/_common/store/usePositionStore";
+
+function useDebounceSearch(form: FormProps["form"]) {
   const [placeInput, setPlaceInput] = useState<string>("");
   const [placeList, setPlaceList] = useState<PlaceItem[]>([]);
   const [overlay, setOverlay] = useState<boolean>(false);
+  const { getPosition } = usePositionStore();
 
   const handleChangePlace = (event: React.ChangeEvent<HTMLInputElement>) => {
     setOverlay(true);
@@ -20,16 +23,20 @@ function useDebounceSearch(form: IFormProps["form"]) {
   };
 
   useEffect(() => {
+    const { latitude, longitude } = getPosition();
+
     if (overlay) {
       const timer = setTimeout(async () => {
-        const response = await fetch(`/api/place/search?keyword=${placeInput}`);
+        const response = await fetch(
+          `/api/place/search?keyword=${placeInput}&lat=${latitude}&lng=${longitude}`,
+        );
         const data = await response.json();
         setPlaceList(data.data);
       }, 500);
 
       return () => clearTimeout(timer);
     }
-  }, [placeInput, overlay]);
+  }, [placeInput, overlay, getPosition]);
 
   return {
     placeInput,
