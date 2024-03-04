@@ -32,7 +32,7 @@ interface NavigationProfileProps {
 
 function NavigationItem(props: NavigationItemProps) {
   const { title, href } = props;
-  
+
   return (
     <div className="mb-2 space-y-2 px-2">
       <Link href={href}>
@@ -108,9 +108,10 @@ function NavigationProfile(props: NavigationProfileProps) {
 // TODO: 튜토리얼과 모각코 페이지를 만들어서 링크를 연결해주세요. 현재는 임시로 '#'로 연결
 function NavigationBar() {
   const { getUser } = useAuthStore();
+
   return (
     <Sheet>
-      <SheetTrigger className="rounded-md p-2 hover:bg-slate-100">
+      <SheetTrigger className="rounded-md p-2 hover:bg-slate-100 h-fit">
         <IconMenu2 />
       </SheetTrigger>
       <SheetContent
