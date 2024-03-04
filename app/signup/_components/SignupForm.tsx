@@ -61,9 +61,11 @@ function SignupForm() {
 
   if (!userData || !languages)
     return (
-      <div className="grid h-screen w-screen place-content-center">
-        <LoadingSpinner width="100" height="100" />
-      </div>
+      <LoadingSpinner
+        width="100"
+        height="100"
+        className="grid h-screen w-screen place-content-center"
+      />
     );
 
   return (

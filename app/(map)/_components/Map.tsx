@@ -113,9 +113,7 @@ function Map() {
   return (
     <div className="relative h-screen w-screen touch-none overflow-hidden">
       {isRankLoading && (
-        <div className="absolute bottom-0 left-0 right-0 top-0 z-10 flex h-full w-full place-content-center bg-white/40 backdrop-blur-sm">
-          <LoadingSpinner />
-        </div>
+        <LoadingSpinner className="absolute bottom-0 left-0 right-0 top-0 z-10 flex h-full w-full place-content-center bg-white/40 backdrop-blur-sm" />
       )}
       <div
         id="map-wrap"
