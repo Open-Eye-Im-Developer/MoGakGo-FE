@@ -33,7 +33,7 @@ const useQueryGeoAreaCode = () => {
   if (checkInstanceOfResponseError(data)) {
     return { data: undefined, isLoading, isError: true, error: data };
   }
-  return { data, isLoading, isError, error };
+  return { data: data.areaCode, isLoading, isError, error };
 };
 
 export default useQueryGeoAreaCode;
