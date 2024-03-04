@@ -38,6 +38,7 @@ function NavigationBar() {
         <NavigationItem title="채팅" href="/chat" />
         <NavigationItem title="모각코" href="#" />
         <NavigationItem title="업적" href="/achievements" />
+        <NavigationItem title="알림" href="/notification" />
       </SheetContent>
     </Sheet>
   );
