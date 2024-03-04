@@ -7,6 +7,8 @@ import {
 import { Project } from "@/app/_common/types/project";
 import { Creator } from "@/app/_common/types/profile";
 
+import ProfileCardItem from "./ProfileCardItem";
+
 interface Props {
   cardList: {
     projectList: Project[];
@@ -21,6 +23,13 @@ function CardList({ cardList }: Props) {
         <CarouselItem key={project.projectId}>
           <div className="mb-20 flex items-center justify-center">
             <ProjectCardContainer project={project} />
+          </div>
+        </CarouselItem>
+      ))}
+      {cardList.profileList.map((profile: Creator) => (
+        <CarouselItem key={profile.id}>
+          <div className="mb-20 flex items-center justify-center">
+            <ProfileCardItem profile={profile} />
           </div>
         </CarouselItem>
       ))}
