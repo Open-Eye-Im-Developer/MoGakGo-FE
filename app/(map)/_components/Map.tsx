@@ -2,12 +2,14 @@
 
 import { toast } from "sonner";
 import { MouseEvent, useEffect, useRef, useState } from "react";
+import { EmblaCarouselType } from "embla-carousel";
 
 import useQueryGeoAreaCode from "@/app/auth-mylocation/_hooks/useQueryGeoAreaCode";
 import { usePositionStore } from "@/app/_common/store/usePositionStore";
 import { cn } from "@/app/_common/shadcn/utils";
 import {
   Carousel,
+  CarouselApi,
   CarouselNext,
   CarouselPrevious,
 } from "@/app/_common/shadcn/ui/carousel";
@@ -37,7 +39,23 @@ function Map() {
   const { isAllowGPS } = usePositionStore();
   const {
     cardList,
+    fetchProject,
+    hasNextProject,
+    fetchProfile,
+    hasNextProfile,
   } = useGetCardList(regionCode);
+  const [api, setApi] = useState<CarouselApi>();
+
+  useEffect(() => {
+    if (!api) return;
+
+    api.on("select", (api: EmblaCarouselType) => {
+      if (api.canScrollNext()) return;
+
+      if (hasNextProject) fetchProject();
+      else if (!hasNextProject && hasNextProfile) fetchProfile();
+    });
+  }, [api, hasNextProject, hasNextProfile]);
 
   if (isGeoError) toast.error(geoError?.message);
 
@@ -111,6 +129,7 @@ function Map() {
           isListShow ? "visible opacity-100" : "invisible opacity-0",
         )}
         onClick={handleCancelCard}
+        setApi={setApi}
       >
         <div
           id="carousel-wrap"
