@@ -60,12 +60,12 @@ function Map() {
   if (isGeoError) toast.error(geoError?.message);
 
   useEffect(() => {
-    if (areaCode) {
-      toast.info("내가 위치한 지역으로 이동합니다.");
-      setRegionCode(areaCode);
-      const regionName = formatRegionName(areaCode);
-      previousRegion.current = document.querySelector(`#${regionName}`);
-    }
+    if (!areaCode) return;
+
+    toast.info("내가 위치한 지역으로 이동합니다.");
+    setRegionCode(areaCode);
+    const regionName = formatRegionName(areaCode);
+    previousRegion.current = document.querySelector(`#${regionName}`);
   }, [areaCode]);
 
   const zoomOut = () => {
