@@ -111,7 +111,7 @@ function NavigationBar() {
 
   return (
     <Sheet>
-      <SheetTrigger className="rounded-md p-2 hover:bg-slate-100 h-fit">
+      <SheetTrigger className="h-fit rounded-md p-2 hover:bg-slate-100">
         <IconMenu2 />
       </SheetTrigger>
       <SheetContent
@@ -127,6 +127,7 @@ function NavigationBar() {
         <NavigationItem title="지도" href="/" />
         <NavigationItem title="채팅" href="/chat" />
         <NavigationItem title="모각코" href="#" />
+        <NavigationItem title="업적" href="/achievements" />
       </SheetContent>
     </Sheet>
   );
