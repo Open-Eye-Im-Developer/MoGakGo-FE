@@ -3,8 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 
 import ButtonFollow from "@/app/project/_components/ButtonFollow";
-import { cn } from "@/app/_common/shadcn/utils";
-import { Tabs, TabsContent } from "@/app/_common/shadcn/ui/tabs";
 import { Progress } from "@/app/_common/shadcn/ui/progress";
 import {
   Card,
@@ -35,21 +33,13 @@ function ProfileCardItem({ profile }: Props) {
   } = profile;
 
   return (
-    <Tabs defaultValue="card" className="h-[550px] w-[330px] sm:w-[450px]">
-      <TabsContent value="card" className="group h-full">
-        <div className={cn("relative h-full transition-all duration-500")}>
-          <Card
-            className={cn(
-              "glass-morphism absolute inset-0 left-0 top-0 border-none shadow-md",
-            )}
-          >
+    <div className="h-[550px] w-[330px] sm:w-[450px]">
+      <div className="h-full">
+        <div className="relative h-full">
+          <Card className="border-none shadow-md">
             <CardHeader className="px-5 pt-4">
               <CardDescription className="flex justify-end text-lg font-bold text-black">
-                <Link
-                  href={githubUrl}
-                  className="flex items-center"
-                  target="_blank"
-                >
+                <Link href={githubUrl} target="_blank">
                   @{githubId}
                 </Link>
               </CardDescription>
@@ -99,13 +89,13 @@ function ProfileCardItem({ profile }: Props) {
                 </div>
               </div>
             </CardContent>
-            <CardFooter className="flex items-center justify-between">
+            <CardFooter className="flex justify-end">
               <ButtonFollow />
             </CardFooter>
           </Card>
         </div>
-      </TabsContent>
-    </Tabs>
+      </div>
+    </div>
   );
 }
 
