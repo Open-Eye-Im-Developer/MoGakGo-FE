@@ -44,18 +44,18 @@ function Map() {
     fetchProfile,
     hasNextProfile,
   } = useGetCardList(regionCode);
-  const [api, setApi] = useState<CarouselApi>();
+  const [carouselApi, setCarouselApi] = useState<CarouselApi>();
 
   useEffect(() => {
-    if (!api) return;
+    if (!carouselApi) return;
 
-    api.on("select", (api: EmblaCarouselType) => {
-      if (api.canScrollNext()) return;
+    carouselApi.on("select", (carouselApi: EmblaCarouselType) => {
+      if (carouselApi.canScrollNext()) return;
 
       if (hasNextProject) fetchProject();
       else if (!hasNextProject && hasNextProfile) fetchProfile();
     });
-  }, [api, hasNextProject, hasNextProfile]);
+  }, [carouselApi, hasNextProject, hasNextProfile]);
 
   if (isGeoError) toast.error(geoError?.message);
 
@@ -129,7 +129,7 @@ function Map() {
           isListShow ? "visible opacity-100" : "invisible opacity-0",
         )}
         onClick={handleCancelCard}
-        setApi={setApi}
+        setApi={setCarouselApi}
       >
         <div
           id="carousel-wrap"
