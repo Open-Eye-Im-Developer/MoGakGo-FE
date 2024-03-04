@@ -1,5 +1,5 @@
-import { ResponseError } from "../types/response.types";
-import { Coordinate } from "../types/position.types";
+import { ResponseError } from "../types/response";
+import { Coordinate } from "../types/position";
 import { instance } from "./instance";
 
 interface GeoAreaCode {
