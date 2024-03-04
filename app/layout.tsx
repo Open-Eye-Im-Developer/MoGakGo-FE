@@ -6,7 +6,6 @@ import "dayjs/locale/ko";
 
 import { Toaster } from "./_common/shadcn/ui/toaster";
 import { ThemeProvider } from "./_common/components/theme-provider";
-import NavigationBar from "./_common/components/NavigationBar";
 import ClientProvider from "./_common/components/ClientProvider";
 
 import type { Metadata } from "next";
@@ -35,10 +34,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <section className="flex flex-row-reverse">
-              <NavigationBar />
               {children}
-            </section>
             <Toaster />
             <Sonner richColors position="bottom-center" />
           </ThemeProvider>
