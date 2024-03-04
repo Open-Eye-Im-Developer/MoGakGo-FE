@@ -36,10 +36,10 @@ function ProjectCardContainer({ project }: Props) {
         if (!prev || "timestamp" in data.data) return data;
         const prevRequestList = prev.data as RequestList[];
         const currentRequestList = data.data;
-        const upadtedRequestList = [...prevRequestList, ...currentRequestList];
+        const updatedRequestList = [...prevRequestList, ...currentRequestList];
         return {
           ...prev,
-          data: upadtedRequestList,
+          data: updatedRequestList,
         };
       });
     }
