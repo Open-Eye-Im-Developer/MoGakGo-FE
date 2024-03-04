@@ -66,6 +66,7 @@ function Map() {
     setRegionCode(areaCode);
     const regionName = formatRegionName(areaCode);
     previousRegion.current = document.querySelector(`#${regionName}`);
+    setIsListShow(true);
   }, [areaCode]);
 
   const zoomOut = () => {
