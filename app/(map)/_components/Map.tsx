@@ -46,9 +46,9 @@ function Map() {
   useEffect(() => {
     if (areaCode) {
       toast.info("내가 위치한 지역으로 이동합니다.");
-      setRegionCode(areaCode);
+      setRegionCode(areaCode.areaCode);
       const regionName = Object.keys(REGION_CODE).find(
-        region => REGION_CODE[region] === areaCode,
+        region => REGION_CODE[region] === areaCode.areaCode,
       );
       previousRegion.current = document.querySelector(`#${regionName}`);
     }
