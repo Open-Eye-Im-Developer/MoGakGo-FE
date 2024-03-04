@@ -17,16 +17,18 @@ interface Props {
 }
 
 function CardList({ cardList }: Props) {
+  const { projectList, profileList } = cardList;
+
   return (
     <CarouselContent>
-      {cardList.projectList.map((project: Project) => (
+      {projectList.map((project: Project) => (
         <CarouselItem key={project.projectId}>
           <div className="mb-20 flex items-center justify-center">
             <ProjectCardContainer project={project} />
           </div>
         </CarouselItem>
       ))}
-      {cardList.profileList.map((profile: Creator) => (
+      {profileList.map((profile: Creator) => (
         <CarouselItem key={profile.id}>
           <div className="mb-20 flex items-center justify-center">
             <ProfileCardItem profile={profile} />
