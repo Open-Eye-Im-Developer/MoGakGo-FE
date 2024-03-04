@@ -22,11 +22,11 @@ interface PlaceItem {
   y: string;
 }
 
-interface IFormProps {
+interface FormProps {
   form: UseFormReturn<Form>;
 }
 
-interface IPlaceResponseProps {
+interface PlaceResponseProps {
   documents: PlaceItem[];
 }
 

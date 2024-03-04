@@ -11,7 +11,7 @@ import {
 import useDebounceSearch from "../_hooks/useDebounceSearch";
 import PlaceList from "./PlaceList";
 
-interface FormTagProps extends IFormProps {}
+interface FormTagProps extends FormProps {}
 
 function FormPlace(props: FormTagProps) {
   const { form } = props;

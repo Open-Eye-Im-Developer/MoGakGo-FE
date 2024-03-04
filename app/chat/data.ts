@@ -1,4 +1,4 @@
-import { ChatType } from "./types/chat";
+import { ChatType } from "./_types/chat";
 
 export const DUMMY: ChatType[] = [
   {
@@ -25,7 +25,7 @@ export const DUMMY: ChatType[] = [
     chatRoomId: "c4c0d1fc-4461-4374-b60a-31c26be54109",
     lastMessage: "몰라용 ?",
     lastMessageCreatedAt: "2024-02-26T10:05:00",
-    status: "OPEN",
+    status: "CLOSE",
     profiles: [
       {
         userId: 1,
