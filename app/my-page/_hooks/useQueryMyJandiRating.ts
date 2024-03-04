@@ -7,7 +7,7 @@ import { UserJandiRating } from "@/app/_common/types/user";
 export const useQueryMyJandiRating = (userId?: number) => {
   const { data, isLoading } = useQuery<UserJandiRating | undefined>({
     queryFn: () => getJandiRatingByUserId(userId),
-    queryKey: ["getSendLikeCount", userId],
+    queryKey: ["getJandiRatingByUserId", userId],
     enabled: typeof userId === "number",
   });
 

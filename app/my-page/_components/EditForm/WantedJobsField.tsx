@@ -24,7 +24,8 @@ import { Checkbox } from "@/app/_common/shadcn/ui/checkbox";
 import { Button } from "@/app/_common/shadcn/ui/button";
 import { Badge } from "@/app/_common/shadcn/ui/badge";
 
-import { WANTED_JOB } from "../../constants";
+import { WANTED_JOB } from "@/app/_common/constants/wantedJob.constants";
+
 import { editFormSchema } from "../../_util/validation";
 
 interface WantedJobsFieldProps {
@@ -47,13 +48,13 @@ function WantedJobsField({ form }: WantedJobsFieldProps) {
                   variant="outline"
                   className="h-auto justify-between px-3"
                 >
-                  {form.getValues("wantedJobs").length === 0 && (
+                  {(form.getValues("wantedJobs") ?? []).length === 0 && (
                     <p className="flex gap-2 text-sm font-normal">
                       관심 직무를 선택해주세요.
                     </p>
                   )}
                   <div className="flex flex-wrap gap-1">
-                    {form.getValues("wantedJobs").map(el => (
+                    {(form.getValues("wantedJobs") ?? []).map(el => (
                       <Badge key={el}>
                         {WANTED_JOB.find(job => job.id === el)?.label}
                       </Badge>

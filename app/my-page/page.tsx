@@ -23,8 +23,6 @@ function MyPage() {
   const { data: receiveLikeCount } = useQueryMyReceiveLikeCount(userData?.id);
   const { data: projectHistory } = useQueryMyProjectHistory(userData?.id);
 
-  console.log(jandiRating);
-
   return (
     <main className="container flex min-h-screen max-w-2xl flex-col gap-8 bg-gray-50 dark:bg-gray-950">
       <Profile data={userData} />

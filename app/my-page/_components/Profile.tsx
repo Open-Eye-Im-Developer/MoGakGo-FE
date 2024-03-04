@@ -45,7 +45,9 @@ export function ProfileLayout({ data }: ProfileLayoutProps) {
         ))}
       </div>
       <div className="text-xs text-gray-400">
-        {data.bio ?? "한줄 소개를 입력해주세요"}
+        {!data.bio || data.bio.trim().length === 0
+          ? "한 줄 소개를 입력해주세요."
+          : data.bio}
       </div>
     </div>
   );
@@ -57,11 +59,9 @@ export function ProfileSkeleton() {
       <div className="relative h-52 w-52">
         {/* 프로필 */}
         <div className="h-full w-full bg-slate-200"></div>
-        {/* <Link href="/my-page/edit"> */}
         <div className="absolute bottom-0 right-0 inline-block bg-primary p-2 text-white">
           <IconPencil />
         </div>
-        {/* </Link> */}
       </div>
       <div className="text-xs text-orange-400">
         {" "}
