@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuerySignUpUser } from "../signup/_hooks/useQuerySignUpUser";
+import { useQueryUserData } from "./_hooks/useQueryUserData";
 import { useQueryMySendLikeCount } from "./_hooks/useQueryMySendLikeCount";
 import { useQueryMyReceiveLikeCount } from "./_hooks/useQueryMyReceiveLikeCount";
 import { useQueryMyProjectReqeusts } from "./_hooks/useQueryMyProjectReqeusts";
@@ -15,13 +15,16 @@ import LikeCount from "./_components/LikeCount";
 import JandiRating from "./_components/JandiRating";
 
 function MyPage() {
-  const { data: userData } = useQuerySignUpUser();
+  // const { data: userData } = useQuerySignUpUser();
+  const { data: userData, isError } = useQueryUserData();
   const { data: jandiRating } = useQueryMyJandiRating(userData?.id);
   const { data: projectList } = useQueryMyProjectList(userData?.id);
   const { data: projectRequests } = useQueryMyProjectReqeusts(userData?.id);
   const { data: sendLikeCount } = useQueryMySendLikeCount(userData?.id);
   const { data: receiveLikeCount } = useQueryMyReceiveLikeCount(userData?.id);
   const { data: projectHistory } = useQueryMyProjectHistory(userData?.id);
+
+  if (isError) return <div>error</div>;
 
   return (
     <main className="container flex min-h-screen max-w-2xl flex-col gap-8 bg-gray-50 dark:bg-gray-950">
