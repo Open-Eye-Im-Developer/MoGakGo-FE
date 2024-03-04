@@ -3,9 +3,6 @@ import withPWA from "next-pwa";
 
 const nextPWAConfig = withPWA({
   dest: "public",
-  images: {
-    domains: ["avatars.githubusercontent.com"],
-  },
 });
 
 const nextConfig = {
