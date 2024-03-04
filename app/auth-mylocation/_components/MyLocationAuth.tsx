@@ -63,7 +63,7 @@ function MyLocationAuth() {
     router.push("/");
   };
 
-  if (isLoading || !data) return <LoadingSpinner />;
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <>
