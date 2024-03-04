@@ -11,11 +11,11 @@ interface MyProjectHistoryProps {
 function MyProjectHistory({ data }: MyProjectHistoryProps) {
   return (
     <div className="flex w-full flex-col gap-4">
-      <div className="text-xl font-bold">지난 매칭</div>
+      <div className="text-xl font-bold">지난 만남 카드</div>
       <div className="flex flex-col gap-2">
         {!data ? <CardSkeleton /> : null}
         {data?.data.length === 0 ? (
-          <p className="text-sm text-gray-500">매칭이 없습니다.</p>
+          <p className="text-sm text-gray-500">만남 카드가 없습니다.</p>
         ) : (
           data?.data.map(project => (
             <Card
