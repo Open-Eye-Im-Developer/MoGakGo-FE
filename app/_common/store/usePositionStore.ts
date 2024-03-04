@@ -1,7 +1,7 @@
 import { createJSONStorage, persist } from "zustand/middleware";
 import { create } from "zustand";
 
-import { Coordinate, PositionState } from "@/app/_common/types/position.types";
+import { Coordinate, PositionState } from "@/app/_common/types/position";
 
 import { getGeolocation } from "@/app/_common/utils/getGeolocation";
 
