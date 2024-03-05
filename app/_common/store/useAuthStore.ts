@@ -8,8 +8,8 @@ interface AuthState {
 }
 
 interface AuthAction {
-  setUser: (user: User | null) => void;
-  getUser: () => User | null;
+  setUser: (user: AuthState["user"]) => void;
+  getUser: () => AuthState["user"];
 }
 
 export const useAuthStore = create(
