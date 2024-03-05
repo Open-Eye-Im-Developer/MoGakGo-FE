@@ -1,6 +1,6 @@
 import { Skeleton } from "@/app/_common/shadcn/ui/skeleton";
 
-function CardSkeleton() {
+function ProjectCardSkeleton() {
   return (
     <div className="align-center flex gap-4 rounded-md bg-white p-3 dark:bg-gray-900">
       <div className="h-12 w-12 animate-pulse rounded-full bg-slate-200"></div>
@@ -16,4 +16,4 @@ function CardSkeleton() {
   );
 }
 
-export default CardSkeleton;
+export default ProjectCardSkeleton;

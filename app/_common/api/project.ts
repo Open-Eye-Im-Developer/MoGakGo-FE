@@ -1,7 +1,11 @@
 import { AxiosError } from "axios";
 
 import { ResponseData, ResponseError } from "../types/response";
-import { Project, ReqeustProjectSummary } from "../types/project";
+import {
+  Project,
+  ProjectSummary,
+  ReqeustProjectSummary,
+} from "../types/project";
 import { instance } from "./instance";
 
 interface RegionRank {
@@ -38,12 +42,12 @@ export const getProjectCard = async (
 
 export const getProjectListByCreatorId = async (
   creatorId?: number,
-): Promise<ResponseData<Project> | undefined> => {
+): Promise<ResponseData<ProjectSummary> | undefined> => {
   if (typeof creatorId !== "number") return;
 
   try {
-    const { data } = await instance.get<ResponseData<Project>>(
-      `/projects/list/${creatorId}?cursorId=1&pageSize=5&sortOrder=ASC`,
+    const { data } = await instance.get<ResponseData<ProjectSummary>>(
+      `/projects/list/${creatorId}?cursorId=&pageSize=5&sortOrder=ASC`,
     );
 
     return data;
@@ -61,7 +65,7 @@ export const getProjectRequestsByCreatorId = async (
 
   try {
     const { data } = await instance.get<ResponseData<ReqeustProjectSummary>>(
-      `/project-requests/${creatorId}?cursorId=1&pageSize=5&sortOrder=ASC`,
+      `/project-requests/${creatorId}?cursorId=&pageSize=5&sortOrder=ASC`,
     );
 
     return data;

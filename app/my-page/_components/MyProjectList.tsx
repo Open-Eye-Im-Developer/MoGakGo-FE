@@ -1,11 +1,11 @@
 import { ResponseData } from "@/app/_common/types/response";
-import { Project } from "@/app/_common/types/project";
+import { ProjectSummary } from "@/app/_common/types/project";
 
-import CardSkeleton from "./CardSkeleton";
-import Card from "./Card";
+import ProjectCardSkeleton from "./ProjectCardSkeleton";
+import ProjectCard from "./ProjectCard";
 
 interface MyProjectListProps {
-  data?: ResponseData<Project>;
+  data?: ResponseData<ProjectSummary>;
 }
 
 function MyProjectList({ data }: MyProjectListProps) {
@@ -13,17 +13,12 @@ function MyProjectList({ data }: MyProjectListProps) {
     <div className="flex w-full flex-col gap-4">
       <div className="text-xl font-bold">내가 생성한 만남 카드</div>
       <div className="flex flex-col gap-2">
-        {!data ? <CardSkeleton /> : null}
+        {!data ? <ProjectCardSkeleton /> : null}
         {data?.data.length === 0 ? (
           <p className="text-sm text-gray-500">만남 카드가 없습니다.</p>
         ) : (
           data?.data.map(project => (
-            <Card
-              key={project.projectId}
-              image={project.creator.avatarUrl}
-              title={project.meetingInfo.meetDetail}
-              body={`${project.meetingInfo.meetStartTime} ~ ${project.meetingInfo.meetEndTime}`}
-            />
+            <ProjectCard key={project.projectId} data={project} />
           ))
         )}
       </div>

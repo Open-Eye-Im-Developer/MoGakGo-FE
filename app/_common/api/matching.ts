@@ -11,7 +11,7 @@ export const getMatchesByUserId = async (
 
   try {
     const { data } = await instance.get<ResponseData<Match>>(
-      `/matches/my/${userId}?cursorId=1&pageSize=5&sortOrder=ASC`,
+      `/matches/my/${userId}?cursorId=&pageSize=5&sortOrder=ASC`,
     );
 
     return data;
@@ -20,4 +20,10 @@ export const getMatchesByUserId = async (
       return error.response?.data;
     }
   }
+};
+
+export const cancelMatch = async (id: number) => {
+  const { data } = await instance.post(`/matches/${id}/cancel`);
+
+  return data;
 };

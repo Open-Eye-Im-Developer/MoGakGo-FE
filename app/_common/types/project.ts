@@ -13,8 +13,7 @@ export interface Project {
   meetingInfo: MeetingInfo;
 }
 
-export type ProjectStatus = "PENDING" | "PROGRESS" | "FINISHED";
-// TODO: 타입 보완 필요
+export type ProjectStatus = "PENDING" | "MATCHED" | "CANCELED" | "FINISHED";
 
 export interface ProjectSummary {
   projectId: number;
