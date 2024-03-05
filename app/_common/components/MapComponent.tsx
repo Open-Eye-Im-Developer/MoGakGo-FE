@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 
+import { formatRegionName } from "@/app/(map)/_utils/formatRegionName";
 import RankInfo from "@/app/(map)/_components/RankInfo";
 
 import "@/app/(map)/_styles/map.css";
-import REGION_CODE from "../constants/regionCode";
 
 const strokeColor = "white";
 const textColor = "black";
@@ -33,9 +33,7 @@ function MapComponent({ regionCode, regionRank }: Props) {
 
   const zoomInRegion = (regionCode: number) => {
     const map = document.querySelector("#map-wrap") as HTMLDivElement;
-    const regionName = Object.keys(REGION_CODE).find(
-      region => REGION_CODE[region] === regionCode,
-    );
+    const regionName = formatRegionName(regionCode);
     const region = document.querySelector(`#${regionName}`);
 
     if (!region || !map) return;

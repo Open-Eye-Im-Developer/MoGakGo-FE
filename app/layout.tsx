@@ -34,7 +34,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+              {children}
             <Toaster />
             <Sonner richColors position="bottom-center" />
           </ThemeProvider>

@@ -7,4 +7,10 @@ export interface PositionState extends Coordinate {
   isGPSOn: boolean;
 }
 
-export type GeoAreaCode = number;
+export interface GeoAreaCode {
+  areaCode: number;
+}
+
+export interface CertificateArea extends GeoAreaCode {
+  userId: number;
+}
