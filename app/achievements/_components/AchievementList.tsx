@@ -28,8 +28,8 @@ const ACHIEVEMENTS: Achievement[] = [
     id: 2,
     title: "너는 내 운명",
     description: "동일한 상대와 3회 이상 매칭될 시 획득",
-    total: 3,
-    nowGrade: 1,
+    total: 5,
+    nowGrade: 4,
     isCompleted: false,
   },
   {

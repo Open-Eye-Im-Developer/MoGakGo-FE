@@ -36,7 +36,7 @@ function AchievementDrawer({
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
       <DrawerContent id={`${id}`}>
-        <DrawerHeader className="place-content-center place-items-center gap-6">
+        <DrawerHeader className="place-content-center place-items-center gap-4 pb-2">
           <div className="w-[100px] rounded-xl bg-secondary">
             <AspectRatio
               ratio={1 / 1}
@@ -64,16 +64,30 @@ function AchievementDrawer({
           <DrawerTitle>{title}</DrawerTitle>
           <DrawerDescription>획득방법: {description}</DrawerDescription>
         </DrawerHeader>
-        <DrawerFooter className="place-items-center">
+        <DrawerFooter className="place-items-center pb-6 pt-2">
           {isCompleted ? (
             <Button className="w-full" onClick={handleCloseDrawer}>
               내 대표 업적으로 설정하기
             </Button>
           ) : (
-            <AchievementProgress
-              className="w-[300px] bg-secondary bg-opacity-30 dark:bg-opacity-50"
-              value={calculateAchievement(nowGrade, total)}
-            />
+            <>
+              {total - nowGrade <= 3 ? (
+                <p className="text-sm text-success">
+                  달성까지 앞으로{" "}
+                  <span className="font-bold">{total - nowGrade}</span>회!
+                </p>
+              ) : (
+                <p className="text-sm text-primary">
+                  달성까지 앞으로{" "}
+                  <span className="font-bold">{total - nowGrade}</span>회
+                  남았어요.
+                </p>
+              )}
+              <AchievementProgress
+                className="relative w-[300px] bg-secondary bg-opacity-30 dark:bg-opacity-50"
+                value={calculateAchievement(nowGrade, total)}
+              ></AchievementProgress>
+            </>
           )}
         </DrawerFooter>
       </DrawerContent>
