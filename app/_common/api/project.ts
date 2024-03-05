@@ -4,7 +4,7 @@ import { ResponseData, ResponseError } from "../types/response";
 import {
   Project,
   ProjectSummary,
-  ReqeustProjectSummary,
+  RequestProjectSummary,
 } from "../types/project";
 import { instance } from "./instance";
 
@@ -60,11 +60,11 @@ export const getProjectListByCreatorId = async (
 
 export const getProjectRequestsByCreatorId = async (
   creatorId?: number,
-): Promise<ResponseData<ReqeustProjectSummary> | undefined> => {
+): Promise<ResponseData<RequestProjectSummary> | undefined> => {
   if (typeof creatorId !== "number") return;
 
   try {
-    const { data } = await instance.get<ResponseData<ReqeustProjectSummary>>(
+    const { data } = await instance.get<ResponseData<RequestProjectSummary>>(
       `/project-requests/${creatorId}?cursorId=&pageSize=5&sortOrder=ASC`,
     );
 

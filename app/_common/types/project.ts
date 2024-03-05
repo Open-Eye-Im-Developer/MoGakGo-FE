@@ -24,7 +24,7 @@ export interface ProjectSummary {
   projectEndTime: string;
 }
 
-export interface ReqeustProjectSummary {
+export interface RequestProjectSummary {
   projectId: number;
   creatorAvatorUrl: string;
   meetingInfo: {

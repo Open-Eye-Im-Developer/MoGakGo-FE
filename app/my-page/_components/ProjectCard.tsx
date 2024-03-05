@@ -17,14 +17,14 @@ import {
 
 import {
   ProjectSummary,
-  ReqeustProjectSummary,
+  RequestProjectSummary,
 } from "@/app/_common/types/project";
 import { Match } from "@/app/_common/types/matching";
 
 import { useMutationMatchCancel } from "../_hooks/useMutationMatchCancel";
 
 interface CardProps {
-  data: Match | ProjectSummary | ReqeustProjectSummary;
+  data: Match | ProjectSummary | RequestProjectSummary;
 }
 
 function ProjectCard({ data }: CardProps) {

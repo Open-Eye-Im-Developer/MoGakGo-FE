@@ -1,14 +1,14 @@
 import { ResponseData } from "@/app/_common/types/response";
-import { ReqeustProjectSummary } from "@/app/_common/types/project";
+import { RequestProjectSummary } from "@/app/_common/types/project";
 
 import ProjectCardSkeleton from "./ProjectCardSkeleton";
 import ProjectCard from "./ProjectCard";
 
-interface MyProjectReqeustsProps {
-  data?: ResponseData<ReqeustProjectSummary>;
+interface MyProjectRequestsProps {
+  data?: ResponseData<RequestProjectSummary>;
 }
 
-function MyProjectReqeusts({ data }: MyProjectReqeustsProps) {
+function MyProjectRequests({ data }: MyProjectRequestsProps) {
   return (
     <div className="flex w-full flex-col gap-4">
       <div className="text-xl font-bold">내가 보낸 요청</div>
@@ -26,4 +26,4 @@ function MyProjectReqeusts({ data }: MyProjectReqeustsProps) {
   );
 }
 
-export default MyProjectReqeusts;
+export default MyProjectRequests;
