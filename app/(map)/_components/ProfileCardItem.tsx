@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import ButtonFollow from "@/app/project/_components/ButtonFollow";
+import ButtonLike from "@/app/project/_components/ButtonLike";
 import { Progress } from "@/app/_common/shadcn/ui/progress";
 import {
   Card,
@@ -90,7 +90,7 @@ function ProfileCardItem({ profile }: Props) {
               </div>
             </CardContent>
             <CardFooter className="flex justify-end">
-              <ButtonFollow />
+              <ButtonLike />
             </CardFooter>
           </Card>
         </div>
