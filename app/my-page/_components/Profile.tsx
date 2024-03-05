@@ -36,13 +36,11 @@ export function ProfileLayout({ data }: ProfileLayoutProps) {
       </div>
       <div className="text-xs text-orange-400">모각코도 한걸음부터</div>
       <div className="text-xl font-bold">{data.username}</div>
-      <div className="flex gap-1">
+      <div className="flex flex-wrap justify-center gap-1">
         {data.wantedJobs?.map(job => (
           <Badge key={job}>{WANTED_JOB.find(el => el.id === job)?.label}</Badge>
         ))}
-        {data.developLanguages?.map(lang => (
-          <Badge key={lang.language}>{lang.language}</Badge>
-        ))}
+        {data.developLanguages?.map(lang => <Badge key={lang}>{lang}</Badge>)}
       </div>
       <div className="text-xs text-gray-400">
         {!data.bio || data.bio.trim().length === 0
