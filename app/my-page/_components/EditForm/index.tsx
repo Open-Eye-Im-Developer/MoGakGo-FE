@@ -27,9 +27,9 @@ function EditForm({ defaultValues, disabled }: EditFormProps) {
     },
   });
 
-  async function handleSubmit(values: z.infer<typeof editFormSchema>) {
+  const handleSubmit = async (values: z.infer<typeof editFormSchema>) => {
     await mutate(values);
-  }
+  };
 
   return (
     <Form {...form}>
