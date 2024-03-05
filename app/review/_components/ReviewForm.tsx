@@ -2,20 +2,36 @@
 
 import { useForm } from "react-hook-form";
 import { MouseEventHandler } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 
+import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import {
   Form,
   FormControl,
   FormDescription,
   FormField,
   FormItem,
-} from "../../shadcn/ui/form";
-import { DialogClose } from "../../shadcn/ui/dialog";
-import { Button } from "../../shadcn/ui/button";
+} from "@/app/_common/shadcn/ui/form";
+import { Button } from "@/app/_common/shadcn/ui/button";
+
+import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
+
+import { useMutationReview } from "../_hooks/useMutationReview";
+import { Ratings } from "../_constants/rating";
 import RatingItem from "./RatingItem";
-import { Ratings } from "./constants/rating";
 
 function ReviewForm() {
+  // TODO: 1. 나가기 버튼 누를시, useRouter의 query params로 projectId와 receiverId를 받아와야 함
+  // TODO: 2. 상대 유저의 경우, 알람을 클릭할 때 projectId와 receiverId를 받아와야 함
+
+  const projectId = useSearchParams().get("projectId");
+  const receiverId = useSearchParams().get("receiverId");
+  const router = useRouter();
+
+  const { user } = useAuthStore();
+  const { mutate } = useMutationReview();
+
   const form = useForm({
     defaultValues: {
       rating: 0,
@@ -26,9 +42,37 @@ function ReviewForm() {
     form.setValue("rating", parseInt(event.currentTarget.id) + 1);
   };
 
+  const onSubmitReview = () => {
+    const rating = form.getValues("rating");
+    if (
+      !rating ||
+      typeof receiverId !== "string" ||
+      typeof projectId !== "string"
+    ) {
+      console.log(rating, receiverId, projectId);
+      return;
+    }
+
+    mutate({
+      rating,
+      receiverId: parseInt(receiverId),
+      projectId: parseInt(projectId),
+      senderId: user.id,
+    });
+  };
+
+  if (!projectId || !receiverId) {
+    router.back();
+
+    return <LoadingSpinner />;
+  }
+
   return (
     <Form {...form}>
-      <form className="flex h-full flex-col p-4">
+      <form
+        className="flex h-full flex-col place-content-center p-4"
+        onSubmit={form.handleSubmit(onSubmitReview)}
+      >
         <header>
           <h2 className="text-2xl font-semibold text-primary">이 친구 어때?</h2>
           <FormDescription className="text-gray-500">
@@ -70,16 +114,12 @@ function ReviewForm() {
                 <p className="text-xs">신중하게 결정해주세요!</p>
               </small>
               <footer className="flex items-end justify-between">
-                <DialogClose asChild>
-                  <small className="cursor-pointer text-gray-500 hover:font-semibold">
-                    리뷰 안하기
-                  </small>
-                </DialogClose>
-                <DialogClose asChild>
-                  <Button type="submit" disabled={!field.value}>
-                    리뷰 저장하기
-                  </Button>
-                </DialogClose>
+                <small className="cursor-pointer text-gray-500 hover:font-semibold">
+                  <Link href={"/"}>리뷰 안하기</Link>
+                </small>
+                <Button type="submit" disabled={!field.value}>
+                  리뷰 저장하기
+                </Button>
               </footer>
             </FormItem>
           )}

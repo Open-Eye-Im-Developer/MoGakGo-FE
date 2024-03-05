@@ -2,6 +2,7 @@ import { AxiosError } from "axios";
 
 import { ResponseData, ResponseError } from "../types/response";
 import { Project } from "../types/project";
+import { Review } from "../components/types/review";
 import { instance } from "./instance";
 
 interface RegionRank {
@@ -34,4 +35,20 @@ export const getProjectCard = async (
       return error.response?.data;
     }
   }
+};
+
+export const postReview = async ({
+  projectId,
+  rating,
+  senderId,
+  receiverId,
+}: Review) => {
+  const { data } = await instance.post(`/review`, {
+    rating,
+    projectId,
+    senderId,
+    receiverId,
+  });
+
+  return data;
 };
