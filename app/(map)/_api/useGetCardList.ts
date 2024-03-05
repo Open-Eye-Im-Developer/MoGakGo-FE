@@ -1,67 +1,92 @@
-import { useQuery } from "@tanstack/react-query";
+import { useRef } from "react";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
 import { getProjectCard } from "@/app/_common/api/project";
 import { getProfileCard } from "@/app/_common/api/profile";
 
-import REGION_CODE from "@/app/_common/constants/regionCode";
+import { formatRegionName } from "../_utils/formatRegionName";
 
-import { checkInstanceOfResponseError } from "@/app/_common/utils/checkInstanceOfResponseError";
-
-// TODO: 페이지네이션 구현
 const useGetCardList = (regionCode: number) => {
-  const regionName =
-    Object.keys(REGION_CODE).find(
-      region => REGION_CODE[region] === regionCode,
-    ) ?? "";
-  const region = regionName.toUpperCase();
+  const region = formatRegionName(regionCode).toUpperCase();
+  const isGetProfile = useRef(false);
 
-  const projectResponse = useQuery({
+  const {
+    data: projectList,
+    isLoading: isProjectLoading,
+    fetchNextPage: fetchProject,
+    hasNextPage: hasNextProject,
+    isFetchingNextPage: isFetchingProject,
+  } = useInfiniteQuery({
     queryKey: ["project-list", region] as const,
-    queryFn: () => getProjectCard(region),
+    queryFn: ({ pageParam = 0 }) => {
+      return getProjectCard({ region, cursorId: pageParam });
+    },
+    initialPageParam: 0,
+    getNextPageParam: lastPage => {
+      if (!lastPage.hasNext) {
+        isGetProfile.current = true;
+        return;
+      }
+      const cursorId = lastPage.data[lastPage.data.length - 1].projectId;
+      return cursorId;
+    },
     enabled: !!region,
   });
 
-  const profileResponse = useQuery({
+  const {
+    data: profileList,
+    isLoading: isProfileLoading,
+    fetchNextPage: fetchProfile,
+    hasNextPage: hasNextProfile,
+    isFetchingNextPage: isFetchingProfile,
+  } = useInfiniteQuery({
     queryKey: ["profile-list", region] as const,
-    queryFn: () => getProfileCard(region),
-    enabled: !!region,
+    queryFn: ({ pageParam = 0 }) => {
+      return getProfileCard({ region, cursorId: pageParam });
+    },
+    initialPageParam: 0,
+    getNextPageParam: lastPage => {
+      if (!lastPage.hasNext) {
+        isGetProfile.current = false;
+        return;
+      }
+      const cursorId = lastPage.data[lastPage.data.length - 1].id;
+      return cursorId;
+    },
+    enabled: !!region && isGetProfile.current,
   });
 
-  if (
-    projectResponse.isLoading ||
-    !projectResponse.data ||
-    profileResponse.isLoading ||
-    !profileResponse.data
-  ) {
-    return { data: undefined, isLoading: true, isError: false, error: null };
-  }
+  const defaultValue = {
+    isProjectLoading,
+    fetchProject,
+    hasNextProject,
+    isFetchingProject,
+    isProfileLoading,
+    fetchProfile,
+    hasNextProfile,
+    isFetchingProfile,
+  };
 
-  if (checkInstanceOfResponseError(projectResponse.data)) {
+  if (isProjectLoading || !projectList) {
     return {
-      data: undefined,
-      isLoading: false,
-      isError: true,
-      error: projectResponse.data,
+      cardList: { projectList: [], profileList: [] },
+      ...defaultValue,
     };
   }
 
-  if (checkInstanceOfResponseError(profileResponse.data)) {
+  if (isProfileLoading || !profileList) {
     return {
-      data: undefined,
-      isLoading: false,
-      isError: true,
-      error: profileResponse.data,
+      cardList: { projectList: projectList.pages[0].data, profileList: [] },
+      ...defaultValue,
     };
   }
-
-  const { data: projectList } = projectResponse.data;
-  const { data: profileList } = profileResponse.data;
 
   return {
-    data: { projectList, profileList },
-    isLoading: false,
-    isError: false,
-    error: null,
+    cardList: {
+      projectList: projectList.pages[0].data,
+      profileList: profileList.pages[0].data,
+    },
+    ...defaultValue,
   };
 };
 

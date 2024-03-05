@@ -5,16 +5,19 @@ import animation from "../assets/spinner-animation.json";
 interface LoadingSpinnerProps {
   width?: string;
   height?: string;
+  className?: string;
 }
 
-function LoadingSpinner({ width, height }: LoadingSpinnerProps) {
+function LoadingSpinner({ width, height, className }: LoadingSpinnerProps) {
   return (
-    <Lottie
-      play
-      animationData={animation}
-      speed={0.5}
-      style={{ width, height }}
-    />
+    <div className={className}>
+      <Lottie
+        play
+        animationData={animation}
+        speed={0.5}
+        style={{ width, height }}
+      />
+    </div>
   );
 }
 
