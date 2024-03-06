@@ -7,7 +7,7 @@ import {
   TablerIconsProps,
 } from "@tabler/icons-react";
 
-import { cn } from "../../shadcn/utils";
+import { cn } from "@/app/_common/shadcn/utils";
 
 type RatingType = "sad-dizzy" | "sad" | "smile" | "happy" | "xd";
 
