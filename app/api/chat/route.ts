@@ -8,10 +8,10 @@ interface ChatMessagesResponseData {
 export async function GET(request: NextRequest) {
   const chatRoomId = request.nextUrl.searchParams.get("chatRoomId");
   let cursorId: number | null = null;
-  let isEndOfData = true;
+  let hasData = true;
   const messages = [];
 
-  while (isEndOfData) {
+  while (hasData) {
     const response = await fetch(
       `http://3.38.76.76:8080/api/v1/chat/${chatRoomId}` +
         "?pageSize=5" +
@@ -28,7 +28,7 @@ export async function GET(request: NextRequest) {
     messages.push(...prevMessages);
 
     cursorId = prevMessages[prevMessages.length - 1]?.id;
-    isEndOfData = hasNext;
+    hasData = hasNext;
   }
 
   return NextResponse.json({ data: messages });
