@@ -15,7 +15,7 @@ export const useMutationReview = () => {
         queryKey: ["project", "user"],
       });
 
-      router.push("/");
+      router.back();
     },
     onError: error => {
       console.error(error);

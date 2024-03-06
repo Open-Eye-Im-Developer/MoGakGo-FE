@@ -2,7 +2,6 @@
 
 import { useForm } from "react-hook-form";
 import { MouseEventHandler } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 import { useAuthStore } from "@/app/_common/store/useAuthStore";
@@ -15,8 +14,6 @@ import {
 } from "@/app/_common/shadcn/ui/form";
 import { Button } from "@/app/_common/shadcn/ui/button";
 
-import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
-
 import { useMutationReview } from "../_hooks/useMutationReview";
 import { Ratings } from "../_constants/rating";
 import RatingItem from "./RatingItem";
@@ -25,9 +22,10 @@ function ReviewForm() {
   // TODO: 1. 나가기 버튼 누를시, useRouter의 query params로 projectId와 receiverId를 받아와야 함
   // TODO: 2. 상대 유저의 경우, 알람을 클릭할 때 projectId와 receiverId를 받아와야 함
 
-  const projectId = useSearchParams().get("projectId");
-  const receiverId = useSearchParams().get("receiverId");
-  const router = useRouter();
+  // TODO: 1,2번이 될 시에 주석 해제
+  // const projectId = useSearchParams().get("projectId");
+  // const receiverId = useSearchParams().get("receiverId");
+  // const router = useRouter();
 
   const { user } = useAuthStore();
   const { mutate } = useMutationReview();
@@ -44,28 +42,27 @@ function ReviewForm() {
 
   const onSubmitReview = () => {
     const rating = form.getValues("rating");
-    if (
-      !rating ||
-      typeof receiverId !== "string" ||
-      typeof projectId !== "string"
-    ) {
-      console.log(rating, receiverId, projectId);
-      return;
-    }
+    // if (
+    //   !rating ||
+    //   typeof receiverId !== "string" ||
+    //   typeof projectId !== "string"
+    // ) {
+    //   return;
+    // }
 
     mutate({
       rating,
-      receiverId: parseInt(receiverId),
-      projectId: parseInt(projectId),
+      receiverId: 2,
+      projectId: 110,
       senderId: user.id,
     });
   };
 
-  if (!projectId || !receiverId) {
-    router.back();
+  // if (!projectId || !receiverId) {
+  //   router.back();
 
-    return <LoadingSpinner />;
-  }
+  //   return <LoadingSpinner />;
+  // }
 
   return (
     <Form {...form}>
