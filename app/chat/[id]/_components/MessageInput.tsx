@@ -1,6 +1,9 @@
 "use client";
-import { useState } from "react";
 
+import { useState } from "react";
+import { Client } from "@stomp/stompjs";
+
+import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { cn } from "@/app/_common/shadcn/utils";
 import { buttonVariants } from "@/app/_common/shadcn/ui/button";
 
@@ -8,10 +11,18 @@ import { MessageType } from "../_types/message";
 
 interface MessageInputProp {
   addNewMessage: (newMessage: MessageType[]) => void;
+  clientRef: React.MutableRefObject<Client | null>;
+  chatRoomId: string;
 }
 
-function MessageInput({ addNewMessage }: MessageInputProp) {
+function MessageInput({
+  addNewMessage,
+  clientRef,
+  chatRoomId,
+}: MessageInputProp) {
   const [message, setMessage] = useState("");
+  const { getUser } = useAuthStore();
+  const hasBlankInMessage = !/\S+/.test(message);
 
   const handleChangeMessage = (message: string) => {
     setMessage(message);
@@ -27,9 +38,22 @@ function MessageInput({ addNewMessage }: MessageInputProp) {
   };
 
   const handleSubmit = () => {
-    if (!/\S+/.test(message)) return;
+    if (
+      hasBlankInMessage ||
+      !(clientRef.current && clientRef.current.connected)
+    )
+      return;
     // post 요청
     // webSocket event 발행
+    clientRef.current?.publish({
+      destination: `/app/chatroom/${chatRoomId}`,
+      body: JSON.stringify({
+        messageType: "TALK",
+        userId: getUser().id,
+        message,
+      }),
+    });
+
     const newMessage: MessageType = {
       content: message,
       senderId: "1",
