@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { deleteUser } from "@/app/_common/api/auth";
 
-export const useMutationDeleteUser = () => {
+export const useDeleteUser = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
 

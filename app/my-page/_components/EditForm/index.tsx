@@ -6,57 +6,55 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/app/_common/shadcn/ui/form";
 import { Button } from "@/app/_common/shadcn/ui/button";
 
-import { UserType } from "../../types";
 import { editFormSchema } from "../../_util/validation";
+import { useMutationUpdateUser } from "../../_hooks/useMutationUpdateUser";
 import WantedJobsField from "./WantedJobsField";
 import UsernameField from "./UsernameField";
-import DevelopLanuagesField from "./DevelopLanguagesField";
 import BioField from "./BioField";
-import AchievementField from "./AchievementField";
 
 interface EditFormProps {
-  defaultValues: UserType;
+  defaultValues?: z.infer<typeof editFormSchema>;
+  disabled?: boolean;
 }
 
-function EditForm({ defaultValues }: EditFormProps) {
+function EditForm({ defaultValues, disabled }: EditFormProps) {
+  const { mutate, isPending } = useMutationUpdateUser();
+
   const form = useForm<z.infer<typeof editFormSchema>>({
     resolver: zodResolver(editFormSchema),
     defaultValues: {
       ...defaultValues,
-      isResetAvator: false,
     },
   });
 
-  function handleSubmit(values: z.infer<typeof editFormSchema>) {
-    console.log(values);
-    alert(JSON.stringify(values));
-  }
+  const handleSubmit = async (values: z.infer<typeof editFormSchema>) => {
+    await mutate(values);
+  };
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
-        <div className="flex max-w-2xl flex-col items-center gap-1.5">
-          <div className="relative h-52 w-52">
-            {/* 프로필 */}
-            <div className="h-full w-full bg-slate-200"></div>
-            <div className="absolute bottom-0 right-0 inline-block bg-primary p-2 text-white">
-              <IconPencil />
+      <form onSubmit={form.handleSubmit(handleSubmit)}>
+        <fieldset className="space-y-4" disabled={disabled || isPending}>
+          <div className="flex max-w-2xl flex-col items-center gap-1.5">
+            <div className="relative h-52 w-52">
+              {/* 프로필 */}
+              <div className="h-full w-full bg-slate-200"></div>
+              <div className="absolute bottom-0 right-0 inline-block bg-primary p-2 text-white">
+                <IconPencil />
+              </div>
             </div>
           </div>
-        </div>
-        {/* <AvatorUploadFiled form={form} /> */}
-        <UsernameField form={form} />
-        <BioField form={form} />
-        <DevelopLanuagesField form={form} />
-        <WantedJobsField form={form} />
-        <AchievementField form={form} />
-        <Button
-          type="submit"
-          className="w-full"
-          disabled={!form.formState.isValid}
-        >
-          저장
-        </Button>
+          <UsernameField form={form} />
+          <BioField form={form} />
+          <WantedJobsField form={form} />
+          <Button
+            type="submit"
+            className="w-full"
+            disabled={!form.formState.isValid}
+          >
+            저장
+          </Button>
+        </fieldset>
       </form>
     </Form>
   );

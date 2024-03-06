@@ -5,7 +5,7 @@ import SignupForm from "./_components/SignupForm";
 function SignUpPage() {
   return (
     <Suspense>
-      <SignupForm />;
+      <SignupForm />
     </Suspense>
   );
 }
