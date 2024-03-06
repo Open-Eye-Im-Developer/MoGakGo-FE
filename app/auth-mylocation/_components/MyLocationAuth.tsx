@@ -40,7 +40,7 @@ function MyLocationAuth() {
   const form = useForm({
     values: {
       areaCode: areaCode,
-      userId: user.id,
+      userId: user?.id,
     },
     resolver: zodResolver(MyLocationAuthFormSchema),
   });
@@ -48,7 +48,7 @@ function MyLocationAuth() {
   const { handleSubmit, formState } = form;
 
   const onSubmit = () => {
-    if (!areaCode || !isError) return;
+    if (!user || !areaCode || !isError) return;
 
     mutate({
       userId: user.id,

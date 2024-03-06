@@ -14,7 +14,7 @@ export interface SignUpUser {
   avatarUrl: string;
   githubUrl: string;
   bio?: string;
-  developLanguages?: Language[];
+  developLanguages?: string[];
   jandiRate?: number;
   achievementTitle?: string;
   wantedJobs?: WantedJobs[];
