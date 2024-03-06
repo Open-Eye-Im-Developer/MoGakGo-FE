@@ -22,6 +22,7 @@ function MessageInput({
 }: MessageInputProp) {
   const [message, setMessage] = useState("");
   const { getUser } = useAuthStore();
+  const hasBlankInMessage = !/\S+/.test(message);
 
   const handleChangeMessage = (message: string) => {
     setMessage(message);
@@ -38,7 +39,7 @@ function MessageInput({
 
   const handleSubmit = () => {
     if (
-      !/\S+/.test(message) ||
+      hasBlankInMessage ||
       !(clientRef.current && clientRef.current.connected)
     )
       return;
