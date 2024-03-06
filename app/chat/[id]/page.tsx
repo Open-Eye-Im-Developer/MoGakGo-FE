@@ -8,11 +8,11 @@ async function getPreviousChatMessageList(chatRoomId: string) {
   const response = await fetch(
     `http://localhost:3000/api/chat?chatRoomId=${chatRoomId}`,
   );
-  const data = await response.json();
+  const { data } = await response.json();
 
   return {
     props: {
-      chatMessageList: data.data,
+      chatMessageList: data,
     },
   };
 }
@@ -23,7 +23,7 @@ async function ChattingRoomPage({ params }: { params: { id: string } }) {
     props: { chatMessageList },
   } = await getPreviousChatMessageList(params.id);
   // TODO: husky로 인해 커밋이 안되므로 임시 추가됨. 삭제 필요
-  console.log(chatMessageList)
+  console.log(chatMessageList);
   return (
     <>
       <StackNavigator
