@@ -32,5 +32,16 @@ export async function GET(request: NextRequest) {
     hasData = hasNext;
   }
 
-  return NextResponse.json({ data: messages });
+  const formattedMessages = messages
+    .map(message => {
+      return {
+        id: message.id,
+        message: message.message,
+        senderId: message.senderId,
+        createdAt: message.createdAt,
+      };
+    })
+    .reverse();
+
+  return NextResponse.json({ data: formattedMessages });
 }
