@@ -24,7 +24,7 @@ export const useMutationSignup = (
 
       setUser({
         ...data,
-        developLanguages,
+        developLanguages: developLanguages.map(obj => obj.language),
       });
 
       queryClient.invalidateQueries({
