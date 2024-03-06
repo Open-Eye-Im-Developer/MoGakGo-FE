@@ -17,6 +17,7 @@ export async function GET(request: NextRequest) {
         "?pageSize=5" +
         `${cursorId ? `&cursorId=${cursorId}` : ""}`,
       {
+        method: "GET",
         headers: {
           Authorization: `Bearer ${process.env.NEXT_PUBLIC_SWAGGER_KEY}`,
         },
