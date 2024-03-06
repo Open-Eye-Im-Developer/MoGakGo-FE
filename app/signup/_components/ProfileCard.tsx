@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { IconMoodPuzzled } from "@tabler/icons-react";
+import { IconExclamationCircle, IconMoodPuzzled } from "@tabler/icons-react";
 
 import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { cn } from "@/app/_common/shadcn/utils";
@@ -24,6 +24,14 @@ import { WANTED_JOB } from "@/app/_common/constants/wantedJob.constants";
 
 function ProfileCard() {
   const { user } = useAuthStore();
+
+  if (!user)
+    return (
+      <div className="flex gap-2 text-red-500">
+        <IconExclamationCircle />
+        <p>유저 정보를 찾을 수 없습니다.</p>
+      </div>
+    );
 
   return (
     <Card className={cn(`inset-0 left-0 top-0  border-none shadow-md`)}>
@@ -67,7 +75,7 @@ function ProfileCard() {
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-1">
-              {user.developLanguages?.map(({ language }, index) => (
+              {user.developLanguages?.map((language, index) => (
                 <Badge key={index}>{language}</Badge>
               ))}
             </div>
