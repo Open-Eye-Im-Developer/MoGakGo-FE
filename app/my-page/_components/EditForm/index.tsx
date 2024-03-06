@@ -44,12 +44,9 @@ function EditForm({ defaultValues, disabled }: EditFormProps) {
               </div>
             </div>
           </div>
-          {/* <AvatorUploadFiled form={form} /> */}
           <UsernameField form={form} />
           <BioField form={form} />
-          {/* <DevelopLanuagesField form={form} /> */}
           <WantedJobsField form={form} />
-          {/* <AchievementField form={form} /> */}
           <Button
             type="submit"
             className="w-full"
