@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 
-import { ResponseData, ResponseError } from "../types/response";
+import { ResponseData } from "../types/response";
 import { Creator, Like } from "../types/profile";
 import { instance } from "./instance";
 
