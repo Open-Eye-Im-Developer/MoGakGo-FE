@@ -2,6 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import { MouseEventHandler } from "react";
+import { redirect } from "next/navigation";
 import Link from "next/link";
 
 import { useAuthStore } from "@/app/_common/store/useAuthStore";
@@ -35,6 +36,8 @@ function ReviewForm() {
       rating: 0,
     },
   });
+
+  if (!user) return redirect("/login");
 
   const handleClickRating: MouseEventHandler<HTMLLIElement> = event => {
     form.setValue("rating", parseInt(event.currentTarget.id) + 1);
