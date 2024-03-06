@@ -40,7 +40,7 @@ function MyLocationAuth() {
   const form = useForm({
     values: {
       areaCode: areaCode,
-      userId: user.id,
+      userId: user?.id,
     },
     resolver: zodResolver(MyLocationAuthFormSchema),
   });
@@ -48,7 +48,7 @@ function MyLocationAuth() {
   const { handleSubmit, formState } = form;
 
   const onSubmit = () => {
-    if (!areaCode || !isError) return;
+    if (!user || !areaCode || !isError) return;
 
     mutate({
       userId: user.id,
@@ -87,7 +87,7 @@ function MyLocationAuth() {
                 {!isAllowGPS()
                   ? "현재 위치를 확인할 수 없습니다."
                   : areaCode && !isError
-                    ? `${CODE_TO_REGION_NAME[areaCode]}`
+                    ? `현재 위치는 '${CODE_TO_REGION_NAME[areaCode]}'입니다.`
                     : "현재 위치는 서비스 지역이 아닙니다."}
               </div>
             </section>

@@ -61,9 +61,11 @@ function SignupForm() {
 
   if (!userData || !languages)
     return (
-      <div className="grid h-screen w-screen place-content-center">
-        <LoadingSpinner width="100" height="100" />
-      </div>
+      <LoadingSpinner
+        width="100"
+        height="100"
+        className="grid h-screen w-screen place-content-center"
+      />
     );
 
   return (
@@ -72,7 +74,7 @@ function SignupForm() {
         <SignupCompleteModal />
       </CustomModal>
 
-      <main className="overscroll-y-none px-4">
+      <main className="overflow-y-auto px-4">
         <Form {...form}>
           <form className="h-screen" onSubmit={form.handleSubmit(onSubmit)}>
             <SignupFirstStep

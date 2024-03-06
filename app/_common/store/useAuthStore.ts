@@ -4,34 +4,18 @@ import { create } from "zustand";
 import { User } from "../types/user";
 
 interface AuthState {
-  user: User;
+  user: User | null;
 }
 
 interface AuthAction {
-  setUser: (user: User) => void;
-  getUser: () => User;
+  setUser: (user: AuthState["user"]) => void;
+  getUser: () => AuthState["user"];
 }
 
 export const useAuthStore = create(
   persist<AuthAction & AuthState>(
     (set, get) => ({
-      user: {
-        id: 0,
-        username: "",
-        githubId: "",
-        githubUrl: "",
-        avatarUrl: "",
-        bio: "",
-        jandiRate: 0,
-        achievementTitle: "",
-        developLanguages: [
-          {
-            language: "",
-            byteSize: 0,
-          },
-        ],
-        wantedJobs: [],
-      },
+      user: null,
       setUser: user => set({ user }),
       getUser: () => get().user,
     }),

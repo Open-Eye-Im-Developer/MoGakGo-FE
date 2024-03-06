@@ -1,6 +1,6 @@
 import { toast } from "sonner";
 
-import { PositionState } from "@/app/_common/types/position.types";
+import { PositionState } from "@/app/_common/types/position";
 
 type Parameter = (state: PositionState) => void;
 

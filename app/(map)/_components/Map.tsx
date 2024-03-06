@@ -2,21 +2,25 @@
 
 import { toast } from "sonner";
 import { MouseEvent, useEffect, useRef, useState } from "react";
+import { EmblaCarouselType } from "embla-carousel";
 
 import useQueryGeoAreaCode from "@/app/auth-mylocation/_hooks/useQueryGeoAreaCode";
 import { usePositionStore } from "@/app/_common/store/usePositionStore";
 import { cn } from "@/app/_common/shadcn/utils";
 import {
   Carousel,
+  CarouselApi,
   CarouselNext,
   CarouselPrevious,
 } from "@/app/_common/shadcn/ui/carousel";
 
 import WithSearchTokens from "@/app/_common/components/WithSearchTokens";
 import MapComponent from "@/app/_common/components/MapComponent";
+import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
 
 import REGION_CODE from "@/app/_common/constants/regionCode";
 
+import { formatRegionName } from "../_utils/formatRegionName";
 import useGetRank from "../_api/useGetRank";
 import useGetCardList from "../_api/useGetCardList";
 import EmptyCardList from "./EmptyCardList";
@@ -31,27 +35,38 @@ function Map() {
   const [regionCode, setRegionCode] = useState(0);
   const previousRegion = useRef<SVGElement | null>(null);
   const [isListShow, setIsListShow] = useState(false);
-  const { data: rank, isError: isRankError, error: rankError } = useGetRank();
+  const { rank, isRankLoading } = useGetRank();
   const { isAllowGPS } = usePositionStore();
   const {
-    data: cardList,
-    isError: isListError,
-    error: listError,
+    cardList,
+    fetchProject,
+    hasNextProject,
+    fetchProfile,
+    hasNextProfile,
   } = useGetCardList(regionCode);
-
-  if (isGeoError) toast.error(geoError?.message);
-  if (isRankError) toast.error(rankError.message);
-  if (isListError) toast.error(listError?.message);
+  const [carouselApi, setCarouselApi] = useState<CarouselApi>();
 
   useEffect(() => {
-    if (areaCode) {
-      toast.info("내가 위치한 지역으로 이동합니다.");
-      setRegionCode(areaCode);
-      const regionName = Object.keys(REGION_CODE).find(
-        region => REGION_CODE[region] === areaCode,
-      );
-      previousRegion.current = document.querySelector(`#${regionName}`);
-    }
+    if (!carouselApi) return;
+
+    carouselApi.on("select", (carouselApi: EmblaCarouselType) => {
+      if (carouselApi.canScrollNext()) return;
+
+      if (hasNextProject) fetchProject();
+      else if (!hasNextProject && hasNextProfile) fetchProfile();
+    });
+  }, [carouselApi, hasNextProject, hasNextProfile]);
+
+  if (isGeoError) toast.error(geoError?.message);
+
+  useEffect(() => {
+    if (!areaCode) return;
+
+    toast.info("내가 위치한 지역으로 이동합니다.");
+    setRegionCode(areaCode);
+    const regionName = formatRegionName(areaCode);
+    previousRegion.current = document.querySelector(`#${regionName}`);
+    setIsListShow(true);
   }, [areaCode]);
 
   const zoomOut = () => {
@@ -98,6 +113,12 @@ function Map() {
 
   return (
     <div className="relative h-screen w-screen touch-none overflow-hidden">
+      <LoadingSpinner
+        className={cn(
+          "absolute bottom-0 left-0 right-0 top-0 z-10 flex h-full w-full place-content-center bg-white/40 backdrop-blur-sm transition-all duration-300",
+          isRankLoading ? "visible opacity-100" : "invisible opacity-0",
+        )}
+      />
       <div
         id="map-wrap"
         onClick={handleRegionClick}
@@ -114,12 +135,14 @@ function Map() {
           isListShow ? "visible opacity-100" : "invisible opacity-0",
         )}
         onClick={handleCancelCard}
+        setApi={setCarouselApi}
       >
         <div
           id="carousel-wrap"
           className="flex h-full w-full flex-col items-center justify-center"
         >
-          {cardList ? (
+          {cardList.projectList.length !== 0 ||
+          cardList.profileList.length !== 0 ? (
             <CardList cardList={cardList} />
           ) : (
             <EmptyCardList onClick={handleEmptyCardClose} />

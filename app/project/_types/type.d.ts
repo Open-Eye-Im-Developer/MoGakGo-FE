@@ -22,11 +22,11 @@ interface PlaceItem {
   y: string;
 }
 
-interface IFormProps {
+interface FormProps {
   form: UseFormReturn<Form>;
 }
 
-interface IPlaceResponseProps {
+interface PlaceResponseProps {
   documents: PlaceItem[];
 }
 
@@ -48,10 +48,7 @@ interface RequestList {
 }
 
 interface RequestListSuccessData {
-  data: RequestList[] extends Array<infer U> ? U : never;
-  hasNext: boolean;
-  numberOfElements: number;
-  size: number;
+  data: RequestList[];
 }
 
 interface RequestListErrorData {
@@ -62,6 +59,6 @@ interface RequestListErrorData {
 }
 
 interface RequestListResponseData {
-  data: RequestListSuccessData | RequestListErrorData;
+  data: RequestList[] | RequestListErrorData;
   status: number;
 }

@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 
-import { ResponseData, ResponseError } from "../types/response";
+import { ResponseData } from "../types/response";
 import {
   Project,
   ProjectSummary,
@@ -12,32 +12,25 @@ interface RegionRank {
   densityRankByRegion: string[];
 }
 
-export const getRank = async (): Promise<
-  RegionRank | ResponseError | undefined
-> => {
-  try {
-    const { data } = await instance.get<RegionRank>("/projects/density/rank");
-    return data;
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      return error.response?.data;
-    }
-  }
+export const getRank = async (): Promise<RegionRank> => {
+  const { data } = await instance.get<RegionRank>("/projects/density/rank");
+  return data;
 };
 
-export const getProjectCard = async (
-  region: string,
-): Promise<ResponseData<Project> | ResponseError | undefined> => {
-  try {
-    const { data } = await instance.get<ResponseData<Project>>(
-      `/projects/${region}?cursorId=1&pageSize=5&sortOrder=ASC`,
-    );
-    return data;
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      return error.response?.data;
-    }
-  }
+interface ProjectCardRequest {
+  region: string;
+  cursorId?: number;
+}
+
+export const getProjectCard = async ({
+  region,
+  cursorId,
+}: ProjectCardRequest) => {
+  const query = `${cursorId ? `cursorId=${cursorId}&` : ""}pageSize=5&sortOrder=ASC`;
+  const { data } = await instance.get<ResponseData<Project>>(
+    `/projects/${region}?${query}`,
+  );
+  return data;
 };
 
 export const getProjectListByCreatorId = async (

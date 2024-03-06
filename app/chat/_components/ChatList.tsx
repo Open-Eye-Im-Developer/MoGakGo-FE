@@ -1,15 +1,16 @@
 "use client";
 import AnnounceEmptyActive from "@/app/_common/components/AnnounceEmptyNotification";
 
-import { DUMMY } from "../data";
 import chatEmptyAnimation from "../_assets/animation.json";
+import useGetChats from "../_api/useGetChats";
 import Chat from "./Chat";
 
 function ChatList() {
+  const { data: chats } = useGetChats();
   return (
     <>
-      {DUMMY?.length ? (
-        [...DUMMY]
+      {chats?.length ? (
+        [...chats]
           .reverse()
           .map(chat => <Chat chat={chat} key={chat.projectId} />)
       ) : (

@@ -29,12 +29,7 @@ function SignupFirstStep({
   };
 
   return (
-    <section
-      className={cn(
-        "scroll-none flex h-full w-full flex-col overflow-y-auto",
-        className,
-      )}
-    >
+    <section className={cn("flex h-full w-full flex-col", className)}>
       <SignupHeader
         step="1"
         subTitle="Github 계정 연동"

@@ -1,4 +1,4 @@
-import { ProfileType } from "../[id]/_types/message";
+import { ProfileType } from "../[id]/_types/chatRoom";
 
 export interface ChatType {
   projectId: number;
