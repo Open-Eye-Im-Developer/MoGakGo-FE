@@ -2,7 +2,6 @@
 
 import { useForm } from "react-hook-form";
 import { MouseEventHandler } from "react";
-import { redirect } from "next/navigation";
 import Link from "next/link";
 
 import { useAuthStore } from "@/app/_common/store/useAuthStore";
@@ -37,14 +36,14 @@ function ReviewForm() {
     },
   });
 
-  if (!user) return redirect("/login");
-
   const handleClickRating: MouseEventHandler<HTMLLIElement> = event => {
     form.setValue("rating", parseInt(event.currentTarget.id) + 1);
   };
 
   const onSubmitReview = () => {
     const rating = form.getValues("rating");
+    if (!user) return;
+
     // if (
     //   !rating ||
     //   typeof receiverId !== "string" ||
@@ -52,6 +51,8 @@ function ReviewForm() {
     // ) {
     //   return;
     // }
+
+    console.log(user.id);
 
     mutate({
       rating,
