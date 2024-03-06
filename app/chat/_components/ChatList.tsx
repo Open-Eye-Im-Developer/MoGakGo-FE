@@ -1,12 +1,23 @@
 "use client";
 import AnnounceEmptyActive from "@/app/_common/components/AnnounceEmptyNotification";
+import ActivityCardSkeleton from "@/app/_common/components/ActivityCardSkeleton";
 
 import chatEmptyAnimation from "../_assets/animation.json";
 import useGetChats from "../_api/useGetChats";
 import Chat from "./Chat";
 
 function ChatList() {
-  const { data: chats } = useGetChats();
+  const { chats, isLoading } = useGetChats();
+
+  if (isLoading)
+    return (
+      <div className="flex flex-col gap-4">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <ActivityCardSkeleton key={i} />
+        ))}
+      </div>
+    );
+
   return (
     <>
       {chats?.length ? (
