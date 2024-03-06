@@ -25,7 +25,7 @@ async function ChattingRoomPage({ params }: { params: { id: string } }) {
   // TODO: husky로 인해 커밋이 안되므로 임시 추가됨. 삭제 필요
   console.log(chatMessageList);
   return (
-    <>
+    <main>
       <StackNavigator
         content={
           <Profile avatarUrl={"https://github.com/shadcn.png"} username={"e"}>
@@ -35,7 +35,7 @@ async function ChattingRoomPage({ params }: { params: { id: string } }) {
       />
       <ProjectInfo />
       <MessageContainer chatRoomId={params.id} />
-    </>
+    </main>
   );
 }
 
