@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 
-import { ResponseData, ResponseError } from "../types/response";
+import { ResponseData } from "../types/response";
 import { Creator, Like } from "../types/profile";
 import { instance } from "./instance";
 
@@ -50,6 +50,7 @@ export const getReceiveLikeCount = async (
     }
   }
 };
+
 interface ProfileLikeBody {
   senderId: number;
   receiverId: number;
@@ -62,34 +63,17 @@ interface ProfileLikeResponse {
 export const postLikeProfile = async ({
   senderId,
   receiverId,
-}: ProfileLikeBody): Promise<
-  ProfileLikeResponse | ResponseError | undefined
-> => {
-  try {
-    const { data } = await instance.post<ProfileLikeResponse>(
-      "/profiles/like",
-      {
-        senderId,
-        receiverId,
-      },
-    );
-    return data;
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      return error.response?.data;
-    }
-  }
+}: ProfileLikeBody) => {
+  const { data } = await instance.post<ProfileLikeResponse>("/profiles/like", {
+    senderId,
+    receiverId,
+  });
+  return data;
 };
 
 export const deleteLikeProfile = async ({
   senderId,
   receiverId,
-}: ProfileLikeBody): Promise<ResponseError | undefined> => {
-  try {
-    await instance.delete("/profiles/like", { senderId, receiverId });
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      return error.response?.data;
-    }
-  }
+}: ProfileLikeBody) => {
+  await instance.delete("/profiles/like", { senderId, receiverId });
 };
