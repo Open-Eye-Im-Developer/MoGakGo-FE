@@ -17,13 +17,10 @@ async function getPreviousChatMessageList(chatRoomId: string) {
   };
 }
 
-// TODO: chatMessageList를 받아와서 MessageContainer에 props로 넘긴다.
 async function ChattingRoomPage({ params }: { params: { id: string } }) {
   const {
     props: { chatMessageList },
   } = await getPreviousChatMessageList(params.id);
-  // TODO: husky로 인해 커밋이 안되므로 임시 추가됨. 삭제 필요
-  console.log(chatMessageList);
   return (
     <main>
       <StackNavigator
@@ -33,8 +30,8 @@ async function ChattingRoomPage({ params }: { params: { id: string } }) {
           </Profile>
         }
       />
-      <ProjectInfo />
-      <MessageContainer chatRoomId={params.id} />
+      <ProjectInfo chatRoomId={params.id} />
+      <MessageContainer chatRoomId={params.id} prevChatMessageList={chatMessageList} />
     </main>
   );
 }
