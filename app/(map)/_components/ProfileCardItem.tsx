@@ -1,8 +1,11 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
 import ButtonLike from "@/app/project/_components/ButtonLike";
+import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { Progress } from "@/app/_common/shadcn/ui/progress";
 import {
   Card,
@@ -15,12 +18,15 @@ import { Badge as Tag } from "@/app/_common/shadcn/ui/badge";
 
 import { Creator } from "@/app/_common/types/profile";
 
+import useToggleLikeProfile from "../_api/useToggleLikeProfile";
+
 interface Props {
   profile: Creator;
 }
 
 function ProfileCardItem({ profile }: Props) {
   const {
+    id,
     username,
     githubId,
     avatarUrl,
@@ -31,6 +37,14 @@ function ProfileCardItem({ profile }: Props) {
     developLanguages,
     wantedJobs,
   } = profile;
+  const [isLiked, setIsLiked] = useState(false);
+  const { user } = useAuthStore();
+  const { addLikeProfile } = useToggleLikeProfile();
+
+  const handleToggleButton = () => {
+    setIsLiked(prev => !prev);
+    addLikeProfile({ senderId: user.id, receiverId: id });
+  };
 
   return (
     <div className="h-[550px] w-[330px] sm:w-[450px]">
@@ -90,7 +104,7 @@ function ProfileCardItem({ profile }: Props) {
               </div>
             </CardContent>
             <CardFooter className="flex justify-end">
-              <ButtonLike />
+              <ButtonLike onClick={handleToggleButton} isLiked={isLiked} />
             </CardFooter>
           </Card>
         </div>
