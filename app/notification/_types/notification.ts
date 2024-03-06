@@ -1,5 +1,5 @@
 export interface NotificationType {
-  tag: "REVIEW_REQUEST" | "REQUEST_ARRIVAL";
+  tag: NotificaitonType;
   sender: {
     name: string;
     id?: string;
@@ -10,3 +10,10 @@ export interface NotificationType {
     createdAt: string;
   };
 }
+
+export type NotificaitonType =
+  | "REVIEW_REQUEST"
+  | "REQUEST_ARRIVAL"
+  | "ACHIEVEMENT"
+  | "MATCHING_SUCCESSED"
+  | "MATCHING_FAILED";
