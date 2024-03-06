@@ -52,8 +52,6 @@ function ReviewForm() {
     //   return;
     // }
 
-    console.log(user.id);
-
     mutate({
       rating,
       receiverId: 2,

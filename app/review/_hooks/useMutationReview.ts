@@ -12,10 +12,10 @@ export const useMutationReview = () => {
     mutationKey: ["review"],
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["project", "user"],
+        queryKey: ["user"],
       });
 
-      router.back();
+      router.push("/my-page");
     },
     onError: error => {
       console.error(error);
