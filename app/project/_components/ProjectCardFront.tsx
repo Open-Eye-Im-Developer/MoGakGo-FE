@@ -69,7 +69,10 @@ function ProjectCardFront(props: CardFrontProps) {
       <CardHeader className="px-5 pt-4">
         <CardDescription className="flex justify-between text-lg font-bold text-black">
           <span className="flex items-center">
-            <ButtonRotate isDisabled={user.id !== id} onRotate={onRotate} />
+            <ButtonRotate
+              isDisabled={!user || user.id !== id}
+              onRotate={onRotate}
+            />
             <Popover>
               <PopoverTrigger className="rounded-md p-2 hover:bg-[#5454543e]">
                 <IconMoodPuzzled />
@@ -122,7 +125,7 @@ function ProjectCardFront(props: CardFrontProps) {
             <p className="font-bold">📍 {meetDetail}</p>
             <p>🕡 {formatMeetingTime(meetStartTime, meetEndTime)}</p>
           </div>
-          {id !== user.id ? (
+          {user && user.id !== id ? (
             <ButtonRequest projectId={projectId} />
           ) : (
             <ProjectRemoveDialog
