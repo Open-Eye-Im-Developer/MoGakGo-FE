@@ -1,4 +1,4 @@
-import { WantedJobIds } from "@/app/my-page/types";
+import { WantedJobs } from "./user";
 
 export interface Creator {
   id: number;
@@ -10,5 +10,10 @@ export interface Creator {
   jandiRate: number;
   achievementTitle: string;
   developLanguages: string[];
-  wantedJobs: WantedJobIds[];
+  wantedJobs: WantedJobs[];
+}
+
+export interface Like {
+  userId: number;
+  likeCount: number;
 }
