@@ -42,7 +42,7 @@ function SignupFinalStep({
     <>
       <section
         className={cn(
-          "scroll-none flex h-full w-full flex-col overflow-hidden",
+          "flex h-full w-full flex-col overscroll-y-none",
           className,
         )}
       >

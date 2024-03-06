@@ -74,7 +74,7 @@ function SignupForm() {
         <SignupCompleteModal />
       </CustomModal>
 
-      <main className="overscroll-y-none px-4">
+      <main className="overflow-y-auto px-4">
         <Form {...form}>
           <form className="h-screen" onSubmit={form.handleSubmit(onSubmit)}>
             <SignupFirstStep

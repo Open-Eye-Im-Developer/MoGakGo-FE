@@ -19,12 +19,7 @@ function SignupSecondStep({
   languages,
 }: SignupSecondStepProps) {
   return (
-    <section
-      className={cn(
-        "scroll-none flex h-full w-full flex-col overflow-y-auto",
-        className,
-      )}
-    >
+    <section className={cn("flex h-full w-full flex-col", className)}>
       <SignupHeader
         step="2"
         subTitle="Github 주 언어"
