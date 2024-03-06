@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Client } from "@stomp/stompjs";
 
+import { useAuthStore } from "@/app/_common/store/useAuthStore";
+
 import { useScroll } from "../_hooks/useScroll";
 import { useCustomMessage } from "../_hooks/useCustomMessage";
 import UpScrollButton from "./UpScrollButton";
@@ -11,16 +13,20 @@ import Message from "./Message";
 
 interface MessageContainerProps {
   chatRoomId: string;
+  prevChatMessageList: CustomMessageType[];
 }
 
-// TODO: props로 받은 chatMessageList를 useCustomMessage에 넘겨서 처리(가공)
+// TODO: props로 받은 chatMessageList를 useCustomMessage에 넘겨서 필터링 처리
 function MessageContainer(props: MessageContainerProps) {
   const { chatRoomId } = props;
   const client = useRef<Client | null>(null);
-  const { messageList, addNewMessage, currentSender } = useCustomMessage();
+  const { user } = useAuthStore();
+  const { messageList, addNewMessage, currentSender } = useCustomMessage(
+    user!.id,
+  );
+
   const { scrollRef, handleScroll, scrollToBottom, isScrollUpper } =
     useScroll();
-  const MY_ID = "1";
   const [exposureMessage, setExposureMessage] = useState("");
 
   const connect = () => {
@@ -35,8 +41,16 @@ function MessageContainer(props: MessageContainerProps) {
     });
 
     client.current.onConnect = () => {
-      client.current?.subscribe(`/topic/chatroom/${chatRoomId}`, () => {
-        // TODO: 받은 메시지 addNewMessage로 messageList에 추가하기
+      client.current?.subscribe(`/topic/chatroom/${chatRoomId}`, data => {
+        const { id, message, senderId, createdAt } = JSON.parse(data.body);
+        addNewMessage([
+          {
+            id,
+            message,
+            senderId,
+            createdAt,
+          },
+        ]);
       });
     };
 
@@ -52,8 +66,8 @@ function MessageContainer(props: MessageContainerProps) {
   };
 
   useEffect(() => {
-    if (currentSender !== MY_ID && isScrollUpper)
-      return setExposureMessage(messageList[messageList.length - 1].content);
+    if (currentSender !== user!.id && isScrollUpper)
+      return setExposureMessage(messageList[messageList.length - 1].message);
     scrollToBottom();
   }, [messageList]);
 
@@ -77,7 +91,9 @@ function MessageContainer(props: MessageContainerProps) {
         onScroll={handleScroll}
       >
         {messageList.map(message => (
-          <Message message={message} key={message.id} />
+          <div key={message.id}>
+            <Message message={message} userId={user!.id} />
+          </div>
         ))}
       </div>
       <UpScrollButton
