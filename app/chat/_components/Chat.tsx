@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { cn } from "@/app/_common/shadcn/utils";
 
 import ActivityCard from "@/app/_common/components/ActivityCard";
@@ -20,10 +21,10 @@ function Chat({ chat }: ChatProps) {
     status,
     profiles,
   } = chat;
+  const { user } = useAuthStore();
 
-  const MY_ID = 1;
   const matchedUser = profiles?.find(
-    profile => profile.userId !== MY_ID,
+    profile => profile.userId !== user!.id,
   ) as ProfileType;
 
   return (
