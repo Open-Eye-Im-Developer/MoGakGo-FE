@@ -21,7 +21,7 @@ function MessageInput({
   chatRoomId,
 }: MessageInputProp) {
   const [message, setMessage] = useState("");
-  const { getUser } = useAuthStore();
+  const { user } = useAuthStore();
   const hasBlankInMessage = !/\S+/.test(message);
 
   const handleChangeMessage = (message: string) => {
@@ -49,7 +49,7 @@ function MessageInput({
       destination: `/app/chatroom/${chatRoomId}`,
       body: JSON.stringify({
         messageType: "TALK",
-        userId: getUser().id,
+        userId: user!.id,
         message,
       }),
     });
