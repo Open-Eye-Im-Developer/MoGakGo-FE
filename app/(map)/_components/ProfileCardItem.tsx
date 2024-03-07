@@ -38,15 +38,15 @@ function ProfileCardItem({ profile }: Props) {
       developLanguages,
       wantedJobs,
     },
-    requestYn: isLiked,
+    requestYn,
   } = profile;
   const { user } = useAuthStore();
-  const { toggleLikeProfile } = useToggleLikeProfile();
+  const { toggleLikeProfile, isLiked } = useToggleLikeProfile();
 
   const handleToggleButton = () => {
     if (!user) return;
     toggleLikeProfile({
-      isLiked,
+      isLiked: isLiked ?? requestYn,
       likeInfo: { senderId: user.id, receiverId: id },
     });
   };
@@ -109,7 +109,10 @@ function ProfileCardItem({ profile }: Props) {
               </div>
             </CardContent>
             <CardFooter className="flex justify-end">
-              <ButtonLike onClick={handleToggleButton} isLiked={isLiked} />
+              <ButtonLike
+                onClick={handleToggleButton}
+                isLiked={isLiked ?? requestYn}
+              />
             </CardFooter>
           </Card>
         </div>
