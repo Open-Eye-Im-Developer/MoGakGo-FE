@@ -21,7 +21,9 @@ function AchievementItem({
   className,
   isRepresentative,
 }: AchievementItemProps) {
-  const { id, title, isCompleted } = achievement;
+  const { achievementId, title, requirementValue, progressCount } = achievement;
+  const isCompleted = progressCount === requirementValue;
+
   const [open, setOpen] = useState(false);
 
   const onOpenChange = () => {
@@ -31,12 +33,13 @@ function AchievementItem({
   return (
     <>
       <AchievementDrawer
+        isCompleted={isCompleted}
         achievement={achievement}
         open={open}
         onOpenChange={setOpen}
       />
       <li
-        id={`${id}`}
+        id={`${achievementId}`}
         className={cn(
           "flex cursor-pointer flex-col items-center gap-2 rounded-md",
           className,

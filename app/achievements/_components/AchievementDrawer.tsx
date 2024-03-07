@@ -18,16 +18,23 @@ import { AchievementProgress } from "./AchievementProgress";
 import { Achievement } from "./AchievementList";
 
 interface AchievementDrawerProps {
+  isCompleted: boolean;
   achievement: Achievement;
   onOpenChange: (open: boolean) => void;
   open: boolean;
 }
+
 function AchievementDrawer({
+  isCompleted,
   achievement,
   open,
   onOpenChange,
 }: AchievementDrawerProps) {
-  const { id, title, isCompleted, description, nowGrade, total } = achievement;
+  const { achievementId, title, description, progressCount, requirementValue } =
+    achievement;
+
+  const leftToComplete = requirementValue - progressCount;
+  const isThreeOrLessLeftToComplete = leftToComplete <= 3;
 
   const handleCloseDrawer = () => {
     onOpenChange(false);
@@ -35,7 +42,7 @@ function AchievementDrawer({
 
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
-      <DrawerContent id={`${id}`}>
+      <DrawerContent id={`${achievementId}`}>
         <DrawerHeader className="place-content-center place-items-center gap-4 pb-2">
           <div className="w-[100px] rounded-xl bg-secondary">
             <AspectRatio
@@ -65,27 +72,26 @@ function AchievementDrawer({
           <DrawerDescription>획득방법: {description}</DrawerDescription>
         </DrawerHeader>
         <DrawerFooter className="place-items-center pb-6 pt-2">
+          {/* TODO: 이미 대표 업적으로 설정하지 않은 경우(user.achievement.id !== achievementId)도 추가하기 */}
           {isCompleted ? (
             <Button className="w-full" onClick={handleCloseDrawer}>
               내 대표 업적으로 설정하기
             </Button>
           ) : (
             <>
-              {total - nowGrade <= 3 ? (
-                <p className="text-sm text-success">
-                  달성까지 앞으로{" "}
-                  <span className="font-bold">{total - nowGrade}</span>회!
-                </p>
-              ) : (
-                <p className="text-sm text-primary">
-                  달성까지 앞으로{" "}
-                  <span className="font-bold">{total - nowGrade}</span>회
-                  남았어요.
-                </p>
-              )}
+              <p
+                className={cn("text-sm", {
+                  "text-success": isThreeOrLessLeftToComplete,
+                  "text-primary": !isThreeOrLessLeftToComplete,
+                })}
+              >
+                달성까지 앞으로{" "}
+                <span className="font-bold">{leftToComplete}</span>회
+                {!isThreeOrLessLeftToComplete && " 남았어요."}
+              </p>
               <AchievementProgress
                 className="relative w-[300px] bg-secondary bg-opacity-30 dark:bg-opacity-50"
-                value={calculateAchievement(nowGrade, total)}
+                value={calculateAchievement(progressCount, requirementValue)}
               ></AchievementProgress>
             </>
           )}

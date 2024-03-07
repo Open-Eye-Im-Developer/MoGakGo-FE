@@ -7,42 +7,48 @@ import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import AchievementItem from "./AchievementItem";
 
 export interface Achievement {
-  id: number;
+  userId: number;
+  achievementId: number;
   title: string;
+  imgUrl: string;
   description: string;
-  total: number;
-  nowGrade: number;
-  isCompleted: boolean;
+  requirementValue: number;
+  requirementType?: "SEQUENCE" | "ACCUMULATE";
+  progressCount: number;
 }
 
 const ACHIEVEMENTS: Achievement[] = [
   {
-    id: 1,
+    userId: 11,
+    achievementId: 1,
     title: "모각코도 한걸음부터",
     description: "접속 30일 이상 시 획득",
-    total: 1,
-    nowGrade: 1,
-    isCompleted: true,
+    requirementValue: 1,
+    progressCount: 1,
+    imgUrl: "/images/cat.webp",
   },
   {
-    id: 2,
+    userId: 11,
+    achievementId: 2,
     title: "너는 내 운명",
     description: "동일한 상대와 3회 이상 매칭될 시 획득",
-    total: 5,
-    nowGrade: 4,
-    isCompleted: false,
+    requirementValue: 5,
+    progressCount: 1,
+    imgUrl: "/images/cat.webp",
   },
   {
-    id: 3,
+    userId: 11,
+    achievementId: 3,
     title: "포획 실패는 존재합니다",
     description: "첫 포획 실패 시 획득",
-    total: 1,
-    nowGrade: 1,
-    isCompleted: true,
+    requirementValue: 1,
+    progressCount: 1,
+    imgUrl: "/images/cat.webp",
   },
 ];
 
 function AchievementList() {
+  // TODO: 실제 user의 achievement 정보를 받아오면 제거
   const myAchievement = undefined;
 
   const hanldeClickMyAchievement = () => {
@@ -78,12 +84,7 @@ function AchievementList() {
         )}
       </header>
       <ul className="mt-8 grid grid-cols-3 grid-rows-3 gap-4">
-        {ACHIEVEMENTS.sort((a, b) => {
-          if (a.isCompleted === b.isCompleted) {
-            return 0;
-          }
-          return a.isCompleted ? 1 : -1;
-        }).map((achievement, index) => (
+        {ACHIEVEMENTS.map((achievement, index) => (
           <AchievementItem achievement={achievement} key={index} />
         ))}
       </ul>
