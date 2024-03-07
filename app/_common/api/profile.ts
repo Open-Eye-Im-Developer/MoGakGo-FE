@@ -76,5 +76,5 @@ export const deleteLikeProfile = async ({
   senderId,
   receiverId,
 }: ProfileLikeBody) => {
-  await instance.delete("/profiles/like", { senderId, receiverId });
+  await instance.delete("/profiles/like", { data: { senderId, receiverId } });
 };
