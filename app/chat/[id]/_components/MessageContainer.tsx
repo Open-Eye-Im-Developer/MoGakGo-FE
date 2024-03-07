@@ -6,6 +6,7 @@ import { Client } from "@stomp/stompjs";
 import { useAuthStore } from "@/app/_common/store/useAuthStore";
 
 import { useScroll } from "../_hooks/useScroll";
+import { useGetPrevMessageList } from "../_hooks/useGetPrevMessageList";
 import { useCustomMessage } from "../_hooks/useCustomMessage";
 import UpScrollButton from "./UpScrollButton";
 import MessageInput from "./MessageInput";
@@ -13,12 +14,13 @@ import Message from "./Message";
 
 interface MessageContainerProps {
   chatRoomId: string;
-  prevChatMessageList: CustomMessageType[];
 }
 
 // TODO: props로 받은 chatMessageList를 useCustomMessage에 넘겨서 필터링 처리
 function MessageContainer(props: MessageContainerProps) {
   const { chatRoomId } = props;
+  const { data: prevChatMessageList, isFetchedAfterMount } =
+    useGetPrevMessageList(chatRoomId);
   const client = useRef<Client | null>(null);
   const { user } = useAuthStore();
   const { messageList, addNewMessage, currentSender } = useCustomMessage(
@@ -82,6 +84,12 @@ function MessageContainer(props: MessageContainerProps) {
       disconnect();
     };
   }, []);
+
+  useEffect(() => {
+    if (isFetchedAfterMount) {
+      addNewMessage(prevChatMessageList!);
+    }
+  }, [isFetchedAfterMount, prevChatMessageList]);
 
   return (
     <div className="relative mt-20 h-full w-full">
