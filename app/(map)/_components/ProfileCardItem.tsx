@@ -44,6 +44,7 @@ function ProfileCardItem({ profile }: Props) {
   const { addLikeProfile } = useToggleLikeProfile();
 
   const handleToggleButton = () => {
+    if (!user) return;
     setIsLiked(prev => !prev);
     addLikeProfile({ senderId: user.id, receiverId: id });
   };
