@@ -50,7 +50,7 @@ const useGetCardList = (regionCode: number) => {
         isGetProfile.current = false;
         return;
       }
-      const cursorId = lastPage.data[lastPage.data.length - 1].id;
+      const cursorId = lastPage.data[lastPage.data.length - 1].response.id;
       return cursorId;
     },
     enabled: !!region && isGetProfile.current,
