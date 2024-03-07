@@ -18,7 +18,7 @@ const useToggleLikeProfile = () => {
   const { mutate: addLikeProfile } = useMutation({
     mutationFn: postLikeProfile,
     onSuccess: () => {
-      toast.success("찔러보기에 성공했습니다.");
+      toast.success("찔러보기 요청을 완료했습니다.");
       setIsLiked(true);
     },
     onError: (error: AxiosError<ResponseError>) => {
@@ -31,7 +31,7 @@ const useToggleLikeProfile = () => {
   const { mutate: cancelLikeProfile } = useMutation({
     mutationFn: deleteLikeProfile,
     onSuccess: () => {
-      toast.success("찔러보기에 삭제에 성공했습니다.");
+      toast.success("찔러보기 삭제를 완료했습니다.");
       setIsLiked(false);
     },
     onError: (error: AxiosError<ResponseError>) => {
