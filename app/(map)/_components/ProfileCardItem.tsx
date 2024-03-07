@@ -16,26 +16,28 @@ import {
 } from "@/app/_common/shadcn/ui/card";
 import { Badge as Tag } from "@/app/_common/shadcn/ui/badge";
 
-import { Creator } from "@/app/_common/types/profile";
+import { Profile } from "@/app/_common/types/profile";
 
 import useToggleLikeProfile from "../_api/useToggleLikeProfile";
 
 interface Props {
-  profile: Creator;
+  profile: Profile;
 }
 
 function ProfileCardItem({ profile }: Props) {
   const {
-    id,
-    username,
-    githubId,
-    avatarUrl,
-    githubUrl,
-    bio,
-    jandiRate,
-    achievementTitle,
-    developLanguages,
-    wantedJobs,
+    response: {
+      id,
+      username,
+      githubId,
+      avatarUrl,
+      githubUrl,
+      bio,
+      jandiRate,
+      achievementTitle,
+      developLanguages,
+      wantedJobs,
+    },
   } = profile;
   const [isLiked, setIsLiked] = useState(false);
   const { user } = useAuthStore();

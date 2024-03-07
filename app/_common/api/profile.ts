@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 
 import { ResponseData } from "../types/response";
-import { Creator, Like } from "../types/profile";
+import { Like, Profile } from "../types/profile";
 import { instance } from "./instance";
 
 interface ProfileCardRequest {
@@ -9,17 +9,12 @@ interface ProfileCardRequest {
   cursorId?: number;
 }
 
-interface ProfileCardResponse {
-  response: Creator;
-  requestYn: boolean;
-}
-
 export const getProfileCard = async ({
   region,
   cursorId,
 }: ProfileCardRequest) => {
   const query = `${cursorId ? `cursorId=${cursorId}&` : ""}pageSize=5&sortOrder=ASC`;
-  const { data } = await instance.get<ResponseData<ProfileCardResponse>>(
+  const { data } = await instance.get<ResponseData<Profile>>(
     `/profiles/${region}?${query}`,
   );
   return data;
