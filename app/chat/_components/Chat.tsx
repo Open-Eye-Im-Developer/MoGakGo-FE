@@ -1,12 +1,10 @@
 import Link from "next/link";
 
-import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { cn } from "@/app/_common/shadcn/utils";
 
 import ActivityCard from "@/app/_common/components/ActivityCard";
 
 import { ChatType } from "../_types/chat";
-import { ProfileType } from "../[id]/_types/chatRoom";
 
 interface ChatProps {
   chat: ChatType;
@@ -19,13 +17,8 @@ function Chat({ chat }: ChatProps) {
     lastMessage,
     lastMessageCreatedAt,
     status,
-    profiles,
+    chatUserInfo: matchedUser,
   } = chat;
-  const { user } = useAuthStore();
-
-  const matchedUser = profiles?.find(
-    profile => profile.userId !== user!.id,
-  ) as ProfileType;
 
   return (
     <Link href={`/chat/${chatRoomId}`} key={projectId}>
