@@ -60,9 +60,7 @@ function NavigationProfile(props: NavigationProfileProps) {
         <div className="flex gap-1">
           {developLanguages &&
             developLanguages.length > 0 &&
-            developLanguages.map(lang => (
-              <Badge key={lang.language}>{lang.language}</Badge>
-            ))}
+            developLanguages.map(lang => <Badge key={lang}>{lang}</Badge>)}
         </div>
       </footer>
     </section>

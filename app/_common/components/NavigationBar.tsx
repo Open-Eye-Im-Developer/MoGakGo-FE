@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { IconMenu2 } from "@tabler/icons-react";
 
 import {
@@ -12,12 +13,13 @@ import {
 
 import { useAuthStore } from "../store/useAuthStore";
 import { Separator } from "../shadcn/ui/separator";
+import { Button } from "../shadcn/ui/button";
 import NavigationProfile from "./NavigationProfile";
 import NavigationItem from "./NavigationItem";
 
 // TODO: 튜토리얼과 모각코 페이지를 만들어서 링크를 연결해주세요. 현재는 임시로 '#'로 연결
 function NavigationBar() {
-  const { getUser } = useAuthStore();
+  const { user } = useAuthStore();
 
   return (
     <Sheet>
@@ -29,7 +31,15 @@ function NavigationBar() {
         className="w-[360px] overflow-hidden p-0 sm:w-[540px] sm:rounded-l-3xl"
       >
         <SheetHeader>
-          <NavigationProfile user={getUser()} />
+          {user ? (
+            <NavigationProfile user={user} />
+          ) : (
+            <div className="flex h-32 items-center justify-center">
+              <Button asChild>
+                <Link href="/login">로그인</Link>
+              </Button>
+            </div>
+          )}
         </SheetHeader>
         <Separator className="mb-4 h-2 bg-slate-100 shadow-inner" />
         <NavigationItem title="튜토리얼" href="#" />

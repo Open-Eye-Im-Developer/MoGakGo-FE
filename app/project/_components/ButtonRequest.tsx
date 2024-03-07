@@ -15,12 +15,20 @@ function ButtonRequest(props: ButtonReuqestProps) {
   const { toast } = useToast();
   const { user } = useAuthStore();
   const handleRequest = async () => {
+    if (!user) {
+      return toast({
+        title: "요청에 실패했습니다.",
+        description: "유저 정보를 찾을 수 없습니다.",
+        variant: "destructive",
+      });
+    }
+
     const response = await fetch("/api/project/request/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ senderId: user.id, projectId: projectId }),
+      body: JSON.stringify({ senderId: user?.id, projectId: projectId }),
     });
 
     const { data, status } = await response.json();

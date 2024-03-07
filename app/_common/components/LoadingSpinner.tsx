@@ -1,3 +1,5 @@
+"use client";
+
 import Lottie from "react-lottie-player";
 
 import animation from "../assets/spinner-animation.json";
