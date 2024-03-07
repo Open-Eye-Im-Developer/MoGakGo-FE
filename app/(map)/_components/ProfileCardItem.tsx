@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -38,15 +38,15 @@ function ProfileCardItem({ profile }: Props) {
       developLanguages,
       wantedJobs,
     },
+    requestYn: isLiked,
   } = profile;
-  const [isLiked, setIsLiked] = useState(false);
   const { user } = useAuthStore();
-  const { addLikeProfile } = useToggleLikeProfile();
+  const { addLikeProfile, cancelLikeProfile } = useToggleLikeProfile();
 
   const handleToggleButton = () => {
     if (!user) return;
-    setIsLiked(prev => !prev);
-    addLikeProfile({ senderId: user.id, receiverId: id });
+    if (isLiked) cancelLikeProfile({ senderId: user.id, receiverId: id });
+    else addLikeProfile({ senderId: user.id, receiverId: id });
   };
 
   return (
