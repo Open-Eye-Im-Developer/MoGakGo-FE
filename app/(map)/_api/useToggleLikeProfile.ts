@@ -1,4 +1,5 @@
 import { toast } from "sonner";
+import { useState } from "react";
 import { AxiosError } from "axios";
 import { useMutation } from "@tanstack/react-query";
 
@@ -12,10 +13,13 @@ interface ToggleLike {
 }
 
 const useToggleLikeProfile = () => {
+  const [isLiked, setIsLiked] = useState<boolean | null>(null);
+
   const { mutate: addLikeProfile } = useMutation({
     mutationFn: postLikeProfile,
     onSuccess: () => {
       toast.success("찔러보기에 성공했습니다.");
+      setIsLiked(true);
     },
     onError: (error: AxiosError<ResponseError>) => {
       if (error.response) toast.error(error.response.data.message);
@@ -28,6 +32,7 @@ const useToggleLikeProfile = () => {
     mutationFn: deleteLikeProfile,
     onSuccess: () => {
       toast.success("찔러보기에 삭제에 성공했습니다.");
+      setIsLiked(false);
     },
     onError: (error: AxiosError<ResponseError>) => {
       if (error.response) toast.error(error.response.data.message);
@@ -41,7 +46,7 @@ const useToggleLikeProfile = () => {
     else addLikeProfile(likeInfo);
   };
 
-  return { toggleLikeProfile };
+  return { toggleLikeProfile, isLiked };
 };
 
 export default useToggleLikeProfile;
