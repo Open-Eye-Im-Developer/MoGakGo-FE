@@ -41,12 +41,14 @@ function ProfileCardItem({ profile }: Props) {
     requestYn: isLiked,
   } = profile;
   const { user } = useAuthStore();
-  const { addLikeProfile, cancelLikeProfile } = useToggleLikeProfile();
+  const { toggleLikeProfile } = useToggleLikeProfile();
 
   const handleToggleButton = () => {
     if (!user) return;
-    if (isLiked) cancelLikeProfile({ senderId: user.id, receiverId: id });
-    else addLikeProfile({ senderId: user.id, receiverId: id });
+    toggleLikeProfile({
+      isLiked,
+      likeInfo: { senderId: user.id, receiverId: id },
+    });
   };
 
   return (

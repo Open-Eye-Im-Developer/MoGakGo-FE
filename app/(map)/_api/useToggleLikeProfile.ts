@@ -6,6 +6,11 @@ import { deleteLikeProfile, postLikeProfile } from "@/app/_common/api/profile";
 
 import { ResponseError } from "@/app/_common/types/response";
 
+interface ToggleLike {
+  isLiked: boolean;
+  likeInfo: { senderId: number; receiverId: number };
+}
+
 const useToggleLikeProfile = () => {
   const { mutate: addLikeProfile } = useMutation({
     mutationFn: postLikeProfile,
@@ -31,7 +36,12 @@ const useToggleLikeProfile = () => {
     throwOnError: false,
   });
 
-  return { addLikeProfile, cancelLikeProfile };
+  const toggleLikeProfile = ({ isLiked, likeInfo }: ToggleLike) => {
+    if (isLiked) cancelLikeProfile(likeInfo);
+    else addLikeProfile(likeInfo);
+  };
+
+  return { toggleLikeProfile };
 };
 
 export default useToggleLikeProfile;
