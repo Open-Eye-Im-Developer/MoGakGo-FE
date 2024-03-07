@@ -9,12 +9,17 @@ interface ProfileCardRequest {
   cursorId?: number;
 }
 
+interface ProfileCardResponse {
+  response: Creator;
+  requestYn: boolean;
+}
+
 export const getProfileCard = async ({
   region,
   cursorId,
 }: ProfileCardRequest) => {
   const query = `${cursorId ? `cursorId=${cursorId}&` : ""}pageSize=5&sortOrder=ASC`;
-  const { data } = await instance.get<ResponseData<Creator>>(
+  const { data } = await instance.get<ResponseData<ProfileCardResponse>>(
     `/profiles/${region}?${query}`,
   );
   return data;
@@ -42,7 +47,8 @@ export const getReceiveLikeCount = async (
 
   try {
     const { data } = await instance.get<Like>(
-      `/profiles/${userId}/receive/like`,);
+      `/profiles/${userId}/receive/like`,
+    );
     return data;
   } catch (error) {
     if (error instanceof AxiosError) {
