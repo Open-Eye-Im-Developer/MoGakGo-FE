@@ -47,7 +47,7 @@ function MessageInput({
       destination: `/app/chatroom/${chatRoomId}`,
       body: JSON.stringify({
         messageType: "TALK",
-        userId: user.id,
+        userId: user!.id,
         message,
       }),
     });
