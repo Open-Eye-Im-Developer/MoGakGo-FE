@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { IconQuestionMark } from "@tabler/icons-react";
 
+import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { cn } from "@/app/_common/shadcn/utils";
 import {
   DrawerContent,
@@ -14,6 +15,7 @@ import { Button } from "@/app/_common/shadcn/ui/button";
 import { AspectRatio } from "@/app/_common/shadcn/ui/aspect-ratio";
 
 import { calculateAchievement } from "../_utils/calculateAchievement";
+import { useMutationUserAchievement } from "../_hooks/useMutationUserAchievement";
 import { AchievementProgress } from "./AchievementProgress";
 import { Achievement } from "./AchievementList";
 
@@ -30,13 +32,21 @@ function AchievementDrawer({
   open,
   onOpenChange,
 }: AchievementDrawerProps) {
+  const { user } = useAuthStore();
   const { achievementId, title, description, progressCount, requirementValue } =
     achievement;
 
   const leftToComplete = requirementValue - progressCount;
   const isThreeOrLessLeftToComplete = leftToComplete <= 3;
 
-  const handleCloseDrawer = () => {
+  const { mutate } = useMutationUserAchievement();
+
+  const handleSubmitAchievement = () => {
+    mutate({
+      userId: user!.id,
+      achievementId: 12,
+    });
+
     onOpenChange(false);
   };
 
@@ -74,7 +84,7 @@ function AchievementDrawer({
         <DrawerFooter className="place-items-center pb-6 pt-2">
           {/* TODO: 이미 대표 업적으로 설정하지 않은 경우(user.achievement.id !== achievementId)도 추가하기 */}
           {isCompleted ? (
-            <Button className="w-full" onClick={handleCloseDrawer}>
+            <Button className="w-full" onClick={handleSubmitAchievement}>
               내 대표 업적으로 설정하기
             </Button>
           ) : (

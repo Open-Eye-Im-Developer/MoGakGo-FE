@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { patchUserAchievement } from "@/app/_common/api/achievements";
 
-export const useMutationUserAchievements = () => {
+export const useMutationUserAchievement = () => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({

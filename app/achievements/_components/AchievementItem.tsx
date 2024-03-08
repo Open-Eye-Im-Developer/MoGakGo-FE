@@ -65,6 +65,7 @@ function AchievementItem({
                 className="absolute z-10  text-white"
               />
             ) : (
+              // TODO: user db에 achievement 구조 달라지면 auth store의 achievement.imgUrl로 가져오기
               <Image
                 width={!isRepresentative ? 80 : 100}
                 height={!isRepresentative ? 80 : 100}
@@ -82,6 +83,7 @@ function AchievementItem({
               "text-balance text-center text-sm",
             )}
           >
+            {/* TODO: user db에 achievement 구조 달라지면 auth store의 achievement.title로 가져오기 */}
             {title}
           </p>
         )}
