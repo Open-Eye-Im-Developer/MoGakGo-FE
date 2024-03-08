@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 
 import { ResponseData } from "../types/response";
-import { Like, Profile } from "../types/profile";
+import { Like, Profile, ProfileLikeInfo } from "../types/profile";
 import { instance } from "./instance";
 
 interface ProfileCardRequest {
@@ -52,11 +52,6 @@ export const getReceiveLikeCount = async (
   }
 };
 
-interface ProfileLikeBody {
-  senderId: number;
-  receiverId: number;
-}
-
 interface ProfileLikeResponse {
   id: number;
 }
@@ -64,7 +59,7 @@ interface ProfileLikeResponse {
 export const postLikeProfile = async ({
   senderId,
   receiverId,
-}: ProfileLikeBody) => {
+}: ProfileLikeInfo) => {
   const { data } = await instance.post<ProfileLikeResponse>("/profiles/like", {
     senderId,
     receiverId,
@@ -75,6 +70,6 @@ export const postLikeProfile = async ({
 export const deleteLikeProfile = async ({
   senderId,
   receiverId,
-}: ProfileLikeBody) => {
+}: ProfileLikeInfo) => {
   await instance.delete("/profiles/like", { data: { senderId, receiverId } });
 };
