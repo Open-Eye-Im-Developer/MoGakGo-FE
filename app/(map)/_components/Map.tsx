@@ -21,6 +21,8 @@ import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
 
 import REGION_CODE from "@/app/_common/constants/regionCode";
 
+import { navigate } from "@/app/_common/utils/redirect";
+
 import { formatRegionName } from "../_utils/formatRegionName";
 import useGetRank from "../_api/useGetRank";
 import useGetCardList from "../_api/useGetCardList";
@@ -86,6 +88,10 @@ function Map() {
       toast.info("유저 정보가 없습니다. 로그인 후 이용해주세요!", {
         action: {
           label: "로그인하기",
+          onClick: () => navigate("/login"),
+        },
+        actionButtonStyle: {
+          backgroundColor: "#0973DC",
         },
       });
       return;
