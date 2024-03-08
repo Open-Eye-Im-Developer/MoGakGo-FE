@@ -1,26 +1,24 @@
 "use client";
 
 import { toast } from "sonner";
-import { redirect } from "next/navigation";
 import { IconLock } from "@tabler/icons-react";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 
 import { useQuerySignUpUser } from "@/app/signup/_hooks/useQuerySignUpUser";
+import { useAuthStore } from "@/app/_common/store/useAuthStore";
 
 import { useQueryAchievements } from "../_hooks/useQueryAchievements";
 import AchievementItem from "./AchievementItem";
 
 function AchievementList() {
-  // TODO: useAuthStore의 setUser를 app의 최상단에서 변경사항이 있을 때마다 갱신하도록 수정 후 주석 제거
-  // const { getUser } = useAuthStore();
+  const { getUser } = useAuthStore();
 
-  // const user = getUser();
+  const user = getUser();
 
+  // TODO: useAuthStore의 setUser를 app의 최상단에서 변경사항이 있을 때마다 갱신하도록 수정 후 data query 제거
   const { data: userData } = useQuerySignUpUser();
 
-  if (!userData) redirect("/login");
-
-  const { data: achievements } = useQueryAchievements(userData.id);
+  const { data: achievements } = useQueryAchievements(user!.id);
 
   const myAchievement = achievements?.find(
     achievement => achievement.achievementId === userData?.achievementId,
