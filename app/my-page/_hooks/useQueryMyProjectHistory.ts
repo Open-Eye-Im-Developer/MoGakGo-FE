@@ -7,9 +7,10 @@ import { Match } from "@/app/_common/types/matching";
 
 export const useQueryMyProjectHistory = (creatorId?: number) => {
   const { data, isLoading } = useQuery<ResponseData<Match> | undefined>({
-    queryFn: () => getMatchesByUserId(creatorId),
+    queryFn: () => (creatorId ? getMatchesByUserId(creatorId) : undefined),
     queryKey: ["getProjectListByCreatorId", creatorId],
     enabled: typeof creatorId === "number",
+    throwOnError: false,
   });
 
   return { data, isLoading };
