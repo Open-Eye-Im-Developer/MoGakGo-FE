@@ -12,7 +12,7 @@ export const useQueryProjectRequests = (
   return useQuery<ResponseData<RequestProjectSummary> | undefined>({
     queryFn: () =>
       creatorId
-        ? getProjectRequestsByCreatorId(creatorId, null, pageSize)
+        ? getProjectRequestsByCreatorId(creatorId, undefined, pageSize)
         : undefined,
     queryKey: ["getProjectRequestsByCreatorId", creatorId],
     enabled: typeof creatorId === "number",

@@ -12,7 +12,7 @@ export const useQueryProjectList = (
   return useQuery<ResponseData<ProjectSummary> | undefined>({
     queryFn: () =>
       creatorId
-        ? getProjectListByCreatorId(creatorId, null, pageSize)
+        ? getProjectListByCreatorId(creatorId, undefined, pageSize)
         : undefined,
     queryKey: ["getProjectListByCreatorId", creatorId],
     enabled: typeof creatorId === "number",

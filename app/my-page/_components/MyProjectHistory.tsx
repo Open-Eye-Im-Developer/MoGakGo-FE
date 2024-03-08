@@ -22,10 +22,10 @@ function MyProjectHistory({ data }: MyProjectHistoryProps) {
       </Link>
       <div className="flex flex-col gap-2">
         {!data ? <ProjectCardSkeleton /> : null}
-        {data?.data.length === 0 ? (
+        {data?.data?.length === 0 ? (
           <p className="text-sm text-gray-500">만남 카드가 없습니다.</p>
         ) : (
-          data?.data.map(project => (
+          data?.data?.map(project => (
             <ProjectCard key={project.matchingId} data={project} />
           ))
         )}

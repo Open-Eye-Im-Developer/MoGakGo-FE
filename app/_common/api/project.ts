@@ -34,8 +34,8 @@ export const getProjectCard = async ({
 
 export const getProjectListByCreatorId = async (
   creatorId: number,
-  cursorId?: number | null,
-  pageSize?: number | null,
+  cursorId?: number,
+  pageSize?: number,
   sortOrder?: "ASC" | "DESC",
 ): Promise<ResponseData<ProjectSummary> | undefined> => {
   const query = [
@@ -58,8 +58,8 @@ export const getProjectListByCreatorId = async (
 
 export const getProjectRequestsByCreatorId = async (
   creatorId: number,
-  cursorId?: number | null,
-  pageSize?: number | null,
+  cursorId?: number,
+  pageSize?: number,
   sortOrder?: "ASC" | "DESC",
 ): Promise<ResponseData<RequestProjectSummary> | undefined> => {
   const query = [

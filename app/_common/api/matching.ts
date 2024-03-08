@@ -4,8 +4,8 @@ import { instance } from "./instance";
 
 export const getMatchesByUserId = async (
   userId: number,
-  cursorId?: number | null,
-  pageSize?: number | null,
+  cursorId?: number,
+  pageSize?: number,
   sortOrder?: "ASC" | "DESC",
 ): Promise<ResponseData<Match>> => {
   const query = [

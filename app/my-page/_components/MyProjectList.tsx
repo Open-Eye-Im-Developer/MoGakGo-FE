@@ -1,3 +1,6 @@
+import Link from "next/link";
+import { IconChevronRight } from "@tabler/icons-react";
+
 import { ResponseData } from "@/app/_common/types/response";
 import { ProjectSummary } from "@/app/_common/types/project";
 
@@ -11,7 +14,12 @@ interface MyProjectListProps {
 function MyProjectList({ data }: MyProjectListProps) {
   return (
     <div className="flex w-full flex-col gap-4">
-      <div className="text-xl font-bold">내가 생성한 만남 카드</div>
+      <Link href="/my-page/my-project">
+        <div className="flex items-center gap-1 text-xl font-bold">
+          내가 생성한 만남 카드
+          <IconChevronRight />
+        </div>
+      </Link>
       <div className="flex flex-col gap-2">
         {!data ? <ProjectCardSkeleton /> : null}
         {data?.data.length === 0 ? (
