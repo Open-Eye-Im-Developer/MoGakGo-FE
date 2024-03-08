@@ -13,7 +13,7 @@ export const useGetPrevMessageList = (chatRoomId: string) => {
 
     while (hasData) {
       const response = await fetch(
-        `http://3.38.76.76:8080/api/v1/chat/${chatRoomId}` +
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/chat/${chatRoomId}` +
           "?pageSize=5" +
           `${cursorId ? `&cursorId=${cursorId}` : ""}`,
         {
