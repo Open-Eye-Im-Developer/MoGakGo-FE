@@ -73,7 +73,10 @@ function Map() {
   };
 
   const handleRegionClick = (event: MouseEvent<HTMLDivElement>) => {
-    if (!isAllowGPS()) return;
+    if (!isAllowGPS()) {
+      toast.info("서비스를 이용하려면 GPS 수집을 허용해주세요!");
+      return;
+    }
 
     const map = document.querySelector("#map-wrap") as HTMLDivElement;
     const isZoomIn = map.style.transform.includes("scale");
