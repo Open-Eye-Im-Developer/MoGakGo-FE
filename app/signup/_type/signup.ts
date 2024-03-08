@@ -16,12 +16,6 @@ export interface SignUpUser {
   bio?: string;
   developLanguages?: string[];
   jandiRate?: number;
-  achievementTitle?: string;
-  // TODO: user db에 achievementId 추가되면 주석 해제
-  // {
-  //   title: Achievement["title"];
-  //   achievementId: Achievement["achievementId"];
-  // };
   wantedJobs?: WantedJobs[];
 }
 

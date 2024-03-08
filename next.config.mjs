@@ -12,7 +12,7 @@ const nextPWAConfig = withPWA({
 
 const nextConfig = {
   images: {
-    domains: ["avatars.githubusercontent.com"],
+    domains: ["avatars.githubusercontent.com", "github.com"],
   },
   async redirects() {
     return [

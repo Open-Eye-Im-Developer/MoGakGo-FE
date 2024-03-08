@@ -33,7 +33,7 @@ export type Region =
 
 export type WantedJobs = (typeof WANTED_JOB)[number]["id"];
 
-export interface User extends SignUpUser {
+export interface User extends SignUpUser, UserAchievement {
   region?: Region;
   region_authentication_at?: string;
   available_join_count?: number;
@@ -51,4 +51,22 @@ export interface UserWantedJob {
 export interface UserJandiRating {
   userId: number;
   jandiRate: number;
+}
+
+export interface UserAchievement {
+  achievementId: Achievement["achievementId"];
+  achievementTitle: Achievement["title"];
+  achievementImageUrl: Achievement["imgUrl"];
+}
+
+export interface Achievement {
+  userId: number;
+  achievementId: number;
+  title: string;
+  imgUrl: string;
+  description: string;
+  requirementValue: number;
+  requirementType?: "SEQUENCE" | "ACCUMULATE";
+  progressCount: number;
+  completed?: boolean;
 }

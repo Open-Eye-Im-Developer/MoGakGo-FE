@@ -1,15 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { getNotAchievedList } from "@/app/_common/api/achievements";
+import { getAchievements } from "@/app/_common/api/achievements";
 
-import { Achievement } from "../_components/AchievementList";
+import { Achievement } from "@/app/_common/types/user";
 
-export const useQueryNotAchievedList = (
-  achievementId: Achievement["achievementId"],
-) => {
+export const useQueryAchievements = (userId: Achievement["userId"]) => {
   const query = useQuery<Achievement[]>({
-    queryKey: ["achievements", achievementId],
-    queryFn: () => getNotAchievedList(achievementId),
+    queryKey: ["achievements", userId],
+    queryFn: () => getAchievements(userId),
   });
 
   return query;

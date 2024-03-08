@@ -7,22 +7,24 @@ import { IconQuestionMark } from "@tabler/icons-react";
 import { cn } from "@/app/_common/shadcn/utils";
 import { AspectRatio } from "@/app/_common/shadcn/ui/aspect-ratio";
 
-import { Achievement } from "./AchievementList";
+import { Achievement } from "@/app/_common/types/user";
+
 import AchievementDrawer from "./AchievementDrawer";
 
 interface AchievementItemProps {
+  styleType: "main" | "item";
   achievement: Achievement;
+  isMyAchievement?: boolean;
   className?: ComponentProps<typeof cn>;
-  isRepresentative?: boolean;
 }
 
 function AchievementItem({
+  styleType,
   achievement,
   className,
-  isRepresentative,
+  isMyAchievement,
 }: AchievementItemProps) {
-  const { achievementId, title, requirementValue, progressCount } = achievement;
-  const isCompleted = progressCount === requirementValue;
+  const { achievementId, title, imgUrl, completed: isCompleted } = achievement;
 
   const [open, setOpen] = useState(false);
 
@@ -33,10 +35,10 @@ function AchievementItem({
   return (
     <>
       <AchievementDrawer
-        isCompleted={isCompleted}
         achievement={achievement}
         open={open}
         onOpenChange={setOpen}
+        isMyAchievement={isMyAchievement}
       />
       <li
         id={`${achievementId}`}
@@ -48,8 +50,11 @@ function AchievementItem({
       >
         <div
           className={cn(
-            !isRepresentative ? "w-[80px]" : "w-[100px]",
-            "rounded-xl bg-secondary",
+            styleType !== "main" ? "w-[80px]" : "w-[100px]",
+            !isCompleted
+              ? "bg-secondary bg-opacity-50"
+              : "border-2 border-secondary bg-transparent p-1",
+            "rounded-xl",
           )}
         >
           <AspectRatio
@@ -65,28 +70,25 @@ function AchievementItem({
                 className="absolute z-10  text-white"
               />
             ) : (
-              // TODO: user db에 achievement 구조 달라지면 auth store의 achievement.imgUrl로 가져오기
               <Image
-                width={!isRepresentative ? 80 : 100}
-                height={!isRepresentative ? 80 : 100}
-                src="/images/cat.webp"
+                width={styleType !== "main" ? 80 : 100}
+                height={styleType !== "main" ? 80 : 100}
+                src={imgUrl}
                 alt="업적 뱃지"
                 className="rounded-xl object-cover"
               />
             )}
           </AspectRatio>
         </div>
-        {!isRepresentative && (
-          <p
-            className={cn(
-              isCompleted ? "text-primary" : "text-gray-400",
-              "text-balance text-center text-sm",
-            )}
-          >
-            {/* TODO: user db에 achievement 구조 달라지면 auth store의 achievement.title로 가져오기 */}
-            {title}
-          </p>
-        )}
+
+        <p
+          className={cn(
+            isCompleted ? "text-primary" : "text-gray-400",
+            "text-pretty text-center text-sm",
+          )}
+        >
+          {title ?? ""}
+        </p>
       </li>
     </>
   );

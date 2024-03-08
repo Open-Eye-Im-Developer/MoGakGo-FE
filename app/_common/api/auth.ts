@@ -1,8 +1,9 @@
 import { toast } from "sonner";
 
-import { SignUpUser, SignupRequest } from "@/app/signup/_type/signup";
+import { SignupRequest } from "@/app/signup/_type/signup";
 import { reIssueAccessTokenResponse } from "@/app/login/_types/login.types";
 
+import { User } from "../types/user";
 import { instance } from "../api/instance";
 
 export const patchSignup = async ({ username, wantedJobs }: SignupRequest) => {
@@ -21,7 +22,7 @@ export const deleteUser = async () => {
 };
 
 export const getSignUpUser = async () => {
-  const { data } = await instance.get<SignUpUser>("/user");
+  const { data } = await instance.get<User>("/user");
 
   return data;
 };

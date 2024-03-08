@@ -1,6 +1,4 @@
-import { Achievement } from "@/app/achievements/_components/AchievementList";
-
-import { User } from "../types/user";
+import { Achievement, User } from "../types/user";
 import { instance } from "./instance";
 
 export interface RequestUserAchievement {
@@ -8,7 +6,7 @@ export interface RequestUserAchievement {
   achievementId: Achievement["achievementId"];
 }
 
-export const getNotAchievedList = async (id: Achievement["achievementId"]) => {
+export const getAchievements = async (id: Achievement["achievementId"]) => {
   const { data } = await instance.get<Achievement[]>(`/achievements/${id}`);
 
   return data;
