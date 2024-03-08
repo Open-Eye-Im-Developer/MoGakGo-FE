@@ -17,3 +17,13 @@ export interface Like {
   userId: number;
   likeCount: number;
 }
+
+export interface Profile {
+  response: Creator;
+  requestYn: boolean;
+}
+
+export interface ProfileLikeInfo {
+  senderId: number;
+  receiverId: number;
+}

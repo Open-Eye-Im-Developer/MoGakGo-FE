@@ -1,8 +1,11 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import ButtonFollow from "@/app/project/_components/ButtonFollow";
+import ButtonLike from "@/app/project/_components/ButtonLike";
+import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { Progress } from "@/app/_common/shadcn/ui/progress";
 import {
   Card,
@@ -13,24 +16,40 @@ import {
 } from "@/app/_common/shadcn/ui/card";
 import { Badge as Tag } from "@/app/_common/shadcn/ui/badge";
 
-import { Creator } from "@/app/_common/types/profile";
+import { Profile } from "@/app/_common/types/profile";
+
+import useToggleLikeProfile from "../_api/useToggleLikeProfile";
 
 interface Props {
-  profile: Creator;
+  profile: Profile;
 }
 
 function ProfileCardItem({ profile }: Props) {
   const {
-    username,
-    githubId,
-    avatarUrl,
-    githubUrl,
-    bio,
-    jandiRate,
-    achievementTitle,
-    developLanguages,
-    wantedJobs,
+    response: {
+      id: receiverId,
+      username,
+      githubId,
+      avatarUrl,
+      githubUrl,
+      bio,
+      jandiRate,
+      achievementTitle,
+      developLanguages,
+      wantedJobs,
+    },
+    requestYn: isAlreadyLiked,
   } = profile;
+  const { user } = useAuthStore();
+  const { toggleLikeProfile, isLiked } = useToggleLikeProfile();
+
+  const handleToggleButton = () => {
+    if (!user) return;
+    toggleLikeProfile({
+      isLiked: isLiked ?? isAlreadyLiked,
+      likeInfo: { senderId: user.id, receiverId },
+    });
+  };
 
   return (
     <div className="h-[550px] w-[330px] sm:w-[450px]">
@@ -90,7 +109,10 @@ function ProfileCardItem({ profile }: Props) {
               </div>
             </CardContent>
             <CardFooter className="flex justify-end">
-              <ButtonFollow />
+              <ButtonLike
+                onClick={handleToggleButton}
+                isLiked={isLiked ?? isAlreadyLiked}
+              />
             </CardFooter>
           </Card>
         </div>
