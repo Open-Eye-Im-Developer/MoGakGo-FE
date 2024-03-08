@@ -6,6 +6,7 @@ import { EmblaCarouselType } from "embla-carousel";
 
 import useQueryGeoAreaCode from "@/app/auth-mylocation/_hooks/useQueryGeoAreaCode";
 import { usePositionStore } from "@/app/_common/store/usePositionStore";
+import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { cn } from "@/app/_common/shadcn/utils";
 import {
   Carousel,
@@ -41,6 +42,7 @@ function Map() {
     hasNextProfile,
   } = useGetCardList(regionCode);
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
+  const { getUser } = useAuthStore();
 
   useEffect(() => {
     if (!carouselApi) return;
@@ -78,11 +80,19 @@ function Map() {
       return;
     }
 
-    const map = document.querySelector("#map-wrap") as HTMLDivElement;
-    const isZoomIn = map.style.transform.includes("scale");
     const target = event.target as SVGElement | HTMLElement;
     const isRegion = target.tagName === "path";
+    if (!getUser() && isRegion) {
+      toast.info("유저 정보가 없습니다. 로그인 후 이용해주세요!", {
+        action: {
+          label: "로그인하기",
+        },
+      });
+      return;
+    }
 
+    const map = document.querySelector("#map-wrap") as HTMLDivElement;
+    const isZoomIn = map.style.transform.includes("scale");
     if (isZoomIn) {
       if (isRegion) return;
       zoomOut();
