@@ -3,12 +3,12 @@ import { IconHeartFilled } from "@tabler/icons-react";
 import { cn } from "@/app/_common/shadcn/utils";
 import { Button } from "@/app/_common/shadcn/ui/button";
 
-interface Props {
+interface ButtonLikeProps {
   onClick: () => void;
   isLiked: boolean;
 }
 
-function ButtonLike({ onClick, isLiked }: Props) {
+function ButtonLike({ onClick, isLiked }: ButtonLikeProps) {
   return (
     <Button
       onClick={onClick}
