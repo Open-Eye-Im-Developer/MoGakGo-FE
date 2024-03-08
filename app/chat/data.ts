@@ -21,7 +21,7 @@ export const DUMMY: ChatType[] = [
     ],
   },
   {
-    projectId: 1,
+    projectId: 2,
     chatRoomId: "c4c0d1fc-4461-4374-b60a-31c26be54109",
     lastMessage: "몰라용 ?",
     lastMessageCreatedAt: "2024-02-26T10:05:00",

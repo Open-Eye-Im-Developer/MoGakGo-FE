@@ -12,14 +12,8 @@ interface ChatProps {
 }
 
 function Chat({ chat }: ChatProps) {
-  const {
-    projectId,
-    chatRoomId,
-    lastMessage,
-    lastMessageCreatedAt,
-    status,
-    profiles,
-  } = chat;
+  const { chatRoomId, lastMessage, lastMessageCreatedAt, status, profiles } =
+    chat;
 
   const MY_ID = 1;
   const matchedUser = profiles?.find(
@@ -27,7 +21,15 @@ function Chat({ chat }: ChatProps) {
   ) as ProfileType;
 
   return (
-    <Link href={`/chat/${chatRoomId}`} key={projectId}>
+    <Link
+      href={{
+        pathname: `/chat/${chatRoomId}`,
+        query: {
+          name: matchedUser.username,
+          profileImage: matchedUser.avatarUrl,
+        },
+      }}
+    >
       <div className="relative">
         <ActivityCard
           name={matchedUser.username}

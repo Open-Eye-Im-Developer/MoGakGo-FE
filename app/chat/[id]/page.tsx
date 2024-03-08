@@ -18,18 +18,30 @@ async function getPreviousChatMessageList(chatRoomId: string) {
 }
 
 // TODO: chatMessageList를 받아와서 MessageContainer에 props로 넘긴다.
-async function ChattingRoomPage({ params }: { params: { id: string } }) {
+interface ChattinRoomPageProps {
+  params: { id: string };
+  searchParams: { name: string; profileImage: string };
+}
+
+async function ChattingRoomPage({
+  params,
+  searchParams,
+}: ChattinRoomPageProps) {
+  const { id } = params;
+  const { name, profileImage } = searchParams;
+
   const {
     props: { chatMessageList },
-  } = await getPreviousChatMessageList(params.id);
+  } = await getPreviousChatMessageList(id);
   // TODO: husky로 인해 커밋이 안되므로 임시 추가됨. 삭제 필요
   console.log(chatMessageList);
+
   return (
     <>
       <StackNavigator
         content={
-          <Profile avatarUrl={"https://github.com/shadcn.png"} username={"e"}>
-            <span>name</span>
+          <Profile avatarUrl={profileImage} username={name}>
+            <span>{name}</span>
           </Profile>
         }
       />
