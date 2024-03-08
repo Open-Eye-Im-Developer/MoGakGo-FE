@@ -6,10 +6,11 @@ import { useMutation } from "@tanstack/react-query";
 import { deleteLikeProfile, postLikeProfile } from "@/app/_common/api/profile";
 
 import { ResponseError } from "@/app/_common/types/response";
+import { ProfileLikeInfo } from "@/app/_common/types/profile";
 
 interface ToggleLike {
   isLiked: boolean;
-  likeInfo: { senderId: number; receiverId: number };
+  likeInfo: ProfileLikeInfo;
 }
 
 const useToggleLikeProfile = () => {
