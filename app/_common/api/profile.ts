@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 
 import { ResponseData } from "../types/response";
-import { Like, Profile, ProfileLikeInfo } from "../types/profile";
+import { Creator, Like, Profile, ProfileLikeInfo } from "../types/profile";
 import { instance } from "./instance";
 
 interface ProfileCardRequest {
@@ -53,7 +53,7 @@ export const getReceiveLikeCount = async (
 };
 
 interface ProfileLikeResponse {
-  id: number;
+  id: Creator["id"];
 }
 
 export const postLikeProfile = async ({
