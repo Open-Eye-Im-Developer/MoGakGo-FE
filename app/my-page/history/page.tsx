@@ -6,7 +6,7 @@ import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { Tabs, TabsList, TabsTrigger } from "@/app/_common/shadcn/ui/tabs";
 import { Button } from "@/app/_common/shadcn/ui/button";
 
-import { useInfiniteQueryMyProjectHistory } from "../_hooks/useInfiniteQueryMyProjectHistory";
+import { useInfiniteQueryProjectHistory } from "../_hooks/useInfiniteQueryProjectHistory";
 import ProjectCardSkeleton from "../_components/ProjectCardSkeleton";
 import ProjectCard from "../_components/ProjectCard";
 
@@ -14,7 +14,7 @@ function HistoryPage() {
   const [currentTab, setCurrentTab] = useState("all");
   const { user } = useAuthStore();
   const { data, fetchNextPage, hasNextPage, isFetching, isPending } =
-    useInfiniteQueryMyProjectHistory(user?.id);
+    useInfiniteQueryProjectHistory(user?.id);
 
   const projects = useMemo(
     () => data?.pages.map(page => (page ? page.data : [])).flat(),

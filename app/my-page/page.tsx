@@ -1,12 +1,12 @@
 "use client";
 
 import { useQueryUserData } from "./_hooks/useQueryUserData";
-import { useQueryMySendLikeCount } from "./_hooks/useQueryMySendLikeCount";
-import { useQueryMyReceiveLikeCount } from "./_hooks/useQueryMyReceiveLikeCount";
-import { useQueryMyProjectRequests } from "./_hooks/useQueryMyProjectRequests";
-import { useQueryMyProjectList } from "./_hooks/useQueryMyProjectList";
-import { useQueryMyProjectHistory } from "./_hooks/useQueryMyProjectHistory";
-import { useQueryMyJandiRating } from "./_hooks/useQueryMyJandiRating";
+import { useQuerySendLikeCount } from "./_hooks/useQuerySendLikeCount";
+import { useQueryReceiveLikeCount } from "./_hooks/useQueryReceiveLikeCount";
+import { useQueryProjectRequests } from "./_hooks/useQueryProjectRequests";
+import { useQueryProjectList } from "./_hooks/useQueryProjectList";
+import { useQueryProjectHistory } from "./_hooks/useQueryProjectHistory";
+import { useQueryJandiRating } from "./_hooks/useQueryJandiRating";
 import Profile from "./_components/Profile";
 import MyProjectRequests from "./_components/MyProjectRequests";
 import MyProjectList from "./_components/MyProjectList";
@@ -15,16 +15,17 @@ import LikeCount from "./_components/LikeCount";
 import JandiRating from "./_components/JandiRating";
 
 function MyPage() {
-  // const { data: userData } = useQuerySignUpUser();
-  const { data: userData, isError } = useQueryUserData();
-  const { data: jandiRating } = useQueryMyJandiRating(userData?.id);
-  const { data: projectList } = useQueryMyProjectList(userData?.id);
-  const { data: projectRequests } = useQueryMyProjectRequests(userData?.id);
-  const { data: sendLikeCount } = useQueryMySendLikeCount(userData?.id);
-  const { data: receiveLikeCount } = useQueryMyReceiveLikeCount(userData?.id);
-  const { data: projectHistory } = useQueryMyProjectHistory(userData?.id);
+  const { data: userData, isError, error } = useQueryUserData();
+  const { data: jandiRating } = useQueryJandiRating(userData?.id);
+  const { data: sendLikeCount } = useQuerySendLikeCount(userData?.id);
+  const { data: receiveLikeCount } = useQueryReceiveLikeCount(userData?.id);
+  const { data: projectList } = useQueryProjectList(userData?.id, 3);
+  const { data: projectRequests } = useQueryProjectRequests(userData?.id, 3);
+  const { data: projectHistory } = useQueryProjectHistory(userData?.id, 3);
 
-  if (isError) return <div>error</div>;
+  if (isError) {
+    return <div>{error.message}</div>;
+  }
 
   return (
     <main className="container flex min-h-screen max-w-2xl flex-col gap-8 bg-gray-50 pb-8 dark:bg-gray-950">

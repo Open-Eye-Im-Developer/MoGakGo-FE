@@ -1,5 +1,3 @@
-import { AxiosError } from "axios";
-
 import { ResponseData } from "../types/response";
 import {
   Project,
@@ -35,39 +33,51 @@ export const getProjectCard = async ({
 };
 
 export const getProjectListByCreatorId = async (
-  creatorId?: number,
+  creatorId: number,
+  cursorId?: number | null,
+  pageSize?: number | null,
+  sortOrder?: "ASC" | "DESC",
 ): Promise<ResponseData<ProjectSummary> | undefined> => {
-  if (typeof creatorId !== "number") return;
+  const query = [
+    ["cursorId", cursorId],
+    ["pageSize", pageSize ?? 5],
+    ["sortOrder", sortOrder ?? "ASC"],
+  ];
 
-  try {
-    const { data } = await instance.get<ResponseData<ProjectSummary>>(
-      `/projects/list/${creatorId}?cursorId=&pageSize=5&sortOrder=ASC`,
-    );
+  const queryString = query
+    .filter(([, value]) => value !== undefined)
+    .map(q => q.join("="))
+    .join("&");
 
-    return data;
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      return error.response?.data;
-    }
-  }
+  const { data } = await instance.get<ResponseData<ProjectSummary>>(
+    `/projects/list/${creatorId}?${queryString}`,
+  );
+
+  return data;
 };
 
 export const getProjectRequestsByCreatorId = async (
-  creatorId?: number,
+  creatorId: number,
+  cursorId?: number | null,
+  pageSize?: number | null,
+  sortOrder?: "ASC" | "DESC",
 ): Promise<ResponseData<RequestProjectSummary> | undefined> => {
-  if (typeof creatorId !== "number") return;
+  const query = [
+    ["cursorId", cursorId],
+    ["pageSize", pageSize ?? 5],
+    ["sortOrder", sortOrder ?? "ASC"],
+  ];
 
-  try {
-    const { data } = await instance.get<ResponseData<RequestProjectSummary>>(
-      `/project-requests/${creatorId}?cursorId=&pageSize=5&sortOrder=ASC`,
-    );
+  const queryString = query
+    .filter(([, value]) => value !== undefined)
+    .map(q => q.join("="))
+    .join("&");
 
-    return data;
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      return error.response?.data;
-    }
-  }
+  const { data } = await instance.get<ResponseData<RequestProjectSummary>>(
+    `/project-requests/${creatorId}?${queryString}`,
+  );
+
+  return data;
 };
 
 export const postReview = async ({

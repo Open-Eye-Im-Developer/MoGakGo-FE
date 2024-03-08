@@ -5,7 +5,7 @@ import { getMatchesByUserId } from "@/app/_common/api/matching";
 import { ResponseData } from "@/app/_common/types/response";
 import { Match } from "@/app/_common/types/matching";
 
-export const useInfiniteQueryMyProjectHistory = (
+export const useInfiniteQueryProjectHistory = (
   creatorId?: number,
   pageSize: number = 5,
 ) => {
