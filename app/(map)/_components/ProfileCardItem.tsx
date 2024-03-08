@@ -27,7 +27,7 @@ interface Props {
 function ProfileCardItem({ profile }: Props) {
   const {
     response: {
-      id,
+      id: receiverId,
       username,
       githubId,
       avatarUrl,
@@ -47,7 +47,7 @@ function ProfileCardItem({ profile }: Props) {
     if (!user) return;
     toggleLikeProfile({
       isLiked: isLiked ?? requestYn,
-      likeInfo: { senderId: user.id, receiverId: id },
+      likeInfo: { senderId: user.id, receiverId },
     });
   };
 
