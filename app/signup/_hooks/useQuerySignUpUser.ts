@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 
 import { getSignUpUser } from "@/app/_common/api/auth";
 
-import { User } from "@/app/_common/types/user";
+import { SignUpUser } from "../_type/signup";
 
 export const useQuerySignUpUser = (hasAccessToken = true) => {
-  const { data, isLoading } = useQuery<User>({
+  const { data, isLoading } = useQuery<SignUpUser>({
     queryFn: getSignUpUser,
     queryKey: ["user"],
     enabled: hasAccessToken,

@@ -1,8 +1,10 @@
-import { Achievement, User } from "../types/user";
+import { SignUpUser } from "@/app/signup/_type/signup";
+
+import { Achievement } from "../types/user";
 import { instance } from "./instance";
 
 export interface RequestUserAchievement {
-  userId: User["id"];
+  userId: SignUpUser["id"];
   achievementId: Achievement["achievementId"];
 }
 

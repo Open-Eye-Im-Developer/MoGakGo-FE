@@ -14,11 +14,11 @@ function AchievementList() {
   const { getUser } = useAuthStore();
 
   const user = getUser();
+  const { data: achievements } = useQueryAchievements(user?.id as number);
 
-  // TODO: useAuthStore의 setUser를 app의 최상단에서 변경사항이 있을 때마다 갱신하도록 수정 후 data query 제거
-  const { data: userData } = useQuerySignUpUser();
-
-  const { data: achievements } = useQueryAchievements(user!.id);
+  // TODO: useAuthStore의 setUser를 전역 상태로 관리하도록 변경 후 사용자 쿼리 삭제
+  const userDataQuery = useQuerySignUpUser();
+  const { data: userData } = userDataQuery;
 
   const myAchievement = achievements?.find(
     achievement => achievement.achievementId === userData?.achievementId,

@@ -33,7 +33,7 @@ export type Region =
 
 export type WantedJobs = (typeof WANTED_JOB)[number]["id"];
 
-export interface User extends SignUpUser, UserAchievement {
+export interface User extends SignUpUser {
   region?: Region;
   region_authentication_at?: string;
   available_join_count?: number;
