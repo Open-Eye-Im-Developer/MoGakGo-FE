@@ -8,6 +8,7 @@ export const useQueryAchievements = (userId: Achievement["userId"]) => {
   const query = useQuery<Achievement[]>({
     queryKey: ["achievements", userId],
     queryFn: () => getAchievements(userId),
+    enabled: !!userId,
   });
 
   return query;
