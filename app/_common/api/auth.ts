@@ -43,5 +43,8 @@ export const reIssueAccessToken = async (refreshToken: string) => {
     localStorage.removeItem("refreshToken");
 
     toast.error("인증이 만료되었습니다. 재로그인이 필요합니다.");
+
+    // TODO: PR #126 merge 후 주석 해제
+    // navigate("/login");
   }
 };
