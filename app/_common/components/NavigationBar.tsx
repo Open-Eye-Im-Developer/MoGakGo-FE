@@ -46,7 +46,7 @@ function NavigationBar() {
         <NavigationItem title="마이페이지" href="/my-page" />
         <NavigationItem title="지도" href="/" />
         <NavigationItem title="채팅" href="/chat" />
-        <NavigationItem title="모각코" href="#" />
+        <NavigationItem title="모각코" href="/project" />
         <NavigationItem title="업적" href="/achievements" />
         <NavigationItem title="알림" href="/notification" />
       </SheetContent>
