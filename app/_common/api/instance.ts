@@ -1,5 +1,5 @@
-import { Cookies } from "react-cookie";
 import { redirect } from "next/navigation";
+import { deleteCookie } from "cookies-next";
 import axios from "axios";
 
 import { reIssueAccessToken } from "./auth";
@@ -32,8 +32,7 @@ instance.interceptors.response.use(
 
     if (status === 401 || status === 404) {
       if (status === 404) {
-        const cookies = new Cookies();
-        cookies.remove("isAuthenticated");
+        deleteCookie("isAuthenticated");
 
         return redirect("/login");
       }

@@ -1,6 +1,6 @@
 import { toast } from "sonner";
-import { Cookies } from "react-cookie";
 import { useRouter } from "next/navigation";
+import { deleteCookie } from "cookies-next";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { useAuthStore } from "@/app/_common/store/useAuthStore";
@@ -16,8 +16,7 @@ export const useDeleteUser = () => {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
 
-      const cookies = new Cookies();
-      cookies.remove("isAuthenticated");
+      deleteCookie("isAuthenticated");
 
       useAuthStore.persist.clearStorage();
 
