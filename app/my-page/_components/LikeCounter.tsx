@@ -1,13 +1,15 @@
+import Link from "next/link";
+
 import { Skeleton } from "@/app/_common/shadcn/ui/skeleton";
 
-import { Like } from "@/app/_common/types/profile";
+import { LikeCount } from "@/app/_common/types/profile";
 
 interface LikeCountProps {
-  sendLikeCount?: Like;
-  receiveLikeCount?: Like;
+  sendLikeCount?: LikeCount;
+  receiveLikeCount?: LikeCount;
 }
 
-function LikeCount({ sendLikeCount, receiveLikeCount }: LikeCountProps) {
+function LikeCounter({ sendLikeCount, receiveLikeCount }: LikeCountProps) {
   return (
     <div className="flex w-full justify-center gap-4">
       {sendLikeCount ? (
@@ -19,10 +21,12 @@ function LikeCount({ sendLikeCount, receiveLikeCount }: LikeCountProps) {
         <PokeCountSkeleton />
       )}
       {receiveLikeCount ? (
-        <PokeCount
-          count={receiveLikeCount.likeCount}
-          label="내가 찔러보기 한 사람"
-        />
+        <Link href={"/my-page/likes"}>
+          <PokeCount
+            count={receiveLikeCount.likeCount}
+            label="내가 찔러보기 한 사람"
+          />
+        </Link>
       ) : (
         <PokeCountSkeleton />
       )}
@@ -57,4 +61,4 @@ function PokeCountSkeleton() {
   );
 }
 
-export default LikeCount;
+export default LikeCounter;

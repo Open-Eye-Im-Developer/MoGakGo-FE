@@ -12,7 +12,7 @@ import Profile from "./_components/Profile";
 import MyProjectRequests from "./_components/MyProjectRequests";
 import MyProjectList from "./_components/MyProjectList";
 import MyProjectHistory from "./_components/MyProjectHistory";
-import LikeCount from "./_components/LikeCount";
+import LikeCounter from "./_components/LikeCounter";
 import JandiRating from "./_components/JandiRating";
 
 function MyPage() {
@@ -32,7 +32,7 @@ function MyPage() {
     <main className="container flex min-h-screen max-w-2xl flex-col gap-8 bg-gray-50 pb-8 dark:bg-gray-950">
       <StackNavigator content={"마이페이지"} />
       <Profile data={userData} />
-      <LikeCount
+      <LikeCounter
         sendLikeCount={sendLikeCount}
         receiveLikeCount={receiveLikeCount}
       />

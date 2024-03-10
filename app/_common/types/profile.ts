@@ -13,7 +13,13 @@ export interface Creator {
   wantedJobs: WantedJobs[];
 }
 
-export interface Like {
+export interface LikeCount {
   userId: number;
   likeCount: number;
+}
+
+export interface Like {
+  username: string;
+  avatarUrl: string;
+  createdAt: string;
 }
