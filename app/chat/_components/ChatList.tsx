@@ -1,4 +1,5 @@
 "use client";
+
 import AnnounceEmptyActive from "@/app/_common/components/AnnounceEmptyNotification";
 
 import chatEmptyAnimation from "../_assets/animation.json";
@@ -6,10 +7,11 @@ import useGetChats from "../_api/useGetChats";
 import Chat from "./Chat";
 
 function ChatList() {
-  const { data: chats } = useGetChats();
+  const { chats } = useGetChats();
+
   return (
     <>
-      {chats?.length ? (
+      {chats.length ? (
         [...chats]
           .reverse()
           .map(chat => <Chat chat={chat} key={chat.projectId} />)

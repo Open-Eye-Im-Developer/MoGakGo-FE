@@ -1,4 +1,5 @@
-import { useParams } from "next/navigation";
+"use client";
+
 import dayjs from "dayjs";
 
 import formatMeetingTime from "@/app/project/_utils/formatMeetingTime";
@@ -11,9 +12,13 @@ import {
   AccordionTrigger,
 } from "../../../_common/shadcn/ui/accordion";
 
-function ProjectInfo() {
-  const { id } = useParams<{ id: string }>();
-  const { data: chatInfo } = useGetChatInfo(id);
+interface ProjectInfoProps {
+  chatRoomId: string;
+}
+
+function ProjectInfo(props: ProjectInfoProps) {
+  const { chatRoomId } = props;
+  const { data: chatInfo } = useGetChatInfo(chatRoomId);
 
   if (!chatInfo) return;
 
