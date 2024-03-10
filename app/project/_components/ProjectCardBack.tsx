@@ -3,7 +3,6 @@
 import React, { forwardRef } from "react";
 import Image from "next/image";
 
-import { useToast } from "@/app/_common/shadcn/ui/use-toast";
 import { Separator } from "@/app/_common/shadcn/ui/separator";
 import {
   Card,
@@ -13,9 +12,9 @@ import {
 } from "@/app/_common/shadcn/ui/card";
 import { Button } from "@/app/_common/shadcn/ui/button";
 
+import useAcceptRequestMutation from "../_hooks/useAcceptRequestMutation";
 import ButtonRotate from "./ButtonRotate";
 import BadgeAdditional from "./BadgeAdditional";
-
 import "../_styles/card.css";
 
 interface CardBackProps {
@@ -26,33 +25,14 @@ interface CardBackProps {
 const ProjectCardBack = forwardRef<HTMLDivElement, CardBackProps>(
   function ProjectCardBack(props, ref) {
     const { requestList, onRotate } = props;
-    const { toast } = useToast();
+    const { createAcceptRequest } = useAcceptRequestMutation();
 
     const handleAccept = async (projectRequestId: number) => {
-      const response = await fetch("/api/project/request/accept", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ projectRequestId }),
-      });
-      const data = await response.json();
-
-      toast({
-        title:
-          data.status === 200
-            ? "요청을 수락했습니다."
-            : "요청 수락에 실패했습니다.",
-        description:
-          data.status === 200
-            ? "매칭이 되었어요! 채팅방으로 가볼까요?"
-            : data.data.message,
-        variant: data.status === 200 ? "default" : "destructive",
-      });
+      createAcceptRequest(projectRequestId);
     };
 
     return (
-      <Card className="glass-morphism absolute inset-0 left-0 top-0 overflow-hidden border-none shadow-md [transform:rotateY(180deg)] [backface-visibility:hidden]">
+      <Card className="glass-morphism absolute inset-0 left-0 top-0 overflow-hidden border-none shadow-md [backface-visibility:hidden] [transform:rotateY(180deg)]">
         <CardHeader className="flex flex-row items-center justify-between border-b border-black px-4 py-2">
           <CardTitle className="flex grow flex-row items-center justify-between pt-1 text-lg font-bold">
             <p className="pl-2">요청 목록</p>
