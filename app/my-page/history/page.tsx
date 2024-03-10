@@ -8,20 +8,31 @@ import { Button } from "@/app/_common/shadcn/ui/button";
 
 import StackNavigator from "@/app/_common/components/StackNavigator";
 
+import { MatchStatus } from "@/app/_common/types/matching";
+
 import { useInfiniteQueryProjectHistory } from "../_hooks/useInfiniteQueryProjectHistory";
 import ProjectCardSkeleton from "../_components/ProjectCardSkeleton";
 import ProjectCard from "../_components/ProjectCard";
 
 function HistoryPage() {
-  const [currentTab, setCurrentTab] = useState("all");
+  const [currentTab, setCurrentTab] = useState("ALL");
+
+  const statusQuery = useMemo(
+    () => (currentTab === "ALL" ? undefined : (currentTab as MatchStatus)),
+    [currentTab],
+  );
+
   const { user } = useAuthStore();
   const { data, fetchNextPage, hasNextPage, isFetching, isPending } =
-    useInfiniteQueryProjectHistory(user?.id);
+    useInfiniteQueryProjectHistory(user?.id, statusQuery);
 
   const projects = useMemo(
     () => data?.pages.map(page => (page ? page.data : [])).flat(),
     [data],
   );
+
+  const handleChangeTab = (value: string) =>
+    setCurrentTab(value as MatchStatus);
 
   return (
     <main className="container flex min-h-screen max-w-2xl flex-col gap-8 bg-gray-50 pb-8 dark:bg-gray-950">
@@ -29,16 +40,15 @@ function HistoryPage() {
       <Tabs
         defaultValue={currentTab}
         className="space-y-4"
-        onValueChange={value => setCurrentTab(value)}
+        onValueChange={handleChangeTab}
       >
         <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="all">전체</TabsTrigger>
-          {/* <TabsTrigger value="inprogress">매칭중</TabsTrigger>
-          <TabsTrigger value="finished">종료</TabsTrigger>
-          <TabsTrigger value="failed">실패</TabsTrigger> */}
+          <TabsTrigger value="ALL">전체</TabsTrigger>
+          <TabsTrigger value="PROGRESS">매칭중</TabsTrigger>
+          <TabsTrigger value="FINISHED">종료</TabsTrigger>
+          <TabsTrigger value="CANCELED">실패</TabsTrigger>
         </TabsList>
       </Tabs>
-      {/* TODO: currentTab 기준으로 필터링 */}
       <section className="flex flex-col gap-2">
         {projects
           ? projects.map(el => <ProjectCard key={el.matchingId} data={el} />)

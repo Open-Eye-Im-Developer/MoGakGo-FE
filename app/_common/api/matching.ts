@@ -1,14 +1,16 @@
 import { ResponseData } from "../types/response";
-import { Match } from "../types/matching";
+import { Match, MatchStatus } from "../types/matching";
 import { instance } from "./instance";
 
 export const getMatchesByUserId = async (
   userId: number,
+  status?: MatchStatus,
   cursorId?: number,
   pageSize?: number,
   sortOrder?: "ASC" | "DESC",
 ): Promise<ResponseData<Match>> => {
   const query = [
+    ["status", status],
     ["cursorId", cursorId],
     ["pageSize", pageSize ?? 5],
     ["sortOrder", sortOrder ?? "ASC"],
