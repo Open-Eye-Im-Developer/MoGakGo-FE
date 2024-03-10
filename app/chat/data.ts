@@ -7,18 +7,11 @@ export const DUMMY: ChatType[] = [
     lastMessage: "그거 아세여?",
     lastMessageCreatedAt: "2024-02-26T10:05:00",
     status: "OPEN",
-    profiles: [
-      {
-        userId: 1,
-        username: "tidavid1",
-        avatarUrl: "https://avatars.githubusercontent.com/u/85854384?v=4",
-      },
-      {
-        userId: 2,
-        username: "mibu119",
-        avatarUrl: "https://avatars.githubusercontent.com/u/114740795?v=4",
-      },
-    ],
+    chatUserInfo: {
+      userId: 1,
+      username: "tidavid1",
+      avatarUrl: "https://avatars.githubusercontent.com/u/85854384?v=4",
+    },
   },
   {
     projectId: 2,
@@ -26,17 +19,10 @@ export const DUMMY: ChatType[] = [
     lastMessage: "몰라용 ?",
     lastMessageCreatedAt: "2024-02-26T10:05:00",
     status: "CLOSE",
-    profiles: [
-      {
-        userId: 1,
-        username: "tidavid1",
-        avatarUrl: "https://avatars.githubusercontent.com/u/85854384?v=4",
-      },
-      {
-        userId: 2,
-        username: "mibu119",
-        avatarUrl: "https://avatars.githubusercontent.com/u/114740795?v=4",
-      },
-    ],
+    chatUserInfo: {
+      userId: 2,
+      username: "mibu119",
+      avatarUrl: "https://avatars.githubusercontent.com/u/114740795?v=4",
+    },
   },
 ];
