@@ -14,8 +14,8 @@ function NotificationList() {
   if (isLoading)
     return (
       <div className="flex flex-col gap-4">
-        {Array.from({ length: 6 }).map((_, i) => (
-          <ActivityCardSkeleton key={i} />
+        {Array.from({ length: 6 }).map((_, index) => (
+          <ActivityCardSkeleton key={index} />
         ))}
       </div>
     );
