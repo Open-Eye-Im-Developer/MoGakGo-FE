@@ -1,4 +1,5 @@
 import { toast } from "sonner";
+import { Cookies } from "react-cookie";
 import { useRouter } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -14,6 +15,10 @@ export const useDeleteUser = () => {
     onSuccess: () => {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
+
+      const cookies = new Cookies();
+      cookies.remove("isAuthenticated");
+
       useAuthStore.persist.clearStorage();
 
       toast.error("회원탈퇴가 완료되었습니다.");

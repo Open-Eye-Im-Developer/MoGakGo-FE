@@ -1,3 +1,4 @@
+import { Cookies } from "react-cookie";
 import { redirect } from "next/navigation";
 import axios from "axios";
 
@@ -30,7 +31,12 @@ instance.interceptors.response.use(
     const refreshToken = localStorage.getItem("refreshToken");
 
     if (status === 401 || status === 404) {
-      if (status === 404) redirect("/login");
+      if (status === 404) {
+        const cookies = new Cookies();
+        cookies.remove("isAuthenticated");
+
+        return redirect("/login");
+      }
 
       const newAccessToken = await reIssueAccessToken(refreshToken ?? "");
 

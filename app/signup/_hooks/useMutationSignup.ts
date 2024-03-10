@@ -1,3 +1,4 @@
+import { useCookies } from "react-cookie";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { useAuthStore } from "@/app/_common/store/useAuthStore";
@@ -12,12 +13,14 @@ export const useMutationSignup = (
 ) => {
   const queryClient = useQueryClient();
   const { setUser } = useAuthStore();
+  const [, setCookie] = useCookies(["isAuthenticated"]);
 
   const { mutate } = useMutation({
     mutationFn: patchSignup,
     onSuccess: (data: SignUpUser) => {
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
+      setCookie("isAuthenticated", "true");
 
       sessionStorage.removeItem("accessToken");
       sessionStorage.removeItem("refreshToken");
