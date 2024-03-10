@@ -27,11 +27,7 @@ import EmptyCardList from "./EmptyCardList";
 import CardList from "./CardList";
 
 function Map() {
-  const {
-    data: areaCode,
-    isError: isGeoError,
-    error: geoError,
-  } = useQueryGeoAreaCode();
+  const { data: areaCode } = useQueryGeoAreaCode();
   const [regionCode, setRegionCode] = useState(0);
   const previousRegion = useRef<SVGElement | null>(null);
   const [isListShow, setIsListShow] = useState(false);
@@ -56,8 +52,6 @@ function Map() {
       else if (!hasNextProject && hasNextProfile) fetchProfile();
     });
   }, [carouselApi, hasNextProject, hasNextProfile]);
-
-  if (isGeoError) toast.error(geoError?.message);
 
   useEffect(() => {
     if (!areaCode) return;
