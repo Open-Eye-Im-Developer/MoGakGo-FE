@@ -99,9 +99,7 @@ function MessageContainer(props: MessageContainerProps) {
         onScroll={handleScroll}
       >
         {messageList.map(message => (
-          <div key={message.id}>
-            <Message message={message} userId={user!.id} />
-          </div>
+          <Message message={message} key={message.id} userId={user!.id} />
         ))}
       </div>
       <UpScrollButton

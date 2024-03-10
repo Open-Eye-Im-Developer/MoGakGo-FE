@@ -7,12 +7,12 @@ import useGetChats from "../_api/useGetChats";
 import Chat from "./Chat";
 
 function ChatList() {
-  const { data: chats } = useGetChats();
+  const { chats } = useGetChats();
 
   return (
     <>
-      {chats && chats.data.length ? (
-        [...chats.data]
+      {chats.length ? (
+        [...chats]
           .reverse()
           .map(chat => <Chat chat={chat} key={chat.projectId} />)
       ) : (

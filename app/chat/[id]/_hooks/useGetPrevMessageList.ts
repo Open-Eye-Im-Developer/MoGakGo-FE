@@ -7,6 +7,7 @@ interface ChatMessagesResponseData {
 
 export const useGetPrevMessageList = (chatRoomId: string) => {
   const getPreviousChatMessageList = async (chatRoomId: string) => {
+    const accessToken = localStorage.getItem("accessToken");
     let cursorId: number | null = null;
     let hasData = true;
     const messages = [];
@@ -19,7 +20,7 @@ export const useGetPrevMessageList = (chatRoomId: string) => {
         {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_SWAGGER_KEY}`,
+            Authorization: `Bearer ${accessToken}`,
           },
         },
       );
