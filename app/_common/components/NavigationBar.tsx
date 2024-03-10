@@ -17,7 +17,7 @@ import { Button } from "../shadcn/ui/button";
 import NavigationProfile from "./NavigationProfile";
 import NavigationItem from "./NavigationItem";
 
-// TODO: 튜토리얼과 모각코 페이지를 만들어서 링크를 연결해주세요. 현재는 임시로 '#'로 연결
+// TODO: 튜토리얼 페이지를 만들어서 링크를 연결해주세요. 현재는 임시로 '#'로 연결
 function NavigationBar() {
   const { user } = useAuthStore();
 
