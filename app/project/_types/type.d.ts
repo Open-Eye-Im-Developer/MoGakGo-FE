@@ -53,3 +53,13 @@ interface RequestListError {
   code: string;
   message: string;
 }
+
+interface FormmatedValues {
+  creatorId: number;
+  meetStartTime: string;
+  meetEndTime: string;
+  meetLat: number;
+  meetLng: number;
+  meetDetail: string;
+  tags: string[];
+}

@@ -1,0 +1,43 @@
+import { AxiosError } from "axios";
+import { useMutation } from "@tanstack/react-query";
+
+import { useToast } from "@/app/_common/shadcn/ui/use-toast";
+import { instance } from "@/app/_common/api/instance";
+
+import { ResponseError } from "@/app/_common/types/response";
+
+function useCreateProjectMutation(onClose: (open: boolean) => void) {
+  const { toast } = useToast();
+
+  const createProject = async (values: FormmatedValues) => {
+    const { data } = await instance.post("/projects", values);
+
+    return data;
+  };
+
+  const { mutate: createNewProject } = useMutation({
+    mutationFn: createProject,
+    onSuccess: () => {
+      toast({
+        title: "프로젝트가 생성되었습니다.",
+        description: "프로젝트가 생성되었습니다.",
+      });
+
+      onClose && onClose(false);
+    },
+    onError: (error: AxiosError<ResponseError>) => {
+      const errorMessage = error.response?.data.message;
+
+      toast({
+        title: "프로젝트 생성에 실패했습니다.",
+        description: errorMessage,
+        variant: "destructive",
+      });
+    },
+    throwOnError: false,
+  });
+
+  return { createNewProject };
+}
+
+export default useCreateProjectMutation;
