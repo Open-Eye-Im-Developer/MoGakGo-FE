@@ -6,6 +6,8 @@ import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { Tabs, TabsList, TabsTrigger } from "@/app/_common/shadcn/ui/tabs";
 import { Button } from "@/app/_common/shadcn/ui/button";
 
+import StackNavigator from "@/app/_common/components/StackNavigator";
+
 import { useInfiniteQueryProjectHistory } from "../_hooks/useInfiniteQueryProjectHistory";
 import ProjectCardSkeleton from "../_components/ProjectCardSkeleton";
 import ProjectCard from "../_components/ProjectCard";
@@ -22,7 +24,8 @@ function HistoryPage() {
   );
 
   return (
-    <main className="container max-h-full min-h-screen max-w-2xl space-y-4 bg-gray-50 dark:bg-gray-950">
+    <main className="container flex min-h-screen max-w-2xl flex-col gap-8 bg-gray-50 pb-8 dark:bg-gray-950">
+      <StackNavigator content={"지난 만남 카드"} />
       <Tabs
         defaultValue={currentTab}
         className="space-y-4"

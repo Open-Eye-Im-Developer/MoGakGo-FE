@@ -1,5 +1,6 @@
 "use client";
 
+import StackNavigator from "../_common/components/StackNavigator";
 import { useQueryUserData } from "./_hooks/useQueryUserData";
 import { useQuerySendLikeCount } from "./_hooks/useQuerySendLikeCount";
 import { useQueryReceiveLikeCount } from "./_hooks/useQueryReceiveLikeCount";
@@ -29,6 +30,7 @@ function MyPage() {
 
   return (
     <main className="container flex min-h-screen max-w-2xl flex-col gap-8 bg-gray-50 pb-8 dark:bg-gray-950">
+      <StackNavigator content={"마이페이지"} />
       <Profile data={userData} />
       <LikeCount
         sendLikeCount={sendLikeCount}
