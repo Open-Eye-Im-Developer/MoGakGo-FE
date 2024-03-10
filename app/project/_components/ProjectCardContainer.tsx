@@ -28,7 +28,7 @@ function ProjectCardContainer({ project }: Props) {
   const { flipped, handleFlip } = useFlip();
   const [requestList, setRequestList] = useState<RequestList[]>([]);
   const { ref, cursorId } = useInfiniteScroll(requestList!);
-  const { data } = useGetRequestListQuery(0, cursorId);
+  const { data } = useGetRequestListQuery(project.projectId, cursorId);
 
   useEffect(() => {
     if (!data || "timestamp" in data) return;
