@@ -5,20 +5,19 @@ import { cn } from "@/app/_common/shadcn/utils";
 import ActivityCard from "@/app/_common/components/ActivityCard";
 
 import { ChatType } from "../_types/chat";
-import { ProfileType } from "../[id]/_types/chatRoom";
 
 interface ChatProps {
   chat: ChatType;
 }
 
 function Chat({ chat }: ChatProps) {
-  const { chatRoomId, lastMessage, lastMessageCreatedAt, status, profiles } =
-    chat;
-
-  const MY_ID = 1;
-  const matchedUser = profiles?.find(
-    profile => profile.userId !== MY_ID,
-  ) as ProfileType;
+  const {
+    chatRoomId,
+    lastMessage,
+    lastMessageCreatedAt,
+    status,
+    chatUserInfo: matchedUser,
+  } = chat;
 
   return (
     <Link

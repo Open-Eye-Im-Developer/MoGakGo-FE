@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 
 dayjs.extend(utc);
 dayjs.extend(tz);
-const timezone = "Europe/London";
+const timezone = "Asia/Seoul";
 
 const formatMeetingTime = (isoStartTime: string, isoEndTime: string) => {
   if (!isoStartTime || !isoEndTime) return "유효하지 않은 시간 입니다.";

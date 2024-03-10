@@ -3,10 +3,13 @@ import { useQuery } from "@tanstack/react-query";
 import { getChats } from "./index";
 
 const useGetChats = () => {
-  const { data: chats, isLoading } = useQuery({
+  const { isLoading, data } = useQuery({
     queryKey: ["chats"] as const,
     queryFn: getChats,
   });
-  return { chats, isLoading };
+
+  if (isLoading || !data) return { chats: [] };
+
+  return { chats: data.data, isLoading };
 };
 export default useGetChats;

@@ -21,7 +21,7 @@ function ChatList() {
 
   return (
     <>
-      {chats?.length ? (
+      {chats.length ? (
         [...chats]
           .reverse()
           .map(chat => <Chat chat={chat} key={chat.chatRoomId} />)
