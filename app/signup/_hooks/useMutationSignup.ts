@@ -1,4 +1,4 @@
-import { useCookies } from "react-cookie";
+import { setCookie } from "cookies-next";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { useAuthStore } from "@/app/_common/store/useAuthStore";
@@ -13,7 +13,7 @@ export const useMutationSignup = (
 ) => {
   const queryClient = useQueryClient();
   const { setUser } = useAuthStore();
-  const [, setCookie] = useCookies(["isAuthenticated"]);
+  setCookie("isAuthenticated", "true");
 
   const { mutate } = useMutation({
     mutationFn: patchSignup,
