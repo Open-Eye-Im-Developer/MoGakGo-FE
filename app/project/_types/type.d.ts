@@ -47,18 +47,9 @@ interface RequestList {
   requestStatus: string;
 }
 
-interface RequestListSuccessData {
-  data: RequestList[];
-}
-
-interface RequestListErrorData {
+interface RequestListError {
   timestamp: string;
   statusCode: number;
   code: string;
   message: string;
-}
-
-interface RequestListResponseData {
-  data: RequestList[] | RequestListErrorData;
-  status: number;
 }
