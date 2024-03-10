@@ -13,7 +13,6 @@ export const useMutationSignup = (
 ) => {
   const queryClient = useQueryClient();
   const { setUser } = useAuthStore();
-  setCookie("isAuthenticated", "true");
 
   const { mutate } = useMutation({
     mutationFn: patchSignup,
