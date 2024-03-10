@@ -1,8 +1,9 @@
 "use client";
-
+import { useParams } from "next/navigation";
 import dayjs from "dayjs";
 
 import formatMeetingTime from "@/app/project/_utils/formatMeetingTime";
+import { Skeleton } from "@/app/_common/shadcn/ui/skeleton";
 
 import useGetChatInfo from "../_api/useGetChatInfo";
 import {
@@ -12,16 +13,26 @@ import {
   AccordionTrigger,
 } from "../../../_common/shadcn/ui/accordion";
 
-interface ProjectInfoProps {
-  chatRoomId: string;
-}
+function ProjectInfo() {
+  const { id } = useParams<{ id: string }>();
+  const { chatInfo, isLoading } = useGetChatInfo(id);
 
-function ProjectInfo(props: ProjectInfoProps) {
-  const { chatRoomId } = props;
-  const { data: chatInfo } = useGetChatInfo(chatRoomId);
+  if (isLoading)
+    return (
+      <Accordion
+        className="absolute z-10 w-full bg-white"
+        type="single"
+        collapsible
+      >
+        <AccordionItem value="item-1">
+          <AccordionTrigger className="p-4 hover:no-underline">
+            <Skeleton className="h-[20px] w-[230px]" />
+          </AccordionTrigger>
+        </AccordionItem>
+      </Accordion>
+    );
 
   if (!chatInfo) return;
-
   const { meetDetail, meetStartTime, meetEndTime } = chatInfo;
 
   return (

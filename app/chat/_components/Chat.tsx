@@ -12,7 +12,6 @@ interface ChatProps {
 
 function Chat({ chat }: ChatProps) {
   const {
-    projectId,
     chatRoomId,
     lastMessage,
     lastMessageCreatedAt,
@@ -21,7 +20,15 @@ function Chat({ chat }: ChatProps) {
   } = chat;
 
   return (
-    <Link href={`/chat/${chatRoomId}`} key={projectId}>
+    <Link
+      href={{
+        pathname: `/chat/${chatRoomId}`,
+        query: {
+          name: matchedUser.username,
+          profileImage: matchedUser.avatarUrl,
+        },
+      }}
+    >
       <div className="relative">
         <ActivityCard
           name={matchedUser.username}
