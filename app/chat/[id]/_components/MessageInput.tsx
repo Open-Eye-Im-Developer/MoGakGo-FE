@@ -7,8 +7,6 @@ import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { cn } from "@/app/_common/shadcn/utils";
 import { buttonVariants } from "@/app/_common/shadcn/ui/button";
 
-import { MessageType } from "../_types/message";
-
 interface MessageInputProp {
   addNewMessage: (newMessage: MessageType[]) => void;
   clientRef: React.MutableRefObject<Client | null>;
@@ -40,7 +38,7 @@ function MessageInput({
   const handleSubmit = () => {
     if (
       hasBlankInMessage ||
-      !(clientRef.current && clientRef.current.connected)
+      !(clientRef.current && clientRef.current.connected && user)
     )
       return;
     // post 요청
@@ -55,9 +53,9 @@ function MessageInput({
     });
 
     const newMessage: MessageType = {
-      content: message,
-      senderId: "1",
-      receiverId: "2",
+      id: Number(Math.random().toString(36).slice(2, 9)), // TODO: 적절한 id로 변경 필요
+      message,
+      senderId: user.id,
       createdAt: new Date().toISOString(),
     };
     addNewMessage([newMessage]);
