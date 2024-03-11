@@ -6,7 +6,11 @@ export interface ChatType {
   lastMessage: string;
   lastMessageCreatedAt: string;
   status: "OPEN" | "CLOSE";
-  profiles: [ChatProfileType, ChatProfileType];
+  chatUserInfo: ChatProfileType;
+}
+
+export interface ChatRoomType {
+  data: ChatType[];
 }
 
 export interface ChatProfileType extends ProfileType {

@@ -42,6 +42,7 @@
     "@stomp/stompjs": "^7.0.0",
     "@tabler/icons-react": "^2.47.0",
     "@tanstack/react-query": "^5.20.2",
+    "@tanstack/react-query-devtools": "^5.25.0",
     "@tanstack/react-table": "^8.11.8",
     "@types/stompjs": "^2.3.9",
     "@typescript-eslint/eslint-plugin": "^7.0.1",

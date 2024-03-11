@@ -5,7 +5,6 @@ import { cn } from "@/app/_common/shadcn/utils";
 import ActivityCard from "@/app/_common/components/ActivityCard";
 
 import { ChatType } from "../_types/chat";
-import { ProfileType } from "../[id]/_types/chatRoom";
 
 interface ChatProps {
   chat: ChatType;
@@ -13,21 +12,23 @@ interface ChatProps {
 
 function Chat({ chat }: ChatProps) {
   const {
-    projectId,
     chatRoomId,
     lastMessage,
     lastMessageCreatedAt,
     status,
-    profiles,
+    chatUserInfo: matchedUser,
   } = chat;
 
-  const MY_ID = 1;
-  const matchedUser = profiles?.find(
-    profile => profile.userId !== MY_ID,
-  ) as ProfileType;
-
   return (
-    <Link href={`/chat/${chatRoomId}`} key={projectId}>
+    <Link
+      href={{
+        pathname: `/chat/${chatRoomId}`,
+        query: {
+          name: matchedUser.username,
+          profileImage: matchedUser.avatarUrl,
+        },
+      }}
+    >
       <div className="relative">
         <ActivityCard
           name={matchedUser.username}
