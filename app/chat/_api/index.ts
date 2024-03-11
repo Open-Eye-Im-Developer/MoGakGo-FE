@@ -8,3 +8,7 @@ export const getChats = async () => {
   const { data } = await instance.get<ChatRoomType>(`/chat?${query}`);
   return data;
 };
+export const deleteChatRoom = async (chatRoomId: string) => {
+  const { data } = await instance.patch(`/chat/${chatRoomId}`);
+  return data;
+};
