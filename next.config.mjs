@@ -10,7 +10,7 @@ const nextPWAConfig = withPWA({
   disable: process.env.NODE_ENV === "development",
 });
 
-const nextConfig = {
+const nextConfig = nextPWAConfig({
   images: {
     domains: ["avatars.githubusercontent.com", "github.com"],
   },
@@ -28,8 +28,6 @@ const nextConfig = {
       },
     ];
   },
-};
+});
 
-export default process.env.NODE_ENV === "development"
-  ? nextConfig
-  : nextPWAConfig;
+export default nextConfig;
