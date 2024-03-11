@@ -12,7 +12,7 @@ export const useQueryProjectHistory = (
   return useQuery<ResponseData<Match> | undefined>({
     queryFn: () =>
       creatorId
-        ? getMatchesByUserId(creatorId, undefined, pageSize)
+        ? getMatchesByUserId(creatorId, undefined, undefined, pageSize)
         : undefined,
     queryKey: ["getMatchesByUserId", creatorId],
     enabled: typeof creatorId === "number",
