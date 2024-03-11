@@ -5,20 +5,20 @@ import { IconLock } from "@tabler/icons-react";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 
 import { useQuerySignUpUser } from "@/app/signup/_hooks/useQuerySignUpUser";
-import { useAuthStore } from "@/app/_common/store/useAuthStore";
+
+import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
 
 import { useQueryAchievements } from "../_hooks/useQueryAchievements";
 import AchievementItem from "./AchievementItem";
 
 function AchievementList() {
-  const { getUser } = useAuthStore();
+  const { data: userData } = useQuerySignUpUser();
 
-  const user = getUser();
-  const { data: achievements } = useQueryAchievements(user?.id as number);
+  const { data: achievements } = useQueryAchievements(userData?.id as number);
 
-  // TODO: useAuthStore의 setUser를 전역 상태로 관리하도록 변경 후 사용자 쿼리 삭제
-  const userDataQuery = useQuerySignUpUser();
-  const { data: userData } = userDataQuery;
+  if (typeof userData?.id !== "number" || !achievements) {
+    return <LoadingSpinner />;
+  }
 
   const myAchievement = achievements?.find(
     achievement => achievement.achievementId === userData?.achievementId,

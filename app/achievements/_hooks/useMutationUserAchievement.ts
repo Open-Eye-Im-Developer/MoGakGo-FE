@@ -9,7 +9,7 @@ export const useMutationUserAchievement = () => {
     mutationFn: patchUserAchievement,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["achievement", "user"],
+        queryKey: ["achievements", "user"],
       });
     },
     onError: error => {
