@@ -4,25 +4,18 @@ import { toast } from "sonner";
 import { IconLock } from "@tabler/icons-react";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 
-import { useQuerySignUpUser } from "@/app/signup/_hooks/useQuerySignUpUser";
-
 import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
 
 import { useQueryAchievements } from "../_hooks/useQueryAchievements";
 import AchievementItem from "./AchievementItem";
 
 function AchievementList() {
-  const { data: userData } = useQuerySignUpUser();
+  const { achievements, myAchievement } = useQueryAchievements();
 
-  const { data: achievements } = useQueryAchievements(userData?.id as number);
-
-  if (typeof userData?.id !== "number" || !achievements) {
+  if (!achievements || !myAchievement) {
+    // TODO: 스켈레톤으로 대체하기
     return <LoadingSpinner />;
   }
-
-  const myAchievement = achievements?.find(
-    achievement => achievement.achievementId === userData?.achievementId,
-  );
 
   const hanldeClickMyAchievement = () => {
     toast.message("아직 설정된 업적이 없어요.");
@@ -68,7 +61,7 @@ function AchievementList() {
             styleType="item"
             achievement={achievement}
             isMyAchievement={
-              achievement.achievementId === myAchievement?.achievementId
+              myAchievement?.achievementId === achievement.achievementId
             }
             key={index}
           />

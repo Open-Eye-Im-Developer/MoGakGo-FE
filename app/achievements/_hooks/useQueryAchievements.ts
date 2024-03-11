@@ -1,15 +1,27 @@
 import { useQuery } from "@tanstack/react-query";
 
+import { useQuerySignUpUser } from "@/app/signup/_hooks/useQuerySignUpUser";
 import { getAchievements } from "@/app/_common/api/achievements";
 
 import { Achievement } from "@/app/_common/types/user";
 
-export const useQueryAchievements = (userId: Achievement["userId"]) => {
-  const query = useQuery<Achievement[]>({
+export const useQueryAchievements = () => {
+  const { data: userData } = useQuerySignUpUser();
+  const userId = userData?.id;
+
+  const { data, isLoading } = useQuery<Achievement[]>({
     queryKey: ["achievements", userId],
-    queryFn: () => getAchievements(userId),
     enabled: !!userId,
+    queryFn: () => getAchievements(userId),
   });
 
-  return query;
+  if (!data || !userData || isLoading)
+    return { achievements: [], myAchievement: null };
+
+  return {
+    achievements: data,
+    myAchievement: data.find(
+      achievement => achievement.achievementId === userData?.achievementId,
+    ),
+  };
 };

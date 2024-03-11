@@ -87,7 +87,7 @@ function AchievementItem({
             "text-pretty text-center text-sm",
           )}
         >
-          {title ?? ""}
+          {title}
         </p>
       </li>
     </>
