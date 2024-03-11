@@ -3,6 +3,7 @@ import { toast } from "sonner";
 import { SignUpUser, SignupRequest } from "@/app/signup/_type/signup";
 import { reIssueAccessTokenResponse } from "@/app/login/_types/login.types";
 
+import { navigate } from "../utils/redirect";
 import { instance } from "../api/instance";
 
 export const patchSignup = async ({ username, wantedJobs }: SignupRequest) => {
@@ -43,5 +44,7 @@ export const reIssueAccessToken = async (refreshToken: string) => {
     localStorage.removeItem("refreshToken");
 
     toast.error("인증이 만료되었습니다. 재로그인이 필요합니다.");
+
+    navigate("/login");
   }
 };
