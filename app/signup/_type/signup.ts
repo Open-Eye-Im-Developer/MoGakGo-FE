@@ -1,4 +1,4 @@
-import { WantedJobs } from "@/app/_common/types/user";
+import { UserAchievement, WantedJobs } from "@/app/_common/types/user";
 
 export interface Language {
   // TODO: 백엔드 서버에서 image 파일 구축이 완료되면 주석 해제
@@ -7,7 +7,7 @@ export interface Language {
   byteSize: number;
 }
 
-export interface SignUpUser {
+export interface SignUpUser extends UserAchievement {
   id: number;
   username: string;
   githubId: string;
@@ -16,7 +16,6 @@ export interface SignUpUser {
   bio?: string;
   developLanguages?: string[];
   jandiRate?: number;
-  achievementTitle?: string;
   wantedJobs?: WantedJobs[];
 }
 

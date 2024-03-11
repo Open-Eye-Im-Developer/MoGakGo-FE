@@ -32,7 +32,7 @@ export const useSearchTokens = (type: "local" | "session") => {
       saveUpdatedTokens(newAccessToken, newRefreshToken);
     }
     if (data && !user) setUser(data);
-  }, [newAccessToken, newRefreshToken, type, data]);
+  }, [newAccessToken, newRefreshToken, type, data, setUser, user]);
 
   return {
     newAccessToken,
