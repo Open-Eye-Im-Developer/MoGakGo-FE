@@ -26,10 +26,10 @@ const config = {
         secondary: "#FFCB09",
         error: "#DC143C",
         success: "#17C964",
-        NeoRed: "#e24a57",
-        NeoYellow: "#fba834",
-        NeoBlue: "#396eeb",
-        NeoGreen: "#25b195",
+        neoRed: "#e24a57",
+        neoYellow: "#fba834",
+        neoBlue: "#396eeb",
+        neoGreen: "#25b195",
       },
       keyframes: {
         "accordion-down": {
