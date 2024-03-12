@@ -1,4 +1,3 @@
-import { AxiosError } from "axios";
 import { useQuery } from "@tanstack/react-query";
 
 import { useAuthStore } from "@/app/_common/store/useAuthStore";
@@ -9,14 +8,8 @@ function useGetCurrentProjectQuery() {
   const { user } = useAuthStore();
 
   const getCurrentProject = async () => {
-    try {
-      const { data } = await instance.get(`/projects/${user!.id}/info`);
-      return data;
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        return { response: error.response?.data };
-      }
-    }
+    const { data } = await instance.get(`/projects/${user!.id}/info`);
+    return data;
   };
 
   const { data, isLoading } = useQuery({
@@ -27,7 +20,7 @@ function useGetCurrentProjectQuery() {
     throwOnError: false,
   });
 
-  if (isLoading || !data) return { project: null };
+  if (isLoading || !data) return { project: null, matchingId: null };
   return { project: data.response, matchingId: data.matchingId };
 }
 
