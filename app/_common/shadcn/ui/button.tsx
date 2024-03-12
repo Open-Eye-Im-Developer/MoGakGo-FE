@@ -10,11 +10,11 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "rounded-md  bg-white px-10 py-3 font-bold shadow-[0px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none",
+          "rounded-md border border-black bg-white px-10 py-3 font-bold shadow-neo transition-all hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none",
         destructive:
           "bg-red-500 text-slate-50 hover:bg-red-500/90 dark:bg-red-900 dark:text-slate-50 dark:hover:bg-red-900/90",
         outline:
-          "rounded-md border-2 border-black bg-white px-10 py-3 font-bold shadow-[0px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none",
+          "rounded-md border-2 border-black bg-white px-10 py-3 font-bold shadow-neo-b transition-all hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none",
         secondary:
           "bg-slate-100 text-slate-900 hover:bg-slate-100/80 dark:bg-slate-800 dark:text-slate-50 dark:hover:bg-slate-800/80",
         ghost:
@@ -26,6 +26,11 @@ const buttonVariants = cva(
         sm: "h-9 rounded-md px-3",
         lg: "h-11 rounded-md px-8",
         icon: "h-10 w-10",
+      },
+      shadow: {
+        none: "shadow-none hover:translate-x-0 hover:translate-y-0 transition-none hover:bg-slate-100",
+        neo: "shadow-neo",
+        neoBottom: "shadow-neo-b",
       },
     },
     defaultVariants: {
@@ -42,11 +47,11 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, shadow, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={cn(buttonVariants({ variant, size, shadow, className }))}
         ref={ref}
         {...props}
       />
