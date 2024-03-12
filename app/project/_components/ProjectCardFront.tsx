@@ -33,6 +33,7 @@ interface CardFrontProps {
   initialRotate?: boolean;
   onRotate: () => void;
   project: Project;
+  matchingId: number | null;
 }
 
 function ProjectCardFront(props: CardFrontProps) {
@@ -56,6 +57,7 @@ function ProjectCardFront(props: CardFrontProps) {
       projectId,
       meetingInfo: { meetDetail, meetEndTime, meetStartTime },
     },
+    matchingId,
   } = props;
   const { user } = useAuthStore();
 
@@ -130,7 +132,7 @@ function ProjectCardFront(props: CardFrontProps) {
           ) : (
             <ProjectRemoveDialog
               projectId={projectId}
-              isMatchedProject={false}
+              isMatchedProject={matchingId ? true : false}
             />
           )}
         </CardFooter>
