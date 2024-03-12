@@ -10,6 +10,6 @@ const useGetChats = () => {
 
   if (isLoading || !data) return { chats: [] };
 
-  return { chats: data.data };
+  return { chats: data.data, isLoading };
 };
 export default useGetChats;

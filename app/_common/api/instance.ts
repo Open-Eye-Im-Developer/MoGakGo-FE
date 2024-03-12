@@ -1,4 +1,3 @@
-import { redirect } from "next/navigation";
 import axios from "axios";
 
 import { reIssueAccessToken } from "./auth";
@@ -26,26 +25,28 @@ instance.interceptors.request.use(config => {
 
 instance.interceptors.response.use(
   async response => {
-    const { config, status } = response;
-    const refreshToken = localStorage.getItem("refreshToken");
-
-    if (status === 401 || status === 404) {
-      if (status === 404) redirect("/login");
-
-      const newAccessToken = await reIssueAccessToken(refreshToken ?? "");
-
-      if (newAccessToken) {
-        localStorage.setItem("accessToken", newAccessToken);
-
-        config.headers.Authorization = `Bearer ${newAccessToken}`;
-
-        return instance(config);
-      }
-    }
-
     return response;
   },
   async error => {
+    const { status, config } = error.response;
+    const refreshToken = localStorage.getItem("refreshToken");
+
+    if (status === 401) {
+      if (config.url !== "/auth/reissue") {
+        const newAccessToken = await reIssueAccessToken(refreshToken ?? "");
+
+        if (newAccessToken) {
+          localStorage.setItem("accessToken", newAccessToken);
+
+          config.headers.Authorization = `Bearer ${newAccessToken}`;
+
+          return instance(config);
+        }
+      }
+
+      return Promise.reject(error);
+    }
+
     return Promise.reject(error);
   },
 );
