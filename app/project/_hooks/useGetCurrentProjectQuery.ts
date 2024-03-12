@@ -28,7 +28,7 @@ function useGetCurrentProjectQuery() {
   });
 
   if (isLoading || !data) return { project: null };
-  return { project: data.response };
+  return { project: data.response, matchingId: data.matchingId };
 }
 
 export default useGetCurrentProjectQuery;
