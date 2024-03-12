@@ -2,7 +2,7 @@
 
 @keyframes blink1 {
   from {
-    fill: #ffcb09;
+    fill: #a1c16e;
   }
   to {
     fill: #ff5555;
@@ -11,7 +11,7 @@
 
 @keyframes blink2 {
   from {
-    fill: #ffcb09;
+    fill: #a1c16e;
   }
   to {
     fill: #ff8888;
@@ -20,7 +20,7 @@
 
 @keyframes blink3 {
   from {
-    fill: #ffcb09;
+    fill: #a1c16e;
   }
   to {
     fill: #ffbbbb;
