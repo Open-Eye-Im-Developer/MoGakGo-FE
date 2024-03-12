@@ -135,7 +135,7 @@ function Map() {
       <div
         id="map-wrap"
         onClick={handleRegionClick}
-        className="absolute z-0 flex h-screen w-screen touch-none items-center justify-center transition-all duration-1000"
+        className="absolute z-0 flex h-screen w-screen touch-none items-center justify-center bg-[#7DD1F2] transition-all duration-1000"
       >
         <MapComponent
           regionCode={regionCode}
