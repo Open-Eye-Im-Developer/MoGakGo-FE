@@ -6,11 +6,12 @@ import { instance } from "@/app/_common/api/instance";
 import { ResponseData } from "@/app/_common/types/response";
 
 // TODO: 프로젝트 카드 생성자가 아닌 사용자가 요청한 프로젝트 목록을 가져오지 못하도록 예외 처리
-function useGetRequestListQuery(id: number, cursorId: number) {
+function useGetRequestListQuery(id: number, cursorId: number | null) {
   const getRequestList = async () => {
     try {
+      const query = `${cursorId ? `cursorId=${cursorId}&` : ""}pageSize=5`;
       const { data } = await instance.get<ResponseData<RequestList>>(
-        `/projects/${id}/requests?pageSize=5&cursorId=${cursorId}`,
+        `/projects/${id}/requests?pageSize=5&${query}`,
       );
 
       return data;

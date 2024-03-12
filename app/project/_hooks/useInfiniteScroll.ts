@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 function useInfiniteScroll(data: RequestList[]) {
-  const [cursorId, setCursorId] = useState(0);
+  const [cursorId, setCursorId] = useState<number | null>(null);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
