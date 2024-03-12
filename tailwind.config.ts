@@ -26,6 +26,10 @@ const config = {
         secondary: "#FFCB09",
         error: "#DC143C",
         success: "#17C964",
+        NeoRed: "#e24a57",
+        NeoYellow: "#fba834",
+        NeoBlue: "#396eeb",
+        NeoGreen: "#25b195",
       },
       keyframes: {
         "accordion-down": {
@@ -61,7 +65,7 @@ const config = {
         "signup-fade-in": "signup-fade-in 0.5s ease-out",
       },
       boxShadow: {
-        "neo": "4px 4px 0px 0px #000000",
+        neo: "4px 4px 0px 0px #000000",
         "neo-b": "0px 4px 0px 0px #000000",
         "neo-l": "-4px 0px 0px 0px #000000",
         "neo-t": "0px -4px 0px 0px #000000",
