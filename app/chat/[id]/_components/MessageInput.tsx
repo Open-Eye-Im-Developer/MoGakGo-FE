@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Client } from "@stomp/stompjs";
 
 import { useAuthStore } from "@/app/_common/store/useAuthStore";
@@ -23,10 +23,10 @@ function MessageInput({
 }: MessageInputProp) {
   const { chats } = useGetChats();
 
-  const isActiveRoom = () => {
+  const isActiveRoom = useMemo(() => {
     const room = chats.find(chat => chat.chatRoomId === chatRoomId) as ChatType;
     return room?.status;
-  };
+  }, [chats, chatRoomId]);
 
   const [message, setMessage] = useState("");
   const { user } = useAuthStore();
