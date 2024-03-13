@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import Image from "next/image";
 import { IconExclamationCircle } from "@tabler/icons-react";
 
 import formatMeetingTime from "@/app/project/_utils/formatMeetingTime";
@@ -24,7 +25,7 @@ import {
 } from "@/app/_common/types/project";
 import { Match } from "@/app/_common/types/matching";
 
-import { useMutationMatchCancel } from "../_hooks/useMutationMatchCancel";
+import { useMutationCancelMatch } from "../_hooks/useMutationCancelMatch";
 
 interface CardProps {
   data: Match | ProjectSummary | RequestProjectSummary;
@@ -75,7 +76,12 @@ function ProjectCard({ data }: CardProps) {
   return (
     <div className="align-center flex items-center gap-4 rounded-md bg-white p-3 dark:bg-gray-900">
       <div className="h-12 w-12 rounded-full">
-        <img src={project.image} alt="another user avatar" />
+        <Image
+          src={project.image}
+          alt="another user avatar"
+          width={48}
+          height={48}
+        />
       </div>
       <div className="flex grow flex-col justify-center space-y-2">
         <div className="text-s flex items-center gap-2">
@@ -101,7 +107,7 @@ interface MatchCancelButtonProps {
 }
 
 function MatchCancelButton({ id }: MatchCancelButtonProps) {
-  const { mutate } = useMutationMatchCancel();
+  const { mutate } = useMutationCancelMatch();
 
   return (
     <AlertDialog>

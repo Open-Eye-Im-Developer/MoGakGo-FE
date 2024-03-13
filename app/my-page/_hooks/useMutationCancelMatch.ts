@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { cancelMatch } from "@/app/_common/api/matching";
 
-export const useMutationMatchCancel = () => {
+export const useMutationCancelMatch = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -17,7 +17,7 @@ export const useMutationMatchCancel = () => {
           "getProjectRequestsByCreatorId",
         ],
       });
-      toast.info("매칭을 취소했습니다.");
+      toast.success("매칭을 취소했습니다.");
     },
     onError: error => {
       if (error instanceof AxiosError) {
