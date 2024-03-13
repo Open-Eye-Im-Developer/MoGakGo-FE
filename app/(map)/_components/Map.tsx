@@ -125,7 +125,7 @@ function Map() {
   };
 
   return (
-    <div className="map-background relative h-screen w-screen touch-none overflow-hidden">
+    <div className="relative h-screen w-screen touch-none overflow-hidden">
       <div className="logo-vertical cursor-pointer" />
       <div className="map-background" />
       <div className="map-background" />

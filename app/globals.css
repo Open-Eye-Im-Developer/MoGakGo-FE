@@ -7,86 +7,33 @@
   src: url("/Galmuri9.woff2");
 }
 
-@layer utilities {
+@layer components {
   .card {
-    backdrop-filter: blur(5px);
-    background-color: rgba(255, 255, 255, 1);
-    border-radius: 26px;
-    box-shadow:
-      35px 35px 68px 0px rgba(120, 120, 120, 0.5),
-      inset -5px -5px 16px 0px rgba(120, 120, 120, 0.6),
-      inset 0px 11px 28px 0px rgb(255, 255, 255);
+    @apply glass-backdrop rounded-[26px] bg-white shadow-[35px_35px_68px_0px_rgba(120,120,120,0.5),inset_-5px_-5px_16px_0px_rgba(120,120,120,0.6),inset_0px_11px_28px_0px_rgb(255,255,255)] backdrop-blur-[5px];
   }
-
   .glass-morphism {
-    background: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 8px 32px 0 #35353574;
-    backdrop-filter: blur(7.5px);
-    -webkit-backdrop-filter: blur(7.5px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    @apply glass-backdrop border border-solid border-[rgba(255,255,255,0.18)] bg-white/25 shadow-[0_8px_32px_0_#35353574] backdrop-blur-[7.5px];
   }
 
   .neumorphism-shadow {
-    box-shadow:
-      35px 35px 68px 0px rgba(104, 104, 104, 0.5),
-      inset -8px -8px 16px 0px rgba(104, 104, 104, 0.6),
-      inset 0px 11px 28px 0px rgb(255, 255, 255);
+    @apply shadow-[35px_35px_68px_0px_rgba(104,104,104,0.5),inset_-8px_-8px_16px_0px_rgba(104,104,104,0.6),inset_0px_11px_28px_0px_rgb(255,255,255)];
   }
 
   .neo-hover {
-    transition-property: all;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 150ms;
-    transform: translate(3px, 3px);
-    box-shadow: none;
+    @apply translate-x-[3px] translate-y-[3px] shadow-none transition-all duration-150 ease-in-out;
   }
 
   .logo-vertical {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    background-image: url("/images/serviceLogoVertical.png");
-    z-index: 50;
-    width: 20px;
-    height: 100%;
-    background-size: 15px;
-    background-repeat: no-repeat;
-  }
-
-  @media (min-width: 744px) {
-    .logo-vertical {
-      background-size: 20px;
-    }
+    @apply absolute left-[15px] top-[15px] z-50 h-full w-[20px] bg-[url("/images/serviceLogoVertical.png")] bg-[length:15px] bg-no-repeat md:bg-[length:20px];
   }
 
   .map-background {
-    position: absolute;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
+    @apply before:animate-slide-infinite after:animate-slide-infinite absolute h-full w-full overflow-hidden before:absolute before:right-[100%] before:h-full before:w-full before:bg-[url("/images/mapBackgroundImage.png")] before:bg-[length:100%] before:content-[""] after:absolute after:h-full after:w-full after:bg-[url("/images/mapBackgroundImage.png")] after:bg-[length:100%] after:content-[""];
   }
+}
 
-  .map-background:before,
-  .map-background:after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: url("/images/mapBackgroundImage.png");
-    background-size: 100%;
-    animation: slide 50s linear infinite;
-  }
-
-  .map-background:before {
-    right: 100%;
-  }
-
-  @keyframes slide {
-    from {
-      transform: translateX(0%);
-    }
-    to {
-      transform: translateX(100%);
-    }
+@layer utilities {
+  .glass-backdrop {
+    -webkit-backdrop-filter: blur(7.5px);
   }
 }
