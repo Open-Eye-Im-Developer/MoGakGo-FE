@@ -562,7 +562,7 @@ function MapComponent({ regionCode, regionRank }: Props) {
                 d="M396.146 588.313C396.646 587.313 399.646 587.409 395.646 572.813C390.646 554.567 416.146 553.813 421.146 549.313C426.146 544.813 432.646 542.821 421.146 525.567C409.646 508.313 422.646 497.313 402.646 473.313C397.674 467.346 409.146 474.479 413.146 477.313C485.146 520.313 530.646 518.313 591.146 524.313C639.546 529.113 640.646 573.979 635.146 595.813M396.146 588.313C403.146 587.813 409.646 590.813 412.146 597.313C414.646 603.813 424.646 610.313 435.146 616.058C445.646 621.804 451.146 633.313 448.646 645.813C446.146 658.313 455.646 663.813 457.646 678.813C459.246 690.813 470.98 694.146 476.646 694.313C479.98 688.479 489.146 675.513 499.146 670.313C511.646 663.813 505.646 655.813 521.646 655.313C537.646 654.813 531.646 642.313 539.646 633.313C547.646 624.313 549.146 620.813 550.146 612.313C551.146 603.813 561.146 597.313 574.146 597.313C587.146 597.313 599.146 602.813 629.146 597.313L635.146 595.813M396.146 588.313L396.5 623C401.707 622.5 408.755 623 412.293 630.125C415.389 636.363 424.793 643.125 435.293 648.871C445.793 654.617 451.293 666.125 448.793 678.625C446.293 691.125 455.793 696.625 457.793 711.625C459.393 723.625 471.126 726.959 476.793 727.125C480.126 721.292 489.293 708.325 499.293 703.125C511.793 696.625 505.793 688.625 521.793 688.125C537.793 687.625 531.793 675.125 539.793 666.125C547.793 657.125 549.293 653.625 550.293 645.125C551.293 636.625 561.293 630.125 574.293 630.125C587.293 630.125 598.207 635.875 629.5 630.5L635.146 629.5V595.813"
                 stroke={strokeColor}
                 strokeWidth="3"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 strokeLinejoin="round"
               />
             </g>
@@ -627,7 +627,7 @@ function MapComponent({ regionCode, regionRank }: Props) {
                 d="M476 695.5C479.333 689.667 488.5 676.7 498.5 671.5C511 665 505 657 521 656.5C537 656 531 643.5 539 634.5C547 625.5 548.5 622 549.5 613.5C550.5 605 560.5 598 573.5 598C586.5 598 598 602 628.5 598.5L634.5 597C650.1 621 715.333 628 746 628.5M476 695.5C485.5 696.333 506.5 695.8 514.5 687M476 695.5C476.163 695.514 476.33 695.528 476.5 695.542M514.5 687C524.5 676 523 678.5 533 678C543 677.5 547.5 679.5 554 670C560.5 660.5 568 664 578 667C588 670 600 670 607 668C614 666 641 664 648.5 669C656 674 662 675 667.5 670.5C673 666 681 665 684.5 673C688 681 693.5 679.5 689 697.5C684.5 715.5 698 709 703 717C708 725 732 726 746 719C745.333 711 745.5 692.4 751.5 682C759 669 748 663 756 652.5M514.5 687C506.638 695.649 486.218 696.312 476.5 695.542M756 652.5C764 642 748.5 639 746 628.5M756 652.5C757.031 651.147 757.671 649.919 758 648.783M746 628.5C748.178 637.647 760.222 641.102 758 648.783M476.5 695.542V728.5C486 729.333 507 728.8 515 720C525 709 523.5 711.5 533.5 711C543.5 710.5 548 712.5 554.5 703C561 693.5 568.5 697 578.5 700C588.5 703 600.5 703 607.5 701C614.5 699 641.5 697 649 702C656.5 707 662.5 708 668 703.5C673.5 699 681.5 698 685 706C688.5 714 694 712.5 689.5 730.5C685 748.5 698.5 742 703.5 750C708.5 758 732.5 759 746.5 752C745.833 744 746 725.4 752 715C759.5 702 748.5 696 756.5 685.5C757.147 684.65 758.5 682.5 758 683.09V648.783M476.5 695.542V695.5M758 646V648.783"
                 stroke={strokeColor}
                 strokeWidth="3"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 strokeLinejoin="round"
               />
             </g>
@@ -660,7 +660,7 @@ function MapComponent({ regionCode, regionRank }: Props) {
                 d="M463 710.689C465.5 706.856 471.8 698.489 477 695.689C486.5 696.523 507.5 695.989 515.5 687.189C525.5 676.189 524 678.689 534 678.189C544 677.689 548.5 679.689 555 670.189C561.5 660.689 569 664.189 579 667.189C589 670.189 601 670.189 608 668.189C615 666.189 642 664.189 649.5 669.189C657 674.189 663 675.189 668.5 670.689C674 666.189 682 665.189 685.5 673.189C689 681.189 694.5 679.689 690 697.689C685.5 715.689 699 709.189 704 717.189C709 725.189 733 726.189 747 719.189C759.5 719.189 761.5 726.189 761 731.189C760.5 736.189 762.5 735.689 770.5 741.689M463 710.689C467.667 711.689 479.3 713.489 488.5 712.689C500 711.689 507 723.689 499.5 732.689M463 710.689V743.689C467.667 744.689 479.3 746.489 488.5 745.689C492.847 745.311 496.408 746.764 498.805 749.213M499.5 732.689C492 741.689 497.5 750.189 504 753.189M499.5 732.689C494.219 739.027 495.384 745.117 498.805 749.213M504 753.189C510.5 756.189 511.5 758.689 511 769.189C510.5 779.689 530.5 791.189 541 792.689C551.5 794.189 554 795.189 555 801.189C556 807.189 558.5 805.689 562.5 806.189C566.5 806.689 576 810.189 574 819.689C572.5 826.689 588.5 829.189 592.5 832.189C596.5 835.189 598 835.189 597.5 844.689C597 854.189 614 850.689 617 850.189C620 849.689 631 839.689 655.5 842.189C671.5 844.689 666.5 839.189 681 838.189C695.5 837.189 684.5 822.689 699 814.689C713.5 806.689 709.5 796.689 739.5 790.689C762 786.689 762 780.189 774.5 776.189M504 753.189C502.366 752.435 500.795 751.333 499.478 749.963M774.5 776.189C777.333 767.856 780.5 749.289 770.5 741.689M774.5 776.189C775.86 772.189 777.297 765.831 777.317 759.46M770.5 741.689C775.631 745.589 777.295 752.375 777.317 759.184M498.805 749.213C499.041 749.453 499.265 749.704 499.478 749.963M498.805 749.213C499.021 749.471 499.245 749.721 499.478 749.963M499.478 749.963C502.827 754.044 503.302 760.315 499.5 765.689C492.735 775.254 497.5 783.189 504 786.189C510.5 789.189 511.5 791.689 511 802.189C510.5 812.689 530.5 824.189 541 825.689C551.5 827.189 554 828.189 555 834.189C556 840.189 558.5 838.689 562.5 839.189C566.5 839.689 576 843.189 574 852.689C572.5 859.689 588.5 862.189 592.5 865.189C596.5 868.189 598 868.189 597.5 877.689C597 887.189 614 883.689 617 883.189C620 882.689 631 872.689 655.5 875.189C671.5 877.689 666.5 872.189 681 871.189C695.5 870.189 684.5 855.689 699 847.689C713.5 839.689 709.5 829.689 739.5 823.689C762 819.689 762 813.189 774.5 809.189C775.879 805.133 777.338 798.651 777.317 792.189V759.46M777.317 759.46V759.184M777.317 759.46C777.318 759.368 777.318 759.276 777.317 759.184"
                 stroke={strokeColor}
                 strokeWidth="3"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 strokeLinejoin="round"
               />
             </g>
@@ -693,14 +693,14 @@ function MapComponent({ regionCode, regionRank }: Props) {
                 d="M412.144 695.517C405.344 685.917 391.977 687.517 386.144 689.517C379.81 693.184 368.344 702.217 373.144 709.017C379.144 717.517 400.144 734.017 400.144 741.517C400.144 749.017 421.144 754.517 417.144 770.017C413.144 785.517 418.644 794.517 434.144 795.517C449.644 796.517 456.644 804.017 455.144 825.517C453.644 847.017 473.644 845.017 484.144 854.017C494.644 863.017 498.144 855.517 498.144 849.517C498.144 843.517 505.144 840.017 521.644 842.017C534.844 843.617 554.144 818.684 562.144 806.017C558.144 805.517 555.644 807.017 554.644 801.017C553.644 795.017 551.144 794.017 540.644 792.517C530.144 791.017 510.144 779.517 510.644 769.017C511.144 758.517 510.144 756.017 503.644 753.017C497.144 750.017 491.644 741.517 499.144 732.517C506.644 723.517 499.644 711.517 488.144 712.517C478.944 713.317 467.31 711.517 462.644 710.517C439.644 714.017 420.644 707.517 412.144 695.517Z"
                 stroke={strokeColor}
                 strokeWidth="3"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 strokeLinejoin="round"
               />
               <path
                 d="M400.143 774.517C400.143 767.017 379.143 750.517 373.143 742.017C372.354 740.9 372.004 739.722 371.999 738.517V705.017C372 707.5 372.595 708.523 373.143 709.017C379.143 717.517 400.143 734.017 400.143 741.517C400.143 749.017 421.143 754.517 417.143 770.017C413.143 785.517 418.643 794.517 434.143 795.517C449.643 796.517 456.643 804.017 455.143 825.517C453.643 847.017 473.643 845.017 484.143 854.017C494.643 863.017 498.143 855.517 498.143 849.517C498.143 843.517 505.143 840.017 521.643 842.017C534.842 843.617 554.143 818.684 562.143 806.017L562.143 839.017C554.143 851.684 534.843 876.617 521.643 875.017C505.143 873.017 498.143 876.517 498.143 882.517C498.143 888.517 494.643 896.017 484.143 887.017C473.643 878.017 453.643 880.017 455.143 858.517C456.643 837.017 449.643 829.517 434.143 828.517C418.643 827.517 413.143 818.517 417.143 803.017C421.143 787.517 400.143 782.017 400.143 774.517Z"
                 stroke={strokeColor}
                 strokeWidth="3"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 strokeLinejoin="round"
               />
             </g>
@@ -769,7 +769,7 @@ function MapComponent({ regionCode, regionRank }: Props) {
                 d="M1201 515.5C1206.33 516.5 1221.3 518.7 1238.5 519.5C1260 520.5 1257 536.5 1246 543M1201 515.5C1209.17 504.5 1226.2 477.7 1229 458.5C1232.5 434.5 1284 414 1307 420.5C1330 427 1362 414.5 1370 402C1376.4 392 1422.67 376.5 1445 370C1446.83 376.167 1449.4 391.7 1445 404.5M1201 515.5V548.5C1206.33 549.5 1221.3 551.7 1238.5 552.5H1241.81V552.751M1445 404.5C1439.5 420.5 1452.5 431.5 1456.5 435C1460.44 438.445 1470.5 452.5 1467.5 473.5M1445 404.5C1446.7 399.544 1447.36 394.178 1447.42 389.105M1445 404.5C1442.18 412.704 1444.22 419.594 1447.42 424.832V389.105M1467.5 473.5C1466 484 1467.5 500.5 1445 498.5C1419.88 496.267 1390.5 500 1385.5 513.5C1380.5 527 1366 529 1362 547C1358 565 1349 572 1342.5 573C1336 574 1327 586.5 1327 595C1283.5 570.5 1267 567.5 1250.5 562.5M1467.5 473.5V516.5C1467.5 523 1464.6 536.3 1445 531.5C1420.5 525.5 1390.5 533 1385.5 546.5C1380.5 560 1366 562 1362 580C1358 598 1349 605 1342.5 606C1336 607 1327 619.5 1327 628C1283.5 603.5 1267 600.5 1250.5 595.5C1244.16 593.577 1241.95 590.115 1241.81 586.5V553.5M1250.5 562.5C1237.3 558.5 1242 547.833 1246 543M1250.5 562.5C1244.16 560.577 1241.95 557.115 1241.81 553.5M1246 543C1244.06 545.35 1241.94 549.079 1241.81 552.751M1447.42 389.105C1447.43 388.566 1447.43 388.031 1447.42 387.5V389.105ZM1241.81 553.5V552.751M1241.81 553.5C1241.8 553.251 1241.8 553.001 1241.81 552.751"
                 stroke={strokeColor}
                 strokeWidth="3"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 strokeLinejoin="round"
               />
             </g>
@@ -806,7 +806,7 @@ function MapComponent({ regionCode, regionRank }: Props) {
                 d="M1327 594.5C1283.5 570 1267 567 1250.5 562C1237.3 558 1242 547.333 1246 542.5C1257 536 1260 520 1238.5 519C1221.3 518.2 1206.33 516 1201 515C1161.4 562.6 1086.5 573.833 1055 573C1058 581.833 1063.1 605.2 1059.5 628C1055 656.5 1102.5 637.5 1119.5 650.5M1327 594.5C1326.33 597.167 1323.8 603.4 1319 607C1313 611.5 1313 624.5 1326 630.5M1327 594.5L1327 630.927C1326.67 630.796 1326.33 630.654 1326 630.5M1326 630.5C1339 636.5 1352.5 625 1367.5 632.5C1378.33 633.333 1396.9 639.3 1384.5 656.5M1384.5 656.5C1383.17 657.5 1380.9 661.4 1382.5 669C1384.5 678.5 1343 684 1346.5 705.5C1350 727 1312 715 1309 725C1306 735 1294.5 720 1291 722.5C1287.5 725 1281 719 1284.5 731C1284 732.167 1284.3 734.6 1289.5 735C1296 735.5 1297 747 1253.5 747C1232 709 1211.5 714 1210 697C1208.5 680 1188.5 680.5 1180.5 668.5C1172.5 656.5 1136.5 663.5 1119.5 650.5M1384.5 656.5C1387.25 652.689 1388.47 649.429 1388.6 646.655M1119.5 650.5C1103.43 638.211 1060.1 654.518 1059.21 632.262L1059.23 659C1059.5 665.5 1059.65 665.493 1059.88 667C1062.95 686.649 1104.37 671.546 1120 683.5C1137 696.5 1173 689.5 1181 701.5C1189 713.5 1209 713 1210.5 730C1212 747 1232.5 742 1254 780C1297.5 780 1296.5 768.5 1290 768C1284.8 767.6 1284.5 765.167 1285 764C1281.5 752 1288 758 1291.5 755.5C1295 753 1306.5 768 1309.5 758C1312.5 748 1350.5 760 1347 738.5C1343.5 717 1385 711.5 1383 702C1381.4 694.4 1383.67 690.5 1385 689.5C1388.14 685.147 1388.81 683.013 1388.61 680L1388.6 646.655M1388.6 646.655L1388.6 645.686C1388.62 646.002 1388.62 646.325 1388.6 646.655Z"
                 stroke={strokeColor}
                 strokeWidth="3"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 strokeLinejoin="round"
               />
             </g>
@@ -839,7 +839,7 @@ function MapComponent({ regionCode, regionRank }: Props) {
                 d="M869 565.219C881.184 565.108 890.58 568.654 887 580.513C879 607.013 907 612.513 907.5 638.013C907.5 651.013 916 651.013 916.5 666.013C918.5 680.513 930 698.013 943.5 698.013C957 698.013 971 695.513 969 705.513C967 715.513 987.5 718.013 986.5 729.513C985.5 741.013 996 732.013 993 745.513C990 759.013 1032 740.013 1045.5 746.513C1048.5 746.513 1059 738.513 1070.5 739.513C1082 740.513 1082 723.013 1093.5 723.513C1105 724.013 1118.5 717.513 1115.5 731.513C1112.5 745.513 1120 750.513 1131 752.013C1142 753.513 1136.5 762.513 1141.5 765.513C1146.5 768.513 1154.5 769.513 1153 780.513C1154 781.846 1157.1 784.513 1161.5 784.513C1164.83 785.18 1173.7 783.513 1182.5 771.513C1193.5 756.513 1193 769.013 1201 767.013C1209 765.013 1202.5 762.013 1217 769.013C1242 780.513 1233 757.513 1238.5 757.513M869 565.219C879.167 544.317 914.1 510.813 972.5 544.013C1029.5 575.513 1044.5 572.513 1054 572.513C1057 581.346 1062.1 604.713 1058.5 627.513C1054 656.013 1101.5 637.013 1118.5 650.013C1135.5 663.013 1171.5 656.013 1179.5 668.013C1187.5 680.013 1207.5 679.513 1209 696.513C1210.5 713.513 1231 708.513 1252.5 746.513C1259 759.013 1244 757.513 1238.5 757.513M869 565.219V598.219C881.184 598.108 890.58 601.654 887 613.513C879 640.013 907 645.513 907.5 671.013C907.5 684.013 916 684.013 916.5 699.013C918.5 713.513 930 731.013 943.5 731.013C957 731.013 971 728.513 969 738.513C967 748.513 987.5 751.013 986.5 762.513C985.5 774.013 996 765.013 993 778.513C990 792.013 1032 773.013 1045.5 779.513C1048.5 779.513 1059 771.513 1070.5 772.513C1082 773.513 1082 756.013 1093.5 756.513C1105 757.013 1118.5 750.513 1115.5 764.513C1112.5 778.513 1120 783.513 1131 785.013C1142 786.513 1136.5 795.513 1141.5 798.513C1146.5 801.513 1154.5 802.513 1153 813.513C1154 814.846 1157.1 817.513 1161.5 817.513C1164.83 818.18 1173.7 816.513 1182.5 804.513C1193.5 789.513 1193 802.013 1201 800.013C1209 798.013 1202.5 795.013 1217 802.013C1242 813.513 1233 790.513 1238.5 790.513C1243.12 790.513 1254.43 791.57 1254.1 784.513V752L1254.07 752.395C1253.45 758.48 1242.92 757.513 1238.5 757.513"
                 stroke={strokeColor}
                 strokeWidth="3"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 strokeLinejoin="round"
               />
             </g>
@@ -872,14 +872,14 @@ function MapComponent({ regionCode, regionRank }: Props) {
                 d="M752.767 682.296C746.767 692.696 746.6 711.296 747.267 719.296C759.767 719.296 761.767 726.296 761.267 731.296C760.767 736.296 762.767 735.796 770.767 741.796C780.767 749.396 777.6 767.963 774.767 776.296C785.267 775.796 805.267 771.996 801.267 760.796C796.267 746.796 820.767 750.796 823.267 751.796C825.767 752.796 838.767 743.796 838.267 756.296C837.767 768.796 845.172 759.55 847.267 779.796C848.767 794.296 891.767 786.796 913.767 774.296C917.1 772.63 922.967 767.796 919.767 761.796C915.767 754.296 938.267 753.296 938.267 766.796C938.267 780.296 950.267 779.796 944.267 799.296C938.267 818.796 951.767 813.296 948.767 827.296C944.658 846.47 970.267 845.296 970.767 848.296C971.267 851.296 985.267 849.296 983.767 857.796C982.283 866.202 997.912 861.895 996.327 870.5C996.309 870.597 996.267 870.694 996.267 870.796C996.267 874.296 1010.27 874.463 1018.27 871.796C1025.77 865.796 1042.77 862.296 1049.77 868.796C1056.77 875.296 1079.27 858.296 1073.27 848.796C1061.77 829.796 1080.27 824.296 1084.77 826.796C1089.27 829.296 1131.27 833.796 1129.77 812.796C1128.27 791.796 1141.77 806.296 1139.77 796.296C1137.77 786.296 1167.27 784.296 1161.77 784.296C1157.37 784.296 1154.27 781.63 1153.27 780.296C1154.77 769.296 1146.77 768.296 1141.77 765.296C1136.77 762.296 1142.27 753.296 1131.27 751.796C1120.27 750.296 1112.77 745.296 1115.77 731.296C1118.77 717.296 1105.27 723.796 1093.77 723.296C1082.27 722.796 1082.27 740.296 1070.77 739.296C1059.27 738.296 1048.77 746.296 1045.77 746.296C1032.27 739.796 990.267 758.796 993.267 745.296C996.267 731.796 985.767 740.796 986.767 729.296C987.767 717.796 967.267 715.296 969.267 705.296C971.267 695.296 957.267 697.796 943.767 697.796C930.267 697.796 918.767 680.296 916.767 665.796C916.267 650.796 907.767 650.796 907.767 637.796C907.267 612.296 879.267 606.796 887.267 580.296C893.667 559.096 858.6 564.463 840.267 569.796C826.933 576.13 798.467 592.396 791.267 606.796C784.067 621.196 758.934 627.463 747.267 628.796C749.767 639.296 765.267 642.296 757.267 652.796C749.267 663.296 760.267 669.296 752.767 682.296Z"
                 stroke={strokeColor}
                 strokeWidth="3"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 strokeLinejoin="round"
               />
               <path
                 d="M1140 829.002C1138 819.002 1167.5 817.002 1162 817.002V783.97C1157.56 784.769 1138.62 787.627 1140.23 795.706C1142.23 805.706 1128.73 791.206 1130.23 812.206C1131.73 833.206 1089.73 828.706 1085.23 826.206C1080.73 823.706 1062.23 829.206 1073.73 848.206C1079.73 857.706 1057.23 874.706 1050.23 868.206C1043.23 861.706 1026.23 865.206 1018.73 871.206C1010.73 873.873 996.733 873.706 996.733 870.206C996.733 870.103 996.776 870.007 996.794 869.91C998.379 861.305 982.75 865.611 984.233 857.206C985.733 848.706 971.733 850.706 971.233 847.706C970.733 844.706 945.125 845.879 949.233 826.706C952.233 812.706 938.733 818.206 944.733 798.706C950.733 779.206 938.733 779.706 938.733 766.206C938.733 752.706 916.233 753.706 920.233 761.206C923.433 767.206 917.567 772.039 914.233 773.706C892.233 786.206 849.233 793.706 847.733 779.206C845.639 758.959 838.233 768.206 838.733 755.706C839.233 743.206 826.233 752.206 823.733 751.206C821.233 750.206 796.733 746.206 801.733 760.206C805.733 771.406 785.733 775.206 775.233 775.706H775V809.002C785.5 808.502 805.5 804.702 801.5 793.502C796.5 779.502 821 783.502 823.5 784.502C826 785.502 839 776.502 838.5 789.002C838 801.502 845.406 792.256 847.5 812.502C849 827.002 892 819.502 914 807.002C917.333 805.336 923.2 800.502 920 794.502C916 787.002 938.5 786.002 938.5 799.502C938.5 813.002 950.5 812.502 944.5 832.002C938.5 851.502 952 846.002 949 860.002C944.891 879.176 970.5 878.002 971 881.002C971.5 884.002 985.5 882.002 984 890.502C982.517 898.908 998.145 894.601 996.56 903.206C996.542 903.303 996.5 903.4 996.5 903.502C996.5 907.002 1010.5 907.169 1018.5 904.502C1026 898.502 1043 895.002 1050 901.502C1057 908.002 1079.5 891.002 1073.5 881.502C1062 862.502 1080.5 857.002 1085 859.502C1089.5 862.002 1131.5 866.502 1130 845.502C1128.5 824.502 1142 839.002 1140 829.002Z"
                 stroke={strokeColor}
                 strokeWidth="3"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 strokeLinejoin="round"
               />
             </g>
@@ -943,9 +943,9 @@ function MapComponent({ regionCode, regionRank }: Props) {
             width="98.1709"
             height="35.4518"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -964,9 +964,9 @@ function MapComponent({ regionCode, regionRank }: Props) {
             width="98.1709"
             height="35.4518"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -985,9 +985,9 @@ function MapComponent({ regionCode, regionRank }: Props) {
             width="98.1709"
             height="35.4518"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -1006,9 +1006,9 @@ function MapComponent({ regionCode, regionRank }: Props) {
             width="98.1709"
             height="35.4518"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -1027,9 +1027,9 @@ function MapComponent({ regionCode, regionRank }: Props) {
             width="98.1709"
             height="35.4518"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -1048,9 +1048,9 @@ function MapComponent({ regionCode, regionRank }: Props) {
             width="124.719"
             height="40.3721"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -1069,9 +1069,9 @@ function MapComponent({ regionCode, regionRank }: Props) {
             width="98.1709"
             height="35.4518"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -1090,9 +1090,9 @@ function MapComponent({ regionCode, regionRank }: Props) {
             width="98.1709"
             height="35.4518"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -1111,9 +1111,9 @@ function MapComponent({ regionCode, regionRank }: Props) {
             width="124.719"
             height="40.3721"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -1132,9 +1132,9 @@ function MapComponent({ regionCode, regionRank }: Props) {
             width="71.623"
             height="30.5314"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -1153,9 +1153,9 @@ function MapComponent({ regionCode, regionRank }: Props) {
             width="98.1709"
             height="35.4518"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -1174,9 +1174,9 @@ function MapComponent({ regionCode, regionRank }: Props) {
             width="98.1709"
             height="35.4518"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -1195,9 +1195,9 @@ function MapComponent({ regionCode, regionRank }: Props) {
             width="98.1709"
             height="35.4518"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -1216,9 +1216,9 @@ function MapComponent({ regionCode, regionRank }: Props) {
             width="98.1709"
             height="35.4518"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -1237,9 +1237,9 @@ function MapComponent({ regionCode, regionRank }: Props) {
             width="98.1709"
             height="35.4518"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -1258,9 +1258,9 @@ function MapComponent({ regionCode, regionRank }: Props) {
             width="124.719"
             height="40.3721"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -1279,9 +1279,9 @@ function MapComponent({ regionCode, regionRank }: Props) {
             width="98.1709"
             height="35.4518"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -1300,9 +1300,9 @@ function MapComponent({ regionCode, regionRank }: Props) {
             width="98.1709"
             height="35.4518"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -1321,9 +1321,9 @@ function MapComponent({ regionCode, regionRank }: Props) {
             width="98.1709"
             height="35.4518"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -1342,9 +1342,9 @@ function MapComponent({ regionCode, regionRank }: Props) {
             width="98.1709"
             height="35.4518"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -1363,9 +1363,9 @@ function MapComponent({ regionCode, regionRank }: Props) {
             width="98.1709"
             height="35.4518"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -1384,9 +1384,9 @@ function MapComponent({ regionCode, regionRank }: Props) {
             width="98.1709"
             height="35.4518"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -1405,9 +1405,9 @@ function MapComponent({ regionCode, regionRank }: Props) {
             width="98.1709"
             height="35.4518"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -1426,9 +1426,9 @@ function MapComponent({ regionCode, regionRank }: Props) {
             width="98.1709"
             height="35.4518"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -1447,9 +1447,9 @@ function MapComponent({ regionCode, regionRank }: Props) {
             width="98.1709"
             height="35.4518"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -1468,9 +1468,9 @@ function MapComponent({ regionCode, regionRank }: Props) {
             width="71.623"
             height="30.5312"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
