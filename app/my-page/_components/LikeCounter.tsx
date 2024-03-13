@@ -12,18 +12,18 @@ interface LikeCountProps {
 function LikeCounter({ sendLikeCount, receiveLikeCount }: LikeCountProps) {
   return (
     <div className="flex w-full justify-center gap-4">
-      {sendLikeCount ? (
+      {receiveLikeCount ? (
         <PokeCount
-          count={sendLikeCount.likeCount}
+          count={receiveLikeCount.likeCount}
           label="나를 찔러보기 한 사람"
         />
       ) : (
         <PokeCountSkeleton />
       )}
-      {receiveLikeCount ? (
+      {sendLikeCount ? (
         <Link href={"/my-page/likes"}>
           <PokeCount
-            count={receiveLikeCount.likeCount}
+            count={sendLikeCount.likeCount}
             label="내가 찔러보기 한 사람"
           />
         </Link>
