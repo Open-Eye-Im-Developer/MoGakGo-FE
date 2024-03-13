@@ -7,37 +7,25 @@
   src: url("/Galmuri9.woff2");
 }
 
-@layer utilities {
+@layer components {
   .card {
-    backdrop-filter: blur(5px);
-    background-color: rgba(255, 255, 255, 1);
-    border-radius: 26px;
-    box-shadow:
-      35px 35px 68px 0px rgba(120, 120, 120, 0.5),
-      inset -5px -5px 16px 0px rgba(120, 120, 120, 0.6),
-      inset 0px 11px 28px 0px rgb(255, 255, 255);
+    @apply glass-backdrop rounded-[26px] bg-white shadow-[35px_35px_68px_0px_rgba(120,120,120,0.5),inset_-5px_-5px_16px_0px_rgba(120,120,120,0.6),inset_0px_11px_28px_0px_rgb(255,255,255)] backdrop-blur-[5px];
   }
-
   .glass-morphism {
-    background: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 8px 32px 0 #35353574;
-    backdrop-filter: blur(7.5px);
-    -webkit-backdrop-filter: blur(7.5px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    @apply glass-backdrop border border-solid border-[rgba(255,255,255,0.18)] bg-white/25 shadow-[0_8px_32px_0_#35353574] backdrop-blur-[7.5px];
   }
 
   .neumorphism-shadow {
-    box-shadow:
-      35px 35px 68px 0px rgba(104, 104, 104, 0.5),
-      inset -8px -8px 16px 0px rgba(104, 104, 104, 0.6),
-      inset 0px 11px 28px 0px rgb(255, 255, 255);
+    @apply shadow-[35px_35px_68px_0px_rgba(104,104,104,0.5),inset_-8px_-8px_16px_0px_rgba(104,104,104,0.6),inset_0px_11px_28px_0px_rgb(255,255,255)];
   }
 
   .neo-hover {
-    transition-property: all;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 150ms;
-    transform: translate(3px, 3px);
-    box-shadow: none;
+    @apply translate-x-[3px] translate-y-[3px] shadow-none transition-all duration-150 ease-in-out;
+  }
+}
+
+@layer utilities {
+  .glass-backdrop {
+    -webkit-backdrop-filter: blur(7.5px);
   }
 }
