@@ -77,3 +77,14 @@ export const getLikes = async (
 
   return data;
 };
+
+export const cancelLike = async (payload: {
+  senderId: number;
+  receiverId: number;
+}) => {
+  const { data } = await instance.delete("profiles/like", {
+    data: payload,
+  });
+
+  return data;
+};

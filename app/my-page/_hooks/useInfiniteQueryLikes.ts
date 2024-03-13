@@ -25,10 +25,10 @@ export const useInfiniteQueryLikes = (
     },
     queryKey: ["getLikes"],
     initialPageParam: undefined,
-    getNextPageParam: (): number | null => {
-      // if (lastPage && lastPage.hasNext) {
-      //   return lastPage.data[lastPage.data.length - 1].id;
-      // }
+    getNextPageParam: (lastPage): number | null => {
+      if (lastPage && lastPage.hasNext) {
+        return lastPage.data[lastPage.data.length - 1].id;
+      }
       return null;
     },
     throwOnError: false,

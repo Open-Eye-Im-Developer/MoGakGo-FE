@@ -19,6 +19,8 @@ export interface LikeCount {
 }
 
 export interface Like {
+  id: number;
+  receiverId: number;
   username: string;
   avatarUrl: string;
   createdAt: string;
