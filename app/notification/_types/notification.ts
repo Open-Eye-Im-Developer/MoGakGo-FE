@@ -6,9 +6,11 @@ import SuccessedImage from "@/public/images/matching_successed.svg";
 import FailedImage from "@/public/images/matching_failed.svg";
 import AchievementImage from "@/public/images/achievement.svg";
 
+import { NotificaitonTag } from "../_constant/notificaiton";
+
 export interface NotificationType {
   id: number;
-  tag: NotificaitonTagType;
+  tag: NotificaitonTag;
   message: string;
   data?: {
     projectId?: number;
@@ -18,15 +20,8 @@ export interface NotificationType {
   createdAt: string;
 }
 
-export type NotificaitonTagType =
-  | "REVIEW_REQUEST"
-  | "REQUEST_ARRIVAL"
-  | "ACHIEVEMENT"
-  | "MATCHING_SUCCESSED"
-  | "MATCHING_FAILED";
-
 export const NotificationTitle: {
-  [key in NotificaitonTagType]: { message: string; image: StaticImport };
+  [key in NotificaitonTag]: { message: string; image: StaticImport };
 } = {
   REVIEW_REQUEST: {
     message: "리뷰작성",
