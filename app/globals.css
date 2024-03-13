@@ -40,4 +40,53 @@
     transform: translate(3px, 3px);
     box-shadow: none;
   }
+
+  .logo-vertical {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-image: url("/images/serviceLogoVertical.png");
+    z-index: 50;
+    width: 20px;
+    height: 100%;
+    background-size: 15px;
+    background-repeat: no-repeat;
+  }
+
+  @media (min-width: 744px) {
+    .logo-vertical {
+      background-size: 20px;
+    }
+  }
+
+  .map-background {
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+
+  .map-background:before,
+  .map-background:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("/images/mapBackgroundImage.png");
+    background-size: 100%;
+    animation: slide 50s linear infinite;
+  }
+
+  .map-background:before {
+    right: 100%;
+  }
+
+  @keyframes slide {
+    from {
+      transform: translateX(0%);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
 }
