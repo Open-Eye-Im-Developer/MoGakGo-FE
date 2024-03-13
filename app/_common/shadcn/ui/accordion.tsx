@@ -15,7 +15,7 @@ const AccordionItem = React.forwardRef<
   <AccordionPrimitive.Item
     ref={ref}
     className={cn(
-      "rounded-br-md border-b-2 border-black shadow-[0px_2px_0px_0px_#000000]",
+      "hover:neo-hover rounded-br-md border-b-2 border-black shadow-[0px_2px_0px_0px_#000000]",
       className,
     )}
     {...props}
@@ -31,7 +31,7 @@ const AccordionTrigger = React.forwardRef<
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(
-        "flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180",
+        "hover:neo-hover flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180",
         className,
       )}
       {...props}
