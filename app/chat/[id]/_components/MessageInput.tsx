@@ -47,7 +47,7 @@ function MessageInput({
 
   const handleSubmit = () => {
     if (
-      isActiveRoom() === "CLOSE" ||
+      isActiveRoom === "CLOSE" ||
       hasBlankInMessage ||
       !(clientRef.current && clientRef.current.connected && user)
     )
@@ -86,7 +86,7 @@ function MessageInput({
         className={cn(
           buttonVariants({ variant: "secondary" }),
           "fixed bottom-0 right-0 m-1 h-8 bg-slate-200 hover:bg-slate-300",
-          isActiveRoom() === "CLOSE" && "hidden",
+          isActiveRoom === "CLOSE" && "hidden",
         )}
       >
         전송
