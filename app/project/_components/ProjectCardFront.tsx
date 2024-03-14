@@ -33,7 +33,6 @@ interface CardFrontProps {
   initialRotate?: boolean;
   onRotate: () => void;
   project: Project;
-  matchingId: number | null;
 }
 
 function ProjectCardFront(props: CardFrontProps) {
@@ -57,14 +56,13 @@ function ProjectCardFront(props: CardFrontProps) {
       projectId,
       meetingInfo: { meetDetail, meetEndTime, meetStartTime },
     },
-    matchingId,
   } = props;
   const { user } = useAuthStore();
 
   return (
     <Card
       className={cn(
-        `glass-morphism absolute inset-0 left-0 top-0 border-none shadow-md [backface-visibility:hidden]`,
+        `absolute inset-0 left-0 top-0 [backface-visibility:hidden]`,
         initialRotate ? "[transform:rotateY(180deg)]" : "",
       )}
     >
@@ -130,10 +128,7 @@ function ProjectCardFront(props: CardFrontProps) {
           {user && user.id !== id ? (
             <ButtonRequest projectId={projectId} />
           ) : (
-            <ProjectRemoveDialog
-              projectId={projectId}
-              isMatchedProject={matchingId ? true : false}
-            />
+            <ProjectRemoveDialog projectId={projectId} />
           )}
         </CardFooter>
       )}

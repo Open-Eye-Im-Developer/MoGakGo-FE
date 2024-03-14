@@ -22,10 +22,9 @@ import ProjectCardBack from "./ProjectCardBack";
 
 interface Props {
   project: Project;
-  matchingId: number | null;
 }
 
-function ProjectCardContainer({ project, matchingId }: Props) {
+function ProjectCardContainer({ project }: Props) {
   const { flipped, handleFlip } = useFlip();
   const [requestList, setRequestList] = useState<RequestList[]>([]);
   const { ref, cursorId } = useInfiniteScroll(requestList!);
@@ -56,11 +55,7 @@ function ProjectCardContainer({ project, matchingId }: Props) {
             `${flipped ? "[transform:rotateY(180deg)]" : ""}`,
           )}
         >
-          <ProjectCardFront
-            onRotate={handleFlip}
-            project={project}
-            matchingId={matchingId}
-          />
+          <ProjectCardFront onRotate={handleFlip} project={project} />
           <ProjectCardBack
             onRotate={handleFlip}
             requestList={requestList}
