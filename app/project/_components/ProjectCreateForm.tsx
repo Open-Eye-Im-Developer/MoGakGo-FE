@@ -5,13 +5,13 @@ import { useForm } from "react-hook-form";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { ToastAction } from "@/app/_common/shadcn/ui/toast";
+import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { Separator } from "@/app/_common/shadcn/ui/separator";
 import { Form, FormMessage } from "@/app/_common/shadcn/ui/form";
 import { Button } from "@/app/_common/shadcn/ui/button";
 
 import formatTime from "../_utils/formatTime";
-import usePopupToast from "../_hooks/usePopupToast";
+import useCreateProjectMutation from "../_hooks/useCreateProjectMutation";
 import formSchema from "../_constants/formSchema";
 import FormTime from "./FormTime";
 import FormTag from "./FormTag";
@@ -23,9 +23,8 @@ interface ProjectCreateFormProps {
 
 function ProjectCreateForm(props: ProjectCreateFormProps) {
   const { onClose } = props;
-  const { showToast } = usePopupToast(
-    <ToastAction altText="다시 시도">다시 시도</ToastAction>,
-  );
+  const { createNewProject } = useCreateProjectMutation(onClose);
+  const { user } = useAuthStore();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -49,33 +48,18 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
     );
 
     // TODO: meetLat, meetLng를 사용자 위치 정보(geolocation)로 변경
-    const formattedValues = {
-      creatorId: 2,
+    const formattedValues: FormmatedValues = {
+      creatorId: user!.id,
       meetStartTime,
       meetEndTime,
-      meetLat: 37.63338336616322, // rest.lat
-      meetLng: 127.0783098757533, // rest.lng
+      meetLat: rest.latitude, // rest.lat
+      meetLng: rest.longitude, // rest.lng
       meetDetail: rest.place,
       tags: rest.tags,
     };
 
     // TODO: 사용자 위치 정보(geolocation)을 전송하여, 범위에 맞는 장소 찾기
-    const response = await fetch("/api/project/create", {
-      method: "POST",
-      headers: {
-        accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ formattedValues }),
-    });
-
-    const { data, status } = await response.json();
-
-    showToast(data, status);
-
-    if (status === 201) {
-      onClose && onClose(false);
-    }
+    createNewProject(formattedValues);
   };
 
   const handleOnPressEnter = (e: React.KeyboardEvent<HTMLFormElement>) => {

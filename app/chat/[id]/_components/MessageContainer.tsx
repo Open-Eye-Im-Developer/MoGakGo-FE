@@ -19,8 +19,11 @@ interface MessageContainerProps {
 // TODO: props로 받은 chatMessageList를 useCustomMessage에 넘겨서 필터링 처리
 function MessageContainer(props: MessageContainerProps) {
   const { chatRoomId } = props;
-  const { data: prevChatMessageList, isFetchedAfterMount } =
-    useGetPrevMessageList(chatRoomId);
+  const {
+    data: prevChatMessageList,
+    isFetchedAfterMount,
+    isLoading,
+  } = useGetPrevMessageList(chatRoomId);
   const client = useRef<Client | null>(null);
   const { user } = useAuthStore();
   const { messageList, addNewMessage, currentSender } = useCustomMessage(
@@ -98,9 +101,13 @@ function MessageContainer(props: MessageContainerProps) {
         ref={scrollRef}
         onScroll={handleScroll}
       >
-        {messageList.map(message => (
-          <Message message={message} key={message.id} userId={user!.id} />
-        ))}
+        <>
+          {isLoading && <div>Loading...</div>}
+          {!isLoading &&
+            messageList.map(message => (
+              <Message message={message} key={message.id} userId={user!.id} />
+            ))}
+        </>
       </div>
       <UpScrollButton
         scrollToBottom={scrollToBottom}

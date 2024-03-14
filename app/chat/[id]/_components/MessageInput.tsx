@@ -1,11 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Client } from "@stomp/stompjs";
 
 import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { cn } from "@/app/_common/shadcn/utils";
 import { buttonVariants } from "@/app/_common/shadcn/ui/button";
+
+import { ChatType } from "../../_types/chat";
+import useGetChats from "../../_api/useGetChats";
 
 interface MessageInputProp {
   addNewMessage: (newMessage: MessageType[]) => void;
@@ -18,6 +21,13 @@ function MessageInput({
   clientRef,
   chatRoomId,
 }: MessageInputProp) {
+  const { chats } = useGetChats();
+
+  const isActiveRoom = useMemo(() => {
+    const room = chats.find(chat => chat.chatRoomId === chatRoomId) as ChatType;
+    return room?.status;
+  }, [chats, chatRoomId]);
+
   const [message, setMessage] = useState("");
   const { user } = useAuthStore();
   const hasBlankInMessage = !/\S+/.test(message);
@@ -37,12 +47,11 @@ function MessageInput({
 
   const handleSubmit = () => {
     if (
+      isActiveRoom === "CLOSE" ||
       hasBlankInMessage ||
       !(clientRef.current && clientRef.current.connected && user)
     )
       return;
-    // post 요청
-    // webSocket event 발행
     clientRef.current?.publish({
       destination: `/app/chatroom/${chatRoomId}`,
       body: JSON.stringify({
@@ -77,6 +86,7 @@ function MessageInput({
         className={cn(
           buttonVariants({ variant: "secondary" }),
           "fixed bottom-0 right-0 m-1 h-8 bg-slate-200 hover:bg-slate-300",
+          isActiveRoom === "CLOSE" && "hidden",
         )}
       >
         전송

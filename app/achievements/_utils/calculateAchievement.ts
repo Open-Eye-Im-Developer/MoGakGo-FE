@@ -1,7 +1,12 @@
-export const calculateAchievement = (nowGrade: number, total: number) => {
+export const calculateAchievement = (nowAchieved: number, total: number) => {
   if (total === 0) {
-    throw new Error("Total cannot be zero");
+    throw new Error("총값은 0이 될 수 없습니다.");
   }
-  const percentage = (nowGrade / total) * 100;
+
+  if (nowAchieved > total) {
+    throw new Error("현재값이 총값보다 큽니다.");
+  }
+
+  const percentage = (nowAchieved / total) * 100;
   return Math.floor(percentage);
 };

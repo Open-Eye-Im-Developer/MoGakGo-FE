@@ -52,3 +52,21 @@ export interface UserJandiRating {
   userId: number;
   jandiRate: number;
 }
+
+export interface UserAchievement {
+  achievementId: Achievement["achievementId"];
+  achievementTitle: Achievement["title"];
+  achievementImageUrl: Achievement["imgUrl"];
+}
+
+export interface Achievement {
+  userId: number;
+  achievementId: number;
+  title: string;
+  imgUrl: string;
+  description: string;
+  requirementValue: number;
+  requirementType?: "SEQUENCE" | "ACCUMULATE";
+  progressCount: number;
+  completed?: boolean;
+}

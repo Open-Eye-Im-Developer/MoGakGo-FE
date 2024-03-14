@@ -1,4 +1,5 @@
 import AchievementList from "./_components/AchievementList";
+export const dynamic = "force-dynamic";
 
 function AchievementsPage() {
   return (

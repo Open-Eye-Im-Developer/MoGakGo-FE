@@ -4,6 +4,10 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { getProjectCard } from "@/app/_common/api/project";
 import { getProfileCard } from "@/app/_common/api/profile";
 
+import { ResponseData } from "@/app/_common/types/response";
+import { Project } from "@/app/_common/types/project";
+import { Profile } from "@/app/_common/types/profile";
+
 import { formatRegionName } from "../_utils/formatRegionName";
 
 const useGetCardList = (regionCode: number) => {
@@ -76,15 +80,33 @@ const useGetCardList = (regionCode: number) => {
 
   if (isProfileLoading || !profileList) {
     return {
-      cardList: { projectList: projectList.pages[0].data, profileList: [] },
+      cardList: {
+        projectList: projectList.pages.reduce(
+          (list: Project[], response: ResponseData<Project>) => {
+            return list.concat(response.data);
+          },
+          [],
+        ),
+        profileList: [],
+      },
       ...defaultValue,
     };
   }
 
   return {
     cardList: {
-      projectList: projectList.pages[0].data,
-      profileList: profileList.pages[0].data,
+      projectList: projectList.pages.reduce(
+        (list: Project[], response: ResponseData<Project>) => {
+          return list.concat(response.data);
+        },
+        [],
+      ),
+      profileList: profileList.pages.reduce(
+        (list: Profile[], response: ResponseData<Profile>) => {
+          return list.concat(response.data);
+        },
+        [],
+      ),
     },
     ...defaultValue,
   };

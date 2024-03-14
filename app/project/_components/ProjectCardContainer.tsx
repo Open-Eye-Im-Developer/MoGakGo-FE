@@ -27,21 +27,18 @@ interface Props {
 
 function ProjectCardContainer({ project, matchingId }: Props) {
   const { flipped, handleFlip } = useFlip();
-  const [requestList, setRequestList] = useState<RequestListResponseData>();
+  const [requestList, setRequestList] = useState<RequestList[]>([]);
   const { ref, cursorId } = useInfiniteScroll(requestList!);
   const { data } = useGetRequestListQuery(project.projectId, cursorId);
 
   useEffect(() => {
-    if (data && data.status === 200 && !("timestamp" in data.data)) {
+    if (!data || "timestamp" in data) return;
+    if (data) {
       setRequestList(prev => {
-        if (!prev || "timestamp" in data.data) return data;
-        const prevRequestList = prev.data as RequestList[];
+        const prevRequestList = prev as RequestList[];
         const currentRequestList = data.data;
         const updatedRequestList = [...prevRequestList, ...currentRequestList];
-        return {
-          ...prev,
-          data: updatedRequestList,
-        };
+        return updatedRequestList;
       });
     }
   }, [data]);

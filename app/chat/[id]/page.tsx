@@ -1,19 +1,31 @@
 import StackNavigator from "../../_common/components/StackNavigator";
+import ProjectInfo from "./_components/ProjectInfo";
 import Profile from "./_components/Profile";
 import MessageContainer from "./_components/MessageContainer";
 
-async function ChattingRoomPage({ params }: { params: { id: string } }) {
+interface ChattinRoomPageProps {
+  params: { id: string };
+  searchParams: { name: string; profileImage: string };
+}
+
+async function ChattingRoomPage({
+  params,
+  searchParams,
+}: ChattinRoomPageProps) {
+  const { id } = params;
+  const { name, profileImage } = searchParams;
+
   return (
     <main>
       <StackNavigator
         content={
-          <Profile avatarUrl={"https://github.com/shadcn.png"} username={"e"}>
-            <span>name</span>
+          <Profile avatarUrl={profileImage} username={name}>
+            <span>{name}</span>
           </Profile>
         }
       />
-      {/* <ProjectInfo chatRoomId={params.id} /> */}
-      <MessageContainer chatRoomId={params.id} />
+      <ProjectInfo />
+      <MessageContainer chatRoomId={id} />
     </main>
   );
 }
