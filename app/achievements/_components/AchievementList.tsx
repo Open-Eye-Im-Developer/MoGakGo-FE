@@ -17,7 +17,7 @@ function AchievementList() {
     return <LoadingSpinner />;
   }
 
-  const hanldeClickMyAchievement = () => {
+  const handleClickMyAchievement = () => {
     toast.message("아직 설정된 업적이 없어요.");
   };
 
@@ -40,7 +40,7 @@ function AchievementList() {
         ) : (
           <div
             className="w-[100px] rounded-xl bg-secondary text-white"
-            onClick={hanldeClickMyAchievement}
+            onClick={handleClickMyAchievement}
           >
             <AspectRatio
               ratio={1 / 1}
