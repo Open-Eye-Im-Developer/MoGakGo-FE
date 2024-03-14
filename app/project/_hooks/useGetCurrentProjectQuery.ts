@@ -9,6 +9,7 @@ function useGetCurrentProjectQuery() {
 
   const getCurrentProject = async () => {
     const { data } = await instance.get(`/projects/${user!.id}/info`);
+
     return data;
   };
 
@@ -21,7 +22,11 @@ function useGetCurrentProjectQuery() {
   });
 
   if (isLoading || !data) return { project: null, matchingId: null };
-  return { project: data.response, matchingId: data.matchingId };
+
+  const project = data.response[0];
+  const matchingId = data.matchingId;
+
+  return { project, matchingId };
 }
 
 export default useGetCurrentProjectQuery;
