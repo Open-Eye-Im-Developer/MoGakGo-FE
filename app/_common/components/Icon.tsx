@@ -2,14 +2,13 @@ import React from "react";
 
 interface IconProps {
   id: string;
-  width?: number | string;
-  height?: number;
+  size?: number | string;
 }
 
 function Icon(props: React.SVGProps<SVGSVGElement> & IconProps) {
-  const { id, width = "100%", height = "100%", ...rest } = props;
+  const { id, size = "100%", ...rest } = props;
   return (
-    <svg width={width} height={height} {...rest}>
+    <svg width={size} height={size} {...rest}>
       <use href={`#${id}`} />
     </svg>
   );
