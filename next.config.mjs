@@ -17,13 +17,8 @@ const nextConfig = nextPWAConfig({
   async redirects() {
     return [
       {
-        source: "/signup/:slug*",
-        destination: "/login",
-        permanent: false,
-      },
-      {
-        source: "/review/:slug*",
-        destination: "/",
+        source: "/signup/:slug",
+        destination: "/signup",
         permanent: false,
       },
     ];
