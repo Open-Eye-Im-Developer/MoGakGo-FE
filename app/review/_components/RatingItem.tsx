@@ -22,8 +22,8 @@ function RatingItem({ type, checked, onChangeChecked }: RatingItemProps) {
     <RatingIcon
       onChange={onChangeChecked}
       type={type}
-      width={50}
-      height={50}
+      width={40}
+      height={40}
       strokeWidth={1.5}
       className={cn(
         checked
