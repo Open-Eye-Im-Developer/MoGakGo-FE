@@ -13,7 +13,7 @@ export const useMutationCancelLike = () => {
       queryClient.invalidateQueries({
         queryKey: ["getLikes"],
       });
-      toast.success("찔러보기을 취소했습니다.");
+      toast.success("찔러보기를 취소했습니다.");
     },
     onError: error => {
       if (error instanceof AxiosError) {
