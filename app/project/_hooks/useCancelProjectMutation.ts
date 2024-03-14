@@ -6,8 +6,11 @@ import { instance } from "@/app/_common/api/instance";
 
 import { ResponseError } from "@/app/_common/types/response";
 
+import useInvalidateQuery from "./useInvalidateQuery";
+
 function useCancelProjectMutation(projectId: number | undefined) {
   const { toast } = useToast();
+  const { invalidateQuery } = useInvalidateQuery();
 
   const cancelProject = async () => {
     const { data } = await instance.patch(`/projects/${projectId}/cancel`);
@@ -22,6 +25,7 @@ function useCancelProjectMutation(projectId: number | undefined) {
         title: "프로젝트를 취소했습니다.",
         description: "프로젝트가 취소되었어요!",
       });
+      invalidateQuery(["current-project"]);
     },
     onError: (error: AxiosError<ResponseError>) => {
       const errorMessage = error.response?.data.message;

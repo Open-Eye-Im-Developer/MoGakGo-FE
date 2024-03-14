@@ -6,8 +6,11 @@ import { instance } from "@/app/_common/api/instance";
 
 import { ResponseError } from "@/app/_common/types/response";
 
+import useInvalidateQuery from "./useInvalidateQuery";
+
 function useCreateProjectMutation(onClose: (open: boolean) => void) {
   const { toast } = useToast();
+  const { invalidateQuery } = useInvalidateQuery();
 
   const createProject = async (values: FormmatedValues) => {
     const { data } = await instance.post("/projects", values);
@@ -20,10 +23,11 @@ function useCreateProjectMutation(onClose: (open: boolean) => void) {
     onSuccess: () => {
       toast({
         title: "프로젝트가 생성되었습니다.",
-        description: "프로젝트가 생성되었습니다.",
+        description: "매칭 요청을 기다려볼까요?",
       });
 
       onClose && onClose(false);
+      invalidateQuery(["current-project"]);
     },
     onError: (error: AxiosError<ResponseError>) => {
       const errorMessage = error.response?.data.message;
