@@ -25,8 +25,8 @@ function NotificationList() {
       {notifications?.length ? (
         [...notifications]
           .reverse()
-          .map((notification: NotificationType, index: number) => (
-            <Notification notification={notification} key={index} />
+          .map((notification: NotificationType) => (
+            <Notification notification={notification} key={notification.id} />
           ))
       ) : (
         <AnnounceEmptyActive

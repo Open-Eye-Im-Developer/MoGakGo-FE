@@ -17,12 +17,16 @@ const AchievementProgress = React.forwardRef<
     )}
     {...props}
   >
+    {/* TODO: 최종 디자인이 결정되면 삭제 */}
+    <p className="absolute left-1/2 z-10 -translate-x-3 translate-y-[10%] text-center text-sm leading-3 text-white">
+      {props.children}
+    </p>
     <ProgressPrimitive.Indicator
       className={cn(
-        "h-full w-full flex-1 bg-secondary transition-all dark:bg-slate-50",
+        "relative h-full w-full flex-1 bg-secondary transition-all dark:bg-slate-50",
       )}
       style={{ transform: `translateX(-${100 - (value || 0)}%)` }}
-    />
+    ></ProgressPrimitive.Indicator>
   </ProgressPrimitive.Root>
 ));
 AchievementProgress.displayName = ProgressPrimitive.Root.displayName;
