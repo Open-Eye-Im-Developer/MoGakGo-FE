@@ -47,18 +47,19 @@ interface RequestList {
   requestStatus: string;
 }
 
-interface RequestListSuccessData {
-  data: RequestList[];
-}
-
-interface RequestListErrorData {
+interface RequestListError {
   timestamp: string;
   statusCode: number;
   code: string;
   message: string;
 }
 
-interface RequestListResponseData {
-  data: RequestList[] | RequestListErrorData;
-  status: number;
+interface FormmatedValues {
+  creatorId: number;
+  meetStartTime: string;
+  meetEndTime: string;
+  meetLat: number;
+  meetLng: number;
+  meetDetail: string;
+  tags: string[];
 }

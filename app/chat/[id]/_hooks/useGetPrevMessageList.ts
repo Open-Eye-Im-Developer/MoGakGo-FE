@@ -1,30 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
 
-interface ChatMessagesResponseData {
-  data: ChatMessage[];
-  hasNext: boolean;
-}
+import { instance } from "@/app/_common/api/instance";
+
+import { ResponseData } from "@/app/_common/types/response";
 
 export const useGetPrevMessageList = (chatRoomId: string) => {
   const getPreviousChatMessageList = async (chatRoomId: string) => {
-    const accessToken = localStorage.getItem("accessToken");
     let cursorId: number | null = null;
     let hasData = true;
     const messages = [];
 
     while (hasData) {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/chat/${chatRoomId}` +
-          "?pageSize=5" +
-          `${cursorId ? `&cursorId=${cursorId}` : ""}`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        },
+      const query: string = `${cursorId ? `&cursorId=${cursorId}` : ""}&pageSize=5`;
+
+      const { data } = await instance.get<ResponseData<ChatMessage>>(
+        `/chat/${chatRoomId}?${query}`,
       );
-      const data: ChatMessagesResponseData = await response.json();
+
       const { data: prevMessages, hasNext } = data;
 
       messages.push(...prevMessages);

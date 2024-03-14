@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 import { usePositionStore } from "@/app/_common/store/usePositionStore";
 
@@ -27,11 +28,15 @@ function useDebounceSearch(form: FormProps["form"]) {
 
     if (overlay) {
       const timer = setTimeout(async () => {
-        const response = await fetch(
-          `/api/place/search?keyword=${placeInput}&lat=${latitude}&lng=${longitude}`,
+        const { data } = await axios.get(
+          `https://dapi.kakao.com/v2/local/search/keyword.json?query=${placeInput}&x=${longitude}&y=${latitude}&radius=10000`,
+          {
+            headers: {
+              Authorization: `KakaoAK ${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}`,
+            },
+          },
         );
-        const data = await response.json();
-        setPlaceList(data.data);
+        setPlaceList(data.documents);
       }, 500);
 
       return () => clearTimeout(timer);
