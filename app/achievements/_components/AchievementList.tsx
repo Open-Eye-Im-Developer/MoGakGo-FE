@@ -1,10 +1,11 @@
 "use client";
 
-import { toast } from "sonner";
 import { IconLock } from "@tabler/icons-react";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 
 import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
+
+import { sonner } from "@/app/_common/utils/sonner";
 
 import { useQueryAchievements } from "../_hooks/useQueryAchievements";
 import AchievementItem from "./AchievementItem";
@@ -18,7 +19,7 @@ function AchievementList() {
   }
 
   const handleClickMyAchievement = () => {
-    toast.message("아직 설정된 업적이 없어요.");
+    sonner.info("아직 설정된 업적이 없어요.");
   };
 
   return (

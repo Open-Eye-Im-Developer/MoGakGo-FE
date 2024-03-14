@@ -1,6 +1,5 @@
 "use client";
 
-import { toast } from "sonner";
 import { MouseEvent, useEffect, useRef, useState } from "react";
 import { EmblaCarouselType } from "embla-carousel";
 
@@ -21,6 +20,7 @@ import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
 
 import REGION_CODE from "@/app/_common/constants/regionCode";
 
+import { sonner } from "@/app/_common/utils/sonner";
 import { navigate } from "@/app/_common/utils/redirect";
 
 import { formatRegionName } from "../_utils/formatRegionName";
@@ -59,8 +59,7 @@ function Map() {
 
   useEffect(() => {
     if (!areaCode) return;
-
-    toast.info("내가 위치한 지역으로 이동합니다.");
+    sonner.info("내가 위치한 지역으로 이동합니다.");
     setRegionCode(areaCode);
     const regionName = formatRegionName(areaCode);
     previousRegion.current = document.querySelector(`#${regionName}`);
@@ -78,20 +77,17 @@ function Map() {
 
   const handleRegionClick = (event: MouseEvent<HTMLDivElement>) => {
     if (!isAllowGPS()) {
-      toast.info("서비스를 이용하려면 GPS 수집을 허용해주세요!");
+      sonner.info("서비스를 이용하려면 GPS 수집을 허용해주세요!");
       return;
     }
 
     const target = event.target as SVGElement | HTMLElement;
     const isRegion = target.tagName === "path";
     if (!getUser() && isRegion) {
-      toast.info("유저 정보가 없습니다. 로그인 후 이용해주세요!", {
+      sonner.info("유저 정보가 없습니다. 로그인 후 이용해주세요!", {
         action: {
           label: "로그인하기",
           onClick: () => navigate("/login"),
-        },
-        actionButtonStyle: {
-          backgroundColor: "#0973DC",
         },
       });
       return;
@@ -158,7 +154,7 @@ function Map() {
           className="flex h-full w-full flex-col items-center justify-center"
         >
           {cardList.projectList.length !== 0 ||
-          cardList.profileList.length !== 0 ? (
+            cardList.profileList.length !== 0 ? (
             <CardList cardList={cardList} />
           ) : (
             <EmptyCardList onClick={handleEmptyCardClose} />

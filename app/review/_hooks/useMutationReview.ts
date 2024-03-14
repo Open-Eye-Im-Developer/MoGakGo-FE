@@ -1,8 +1,9 @@
-import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { postReview } from "@/app/_common/api/project";
+
+import { sonner } from "@/app/_common/utils/sonner";
 
 export const useMutationReview = () => {
   const router = useRouter();
@@ -20,7 +21,7 @@ export const useMutationReview = () => {
     },
     onError: error => {
       console.error(error);
-      toast.error(error.message);
+      sonner.error(error.message);
     },
   });
 
