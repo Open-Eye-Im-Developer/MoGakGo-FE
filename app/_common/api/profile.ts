@@ -1,5 +1,7 @@
 import { AxiosError } from "axios";
 
+import { generateQueryString } from "@/app/my-page/_util/generateQueryString";
+
 import { ResponseData } from "../types/response";
 import { Creator, Like, LikeCount } from "../types/profile";
 import { instance } from "./instance";
@@ -66,10 +68,7 @@ export const getLikes = async (
     ["sortOrder", sortOrder ?? "ASC"],
   ];
 
-  const queryString = query
-    .filter(([, value]) => value !== undefined)
-    .map(q => q.join("="))
-    .join("&");
+  const queryString = generateQueryString(query);
 
   const { data } = await instance.get<ResponseData<Like>>(
     `profiles/list/${userId}/like?${queryString}`,

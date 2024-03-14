@@ -1,3 +1,5 @@
+import { generateQueryString } from "@/app/my-page/_util/generateQueryString";
+
 import { ResponseData } from "../types/response";
 import { Match, MatchStatus } from "../types/matching";
 import { instance } from "./instance";
@@ -16,10 +18,7 @@ export const getMatchesByUserId = async (
     ["sortOrder", sortOrder ?? "ASC"],
   ];
 
-  const queryString = query
-    .filter(([, value]) => value !== undefined)
-    .map(q => q.join("="))
-    .join("&");
+  const queryString = generateQueryString(query);
 
   const { data } = await instance.get<ResponseData<Match>>(
     `/matches/my/${userId}?${queryString}`,

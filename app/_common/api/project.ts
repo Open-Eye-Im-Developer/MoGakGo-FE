@@ -1,3 +1,5 @@
+import { generateQueryString } from "@/app/my-page/_util/generateQueryString";
+
 import { ResponseData } from "../types/response";
 import {
   Project,
@@ -44,10 +46,7 @@ export const getProjectListByCreatorId = async (
     ["sortOrder", sortOrder ?? "ASC"],
   ];
 
-  const queryString = query
-    .filter(([, value]) => value !== undefined)
-    .map(q => q.join("="))
-    .join("&");
+  const queryString = generateQueryString(query);
 
   const { data } = await instance.get<ResponseData<ProjectSummary>>(
     `/projects/list/${creatorId}?${queryString}`,
@@ -68,10 +67,7 @@ export const getProjectRequestsByCreatorId = async (
     ["sortOrder", sortOrder ?? "ASC"],
   ];
 
-  const queryString = query
-    .filter(([, value]) => value !== undefined)
-    .map(q => q.join("="))
-    .join("&");
+  const queryString = generateQueryString(query);
 
   const { data } = await instance.get<ResponseData<RequestProjectSummary>>(
     `/project-requests/${creatorId}?${queryString}`,
