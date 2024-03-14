@@ -5,7 +5,7 @@ interface CustomSonnerProps {
   type: "success" | "error" | "warning" | "info";
   title: string;
   description?: string;
-  action: {
+  action?: {
     label: React.ReactNode;
     onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   };
@@ -20,7 +20,6 @@ const background = {
 
 function CustomSonner(props: CustomSonnerProps) {
   const { type, title, description, action } = props;
-  const { label, onClick } = action;
 
   return (
     <section
@@ -152,8 +151,8 @@ function CustomSonner(props: CustomSonnerProps) {
         </div>
       </div>
       {action && (
-        <Button className="text-black" onClick={onClick}>
-          {label}
+        <Button className="text-black" onClick={action.onClick}>
+          {action.label}
         </Button>
       )}
     </section>
