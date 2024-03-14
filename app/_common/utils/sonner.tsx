@@ -4,7 +4,7 @@ import CustomSonner from "../components/CustomSonner";
 
 interface SonnerData {
   description?: string;
-  action: {
+  action?: {
     label?: string;
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   };
@@ -17,8 +17,8 @@ export const sonner = {
         type="success"
         title={title}
         description={data?.description}
-        label={data?.action.label}
-        onClick={data?.action.onClick}
+        label={data?.action?.label}
+        onClick={data?.action?.onClick}
       />,
       { unstyled: true },
     );
@@ -29,8 +29,8 @@ export const sonner = {
         type="error"
         title={title}
         description={data?.description}
-        label={data?.action.label}
-        onClick={data?.action.onClick}
+        label={data?.action?.label}
+        onClick={data?.action?.onClick}
       />,
       { unstyled: true },
     );
@@ -41,8 +41,8 @@ export const sonner = {
         type="warning"
         title={title}
         description={data?.description}
-        label={data?.action.label}
-        onClick={data?.action.onClick}
+        label={data?.action?.label}
+        onClick={data?.action?.onClick}
       />,
       { unstyled: true },
     );
@@ -53,8 +53,8 @@ export const sonner = {
         type="info"
         title={title}
         description={data?.description}
-        label={data?.action.label}
-        onClick={data?.action.onClick}
+        label={data?.action?.label}
+        onClick={data?.action?.onClick}
       />,
       { unstyled: true },
     );
