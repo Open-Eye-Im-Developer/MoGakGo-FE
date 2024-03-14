@@ -31,7 +31,7 @@ const AccordionItem = React.forwardRef<
 >(({ className, variant, ...props }, ref) => (
   <AccordionPrimitive.Item
     ref={ref}
-    className={cn(className, accordionVariants({ variant }))}
+    className={cn(accordionVariants({ variant }), className)}
     {...props}
   />
 ));
