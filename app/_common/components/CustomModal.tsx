@@ -19,7 +19,7 @@ function CustomModal({ children, className, ...props }: CustomModalProps) {
       <Dialog.Portal>
         <DialogContentNoClose
           className={cn(
-            "flex max-h-[650px] max-w-[300px] flex-col rounded-md px-4 py-2",
+            "flex max-w-[300px] flex-col rounded-md border-2 border-black p-4 shadow-neo",
             className,
           )}
           onPointerDownOutside={(event: Event) => {
