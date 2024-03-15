@@ -58,6 +58,13 @@
         },
         "newlines-between": "always"
       }
+    ],
+    "no-restricted-imports": [
+      "error",
+      {
+        "name": "sonner",
+        "message": "커스텀 토스트를 사용해주세요."
+      }
     ]
   }
 }
