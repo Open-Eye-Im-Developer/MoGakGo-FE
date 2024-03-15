@@ -30,6 +30,12 @@ const config = {
         neoYellow: "#fba834",
         neoBlue: "#396eeb",
         neoGreen: "#25b195",
+        land: "#a1c16e",
+        underground: "#6F4B35",
+        sky: "#7DD1F2",
+        mapRankFirst: "#c01eeb",
+        mapRankSecond: "#d978f3",
+        mapRankThird: "#e5a5f7",
       },
       keyframes: {
         "accordion-down": {
@@ -90,6 +96,9 @@ const config = {
     },
   },
   plugins: [require("tailwindcss-animate")],
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
 } satisfies Config;
 
 export default config;

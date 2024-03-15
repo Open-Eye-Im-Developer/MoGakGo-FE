@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 
-function useInfiniteScroll(data: RequestListResponseData) {
-  const [cursorId, setCursorId] = useState(0);
+function useInfiniteScroll(data: RequestList[]) {
+  const [cursorId, setCursorId] = useState<number | null>(null);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScrollEnded = () => {
-      if (Array.isArray(data?.data)) {
-        const lastItem = data.data[data.data.length - 1];
+      if (Array.isArray(data)) {
+        const lastItem = data[data.length - 1];
         if (lastItem) {
           setCursorId(lastItem.id);
         }

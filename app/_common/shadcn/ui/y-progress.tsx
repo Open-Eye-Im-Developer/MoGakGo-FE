@@ -20,7 +20,7 @@ const indicatorVariants = cva("h-full w-full flex-1 transition-all", {
   },
 });
 
-const Progress = React.forwardRef<
+const YProgress = React.forwardRef<
   React.ElementRef<typeof ProgressPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root> &
     VariantProps<typeof indicatorVariants>
@@ -28,17 +28,17 @@ const Progress = React.forwardRef<
   <ProgressPrimitive.Root
     ref={ref}
     className={cn(
-      "relative h-4 w-full overflow-hidden rounded-full border border-black bg-slate-100 shadow-neo dark:bg-slate-800",
+      "relative h-full w-4 overflow-hidden rounded-full border border-black bg-slate-100 shadow-neo dark:bg-slate-800",
       className,
     )}
     {...props}
   >
     <ProgressPrimitive.Indicator
       className={cn(indicatorVariants({ background }))}
-      style={{ transform: `translateX(-${100 - (value || 0)}%)` }}
+      style={{ transform: `translateY(${100 - (value || 0)}%)` }}
     />
   </ProgressPrimitive.Root>
 ));
-Progress.displayName = ProgressPrimitive.Root.displayName;
+YProgress.displayName = ProgressPrimitive.Root.displayName;
 
-export { Progress };
+export { YProgress };
