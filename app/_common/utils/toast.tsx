@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-restricted-imports
 import { toast as sonner } from "sonner";
 
 import CustomSonner from "../components/CustomSonner";
