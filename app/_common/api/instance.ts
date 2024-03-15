@@ -29,11 +29,11 @@ instance.interceptors.response.use(
   },
   async error => {
     const { status, config } = error.response;
-    const refreshToken = getCookie("refreshToken");
+    const refreshToken = getCookie("refreshToken", "");
 
     if (status === 401) {
       if (config.url !== "/auth/reissue") {
-        const newAccessToken = await reIssueAccessToken(refreshToken ?? "");
+        const newAccessToken = await reIssueAccessToken(refreshToken);
 
         if (newAccessToken) {
           localStorage.setItem("accessToken", newAccessToken);
