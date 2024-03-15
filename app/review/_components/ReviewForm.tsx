@@ -44,14 +44,6 @@ function ReviewForm() {
     const rating = form.getValues("rating");
     if (!user) return;
 
-    // if (
-    //   !rating ||
-    //   typeof receiverId !== "string" ||
-    //   typeof projectId !== "string"
-    // ) {
-    //   return;
-    // }
-
     mutate({
       rating,
       receiverId: 2,
@@ -60,10 +52,9 @@ function ReviewForm() {
     });
   };
 
+  // TODO: 1,2번이 될 시에 주석 해제
   // if (!projectId || !receiverId) {
-  //   router.back();
-
-  //   return <LoadingSpinner />;
+  //   router.push("/");
   // }
 
   return (
