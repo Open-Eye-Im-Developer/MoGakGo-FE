@@ -63,6 +63,14 @@ const config = {
           from: { opacity: "0" },
           to: { opacity: "1" },
         },
+        "slide-infinite": {
+          from: {
+            transform: "translateX(0)",
+          },
+          to: {
+            transform: "translateX(100%)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -70,6 +78,7 @@ const config = {
         "map-bounce": "map-bounce 1.2s linear infinite alternate",
         "signup-fade-out": "signup-fade-out 0.5s ease-out",
         "signup-fade-in": "signup-fade-in 0.5s ease-out",
+        "slide-infinite": "slide-infinite 50s linear infinite",
       },
       boxShadow: {
         neo: "4px 4px 0px 0px #000000",
@@ -88,6 +97,9 @@ const config = {
     },
   },
   plugins: [require("tailwindcss-animate")],
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
 } satisfies Config;
 
 export default config;

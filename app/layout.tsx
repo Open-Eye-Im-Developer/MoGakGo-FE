@@ -6,6 +6,7 @@ import "dayjs/locale/ko";
 
 import { Toaster } from "./_common/shadcn/ui/toaster";
 import { ThemeProvider } from "./_common/components/theme-provider";
+import SVGProvider from "./_common/components/SVGProvider";
 import ClientProvider from "./_common/components/ClientProvider";
 
 import type { Metadata } from "next";
@@ -37,6 +38,7 @@ export default function RootLayout({
               {children}
             <Toaster />
             <Sonner richColors position="bottom-center" />
+            <SVGProvider />
           </ThemeProvider>
         </ClientProvider>
         <Toaster />

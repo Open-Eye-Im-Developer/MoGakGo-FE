@@ -27,6 +27,14 @@
   .neo-hover {
     @apply translate-x-[3px] translate-y-[3px] shadow-none transition-all duration-150 ease-in-out;
   }
+
+  .logo-vertical {
+    @apply absolute left-[15px] top-[15px] z-50 h-full w-[20px] bg-[url("/images/serviceLogoVertical.png")] bg-[length:15px] bg-no-repeat md:bg-[length:20px];
+  }
+
+  .map-background {
+    @apply before:animate-slide-infinite after:animate-slide-infinite absolute h-full w-full overflow-hidden before:absolute before:right-[100%] before:h-full before:w-full before:bg-[url("/images/mapBackgroundImage.png")] before:bg-[length:100%] before:content-[""] after:absolute after:h-full after:w-full after:bg-[url("/images/mapBackgroundImage.png")] after:bg-[length:100%] after:content-[""];
+  }
 }
 
 @layer utilities {
