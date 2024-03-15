@@ -19,15 +19,15 @@ const formSchema = z
       const endMinute = Number(data.endMinute);
 
       if (startHour === new Date().getHours()) {
-        if (
-          startMinute >= new Date().getMinutes() &&
-          startHour <= endHour &&
-          startMinute < endMinute
-        )
-          return true;
+        if (startMinute >= new Date().getMinutes()) {
+          if (startHour === endHour) return startMinute < endMinute;
+          else if (startHour < endHour) return true;
+          return false;
+        }
         return false;
       } else if (startHour > new Date().getHours()) {
-        if (startHour <= endHour && startMinute < endMinute) return true;
+        if (startHour === endHour) return startMinute < endMinute;
+        else if (startHour < endHour) return true;
         return false;
       }
       return false;

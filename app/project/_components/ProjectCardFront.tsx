@@ -62,7 +62,7 @@ function ProjectCardFront(props: CardFrontProps) {
   return (
     <Card
       className={cn(
-        `glass-morphism absolute inset-0 left-0 top-0 border-none shadow-md [backface-visibility:hidden]`,
+        `absolute inset-0 left-0 top-0 [backface-visibility:hidden]`,
         initialRotate ? "[transform:rotateY(180deg)]" : "",
       )}
     >
@@ -128,10 +128,7 @@ function ProjectCardFront(props: CardFrontProps) {
           {user && user.id !== id ? (
             <ButtonRequest projectId={projectId} />
           ) : (
-            <ProjectRemoveDialog
-              projectId={projectId}
-              isMatchedProject={false}
-            />
+            <ProjectRemoveDialog projectId={projectId} />
           )}
         </CardFooter>
       )}

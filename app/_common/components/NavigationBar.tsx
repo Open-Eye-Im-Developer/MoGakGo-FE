@@ -17,7 +17,7 @@ import { Button } from "../shadcn/ui/button";
 import NavigationProfile from "./NavigationProfile";
 import NavigationItem from "./NavigationItem";
 
-// TODO: 튜토리얼과 모각코 페이지를 만들어서 링크를 연결해주세요. 현재는 임시로 '#'로 연결
+// TODO: 튜토리얼 페이지를 만들어서 링크를 연결해주세요. 현재는 임시로 '#'로 연결
 function NavigationBar() {
   const { user } = useAuthStore();
 
@@ -46,7 +46,7 @@ function NavigationBar() {
         <NavigationItem title="마이페이지" href="/my-page" />
         <NavigationItem title="지도" href="/" />
         <NavigationItem title="채팅" href="/chat" />
-        <NavigationItem title="모각코" href="#" />
+        <NavigationItem title="모각코" href="/project" />
         <NavigationItem title="업적" href="/achievements" />
         <NavigationItem title="알림" href="/notification" />
       </SheetContent>
