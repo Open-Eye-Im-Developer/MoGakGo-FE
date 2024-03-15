@@ -7,6 +7,5 @@ export const useQueryUserData = () => {
     queryFn: getSignUpUser,
     throwOnError: false,
     queryKey: ["getSignUpUser"],
-    refetchOnWindowFocus: true,
   });
 };
