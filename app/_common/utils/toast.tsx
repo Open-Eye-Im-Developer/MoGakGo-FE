@@ -1,4 +1,4 @@
-import { toast } from "sonner";
+import { toast as sonner } from "sonner";
 
 import CustomSonner from "../components/CustomSonner";
 
@@ -10,9 +10,9 @@ interface SonnerData {
   };
 }
 
-export const sonner = {
+export const toast = {
   success(title: string, data?: SonnerData) {
-    toast(
+    sonner(
       <CustomSonner
         type="success"
         title={title}
@@ -24,7 +24,7 @@ export const sonner = {
     );
   },
   error(title: string, data?: SonnerData) {
-    toast(
+    sonner(
       <CustomSonner
         type="error"
         title={title}
@@ -36,7 +36,7 @@ export const sonner = {
     );
   },
   warning(title: string, data?: SonnerData) {
-    toast(
+    sonner(
       <CustomSonner
         type="warning"
         title={title}
@@ -48,7 +48,7 @@ export const sonner = {
     );
   },
   info(title: string, data?: SonnerData) {
-    toast(
+    sonner(
       <CustomSonner
         type="info"
         title={title}
