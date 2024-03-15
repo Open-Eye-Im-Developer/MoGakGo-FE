@@ -1,10 +1,11 @@
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { deleteCookie } from "cookies-next";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { deleteUser } from "@/app/_common/api/auth";
+
+import { deleteCookie } from "../../utils/cookie";
 
 export const useDeleteUser = () => {
   const queryClient = useQueryClient();
@@ -14,9 +15,7 @@ export const useDeleteUser = () => {
     mutationFn: deleteUser,
     onSuccess: () => {
       localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
-
-      deleteCookie("isAuthenticated");
+      deleteCookie("refreshToken");
 
       useAuthStore.persist.clearStorage();
 
