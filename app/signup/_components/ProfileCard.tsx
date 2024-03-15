@@ -8,7 +8,7 @@ import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { Badge } from "@/app/_common/shadcn/ui/badge";
 
 import "@/app/project/_styles/card.css";
-import { WANTED_JOB } from "@/app/_common/constants/wantedJob.constants";
+import { WANTED_JOB_LABELS } from "@/app/_common/constants/wantedJob.constants";
 
 function ProfileCard() {
   const { user } = useAuthStore();
@@ -47,13 +47,13 @@ function ProfileCard() {
               </Badge>
             ))}
           </div>
-          <div className="grid grid-cols-3 gap-1">
+          <div className="flex flex-row flex-wrap place-content-center gap-1">
             {user.wantedJobs?.map((job, index) => (
               <Badge
                 key={index}
-                className="flex w-full justify-center text-nowrap text-center"
+                className="flex w-fit justify-center text-center"
               >
-                {WANTED_JOB.find(wanted => wanted.id === job)?.label}
+                {WANTED_JOB_LABELS[job]}
               </Badge>
             ))}
           </div>
