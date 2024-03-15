@@ -59,7 +59,7 @@ function ReviewForm() {
   return (
     <Form {...form}>
       <form
-        className="flex flex-col place-content-center space-y-8 rounded border-2 border-black bg-white p-6 shadow-neo"
+        className="z-10 flex flex-col place-content-center space-y-8 rounded-md border-2 border-black bg-white p-6 shadow-neo"
         onSubmit={form.handleSubmit(onSubmitReview)}
       >
         <header className="text-center">
@@ -104,7 +104,7 @@ function ReviewForm() {
                   <p className="text-xs">신중하게 결정해주세요!</p>
                 </small>
                 <section className="flex w-full items-center justify-between">
-                  <small className="cursor-pointer text-gray-500 hover:font-semibold">
+                  <small className="cursor-pointer text-gray-500 hover:text-neoRed">
                     <Link href={"/"}>리뷰 안하기</Link>
                   </small>
                   <Button
