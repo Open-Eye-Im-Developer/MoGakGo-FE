@@ -35,6 +35,10 @@
   .map-background {
     @apply before:animate-slide-infinite after:animate-slide-infinite absolute h-full w-full overflow-hidden before:absolute before:right-[100%] before:h-full before:w-full before:bg-[url("/images/mapBackgroundImage.png")] before:bg-[length:100%] before:content-[""] after:absolute after:h-full after:w-full after:bg-[url("/images/mapBackgroundImage.png")] after:bg-[length:100%] after:content-[""];
   }
+
+  .main-logo {
+    @apply before:animate-slide-infinite after:animate-slide-infinite absolute  z-0 h-full w-full overflow-hidden before:absolute before:right-[100%] before:h-full before:w-full before:bg-[url("/images/main_logo.webp")] before:bg-[length:100%] before:content-[""] after:absolute after:h-full after:w-full after:bg-[url("/images/main_logo.webp")] after:bg-[length:100%] after:content-[""];
+  }
 }
 
 @layer utilities {

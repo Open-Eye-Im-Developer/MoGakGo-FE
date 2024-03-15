@@ -3,15 +3,13 @@
 import Link from "next/link";
 
 import StartWithGithubButton from "./StartWithGithubButton";
+import LoginLogo from "./LoginLogo";
 
 function LoginForm() {
   return (
     <form className="mt-16 flex w-full flex-col place-items-center space-y-16">
       <div>
-        <section className="font-logo grid h-56 w-[297px] place-content-center rounded-lg border-8 border-black bg-gradient-to-b from-[#9FB386] to-[#6F9440] text-center text-5xl">
-          <h1>MOGAK</h1>
-          <h1>GO</h1>
-        </section>
+        <LoginLogo />
         <p className="mt-2 text-xs">Open Eye Im Developer</p>
       </div>
       <section className="flex flex-col items-center gap-3">
