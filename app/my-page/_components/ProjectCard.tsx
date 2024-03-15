@@ -3,19 +3,7 @@ import Image from "next/image";
 import { IconExclamationCircle } from "@tabler/icons-react";
 
 import formatMeetingTime from "@/app/project/_utils/formatMeetingTime";
-import { Button } from "@/app/_common/shadcn/ui/button";
 import { Badge } from "@/app/_common/shadcn/ui/badge";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/app/_common/shadcn/ui/alert-dialog";
 
 import { MATCH_STATUS } from "@/app/_common/constants/matchStatus";
 
@@ -25,7 +13,7 @@ import {
 } from "@/app/_common/types/project";
 import { Match } from "@/app/_common/types/matching";
 
-import { useMutationCancelMatch } from "../_hooks/useMutationCancelMatch";
+import MatchCancelButton from "./MatchCancelButton";
 
 interface CardProps {
   data: Match | ProjectSummary | RequestProjectSummary;
@@ -99,36 +87,6 @@ function ProjectCard({ data }: CardProps) {
         <MatchCancelButton id={project.id} />
       ) : null}
     </div>
-  );
-}
-
-interface MatchCancelButtonProps {
-  id: number;
-}
-
-function MatchCancelButton({ id }: MatchCancelButtonProps) {
-  const { mutate } = useMutationCancelMatch();
-
-  return (
-    <AlertDialog>
-      <AlertDialogTrigger>
-        <Button>취소</Button>
-      </AlertDialogTrigger>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>정말 매치를 취소하시겠습니까?</AlertDialogTitle>
-          <AlertDialogDescription>
-            이 작업은 되돌릴 수 없습니다.
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>아니요</AlertDialogCancel>
-          <AlertDialogAction onClick={() => mutate(id)}>
-            매치 취소하기
-          </AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
   );
 }
 

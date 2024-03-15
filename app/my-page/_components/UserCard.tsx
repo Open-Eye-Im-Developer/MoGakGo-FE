@@ -1,27 +1,11 @@
-import { toast } from "sonner";
 import Image from "next/image";
 import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
 
-import { useQuerySignUpUser } from "@/app/signup/_hooks/useQuerySignUpUser";
-import { Button } from "@/app/_common/shadcn/ui/button";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/app/_common/shadcn/ui/alert-dialog";
-
 import { Like } from "@/app/_common/types/profile";
 
-import { useMutationCancelLike } from "../_hooks/useMutationCancelLike";
-
 import "dayjs/locale/ko";
+import LikeCancelButton from "./LikeCancelButton";
 
 interface CardProps {
   data: Like;
@@ -47,48 +31,8 @@ function UserCard(props: CardProps) {
         <div className="text-s flex items-center gap-2">{data.username}</div>
         <div className="text-xs">{dayjs(data.createdAt).fromNow()}</div>
       </div>
-      <MatchCancelButton id={data.receiverId} />
+      <LikeCancelButton id={data.receiverId} />
     </div>
-  );
-}
-
-interface MatchCancelButtonProps {
-  id: number;
-}
-
-function MatchCancelButton(props: MatchCancelButtonProps) {
-  const { id } = props;
-  const { data } = useQuerySignUpUser();
-  const { mutate } = useMutationCancelLike();
-
-  const handleCancelLike = () => {
-    if (!data || !data.id) {
-      toast.error("로그인이 필요합니다.");
-      return;
-    }
-    mutate({ senderId: data.id, receiverId: id });
-  };
-
-  return (
-    <AlertDialog>
-      <AlertDialogTrigger>
-        <Button>취소</Button>
-      </AlertDialogTrigger>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>찔러보기를 취소하시겠습니까?</AlertDialogTitle>
-          <AlertDialogDescription>
-            프로필 카드에서 다시 찔러보기 할 수 있습니다.
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>아니요</AlertDialogCancel>
-          <AlertDialogAction onClick={handleCancelLike}>
-            찔러보기 취소하기
-          </AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
   );
 }
 
