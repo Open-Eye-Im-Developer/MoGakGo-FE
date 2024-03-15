@@ -77,7 +77,7 @@ function ReviewForm() {
                 <ul className="flex w-full justify-center gap-5 py-5">
                   {Ratings.map(({ type, content }, index) => (
                     <li
-                      className="flex cursor-pointer flex-col items-center"
+                      className="flex cursor-pointer flex-col items-center gap-1"
                       key={index}
                       id={index.toString()}
                       onClick={handleClickRating}
