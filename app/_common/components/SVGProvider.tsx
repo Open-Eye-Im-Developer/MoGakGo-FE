@@ -3019,7 +3019,14 @@ const spriteSVGCode = (
 );
 
 function SVGProvider() {
-  return createPortal(spriteSVGCode, document.body);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    setIsMounted(true);
+  }, []);
+
+  return isMounted && createPortal(spriteSVGCode, document.body);
 }
 
 export default SVGProvider;
