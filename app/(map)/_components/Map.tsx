@@ -20,7 +20,7 @@ import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
 
 import REGION_CODE from "@/app/_common/constants/regionCode";
 
-import { sonner } from "@/app/_common/utils/sonner";
+import { toast } from "@/app/_common/utils/toast";
 import { navigate } from "@/app/_common/utils/redirect";
 
 import { formatRegionName } from "../_utils/formatRegionName";
@@ -59,7 +59,7 @@ function Map() {
 
   useEffect(() => {
     if (!areaCode) return;
-    sonner.info("내가 위치한 지역으로 이동합니다.");
+    toast.info("내가 위치한 지역으로 이동합니다.");
     setRegionCode(areaCode);
     const regionName = formatRegionName(areaCode);
     previousRegion.current = document.querySelector(`#${regionName}`);
@@ -77,14 +77,14 @@ function Map() {
 
   const handleRegionClick = (event: MouseEvent<HTMLDivElement>) => {
     if (!isAllowGPS()) {
-      sonner.info("서비스를 이용하려면 GPS 수집을 허용해주세요!");
+      toast.info("서비스를 이용하려면 GPS 수집을 허용해주세요!");
       return;
     }
 
     const target = event.target as SVGElement | HTMLElement;
     const isRegion = target.tagName === "path";
     if (!getUser() && isRegion) {
-      sonner.info("유저 정보가 없습니다. 로그인 후 이용해주세요!", {
+      toast.info("유저 정보가 없습니다. 로그인 후 이용해주세요!", {
         action: {
           label: "로그인하기",
           onClick: () => navigate("/login"),

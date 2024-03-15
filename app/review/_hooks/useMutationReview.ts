@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { postReview } from "@/app/_common/api/project";
 
-import { sonner } from "@/app/_common/utils/sonner";
+import { toast } from "@/app/_common/utils/toast";
 
 export const useMutationReview = () => {
   const router = useRouter();
@@ -21,7 +21,7 @@ export const useMutationReview = () => {
     },
     onError: error => {
       console.error(error);
-      sonner.error(error.message);
+      toast.error(error.message);
     },
   });
 

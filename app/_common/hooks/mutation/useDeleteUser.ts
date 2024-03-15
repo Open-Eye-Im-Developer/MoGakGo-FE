@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { deleteUser } from "@/app/_common/api/auth";
 
-import { sonner } from "../../utils/sonner";
+import { toast } from "../../utils/toast";
 
 export const useDeleteUser = () => {
   const queryClient = useQueryClient();
@@ -17,7 +17,7 @@ export const useDeleteUser = () => {
       localStorage.removeItem("refreshToken");
       useAuthStore.persist.clearStorage();
 
-      sonner.error("회원탈퇴가 완료되었습니다.");
+      toast.error("회원탈퇴가 완료되었습니다.");
 
       queryClient.invalidateQueries({
         queryKey: ["user"],
@@ -26,7 +26,7 @@ export const useDeleteUser = () => {
       router.push("/");
     },
     onError: error => {
-      sonner.error("존재하지 않는 회원입니다.");
+      toast.error("존재하지 않는 회원입니다.");
       console.error(error);
     },
   });

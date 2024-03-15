@@ -1,8 +1,9 @@
-import { toast } from "sonner";
 import { AxiosError } from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { cancelLike } from "@/app/_common/api/profile";
+
+import { toast } from "@/app/_common/utils/toast";
 
 export const useMutationCancelLike = () => {
   const queryClient = useQueryClient();

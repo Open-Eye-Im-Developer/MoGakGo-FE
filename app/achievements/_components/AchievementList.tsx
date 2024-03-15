@@ -5,7 +5,7 @@ import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 
 import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
 
-import { sonner } from "@/app/_common/utils/sonner";
+import { toast } from "@/app/_common/utils/toast";
 
 import { useQueryAchievements } from "../_hooks/useQueryAchievements";
 import AchievementItem from "./AchievementItem";
@@ -19,7 +19,7 @@ function AchievementList() {
   }
 
   const handleClickMyAchievement = () => {
-    sonner.info("아직 설정된 업적이 없어요.");
+    toast.info("아직 설정된 업적이 없어요.");
   };
 
   return (
