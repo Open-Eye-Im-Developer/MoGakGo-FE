@@ -1,7 +1,8 @@
 "use client";
 
 import { createPortal } from "react-dom";
-import React, { useEffect, useState } from "react";
+
+import withOnMounted from "../hoc/withOnMounted";
 
 const spriteSVGCode = (
   <svg xmlns="http://www.w3.org/2000/svg" className="hidden">
@@ -3019,14 +3020,7 @@ const spriteSVGCode = (
 );
 
 function SVGProvider() {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    setIsMounted(true);
-  }, []);
-
-  return isMounted && createPortal(spriteSVGCode, document.body);
+  return createPortal(spriteSVGCode, document.body);
 }
 
-export default SVGProvider;
+export default withOnMounted(SVGProvider);
