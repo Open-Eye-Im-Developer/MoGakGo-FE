@@ -1,6 +1,6 @@
 import { SignUpUser } from "@/app/signup/_type/signup";
 
-import { WANTED_JOB } from "../constants/wantedJob.constants";
+import { WantedJobType } from "../constants/wantedJob.constants";
 
 export type Region =
   | "종로구"
@@ -31,8 +31,6 @@ export type Region =
   | "분당구"
   | "기타";
 
-export type WantedJobs = (typeof WANTED_JOB)[number]["id"];
-
 export interface User extends SignUpUser {
   region?: Region;
   region_authentication_at?: string;
@@ -45,7 +43,7 @@ export interface User extends SignUpUser {
 export interface UserWantedJob {
   id: string;
   userId: string;
-  wantedJobs: WantedJobs[];
+  wantedJobs: WantedJobType[];
 }
 
 export interface UserJandiRating {
