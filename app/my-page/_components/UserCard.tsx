@@ -2,7 +2,6 @@ import { toast } from "sonner";
 import Image from "next/image";
 import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
-import { IconExclamationCircle } from "@tabler/icons-react";
 
 import { useQuerySignUpUser } from "@/app/signup/_hooks/useQuerySignUpUser";
 import { Button } from "@/app/_common/shadcn/ui/button";
@@ -33,16 +32,6 @@ dayjs.locale("ko");
 
 function UserCard(props: CardProps) {
   const { data } = props;
-
-  if (!data)
-    return (
-      <div className="align-center flex items-center gap-4 rounded-md bg-white p-3 dark:bg-gray-900">
-        <div className="flex gap-2 text-red-500">
-          <IconExclamationCircle />
-          <p>올바르지 않은 유저 데이터입니다.</p>
-        </div>
-      </div>
-    );
 
   return (
     <div className="align-center flex items-center gap-4 rounded-md bg-white p-3 dark:bg-gray-900">
