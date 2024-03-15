@@ -32,7 +32,7 @@ const ProjectCardBack = forwardRef<HTMLDivElement, CardBackProps>(
     };
 
     return (
-      <Card className="glass-morphism absolute inset-0 left-0 top-0 overflow-hidden border-none shadow-md [backface-visibility:hidden] [transform:rotateY(180deg)]">
+      <Card className="absolute inset-0 left-0 top-0 overflow-hidden [backface-visibility:hidden] [transform:rotateY(180deg)]">
         <CardHeader className="flex flex-row items-center justify-between border-b border-black px-4 py-2">
           <CardTitle className="flex grow flex-row items-center justify-between pt-1 text-lg font-bold">
             <p className="pl-2">요청 목록</p>

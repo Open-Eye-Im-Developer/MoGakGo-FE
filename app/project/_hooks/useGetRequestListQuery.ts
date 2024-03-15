@@ -11,7 +11,7 @@ function useGetRequestListQuery(id: number, cursorId: number | null) {
     try {
       const query = `${cursorId ? `cursorId=${cursorId}&` : ""}pageSize=5`;
       const { data } = await instance.get<ResponseData<RequestList>>(
-        `/projects/${id}/requests?pageSize=5&${query}`,
+        `/projects/${id}/requests?${query}`,
       );
 
       return data;

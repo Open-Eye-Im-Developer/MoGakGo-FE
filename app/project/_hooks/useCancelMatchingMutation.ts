@@ -6,11 +6,14 @@ import { instance } from "@/app/_common/api/instance";
 
 import { ResponseError } from "@/app/_common/types/response";
 
+import useInvalidateQuery from "./useInvalidateQuery";
+
 function useCacnelMatchingMutation(matchingId: number | undefined) {
   const { toast } = useToast();
+  const { invalidateQuery } = useInvalidateQuery();
 
   const cancelMatching = async () => {
-    const { data } = await instance.post(`/matches/${matchingId}/cancel`);
+    const { data } = await instance.post(`/matches/${matchingId!}/cancel`);
 
     return data;
   };
@@ -22,6 +25,7 @@ function useCacnelMatchingMutation(matchingId: number | undefined) {
         title: "매칭을 취소했습니다.",
         description: "매칭이 취소되었어요!",
       });
+      invalidateQuery(["current-project"]);
     },
     onError: (error: AxiosError<ResponseError>) => {
       const errorMessage = error.response?.data.message;
