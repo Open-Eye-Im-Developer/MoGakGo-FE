@@ -47,9 +47,6 @@ function EditForm({ defaultValues, disabled }: EditFormProps) {
               ) : (
                 <div className="h-full w-full bg-slate-200"></div>
               )}
-              {/* <div className="absolute bottom-0 right-0 inline-block bg-primary p-2 text-white">
-                <IconPencil />
-              </div> */}
             </div>
           </div>
           <UsernameField form={form} />
