@@ -11,7 +11,6 @@ import { useAuthStore } from "../store/useAuthStore";
 const saveNewTokens = (newAccessToken: string, newRefreshToken: string) => {
   sessionStorage.setItem("accessToken", newAccessToken);
   sessionStorage.setItem("refreshToken", newRefreshToken);
-  console.log("saveNewTokens");
 };
 
 const saveUpdatedTokens = (newAccessToken: string, newRefreshToken: string) => {
