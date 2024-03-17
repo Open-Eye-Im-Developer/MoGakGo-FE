@@ -1,10 +1,11 @@
-import { toast } from "sonner";
 import { AxiosError } from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { cancelMatch } from "@/app/_common/api/matching";
 
-export const useMutationCancelMatch = () => {
+import { toast } from "@/app/_common/utils/toast";
+
+export const useMutationMatchCancel = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
