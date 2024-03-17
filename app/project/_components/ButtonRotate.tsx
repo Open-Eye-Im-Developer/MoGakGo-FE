@@ -1,7 +1,8 @@
 import React from "react";
-import { IconRotate360 } from "@tabler/icons-react";
 
 import { Button } from "@/app/_common/shadcn/ui/button";
+
+import Icon from "@/app/_common/components/Icon";
 
 interface ButtonRotateProps {
   isDisabled?: boolean;
@@ -18,7 +19,7 @@ function ButtonRotate(props: ButtonRotateProps) {
       onClick={onRotate}
       disabled={isDisabled}
     >
-      <IconRotate360 />
+      <Icon id="rotate" className="h-4 w-4" />
     </Button>
   );
 }
