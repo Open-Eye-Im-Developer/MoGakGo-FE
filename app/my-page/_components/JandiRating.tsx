@@ -14,8 +14,8 @@ function JandiRating({ data }: JandiRatingProps) {
       <div className="flex flex-col gap-2">
         {data ? (
           <>
-            <Progress className="h-2.5" value={50} />
-            <div className="text-xs">50%</div>
+            <Progress className="h-2.5" value={data.jandiRate} />
+            <div className="text-xs">{data.jandiRate}</div>
           </>
         ) : (
           <>
