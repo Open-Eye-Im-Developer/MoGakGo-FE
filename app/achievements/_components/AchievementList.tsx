@@ -1,61 +1,62 @@
 "use client";
 
 import { toast } from "sonner";
-import { IconLock } from "@tabler/icons-react";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 
 import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
+import Icon from "@/app/_common/components/Icon";
 
 import { useQueryAchievements } from "../_hooks/useQueryAchievements";
+import MyAchievement from "./MyAchievement";
+import ListSortSelect from "./ListSortSelect";
 import AchievementItem from "./AchievementItem";
 
 function AchievementList() {
   const { achievements, myAchievement } = useQueryAchievements();
 
-  if (!achievements || !myAchievement) {
-    // TODO: 스켈레톤으로 대체하기
-    return <LoadingSpinner />;
-  }
-
   const hanldeClickMyAchievement = () => {
     toast.message("아직 설정된 업적이 없어요.");
   };
 
+  if (!achievements) return <LoadingSpinner />;
+
   return (
-    <main className="flex flex-col items-center">
-      <header className="grid w-full place-content-center place-items-center gap-3 rounded-none border-y border-gray-300 py-8">
-        <h3 className="font-semibold">나의 대표 뱃지</h3>
+    <main className="flex flex-col">
+      <header className="grid w-full place-content-center place-items-center gap-1 rounded-none py-6">
         <small className="text-center text-xs text-gray-500">
           {!myAchievement && (
-            <p>획득한 업적으로 &apos;대표 뱃지&apos;을 변경할 수 있어요.</p>
+            <p>
+              현재 대표로 설정한 뱃지가 없어요.
+              <br />
+              획득한 업적으로 &apos;대표 뱃지&apos;를 변경할 수 있어요.
+            </p>
           )}
         </small>
 
         {myAchievement ? (
-          <AchievementItem
-            styleType="main"
-            achievement={myAchievement}
-            isMyAchievement
-          />
+          <MyAchievement achievement={myAchievement} />
         ) : (
           <div
-            className="w-[100px] rounded-xl bg-secondary text-white"
+            className="mt-2 w-[100px] rounded-full bg-white"
             onClick={hanldeClickMyAchievement}
           >
             <AspectRatio
               ratio={1 / 1}
               className="relative grid place-content-center place-items-center"
             >
-              <IconLock
-                strokeWidth={1.5}
+              <Icon
+                id="lock"
                 size={50}
-                className="absolute z-10 "
+                className="absolute z-10 text-neoYellow"
               />
             </AspectRatio>
           </div>
         )}
       </header>
-      <ul className="mt-8 grid grid-cols-3 grid-rows-3 gap-4">
+      <section className="flex justify-end text-start">
+        <ListSortSelect />
+      </section>
+      <ul className="mt-3 grid w-full grid-cols-1 gap-4">
         {achievements?.map((achievement, index) => (
           <AchievementItem
             styleType="item"
