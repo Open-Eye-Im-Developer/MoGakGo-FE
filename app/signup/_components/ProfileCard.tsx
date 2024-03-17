@@ -8,7 +8,7 @@ import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { Badge } from "@/app/_common/shadcn/ui/badge";
 
 import "@/app/project/_styles/card.css";
-import { WANTED_JOB_LABELS } from "@/app/_common/constants/wantedJob.constants";
+import { WANTED_JOB_LABELS } from "@/app/_common/constants/wantedJob";
 
 function ProfileCard() {
   const { user } = useAuthStore();

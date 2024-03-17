@@ -5,7 +5,7 @@ import { SignUpUser } from "@/app/signup/_type/signup";
 import { Skeleton } from "@/app/_common/shadcn/ui/skeleton";
 import { Badge } from "@/app/_common/shadcn/ui/badge";
 
-import { WANTED_JOB } from "@/app/_common/constants/wantedJob.constants";
+import { WANTED_JOB } from "@/app/_common/constants/wantedJob";
 
 interface ProfileProps {
   data?: SignUpUser;

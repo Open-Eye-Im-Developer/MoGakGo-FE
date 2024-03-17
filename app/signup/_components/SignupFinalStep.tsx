@@ -14,7 +14,7 @@ import {
 import { Checkbox } from "@/app/_common/shadcn/ui/checkbox";
 import { Button } from "@/app/_common/shadcn/ui/button";
 
-import { WANTED_JOB } from "@/app/_common/constants/wantedJob.constants";
+import { WANTED_JOB } from "@/app/_common/constants/wantedJob";
 
 import { SignupRequest } from "../_type/signup";
 import SignupHeader from "./SignupHeader";
