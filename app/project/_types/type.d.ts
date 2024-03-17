@@ -30,20 +30,22 @@ interface PlaceResponseProps {
   documents: PlaceItem[];
 }
 
+interface Profile {
+  id?: number;
+  username: string;
+  githubId: string;
+  avatarUrl: string;
+  githubUrl: string;
+  bio: string;
+  jandiRate: number;
+  achievementTitle: string;
+  developLanguages: string[];
+  wantedJobs: string[];
+}
+
 interface RequestList {
   id: number;
-  senderPreview: {
-    id: number;
-    username: string;
-    githubId: string;
-    avatarUrl: string;
-    githubUrl: string;
-    bio: string;
-    jandiRate: number;
-    achievementTitle: string;
-    developLanguages: string[];
-    wantedJobs: string[];
-  };
+  senderPreview: Profile;
   requestStatus: string;
 }
 
