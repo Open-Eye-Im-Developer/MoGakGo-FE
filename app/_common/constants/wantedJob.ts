@@ -1,33 +1,5 @@
-export type WantedJobType =
-  | "BACKEND"
-  | "FRONTEND"
-  | "FULLSTACK"
-  | "ANDROID"
-  | "IOS"
-  | "MACHINE_LEARNING"
-  | "ARTIFICIAL_INTELLIGENCE"
-  | "DATA_ENGINEER"
-  | "DBA"
-  | "MOBILE_GAME"
-  | "SYSTEM_NETWORK"
-  | "SYSTEM_SW"
-  | "DEVOPS"
-  | "INTERNET_SECURITY"
-  | "EMBEDDED_SOFTWARE"
-  | "ROBOTICS_MIDDLEWARE"
-  | "QA"
-  | "IOT"
-  | "APPLICATION_SW"
-  | "BLOCKCHAIN"
-  | "PROJECT_MANAGEMENT"
-  | "WEB_PUBLISHING"
-  | "CROSS_PLATFORM"
-  | "VR_AR_3D"
-  | "ERP"
-  | "GRAPHICS";
-
-interface WantedJob {
-  id: WantedJobType;
+export interface WantedJob {
+  id: keyof typeof WANTED_JOB_LABELS;
   label: string;
 }
 
