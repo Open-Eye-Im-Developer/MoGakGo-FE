@@ -1,4 +1,4 @@
-import { WantedJobs } from "./user";
+import { WantedJobType } from "../constants/wantedJob.constants";
 
 export interface Creator {
   id: number;
@@ -10,7 +10,7 @@ export interface Creator {
   jandiRate: number;
   achievementTitle: string;
   developLanguages: string[];
-  wantedJobs: WantedJobs[];
+  wantedJobs: WantedJobType[];
 }
 
 export interface Like {
