@@ -2,7 +2,7 @@
 
 import { createPortal } from "react-dom";
 
-import WithOnMounted from "../hoc/WithOnMounted";
+import WithOnMounted from "../hoc/withOnMounted";
 
 const spriteSVGCode = (
   <svg xmlns="http://www.w3.org/2000/svg" className="hidden">
