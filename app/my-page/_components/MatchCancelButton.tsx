@@ -11,14 +11,14 @@ import {
   AlertDialogTrigger,
 } from "@/app/_common/shadcn/ui/alert-dialog";
 
-import { useMutationCancelMatch } from "../_hooks/useMutationCancelMatch";
+import { useMutationMatchCancel } from "../_hooks/useMutationCancelMatch";
 
 interface MatchCancelButtonProps {
   id: number;
 }
 
 function MatchCancelButton({ id }: MatchCancelButtonProps) {
-  const { mutate } = useMutationCancelMatch();
+  const { mutate } = useMutationMatchCancel();
 
   return (
     <AlertDialog>
