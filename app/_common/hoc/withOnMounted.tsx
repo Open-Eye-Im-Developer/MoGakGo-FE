@@ -1,9 +1,7 @@
-/* eslint-disable react/display-name */
-/* eslint-disable react-hooks/rules-of-hooks */
 import { ComponentType, useEffect, useState } from "react";
 
 function WithOnMounted<P extends object>(Component: ComponentType<P>) {
-  return function (props: P) {
+  return function Mount(props: P) {
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
