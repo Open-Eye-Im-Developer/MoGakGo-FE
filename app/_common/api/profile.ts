@@ -3,7 +3,13 @@ import { AxiosError } from "axios";
 import { generateQueryString } from "@/app/my-page/_util/generateQueryString";
 
 import { ResponseData } from "../types/response";
-import { Creator, Like, LikeCount } from "../types/profile";
+import {
+  Creator,
+  Like,
+  LikeCount,
+  Profile,
+  ProfileLikeInfo,
+} from "../types/profile";
 import { instance } from "./instance";
 
 interface ProfileCardRequest {
@@ -16,7 +22,7 @@ export const getProfileCard = async ({
   cursorId,
 }: ProfileCardRequest) => {
   const query = `${cursorId ? `cursorId=${cursorId}&` : ""}pageSize=5&sortOrder=ASC`;
-  const { data } = await instance.get<ResponseData<Creator>>(
+  const { data } = await instance.get<ResponseData<Profile>>(
     `/profiles/${region}?${query}`,
   );
   return data;
@@ -86,4 +92,26 @@ export const cancelLike = async (payload: {
   });
 
   return data;
+};
+
+interface ProfileLikeResponse {
+  id: Creator["id"];
+}
+
+export const postLikeProfile = async ({
+  senderId,
+  receiverId,
+}: ProfileLikeInfo) => {
+  const { data } = await instance.post<ProfileLikeResponse>("/profiles/like", {
+    senderId,
+    receiverId,
+  });
+  return data;
+};
+
+export const deleteLikeProfile = async ({
+  senderId,
+  receiverId,
+}: ProfileLikeInfo) => {
+  await instance.delete("/profiles/like", { data: { senderId, receiverId } });
 };

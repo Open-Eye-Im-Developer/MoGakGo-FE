@@ -25,3 +25,12 @@ export interface Like {
   avatarUrl: string;
   createdAt: string;
 }
+export interface Profile {
+  response: Creator;
+  requestYn: boolean;
+}
+
+export interface ProfileLikeInfo {
+  senderId: number;
+  receiverId: number;
+}

@@ -5,14 +5,14 @@ import {
 } from "@/app/_common/shadcn/ui/carousel";
 
 import { Project } from "@/app/_common/types/project";
-import { Creator } from "@/app/_common/types/profile";
+import { Profile } from "@/app/_common/types/profile";
 
 import ProfileCardItem from "./ProfileCardItem";
 
 interface Props {
   cardList: {
     projectList: Project[];
-    profileList: Creator[];
+    profileList: Profile[];
   };
 }
 
@@ -28,8 +28,8 @@ function CardList({ cardList }: Props) {
           </div>
         </CarouselItem>
       ))}
-      {profileList.map((profile: Creator) => (
-        <CarouselItem key={profile.id}>
+      {profileList.map((profile: Profile) => (
+        <CarouselItem key={profile.response.id}>
           <div className="mb-20 flex items-center justify-center">
             <ProfileCardItem profile={profile} />
           </div>

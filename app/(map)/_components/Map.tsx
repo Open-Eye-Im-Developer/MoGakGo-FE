@@ -6,6 +6,7 @@ import { EmblaCarouselType } from "embla-carousel";
 
 import useQueryGeoAreaCode from "@/app/auth-mylocation/_hooks/useQueryGeoAreaCode";
 import { usePositionStore } from "@/app/_common/store/usePositionStore";
+import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { cn } from "@/app/_common/shadcn/utils";
 import {
   Carousel,
@@ -20,6 +21,8 @@ import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
 
 import REGION_CODE from "@/app/_common/constants/regionCode";
 
+import { navigate } from "@/app/_common/utils/redirect";
+
 import { formatRegionName } from "../_utils/formatRegionName";
 import useGetRank from "../_api/useGetRank";
 import useGetCardList from "../_api/useGetCardList";
@@ -27,11 +30,7 @@ import EmptyCardList from "./EmptyCardList";
 import CardList from "./CardList";
 
 function Map() {
-  const {
-    data: areaCode,
-    isError: isGeoError,
-    error: geoError,
-  } = useQueryGeoAreaCode();
+  const { data: areaCode } = useQueryGeoAreaCode();
   const [regionCode, setRegionCode] = useState(0);
   const previousRegion = useRef<SVGElement | null>(null);
   const [isListShow, setIsListShow] = useState(false);
@@ -45,6 +44,7 @@ function Map() {
     hasNextProfile,
   } = useGetCardList(regionCode);
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
+  const { getUser } = useAuthStore();
 
   useEffect(() => {
     if (!carouselApi) return;
@@ -56,8 +56,6 @@ function Map() {
       else if (!hasNextProject && hasNextProfile) fetchProfile();
     });
   }, [carouselApi, hasNextProject, hasNextProfile]);
-
-  if (isGeoError) toast.error(geoError?.message);
 
   useEffect(() => {
     if (!areaCode) return;
@@ -79,13 +77,28 @@ function Map() {
   };
 
   const handleRegionClick = (event: MouseEvent<HTMLDivElement>) => {
-    if (!isAllowGPS()) return;
+    if (!isAllowGPS()) {
+      toast.info("서비스를 이용하려면 GPS 수집을 허용해주세요!");
+      return;
+    }
+
+    const target = event.target as SVGElement | HTMLElement;
+    const isRegion = target.tagName === "path";
+    if (!getUser() && isRegion) {
+      toast.info("유저 정보가 없습니다. 로그인 후 이용해주세요!", {
+        action: {
+          label: "로그인하기",
+          onClick: () => navigate("/login"),
+        },
+        actionButtonStyle: {
+          backgroundColor: "#0973DC",
+        },
+      });
+      return;
+    }
 
     const map = document.querySelector("#map-wrap") as HTMLDivElement;
     const isZoomIn = map.style.transform.includes("scale");
-    const target = event.target as SVGElement | HTMLElement;
-    const isRegion = target.tagName === "path";
-
     if (isZoomIn) {
       if (isRegion) return;
       zoomOut();
@@ -113,6 +126,9 @@ function Map() {
 
   return (
     <div className="relative h-screen w-screen touch-none overflow-hidden">
+      <div className="logo-vertical cursor-pointer" />
+      <div className="map-background" />
+      <div className="map-background" />
       <LoadingSpinner
         className={cn(
           "absolute bottom-0 left-0 right-0 top-0 z-10 flex h-full w-full place-content-center bg-white/40 backdrop-blur-sm transition-all duration-300",

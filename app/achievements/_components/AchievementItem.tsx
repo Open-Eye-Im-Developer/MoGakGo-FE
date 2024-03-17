@@ -7,21 +7,25 @@ import { IconQuestionMark } from "@tabler/icons-react";
 import { cn } from "@/app/_common/shadcn/utils";
 import { AspectRatio } from "@/app/_common/shadcn/ui/aspect-ratio";
 
-import { Achievement } from "./AchievementList";
+import { Achievement } from "@/app/_common/types/user";
+
 import AchievementDrawer from "./AchievementDrawer";
 
 interface AchievementItemProps {
+  styleType: "main" | "item";
   achievement: Achievement;
+  isMyAchievement?: boolean;
   className?: ComponentProps<typeof cn>;
-  isRepresentative?: boolean;
 }
 
 function AchievementItem({
+  styleType,
   achievement,
   className,
-  isRepresentative,
+  isMyAchievement,
 }: AchievementItemProps) {
-  const { id, title, isCompleted } = achievement;
+  const { achievementId, title, imgUrl, completed: isCompleted } = achievement;
+
   const [open, setOpen] = useState(false);
 
   const onOpenChange = () => {
@@ -34,9 +38,10 @@ function AchievementItem({
         achievement={achievement}
         open={open}
         onOpenChange={setOpen}
+        isMyAchievement={isMyAchievement}
       />
       <li
-        id={`${id}`}
+        id={`${achievementId}`}
         className={cn(
           "flex cursor-pointer flex-col items-center gap-2 rounded-md",
           className,
@@ -45,8 +50,11 @@ function AchievementItem({
       >
         <div
           className={cn(
-            !isRepresentative ? "w-[80px]" : "w-[100px]",
-            "rounded-xl bg-secondary",
+            styleType !== "main" ? "w-[80px]" : "w-[100px]",
+            !isCompleted
+              ? "bg-secondary bg-opacity-50"
+              : "border-2 border-secondary bg-transparent p-1",
+            "rounded-xl",
           )}
         >
           <AspectRatio
@@ -63,25 +71,24 @@ function AchievementItem({
               />
             ) : (
               <Image
-                width={!isRepresentative ? 80 : 100}
-                height={!isRepresentative ? 80 : 100}
-                src="/images/cat.webp"
+                width={styleType !== "main" ? 80 : 100}
+                height={styleType !== "main" ? 80 : 100}
+                src={imgUrl}
                 alt="업적 뱃지"
                 className="rounded-xl object-cover"
               />
             )}
           </AspectRatio>
         </div>
-        {!isRepresentative && (
-          <p
-            className={cn(
-              isCompleted ? "text-primary" : "text-gray-400",
-              "text-balance text-center text-sm",
-            )}
-          >
-            {title}
-          </p>
-        )}
+
+        <p
+          className={cn(
+            isCompleted ? "text-primary" : "text-gray-400",
+            "text-pretty text-center text-sm",
+          )}
+        >
+          {title}
+        </p>
       </li>
     </>
   );
