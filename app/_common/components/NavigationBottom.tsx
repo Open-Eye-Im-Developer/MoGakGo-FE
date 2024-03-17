@@ -11,7 +11,7 @@ function NavigationBottom() {
   return (
     <Menubar
       defaultValue={pathname}
-      className="absolute bottom-8 left-2/4 z-50 -translate-x-2/4 shadow-neo-b"
+      className="fixed bottom-8 left-2/4 z-50 -translate-x-2/4 shadow-neo-b"
     >
       <MenubarMenu value="/">
         <MenubarTrigger
