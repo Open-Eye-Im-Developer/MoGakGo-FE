@@ -58,10 +58,12 @@ function ProjectRemoveDialog(props: ProjectRemoveDialogProps) {
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger asChild>{triggerComponent}</AlertDialogTrigger>
+      <AlertDialogTrigger asChild className="bg-neoRed text-white">
+        {triggerComponent}
+      </AlertDialogTrigger>
       <AlertDialogPortal />
       <AlertDialogOverlay className="h-full w-full bg-transparent backdrop-blur-md" />
-      <AlertDialogContent className="flex max-w-[300px] flex-col items-start gap-10 rounded-lg">
+      <AlertDialogContent className="flex max-w-[300px] flex-col items-start gap-10 rounded-lg border border-black shadow-neo">
         <AlertDialogHeader>
           <AlertDialogTitle>{titleComponent}</AlertDialogTitle>
           <AlertDialogDescription>
