@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { ComponentType, useEffect, useState } from "react";
 
-function withOnMounted<P extends object>(Component: ComponentType<P>) {
+function WithOnMounted<P extends object>(Component: ComponentType<P>) {
   return function (props: P) {
     const [isMounted, setIsMounted] = useState(false);
 
@@ -16,4 +16,4 @@ function withOnMounted<P extends object>(Component: ComponentType<P>) {
   };
 }
 
-export default withOnMounted;
+export default WithOnMounted;

@@ -2,7 +2,7 @@
 
 import { createPortal } from "react-dom";
 
-import withOnMounted from "../hoc/withOnMounted";
+import WithOnMounted from "../hoc/WithOnMounted";
 
 const spriteSVGCode = (
   <svg xmlns="http://www.w3.org/2000/svg" className="hidden">
@@ -3023,4 +3023,4 @@ function SVGProvider() {
   return createPortal(spriteSVGCode, document.body);
 }
 
-export default withOnMounted(SVGProvider);
+export default WithOnMounted(SVGProvider);
