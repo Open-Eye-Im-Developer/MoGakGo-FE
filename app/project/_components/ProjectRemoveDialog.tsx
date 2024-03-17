@@ -44,9 +44,8 @@ function ProjectRemoveDialog(props: ProjectRemoveDialogProps) {
   const titleComponent = isMatchedProject
     ? "정말 매칭을 취소하시겠어요?"
     : "정말 프로젝트를 취소하시겠어요?";
-  const descriptionComponent = isMatchedProject
-    ? "한 번 취소된 매칭은 되돌릴 수 없어요!"
-    : "한 번 취소된 프로젝트는 되돌릴 수 없어요!";
+
+  const descriptionComponent = "이 작업은 되돌릴 수 없어요!";
 
   const handleCancelProject = async () => {
     createCancelProject();
@@ -65,18 +64,22 @@ function ProjectRemoveDialog(props: ProjectRemoveDialogProps) {
       <AlertDialogOverlay className="h-full w-full bg-transparent backdrop-blur-md" />
       <AlertDialogContent className="flex max-w-[300px] flex-col items-start gap-10 rounded-lg border border-black shadow-neo">
         <AlertDialogHeader>
-          <AlertDialogTitle>{titleComponent}</AlertDialogTitle>
-          <AlertDialogDescription>
+          <AlertDialogTitle className="text-base">
+            {titleComponent}
+          </AlertDialogTitle>
+          <AlertDialogDescription className="text-xs">
             {descriptionComponent}
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogFooter className="flex flex-row items-center gap-2 self-end">
+        <AlertDialogFooter className="flex w-full flex-col gap-2 sm:flex-col">
           <AlertDialogAction
             onClick={isMatchedProject ? handleCancelMatch : handleCancelProject}
           >
-            진행
+            취소할래요.
           </AlertDialogAction>
-          <AlertDialogCancel className="mt-0">취소</AlertDialogCancel>
+          <AlertDialogCancel className="ml-0 mt-0 sm:ml-0">
+            안 할래요.
+          </AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 
 import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { cn } from "@/app/_common/shadcn/utils";
@@ -51,6 +52,7 @@ function ProjectCardFront(props: CardFrontProps) {
         id,
         githubId,
         avatarUrl,
+        githubUrl,
         username,
         achievementTitle,
         bio,
@@ -80,7 +82,7 @@ function ProjectCardFront(props: CardFrontProps) {
               onRotate={onRotate}
             />
             <Popover>
-              <PopoverTrigger className="rounded-md p-2 hover:bg-[#5454543e]">
+              <PopoverTrigger className="rounded-md p-3 hover:bg-[#5454543e]">
                 <Icon id="project-tag" className="h-5 w-5" />
               </PopoverTrigger>
               <PopoverContent className="max-w-[150px]">
@@ -95,10 +97,16 @@ function ProjectCardFront(props: CardFrontProps) {
               </PopoverContent>
             </Popover>
           </span>
-          <span className="flex items-center text-[#A2A2A2]">@{githubId}</span>
+          <Link
+            href={githubUrl}
+            target="_blank"
+            className="flex items-center text-[#A2A2A2]"
+          >
+            @{githubId}
+          </Link>
         </CardDescription>
       </CardHeader>
-      <CardContent className="flex flex-col items-center gap-8 px-3">
+      <CardContent className="flex flex-col items-center gap-8 px-3 py-2">
         <div className="flex w-full flex-col gap-3">
           <div className="flex w-full justify-between ">
             <div className="relative ml-2 rounded-full">
@@ -133,7 +141,7 @@ function ProjectCardFront(props: CardFrontProps) {
         </div>
       </CardContent>
       {!initialRotate && (
-        <CardFooter className="flex items-center justify-between">
+        <CardFooter className="flex items-center justify-between px-4">
           <div>
             <p className="font-bold">{meetDetail}</p>
             <p className="text-xs">
