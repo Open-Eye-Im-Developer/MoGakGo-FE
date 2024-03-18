@@ -1,7 +1,7 @@
 import axios from "axios";
 
+import { getCookie } from "../utils/cookie";
 import { reIssueAccessToken } from "./auth";
-
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const SERVER_VERSION = "/api/v1";
 
@@ -29,11 +29,11 @@ instance.interceptors.response.use(
   },
   async error => {
     const { status, config } = error.response;
-    const refreshToken = localStorage.getItem("refreshToken");
+    const refreshToken = await getCookie("refreshToken", "");
 
     if (status === 401) {
       if (config.url !== "/auth/reissue") {
-        const newAccessToken = await reIssueAccessToken(refreshToken ?? "");
+        const newAccessToken = await reIssueAccessToken(refreshToken);
 
         if (newAccessToken) {
           localStorage.setItem("accessToken", newAccessToken);
