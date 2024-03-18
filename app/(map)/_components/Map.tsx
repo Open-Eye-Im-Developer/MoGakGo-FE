@@ -10,8 +10,6 @@ import { cn } from "@/app/_common/shadcn/utils";
 import {
   Carousel,
   CarouselApi,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/app/_common/shadcn/ui/carousel";
 
 import WithSearchTokens from "@/app/_common/components/WithSearchTokens";
@@ -160,8 +158,6 @@ function Map() {
             <EmptyCardList onClick={handleEmptyCardClose} />
           )}
         </div>
-        <CarouselPrevious className="left-10 hidden md:inline-flex" />
-        <CarouselNext className="right-10 hidden md:inline-flex" />
       </Carousel>
     </div>
   );
