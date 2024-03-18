@@ -24,15 +24,15 @@ export const NotificationTitle: {
   [key in NotificaitonTag]: { message: string; image: StaticImport };
 } = {
   REVIEW_REQUEST: {
-    message: "리뷰작성",
+    message: "리뷰 요청",
     image: ReviewImage,
   },
   REQUEST_ARRIVAL: {
-    message: "찔러보기 도착",
+    message: "찔러보기",
     image: RequestImage,
   },
   ACHIEVEMENT: {
-    message: "업적 달성",
+    message: "업적 겟또",
     image: AchievementImage,
   },
   MATCHING_SUCCESSED: {

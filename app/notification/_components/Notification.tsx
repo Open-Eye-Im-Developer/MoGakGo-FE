@@ -44,7 +44,7 @@ function Notification({ notification }: NotificationProps) {
       onClick={handleClickNotificationRedirect}
     >
       <div>
-        <div className="flex gap-1">
+        <div className="flex gap-3">
           <Image
             src={NotificationTitle[tag].image}
             alt={`${tag} image`}
@@ -55,7 +55,7 @@ function Notification({ notification }: NotificationProps) {
             {NotificationTitle[tag].message}
           </span>
         </div>
-        <p className="pl-6">{message}</p>
+        <p className="pl-8">{message}</p>
       </div>
       <div className="relative float-right">
         <time className="min-w-fit text-center text-sm text-gray-400">
