@@ -1,33 +1,5 @@
-export type WantedJobType =
-  | "BACKEND"
-  | "FRONTEND"
-  | "FULLSTACK"
-  | "ANDROID"
-  | "IOS"
-  | "MACHINE_LEARNING"
-  | "ARTIFICIAL_INTELLIGENCE"
-  | "DATA_ENGINEER"
-  | "DBA"
-  | "MOBILE_GAME"
-  | "SYSTEM_NETWORK"
-  | "SYSTEM_SW"
-  | "DEVOPS"
-  | "INTERNET_SECURITY"
-  | "EMBEDDED_SOFTWARE"
-  | "ROBOTICS_MIDDLEWARE"
-  | "QA"
-  | "IOT"
-  | "APPLICATION_SW"
-  | "BLOCKCHAIN"
-  | "PROJECT_MANAGEMENT"
-  | "WEB_PUBLISHING"
-  | "CROSS_PLATFORM"
-  | "VR_AR_3D"
-  | "ERP"
-  | "GRAPHICS";
-
-interface WantedJob {
-  id: WantedJobType;
+export interface WantedJob {
+  id: keyof typeof WANTED_JOB_LABELS;
   label: string;
 }
 
@@ -59,3 +31,32 @@ export const WANTED_JOB: WantedJob[] = [
   { id: "ERP", label: "ERP" },
   { id: "GRAPHICS", label: "그래픽스" },
 ];
+
+export const WANTED_JOB_LABELS = {
+  BACKEND: "서버/백엔드",
+  FRONTEND: "프론트엔드",
+  FULLSTACK: "풀스택",
+  ANDROID: "안드로이드",
+  IOS: "iOS",
+  MACHINE_LEARNING: "머신러닝",
+  ARTIFICIAL_INTELLIGENCE: "인공지능(AI)",
+  DATA_ENGINEER: "데이터 엔지니어링",
+  DBA: "DBA",
+  MOBILE_GAME: "모바일 게임",
+  SYSTEM_NETWORK: "시스템/네트워크",
+  SYSTEM_SW: "시스템 소프트웨어",
+  DEVOPS: "데브옵스",
+  INTERNET_SECURITY: "인터넷 보안",
+  EMBEDDED_SOFTWARE: "임베디드 소프트웨어",
+  ROBOTICS_MIDDLEWARE: "로보틱스 미들웨어",
+  QA: "QA",
+  IOT: "IoT",
+  APPLICATION_SW: "응용 소프트웨어",
+  BLOCKCHAIN: "블록체인",
+  PROJECT_MANAGEMENT: "PM",
+  WEB_PUBLISHING: "웹 퍼블리싱",
+  CROSS_PLATFORM: "크로스 플랫폼",
+  VR_AR_3D: "VR/AR/3D",
+  ERP: "ERP",
+  GRAPHICS: "그래픽스",
+} as const;

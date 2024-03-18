@@ -11,9 +11,10 @@ const textColor = "black";
 interface Props {
   regionCode: number;
   regionRank?: string[];
+  type?: "default" | "only-bounce";
 }
 
-function MapComponent({ regionCode, regionRank }: Props) {
+function MapComponent({ regionCode, regionRank, type = "default" }: Props) {
   useEffect(() => {
     if (!regionRank) return;
 
@@ -40,8 +41,16 @@ function MapComponent({ regionCode, regionRank }: Props) {
 
     const { bottom, top, right, left } = region.getBoundingClientRect();
     const { offsetWidth: width, offsetHeight: height } = document.body;
-    map.style.transform = `scale(2.5) translate(${width / 2 - (right + left) / 2}px, ${height / 2 - (bottom + top) / 2}px)`;
-    region.classList.add("animate-map-bounce");
+
+    switch (type) {
+      case "default":
+        map.style.transform = `scale(2.5) translate(${width / 2 - (right + left) / 2}px, ${height / 2 - (bottom + top) / 2}px)`;
+      // Fallthrough
+      case "only-bounce":
+        region.classList.add("animate-map-bounce");
+        break;
+      default:
+    }
   };
 
   return (
