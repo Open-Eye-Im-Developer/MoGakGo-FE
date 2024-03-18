@@ -29,7 +29,7 @@ function FormPlace(props: FormTagProps) {
       name="place"
       render={({ field }) => (
         <FormItem>
-          <FormLabel className="text-base">📍 장소</FormLabel>
+          <FormLabel className="text-base">장소</FormLabel>
           <FormControl>
             <>
               <Input
@@ -37,6 +37,7 @@ function FormPlace(props: FormTagProps) {
                 placeholder="장소를 입력하세요."
                 value={placeInput || ""}
                 onChangeCapture={handleChangePlace}
+                className="shadow-neo-thin"
               />
               <PlaceList
                 placeList={placeList}
