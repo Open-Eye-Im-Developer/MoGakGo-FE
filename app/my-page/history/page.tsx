@@ -35,38 +35,40 @@ function HistoryPage() {
     setCurrentTab(value as MatchStatus);
 
   return (
-    <main className="container flex min-h-screen max-w-2xl flex-col gap-8 bg-gray-50 pb-8 dark:bg-gray-950">
+    <>
       <StackNavigator content={"지난 만남 카드"} />
-      <Tabs
-        defaultValue={currentTab}
-        className="space-y-4"
-        onValueChange={handleChangeTab}
-      >
-        <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="ALL">전체</TabsTrigger>
-          <TabsTrigger value="PROGRESS">매칭중</TabsTrigger>
-          <TabsTrigger value="FINISHED">종료</TabsTrigger>
-          <TabsTrigger value="CANCELED">실패</TabsTrigger>
-        </TabsList>
-      </Tabs>
-      <section className="flex flex-col gap-2">
-        {projects
-          ? projects.map(el => <ProjectCard key={el.matchingId} data={el} />)
-          : null}
-        {isPending || isFetching
-          ? Array.from({ length: 5 }).map((_, i) => (
-              <ProjectCardSkeleton key={i} />
-            ))
-          : null}
-      </section>
-      <Button
-        className="w-full"
-        onClick={() => fetchNextPage()}
-        disabled={!hasNextPage || isFetching}
-      >
-        더보기
-      </Button>
-    </main>
+      <main className="container flex min-h-screen max-w-2xl flex-col gap-8 pb-8">
+        <Tabs
+          defaultValue={currentTab}
+          className="space-y-4"
+          onValueChange={handleChangeTab}
+        >
+          <TabsList className="grid w-full grid-cols-4">
+            <TabsTrigger value="ALL">전체</TabsTrigger>
+            <TabsTrigger value="PROGRESS">매칭중</TabsTrigger>
+            <TabsTrigger value="FINISHED">종료</TabsTrigger>
+            <TabsTrigger value="CANCELED">실패</TabsTrigger>
+          </TabsList>
+        </Tabs>
+        <section className="flex flex-col gap-2">
+          {projects
+            ? projects.map(el => <ProjectCard key={el.matchingId} data={el} />)
+            : null}
+          {isPending || isFetching
+            ? Array.from({ length: 5 }).map((_, i) => (
+                <ProjectCardSkeleton key={i} />
+              ))
+            : null}
+        </section>
+        <Button
+          className="w-full"
+          onClick={() => fetchNextPage()}
+          disabled={!hasNextPage || isFetching}
+        >
+          더보기
+        </Button>
+      </main>
+    </>
   );
 }
 

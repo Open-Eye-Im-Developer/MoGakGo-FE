@@ -1,28 +1,30 @@
 import { Skeleton } from "@/app/_common/shadcn/ui/skeleton";
 import { Progress } from "@/app/_common/shadcn/ui/progress";
 
-import { UserJandiRating } from "@/app/_common/types/user";
+import { useQueryUserData } from "../_hooks/useQueryUserData";
+import { useQueryJandiRating } from "../_hooks/useQueryJandiRating";
 
-interface JandiRatingProps {
-  data?: UserJandiRating;
-}
+function JandiRating() {
+  const { data: userData } = useQueryUserData();
+  const { data } = useQueryJandiRating(userData?.id);
 
-function JandiRating({ data }: JandiRatingProps) {
   return (
     <div className="flex w-full flex-col gap-4">
-      <div className="text-xl font-bold">🌲나의 잔디력</div>
-      <div className="flex flex-col gap-2">
-        {data ? (
-          <>
-            <Progress className="h-2.5" value={data.jandiRate} />
-            <div className="text-xs">{data.jandiRate}</div>
-          </>
-        ) : (
-          <>
-            <Skeleton className="h-[10px] w-full" />
-            <Skeleton className="h-[16px] w-[30px] rounded-none" />
-          </>
-        )}
+      <div className="text-md font-bold">나의 잔디력</div>
+      <div className="flex flex-grow items-center">
+        <div className="flex flex-grow flex-col gap-2">
+          {data ? (
+            <>
+              <Progress className="h-2.5" value={data.jandiRate} />
+              <div className="text-xs">{data.jandiRate}</div>
+            </>
+          ) : (
+            <>
+              <Skeleton className="h-[10px] w-full" />
+              <Skeleton className="h-[16px] w-[30px] rounded-none" />
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
