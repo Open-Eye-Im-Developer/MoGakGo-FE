@@ -38,7 +38,9 @@ export default function RootLayout({
             {children}
             <Toaster />
             <SVGProvider />
-            <Sonner position="bottom-center" />
+            <Sonner
+              position="top-center"
+            />
           </ThemeProvider>
         </ClientProvider>
         <Toaster />
