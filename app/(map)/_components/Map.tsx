@@ -134,8 +134,8 @@ function Map() {
       </div>
       <Carousel
         className={cn(
-          "z-60 h-screen w-screen transition-all delay-1000 duration-300",
-          isListShow ? "visible opacity-100" : "invisible opacity-0",
+          "z-60 h-screen w-screen transition-all delay-0 duration-300",
+          isListShow ? "visible opacity-100 delay-1000" : "invisible opacity-0",
         )}
         setApi={setCarouselApi}
       >
