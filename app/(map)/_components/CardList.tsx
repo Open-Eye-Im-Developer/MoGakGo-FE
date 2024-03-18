@@ -5,6 +5,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/app/_common/shadcn/ui/carousel";
+import { Button } from "@/app/_common/shadcn/ui/button";
 
 import { Project } from "@/app/_common/types/project";
 import { Profile } from "@/app/_common/types/profile";
@@ -16,9 +17,10 @@ interface Props {
     projectList: Project[];
     profileList: Profile[];
   };
+  onClick: () => void;
 }
 
-function CardList({ cardList }: Props) {
+function CardList({ cardList, onClick }: Props) {
   const { projectList, profileList } = cardList;
 
   return (
@@ -41,6 +43,9 @@ function CardList({ cardList }: Props) {
       </CarouselContent>
       <CarouselPrevious className="left-10 hidden md:inline-flex" />
       <CarouselNext className="right-10 hidden md:inline-flex" />
+      <Button onClick={onClick} className="absolute bottom-10">
+        돌아가기
+      </Button>
     </>
   );
 }
