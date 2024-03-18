@@ -29,6 +29,8 @@ export const getSignUpUser = async () => {
 
 export const reIssueAccessToken = async (refreshToken: string) => {
   try {
+    if (refreshToken === "") return navigate("/login");
+
     const { data } = await instance.post<reIssueAccessTokenResponse>(
       "/auth/reissue",
       {
