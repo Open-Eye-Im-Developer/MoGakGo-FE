@@ -1,5 +1,6 @@
 "use client";
 import { useParams } from "next/navigation";
+import Link from "next/link";
 import dayjs from "dayjs";
 
 import formatMeetingTime from "@/app/project/_utils/formatMeetingTime";
@@ -16,7 +17,7 @@ import {
 
 function ProjectInfo() {
   const { id } = useParams<{ id: string }>();
-  const KAKAO_MAP_URL = "https://map.kakao.com/link/map";
+
   const { chatInfo, isLoading } = useGetChatInfo(id);
 
   if (isLoading)
@@ -53,12 +54,12 @@ function ProjectInfo() {
         <AccordionTrigger className="p-4 hover:no-underline">
           <div className="flex gap-2">
             <span>📍 {meetDetail}</span>
-            <a
+            <Link
               target="_blank"
-              href={`${KAKAO_MAP_URL}/${meetLocationLatitude},${meetLocationLongitude}`}
+              href={`${process.env.NEXT_PUBLIC_KAKAO_MAP_URL}/${meetLocationLatitude},${meetLocationLongitude}`}
             >
               <Badge className="bg-[#E24A57]">장소보기</Badge>
-            </a>
+            </Link>
           </div>
         </AccordionTrigger>
         <AccordionContent className="px-4 text-gray-500">
