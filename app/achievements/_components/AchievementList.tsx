@@ -1,10 +1,11 @@
 "use client";
 
-import { toast } from "sonner";
 import { IconLock } from "@tabler/icons-react";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 
 import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
+
+import { toast } from "@/app/_common/utils/toast";
 
 import { useQueryAchievements } from "../_hooks/useQueryAchievements";
 import AchievementItem from "./AchievementItem";
@@ -17,8 +18,8 @@ function AchievementList() {
     return <LoadingSpinner />;
   }
 
-  const hanldeClickMyAchievement = () => {
-    toast.message("아직 설정된 업적이 없어요.");
+  const handleClickMyAchievement = () => {
+    toast.info("아직 설정된 업적이 없어요.");
   };
 
   return (
@@ -40,7 +41,7 @@ function AchievementList() {
         ) : (
           <div
             className="w-[100px] rounded-xl bg-secondary text-white"
-            onClick={hanldeClickMyAchievement}
+            onClick={handleClickMyAchievement}
           >
             <AspectRatio
               ratio={1 / 1}

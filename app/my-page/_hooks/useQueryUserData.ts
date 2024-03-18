@@ -3,11 +3,9 @@ import { useQuery } from "@tanstack/react-query";
 import { getSignUpUser } from "@/app/_common/api/auth";
 
 export const useQueryUserData = () => {
-  const { data, isLoading, isError } = useQuery({
+  return useQuery({
     queryFn: getSignUpUser,
-    queryKey: ["getSignUpUser"],
     throwOnError: false,
+    queryKey: ["getSignUpUser"],
   });
-
-  return { data, isLoading, isError };
 };

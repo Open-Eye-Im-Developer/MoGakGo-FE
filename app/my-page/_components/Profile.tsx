@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { IconPencil } from "@tabler/icons-react";
 
 import { SignUpUser } from "@/app/signup/_type/signup";
@@ -26,8 +27,16 @@ export function ProfileLayout({ data }: ProfileLayoutProps) {
   return (
     <div className="flex max-w-2xl flex-col items-center gap-1.5">
       <div className="relative h-52 w-52">
-        {/* 프로필 */}
-        <div className="h-full w-full bg-slate-200"></div>
+        {data.avatarUrl ? (
+          <Image
+            src={data.avatarUrl}
+            alt={`${data.username}'s avatar image`}
+            width={208}
+            height={208}
+          />
+        ) : (
+          <div className="h-full w-full bg-slate-200"></div>
+        )}
         <Link href="/my-page/edit">
           <div className="absolute bottom-0 right-0 inline-block bg-primary p-2 text-white">
             <IconPencil />

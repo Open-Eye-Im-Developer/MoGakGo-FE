@@ -1,4 +1,3 @@
-import { toast } from "sonner";
 import { useState } from "react";
 import { AxiosError } from "axios";
 import { useMutation } from "@tanstack/react-query";
@@ -7,6 +6,8 @@ import { deleteLikeProfile, postLikeProfile } from "@/app/_common/api/profile";
 
 import { ResponseError } from "@/app/_common/types/response";
 import { ProfileLikeInfo } from "@/app/_common/types/profile";
+
+import { toast } from "@/app/_common/utils/toast";
 
 interface ToggleLike {
   isLiked: boolean;

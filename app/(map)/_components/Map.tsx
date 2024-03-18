@@ -1,6 +1,5 @@
 "use client";
 
-import { toast } from "sonner";
 import { MouseEvent, useEffect, useRef, useState } from "react";
 import { EmblaCarouselType } from "embla-carousel";
 
@@ -21,6 +20,7 @@ import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
 
 import REGION_CODE from "@/app/_common/constants/regionCode";
 
+import { toast } from "@/app/_common/utils/toast";
 import { navigate } from "@/app/_common/utils/redirect";
 
 import { formatRegionName } from "../_utils/formatRegionName";
@@ -59,7 +59,6 @@ function Map() {
 
   useEffect(() => {
     if (!areaCode) return;
-
     toast.info("내가 위치한 지역으로 이동합니다.");
     setRegionCode(areaCode);
     const regionName = formatRegionName(areaCode);
@@ -89,9 +88,6 @@ function Map() {
         action: {
           label: "로그인하기",
           onClick: () => navigate("/login"),
-        },
-        actionButtonStyle: {
-          backgroundColor: "#0973DC",
         },
       });
       return;
@@ -138,7 +134,7 @@ function Map() {
       <div
         id="map-wrap"
         onClick={handleRegionClick}
-        className="absolute z-0 flex h-screen w-screen touch-none items-center justify-center bg-sky transition-all duration-1000"
+        className="absolute z-0 flex h-screen w-screen touch-none items-center justify-center transition-all duration-1000"
       >
         <MapComponent
           regionCode={regionCode}
@@ -158,7 +154,7 @@ function Map() {
           className="flex h-full w-full flex-col items-center justify-center"
         >
           {cardList.projectList.length !== 0 ||
-          cardList.profileList.length !== 0 ? (
+            cardList.profileList.length !== 0 ? (
             <CardList cardList={cardList} />
           ) : (
             <EmptyCardList onClick={handleEmptyCardClose} />
