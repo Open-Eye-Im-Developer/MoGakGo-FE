@@ -7,6 +7,8 @@ import {
 } from "@/app/_common/shadcn/ui/carousel";
 import { Button } from "@/app/_common/shadcn/ui/button";
 
+import Icon from "@/app/_common/components/Icon";
+
 import { Project } from "@/app/_common/types/project";
 import { Profile } from "@/app/_common/types/profile";
 
@@ -49,14 +51,14 @@ function CardList({ cardList, onClick }: Props) {
         >
           돌아가기
         </Button>
+        <Button
+          onClick={onClick}
+          className="absolute hidden h-12 w-12 items-center justify-center rounded-full p-0 short:left-1 short:top-14 short:inline-flex short:translate-x-0"
+        >
+          <Icon id="arrow-left-turn" size={24} />
+        </Button>
         <CarouselNext className="right-[-80px] short:right-1" />
       </div>
-      <Button
-        onClick={onClick}
-        className="short:inline-block absolute bottom-[4px] left-1/2 hidden -translate-x-1/2"
-      >
-        돌아가기
-      </Button>
     </>
   );
 }
