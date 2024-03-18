@@ -21,7 +21,6 @@ export const toast = {
         label={data?.action?.label}
         onClick={data?.action?.onClick}
       />,
-      { unstyled: true },
     );
   },
   error(title: string, data?: SonnerData) {
@@ -33,7 +32,6 @@ export const toast = {
         label={data?.action?.label}
         onClick={data?.action?.onClick}
       />,
-      { unstyled: true },
     );
   },
   warning(title: string, data?: SonnerData) {
@@ -45,7 +43,6 @@ export const toast = {
         label={data?.action?.label}
         onClick={data?.action?.onClick}
       />,
-      { unstyled: true },
     );
   },
   info(title: string, data?: SonnerData) {
@@ -57,7 +54,6 @@ export const toast = {
         label={data?.action?.label}
         onClick={data?.action?.onClick}
       />,
-      { unstyled: true },
     );
   },
 };

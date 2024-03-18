@@ -42,6 +42,7 @@ export default function RootLayout({
               position="top-center"
               toastOptions={{
                 style: { background: "transparent" },
+                unstyled: true,
               }}
             />
           </ThemeProvider>
