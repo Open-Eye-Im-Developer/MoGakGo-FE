@@ -1,7 +1,7 @@
-import { IconHeartFilled } from "@tabler/icons-react";
-
 import { cn } from "@/app/_common/shadcn/utils";
 import { Button } from "@/app/_common/shadcn/ui/button";
+
+import Icon from "@/app/_common/components/Icon";
 
 interface ButtonLikeProps {
   onClick: () => void;
@@ -12,12 +12,9 @@ function ButtonLike({ onClick, isLiked }: ButtonLikeProps) {
   return (
     <Button
       onClick={onClick}
-      className={cn(
-        "mt-0 flex items-center justify-center bg-[#F9679C] p-2 hover:bg-[#F9679C]",
-        isLiked ? "text-secondary" : "text-white",
-      )}
+      className={cn("w-full", isLiked ? "text-neoRed" : "text-black")}
     >
-      <IconHeartFilled />
+      <Icon id="follow-fulfill" />
     </Button>
   );
 }

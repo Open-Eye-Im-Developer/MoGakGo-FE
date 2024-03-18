@@ -24,24 +24,24 @@ function SignupCompleteModal() {
   };
 
   return (
-    <section className="flex flex-col gap-4 p-4">
+    <section className="flex flex-col items-center space-y-6 px-2 py-4">
       <header>
-        <h2 className="text-2xl font-semibold text-primary">🎉 가입 완료</h2>
-        <small className="text-sm text-gray-500">
+        <h2 className="text-center text-xl">🎉 가입 완료</h2>
+        <small className="text-xs text-gray-500">
           환영합니다! 회원가입이 완료되었습니다.
         </small>
       </header>
       <ProfileCard />
-      <footer className="flex justify-end">
-        <Button
-          type="button"
-          onClick={handleCompleted}
-          id="signup"
-          onMouseEnter={handlePresetPosition}
-        >
-          완료
-        </Button>
-      </footer>
+      <Button
+        type="button"
+        variant={"outline"}
+        className="w-[80%] bg-neoBlue text-white"
+        onClick={handleCompleted}
+        id="signup"
+        onMouseEnter={handlePresetPosition}
+      >
+        시작하기
+      </Button>
     </section>
   );
 }

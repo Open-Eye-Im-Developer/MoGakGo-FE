@@ -46,8 +46,8 @@ function ProjectCardContainer({ project }: Props) {
   }, [data]);
 
   return (
-    <Tabs defaultValue="card" className="h-[550px] w-[330px] sm:w-[450px]">
-      <TabsList className="glass-morphism grid w-full grid-cols-2">
+    <Tabs defaultValue="card" className="h-[600px] w-[330px] sm:w-[450px]">
+      <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="card">Card</TabsTrigger>
         <TabsTrigger value="chat">Chat</TabsTrigger>
       </TabsList>

@@ -1,8 +1,9 @@
-import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { postReview } from "@/app/_common/api/project";
+
+import { toast } from "@/app/_common/utils/toast";
 
 export const useMutationReview = () => {
   const router = useRouter();

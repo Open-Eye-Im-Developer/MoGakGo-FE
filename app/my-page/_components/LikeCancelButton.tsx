@@ -1,5 +1,3 @@
-import { toast } from "sonner";
-
 import { useQuerySignUpUser } from "@/app/signup/_hooks/useQuerySignUpUser";
 import { Button } from "@/app/_common/shadcn/ui/button";
 import {
@@ -13,6 +11,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/app/_common/shadcn/ui/alert-dialog";
+
+import { toast } from "@/app/_common/utils/toast";
 
 import { useMutationCancelLike } from "../_hooks/useMutationCancelLike";
 

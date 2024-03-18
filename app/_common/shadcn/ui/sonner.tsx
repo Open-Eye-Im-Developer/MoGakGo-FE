@@ -1,5 +1,6 @@
 "use client";
 
+// eslint-disable-next-line no-restricted-imports
 import { Toaster as Sonner } from "sonner";
 import { useTheme } from "next-themes";
 
