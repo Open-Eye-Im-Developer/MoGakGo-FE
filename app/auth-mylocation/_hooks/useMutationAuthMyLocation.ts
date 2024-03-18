@@ -1,9 +1,10 @@
-import { toast } from "sonner";
 import { useMutation } from "@tanstack/react-query";
 
 import { patchGeoCertificate } from "@/app/_common/api/location";
 
 import { CertificateArea } from "@/app/_common/types/position";
+
+import { toast } from "@/app/_common/utils/toast";
 
 export const useMutationAuthMyLocation = () => {
   const { mutate } = useMutation({

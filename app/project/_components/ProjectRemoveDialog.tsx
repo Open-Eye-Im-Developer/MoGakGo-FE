@@ -3,6 +3,7 @@
 import React from "react";
 import { IconLogout } from "@tabler/icons-react";
 
+import { useMatchingStore } from "@/app/_common/store/useMatchingStore";
 import { Button } from "@/app/_common/shadcn/ui/button";
 import {
   AlertDialog,
@@ -23,27 +24,29 @@ import useCacnelMatchingMutation from "../_hooks/useCancelMatchingMutation";
 
 interface ProjectRemoveDialogProps {
   projectId: number;
-  isMatchedProject: boolean;
 }
+
 function ProjectRemoveDialog(props: ProjectRemoveDialogProps) {
-  const { projectId, isMatchedProject } = props;
-  const { createCancelMatching } = useCacnelMatchingMutation(52); // TODO: 매칭 id 받아오기
+  const { projectId } = props;
+  const { matchingId } = useMatchingStore();
+  const { createCancelMatching } = useCacnelMatchingMutation(matchingId!);
   const { createCancelProject } = useCancelProjectMutation(projectId);
+  const isMatchedProject = matchingId !== null;
 
   const triggerComponent = isMatchedProject ? (
     <Button>
       <IconLogout />
     </Button>
   ) : (
-    <Button>삭제</Button>
+    <Button>취소</Button>
   );
 
   const titleComponent = isMatchedProject
     ? "정말 매칭을 취소하시겠어요?"
-    : "정말 프로젝트를 삭제하시겠어요?";
+    : "정말 프로젝트를 취소하시겠어요?";
   const descriptionComponent = isMatchedProject
     ? "한 번 취소된 매칭은 되돌릴 수 없어요!"
-    : "한 번 삭제된 프로젝트는 되돌릴 수 없어요!";
+    : "한 번 취소된 프로젝트는 되돌릴 수 없어요!";
 
   const handleCancelProject = async () => {
     createCancelProject();

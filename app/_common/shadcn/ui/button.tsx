@@ -10,11 +10,11 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "rounded-md border border-black bg-white px-10 py-3 font-bold shadow-neo transition-all hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none",
+          "rounded-md border border-black bg-white px-10 py-3 font-bold shadow-neo transition-all active:translate-x-[3px] active:translate-y-[3px] active:shadow-none ",
         destructive:
           "bg-red-500 text-slate-50 hover:bg-red-500/90 dark:bg-red-900 dark:text-slate-50 dark:hover:bg-red-900/90",
         outline:
-          "rounded-md border-2 border-black bg-white px-10 py-3 font-bold shadow-neo-b transition-all hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none",
+          "rounded-md border-2 border-black bg-white px-10 py-3 font-bold shadow-neo-b transition-all active:translate-x-[3px] active:translate-y-[3px] active:shadow-none",
         secondary:
           "bg-slate-100 text-slate-900 hover:bg-slate-100/80 dark:bg-slate-800 dark:text-slate-50 dark:hover:bg-slate-800/80",
         ghost:

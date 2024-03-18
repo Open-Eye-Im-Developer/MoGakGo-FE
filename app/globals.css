@@ -7,6 +7,11 @@
   src: url("/Galmuri9.woff2");
 }
 
+@font-face {
+  font-family: "RoboRobo";
+  src: url("/pixelroborobo.otf");
+}
+
 @layer components {
   .card {
     @apply glass-backdrop rounded-[26px] bg-white shadow-[35px_35px_68px_0px_rgba(120,120,120,0.5),inset_-5px_-5px_16px_0px_rgba(120,120,120,0.6),inset_0px_11px_28px_0px_rgb(255,255,255)] backdrop-blur-[5px];
@@ -21,6 +26,18 @@
 
   .neo-hover {
     @apply translate-x-[3px] translate-y-[3px] shadow-none transition-all duration-150 ease-in-out;
+  }
+
+  .logo-vertical {
+    @apply absolute left-[15px] top-[15px] z-50 h-full w-[20px] bg-[url("/images/serviceLogoVertical.png")] bg-[length:15px] bg-no-repeat md:bg-[length:20px];
+  }
+
+  .map-background {
+    @apply before:animate-slide-infinite after:animate-slide-infinite absolute h-full w-full overflow-hidden before:absolute before:right-[100%] before:h-full before:w-full before:bg-[url("/images/mapBackgroundImage.png")] before:bg-[length:100%] before:content-[""] after:absolute after:h-full after:w-full after:bg-[url("/images/mapBackgroundImage.png")] after:bg-[length:100%] after:content-[""];
+  }
+
+  .main-logo {
+    @apply before:animate-slide-infinite after:animate-slide-infinite absolute  z-0 h-full w-full overflow-hidden before:absolute before:right-[100%] before:h-full before:w-full before:bg-[url("/images/main_logo.webp")] before:bg-[length:100%] before:content-[""] after:absolute after:h-full after:w-full after:bg-[url("/images/main_logo.webp")] after:bg-[length:100%] after:content-[""];
   }
 }
 

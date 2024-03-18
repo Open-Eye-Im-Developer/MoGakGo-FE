@@ -60,56 +60,67 @@ function ReviewForm() {
   return (
     <Form {...form}>
       <form
-        className="flex h-full flex-col place-content-center p-4"
+        className="z-10 flex flex-col place-content-center rounded-md border-2 border-black bg-white p-6 shadow-neo"
         onSubmit={form.handleSubmit(onSubmitReview)}
       >
-        <header>
-          <h2 className="text-2xl font-semibold text-primary">이 친구 어때?</h2>
-          <FormDescription className="text-gray-500">
-            오늘의 만난 친구에 대해서 리뷰를 남겨주세요.
-          </FormDescription>
-        </header>
         <FormField
           name="rating"
           control={form.control}
           render={({ field }) => (
-            <FormItem className="space-y-5">
-              <FormControl className="flex w-full items-center px-2">
-                <ul className="flex w-full justify-center gap-5 py-5">
-                  {Ratings.map(({ type, content }, index) => (
-                    <li
-                      className="flex cursor-pointer flex-col items-center"
-                      key={index}
-                      id={index.toString()}
-                      onClick={handleClickRating}
-                    >
-                      <RatingItem
-                        type={type}
-                        checked={field.value === index + 1}
-                        onChangeChecked={() =>
-                          form.setValue("rating", index + 1)
-                        }
-                      />
-                      <small className="text-[0.7rem] text-gray-600">
-                        {content}
-                      </small>
-                    </li>
-                  ))}
-                </ul>
-              </FormControl>
-              <small className="my-5 flex w-full flex-col text-end text-gray-500">
-                <p className="text-xs">
-                  여러분의 리뷰가 상대방의 잔디력에 영향을 줍니다.
-                </p>
-                <p className="text-xs">신중하게 결정해주세요!</p>
-              </small>
-              <footer className="flex items-end justify-between">
-                <small className="cursor-pointer text-gray-500 hover:font-semibold">
-                  <Link href={"/"}>리뷰 안하기</Link>
-                </small>
-                <Button type="submit" disabled={!field.value}>
-                  리뷰 저장하기
-                </Button>
+            <FormItem className="space-y-14">
+              <div className="space-y-2">
+                <header className="space-y-1 text-left">
+                  <h2 className="text-xl text-black">리뷰 남기기</h2>
+                  <FormDescription className="text-xs text-gray-500">
+                    오늘의 만난 친구에 대해서 리뷰를 남겨주세요.
+                  </FormDescription>
+                </header>
+                <section className="sapce-y-1">
+                  <FormControl className="flex w-full items-center">
+                    <ul className="flex w-full justify-center gap-5 pt-5">
+                      {Ratings.map(({ type, content }, index) => (
+                        <li
+                          className="flex cursor-pointer flex-col items-center gap-1"
+                          key={index}
+                          id={index.toString()}
+                          onClick={handleClickRating}
+                        >
+                          <RatingItem
+                            type={type}
+                            checked={field.value === index + 1}
+                            onChangeChecked={() =>
+                              form.setValue("rating", index + 1)
+                            }
+                          />
+                          <small className="text-nowrap text-[0.6rem] text-gray-500">
+                            {content}
+                          </small>
+                        </li>
+                      ))}
+                    </ul>
+                  </FormControl>
+                  <small className="my-5 block w-full text-end text-neoYellow">
+                    <p className="text-xs">
+                      여러분의 리뷰가 상대방의 잔디력에 영향을 줍니다.
+                    </p>
+                    <p className="text-xs">신중하게 결정해주세요!</p>
+                  </small>
+                </section>
+              </div>
+              <footer className="flex flex-col items-end justify-between pt-10">
+                <section className="flex w-full items-center justify-between">
+                  <small className="cursor-pointer text-gray-500 hover:text-neoRed">
+                    <Link href={"/"}>리뷰 안하기</Link>
+                  </small>
+                  <Button
+                    type="submit"
+                    disabled={!field.value}
+                    variant={"outline"}
+                    className="border-2 border-white bg-neoBlue text-white"
+                  >
+                    저장하기
+                  </Button>
+                </section>
               </footer>
             </FormItem>
           )}

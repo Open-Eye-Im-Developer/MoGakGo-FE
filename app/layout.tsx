@@ -1,11 +1,12 @@
 import "./globals.css";
 
-import { Toaster as Sonner } from "sonner";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
 
 import { Toaster } from "./_common/shadcn/ui/toaster";
+import { Toaster as Sonner } from "./_common/shadcn/ui/sonner";
 import { ThemeProvider } from "./_common/components/theme-provider";
+import SVGProvider from "./_common/components/SVGProvider";
 import ClientProvider from "./_common/components/ClientProvider";
 
 import type { Metadata } from "next";
@@ -34,9 +35,10 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-              {children}
+            {children}
             <Toaster />
-            <Sonner richColors position="bottom-center" />
+            <SVGProvider />
+            <Sonner position="bottom-center" />
           </ThemeProvider>
         </ClientProvider>
         <Toaster />
