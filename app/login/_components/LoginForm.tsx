@@ -1,11 +1,34 @@
 "use client";
 
+import { useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
+import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
+
+import { useMutationLogin } from "../_hooks/useMutationLogin";
 import StartWithGithubButton from "./StartWithGithubButton";
 import LoginLogo from "./LoginLogo";
 
 function LoginForm() {
+  const code = useSearchParams().get("code");
+  const { mutate } = useMutationLogin();
+
+  useEffect(() => {
+    if (!code) return;
+
+    mutate(code);
+  }, [mutate, code]);
+
+  if (code)
+    return (
+      <LoadingSpinner
+        width="100%"
+        height="100%"
+        className="flex h-screen w-full place-content-center"
+      />
+    );
+
   return (
     <form className="mt-16 flex w-full flex-col place-items-center space-y-16">
       <div>
