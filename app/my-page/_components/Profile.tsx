@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { SignUpUser } from "@/app/signup/_type/signup";
+import { useQueryAchievements } from "@/app/achievements/_hooks/useQueryAchievements";
 import { Skeleton } from "@/app/_common/shadcn/ui/skeleton";
 import { Button } from "@/app/_common/shadcn/ui/button";
 import { Badge } from "@/app/_common/shadcn/ui/badge";
@@ -12,22 +13,28 @@ import {
 
 import { WANTED_JOB } from "@/app/_common/constants/wantedJob.constants";
 
+import { Achievement } from "@/app/_common/types/user";
+
 import { useQueryUserData } from "../_hooks/useQueryUserData";
 
 function Profile() {
   const { data } = useQueryUserData();
+  const { myAchievement } = useQueryAchievements();
 
   if (!data) return <ProfileSkeleton />;
-  return <ProfileLayout data={data} />;
+  return <ProfileLayout data={data} myAchievement={myAchievement} />;
 }
 
 export default Profile;
 
 interface ProfileLayoutProps {
   data: SignUpUser;
+  myAchievement?: Achievement | null;
 }
 
-export function ProfileLayout({ data }: ProfileLayoutProps) {
+export function ProfileLayout(props: ProfileLayoutProps) {
+  const { data, myAchievement } = props;
+
   return (
     <div className="flex max-w-2xl flex-col gap-8">
       <div className="flex gap-6">
@@ -38,9 +45,11 @@ export function ProfileLayout({ data }: ProfileLayoutProps) {
         <div className="flex flex-grow flex-col gap-2">
           <div className="flex flex-col gap-1">
             <div className="text-lg font-bold">{data.username}</div>
-            <div className="text-xs text-orange-400">
-              {data.achievementTitle}
-            </div>
+            {myAchievement ? (
+              <div className="text-xs text-orange-400">
+                {myAchievement.title}
+              </div>
+            ) : null}
           </div>
           <div className="text-xs text-gray-400">
             {!data.bio || data.bio.trim().length === 0
