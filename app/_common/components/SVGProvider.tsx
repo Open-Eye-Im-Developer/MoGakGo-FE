@@ -6,6 +6,17 @@ import WithOnMounted from "../hoc/WithOnMounted";
 
 const spriteSVGCode = (
   <svg xmlns="http://www.w3.org/2000/svg" className="hidden">
+    <symbol
+      id="arrow-left-turn"
+      viewBox="0 0 20 18"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M18.3801 5.19012H16.8601V3.67012H7.71009V0.620117H6.19009V2.14012H4.67009V3.67012H3.14009V5.19012H1.62009V6.71012H0.0900879V8.24012H1.62009V9.76012H3.14009V11.2901H4.67009V12.8101H6.19009V14.3301H7.71009V11.2901H13.8101V12.8101H15.3301V14.3301H13.8101V15.8601H12.2901V17.3801H15.3301V15.8601H18.3801V14.3301H19.9001V6.71012H18.3801V5.19012Z"
+        fill="#000001"
+      />
+    </symbol>
     <symbol id="chevron-right" viewBox="0 0 24 24">
       <path
         d="M8 5v2h2V5H8zm4 4V7h-2v2h2zm2 2V9h-2v2h2zm0 2h2v-2h-2v2zm-2 2v-2h2v2h-2zm0 0h-2v2h2v-2zm-4 4v-2h2v2H8z"
