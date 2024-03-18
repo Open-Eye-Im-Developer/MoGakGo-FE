@@ -1,3 +1,5 @@
+import { WantedJob } from "@/app/_common/constants/wantedJob";
+
 interface Form {
   place: string;
   startHour: string;
@@ -40,7 +42,7 @@ interface Profile {
   jandiRate?: number;
   achievementTitle?: string;
   developLanguages?: string[];
-  wantedJobs?: string[];
+  wantedJobs?: WantedJob[];
 }
 
 interface RequestList {
