@@ -4,8 +4,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { deleteUser } from "@/app/_common/api/auth";
 
-import { deleteCookie } from "../../utils/cookie";
 import { toast } from "../../utils/toast";
+import { deleteCookie } from "../../utils/cookie";
 
 export const useDeleteUser = () => {
   const queryClient = useQueryClient();
