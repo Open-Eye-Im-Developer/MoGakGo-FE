@@ -70,7 +70,7 @@ function ProjectCardFront(props: CardFrontProps) {
   return (
     <Card
       className={cn(
-        `absolute inset-0 left-0 top-0 [backface-visibility:hidden]`,
+        `absolute inset-0 left-0 top-0 flex flex-col [backface-visibility:hidden]`,
         initialRotate ? "[transform:rotateY(180deg)]" : "",
       )}
     >
@@ -106,7 +106,7 @@ function ProjectCardFront(props: CardFrontProps) {
           </Link>
         </CardDescription>
       </CardHeader>
-      <CardContent className="flex flex-col items-center gap-8 px-3 py-2">
+      <CardContent className="flex flex-col items-center gap-8 px-3 py-2 grow">
         <div className="flex w-full flex-col gap-3">
           <div className="flex w-full justify-between ">
             <div className="relative ml-2 rounded-full">

@@ -23,7 +23,7 @@ function DialogMoreInfo(props: DialogMoreInfoProps) {
         </Button>
       </DialogTrigger>
       <DialogContent className="h-[600px] w-[330px] rounded-lg p-0 sm:w-[450px]">
-        <ProfileCard profile={profile} />
+        <ProfileCard profile={profile} isBehind={false} />
       </DialogContent>
     </Dialog>
   );
