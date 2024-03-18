@@ -56,7 +56,7 @@ function ProjectInfo() {
             <span>📍 {meetDetail}</span>
             <Link
               target="_blank"
-              href={`${process.env.NEXT_PUBLIC_KAKAO_MAP_URL}/${meetLocationLatitude},${meetLocationLongitude}`}
+              href={`${process.env.NEXT_PUBLIC_KAKAO_MAP_URL}/${meetLocationLongitude},${meetLocationLatitude}`}
             >
               <Badge className="bg-[#E24A57]">장소보기</Badge>
             </Link>
