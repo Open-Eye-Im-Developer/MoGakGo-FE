@@ -10,6 +10,8 @@ import { Badge } from "@/app/_common/shadcn/ui/badge";
 
 import Icon from "@/app/_common/components/Icon";
 
+import { WANTED_JOB_LABELS } from "@/app/_common/constants/wantedJob";
+
 import { WantedJobs } from "@/app/_common/types/user";
 
 type InfoType = "LANG" | "INTEREST";
@@ -40,7 +42,9 @@ function InfoPopover(props: InfoPopoverProps) {
         <main className="flex flex-wrap gap-1">
           {infoList!.map(info => (
             <Badge key={info} variant="outline">
-              {info}
+              {type === "LANG"
+                ? info
+                : WANTED_JOB_LABELS[info as keyof typeof WANTED_JOB_LABELS]}
             </Badge>
           ))}
         </main>
