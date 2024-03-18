@@ -7,7 +7,7 @@ import { CertificateArea } from "@/app/_common/types/position";
 import { toast } from "@/app/_common/utils/toast";
 
 export const useMutationAuthMyLocation = () => {
-  const { mutate } = useMutation({
+  const { mutate, isSuccess } = useMutation({
     mutationFn: (data: CertificateArea) => patchGeoCertificate(data),
     onSuccess: () => {
       toast.success("내 위치 인증이 완료되었습니다.");
@@ -17,5 +17,5 @@ export const useMutationAuthMyLocation = () => {
     },
   });
 
-  return { mutate };
+  return { mutate, isSuccess };
 };

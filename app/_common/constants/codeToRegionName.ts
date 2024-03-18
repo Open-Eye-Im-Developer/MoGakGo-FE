@@ -1,5 +1,7 @@
+import { Region } from "../types/user";
+
 interface CodeRegion {
-  [key: number]: string;
+  [key: number]: Region;
 }
 
 export const CODE_TO_REGION_NAME: CodeRegion = {
