@@ -17,9 +17,9 @@ export async function setCookie<T>(
   }
 }
 
-export function getCookie<T>(key: string): T | undefined;
-export function getCookie<T>(key: string, defaultValue: T): T;
-export async function getCookie<T>(key: string, defaultValue?: T) {
+export function getCookie<T>(key: string): Promise<T> | undefined;
+export function getCookie<T>(key: string, defaultValue: T): Promise<T>;
+export async function getCookie<T>(key: string, defaultValue?: Promise<T>) {
   try {
     const data = cookieStore.get(key)?.value;
     if (!data) return defaultValue;

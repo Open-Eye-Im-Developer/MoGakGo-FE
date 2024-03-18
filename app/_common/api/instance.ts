@@ -29,7 +29,7 @@ instance.interceptors.response.use(
   },
   async error => {
     const { status, config } = error.response;
-    const refreshToken = getCookie("refreshToken", "");
+    const refreshToken = await getCookie("refreshToken", "");
 
     if (status === 401) {
       if (config.url !== "/auth/reissue") {
