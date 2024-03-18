@@ -1,9 +1,10 @@
-import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { deleteUser } from "@/app/_common/api/auth";
+
+import { toast } from "../../utils/toast";
 
 export const useDeleteUser = () => {
   const queryClient = useQueryClient();

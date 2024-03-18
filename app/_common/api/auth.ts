@@ -1,8 +1,7 @@
-import { toast } from "sonner";
-
 import { SignupRequest } from "@/app/signup/_type/signup";
 import { reIssueAccessTokenResponse } from "@/app/login/_types/login.types";
 
+import { toast } from "../utils/toast";
 import { navigate } from "../utils/redirect";
 import { User } from "../types/user";
 import { instance } from "../api/instance";

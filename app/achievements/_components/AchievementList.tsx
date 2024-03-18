@@ -1,10 +1,11 @@
 "use client";
 
-import { toast } from "sonner";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 
 import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
 import Icon from "@/app/_common/components/Icon";
+
+import { toast } from "@/app/_common/utils/toast";
 
 import { useQueryAchievements } from "../_hooks/useQueryAchievements";
 import MyAchievement from "./MyAchievement";
@@ -14,8 +15,8 @@ import AchievementItem from "./AchievementItem";
 function AchievementList() {
   const { achievements, myAchievement } = useQueryAchievements();
 
-  const hanldeClickMyAchievement = () => {
-    toast.message("아직 설정된 업적이 없어요.");
+  const handleClickMyAchievement = () => {
+    toast.info("아직 설정된 업적이 없어요.");
   };
 
   if (!achievements) return <LoadingSpinner />;

@@ -22,7 +22,7 @@ function ProjectChatCard(props: ChatCardProps) {
   const { messages } = props;
 
   return (
-    <Card className="glass-morphism overflow-hidden border-none shadow-md">
+    <Card className="overflow-hidden">
       <CardHeader className="border-b border-black py-4">
         <CardTitle className="text-base">📍 맥심플랜트 이태원점</CardTitle>
       </CardHeader>

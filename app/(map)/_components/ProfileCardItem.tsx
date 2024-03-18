@@ -2,11 +2,11 @@
 
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 
+import InfoPopover from "@/app/project/_components/InfoPopover";
 import ButtonLike from "@/app/project/_components/ButtonLike";
 import { useAuthStore } from "@/app/_common/store/useAuthStore";
-import { Progress } from "@/app/_common/shadcn/ui/progress";
+import { YProgress } from "@/app/_common/shadcn/ui/y-progress";
 import {
   Card,
   CardContent,
@@ -14,7 +14,13 @@ import {
   CardFooter,
   CardHeader,
 } from "@/app/_common/shadcn/ui/card";
-import { Badge as Tag } from "@/app/_common/shadcn/ui/badge";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/app/_common/shadcn/ui/avatar";
+
+import Icon from "@/app/_common/components/Icon";
 
 import { Profile } from "@/app/_common/types/profile";
 
@@ -52,59 +58,56 @@ function ProfileCardItem({ profile }: Props) {
   };
 
   return (
-    <div className="h-[550px] w-[330px] sm:w-[450px]">
+    <div className="h-[600px] w-[330px] sm:w-[450px]">
       <div className="h-full">
         <div className="relative h-full">
-          <Card className="border-none shadow-md">
+          <Card>
             <CardHeader className="px-5 pt-4">
               <CardDescription className="flex justify-end text-lg font-bold text-black">
-                <Link href={githubUrl} target="_blank">
+                <Link
+                  href={githubUrl}
+                  target="_blank"
+                  className="flex items-center text-[#A2A2A2]"
+                >
                   @{githubId}
                 </Link>
               </CardDescription>
             </CardHeader>
-            <CardContent className="flex flex-col items-center gap-10">
-              <div className="flex flex-col items-center gap-5">
-                <div className="relative overflow-hidden rounded-xl shadow-lg">
-                  <Image
-                    src={avatarUrl}
-                    alt="프로필 이미지"
-                    width={150}
-                    height={150}
-                  />
+            <CardContent className="flex flex-col items-center gap-8 px-3 py-2">
+              <div className="flex w-full flex-col gap-3">
+                <div className="flex w-full justify-between ">
+                  <div className="relative ml-2 rounded-full">
+                    <Avatar className="h-52 w-52">
+                      <AvatarImage src={avatarUrl} alt="profile" />
+                      <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                  </div>
+                  <div className="flex gap-2">
+                    <div className="flex h-full items-end">
+                      <Icon id="jandi" className="mb-6 h-6 w-6" />
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <YProgress value={jandiRate} background="green" />
+                      <span className="text-xs text-[#868686]">
+                        {jandiRate * 100}%
+                      </span>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex flex-col items-center gap-[6px]">
+                <div className="flex flex-col items-center gap-4">
                   <div className="flex flex-col items-center gap-1 p-1">
-                    <h1 className="text-xl font-bold">{username}</h1>
+                    <h1 className="text-2xl font-bold">{username}</h1>
                     <h3 className="text-xs text-[#F76A6A]">
                       {achievementTitle}
                     </h3>
                   </div>
-                  <p className="text-[#868686]">{bio}</p>
-                  <div className="flex flex-wrap items-center justify-center gap-1">
-                    {wantedJobs.map(job => (
-                      <Tag key={job}>{job}</Tag>
-                    ))}
-                  </div>
-                  <div className="flex flex-wrap items-center justify-center gap-1">
-                    {developLanguages.map(job => (
-                      <Tag key={job}>{job}</Tag>
-                    ))}
-                  </div>
+                  <p className="w-60 overflow-hidden text-center text-sm">
+                    {bio}
+                  </p>
                 </div>
-              </div>
-              <div className="flex w-full items-center justify-center">
-                <Image
-                  src="/images/grass.png"
-                  alt="잔디력"
-                  width={50}
-                  height={50}
-                />
-                <div className="mr-10 w-40">
-                  <Progress value={jandiRate} />
-                  <span className="text-xs text-[#868686]">
-                    {jandiRate * 100}%
-                  </span>
+                <div className="flex flex-col items-center">
+                  <InfoPopover type="INTEREST" infoList={wantedJobs} />
+                  <InfoPopover type="LANG" infoList={developLanguages} />
                 </div>
               </div>
             </CardContent>

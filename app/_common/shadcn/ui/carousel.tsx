@@ -8,6 +8,8 @@ import useEmblaCarousel, {
 import { cn } from "@/app/_common/shadcn/utils";
 import { Button } from "@/app/_common/shadcn/ui/button";
 
+import Icon from "../../components/Icon";
+
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
 type CarouselOptions = UseCarouselParameters[0];
@@ -217,90 +219,7 @@ const CarouselPrevious = React.forwardRef<
       onClick={scrollPrev}
       {...props}
     >
-      {/* // TODO: svg sprite 작업 아후 아이콘 변경 */}
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        height={24}
-        width={24}
-        id="Cursor-Hand--Streamline-Pixel"
-        className="rotate-[-90deg] -scale-x-100"
-      >
-        <desc>{"Cursor Hand Streamline Icon: https://streamlinehq.com"}</desc>
-        <title>{"cursor-hand"}</title>
-        <g>
-          <path
-            d="M20.0025 10.2825h1.1400000000000001v8.0025h-1.1400000000000001Z"
-            fill="#000000"
-            strokeWidth={1}
-          />
-          <path
-            d="M18.855 20.572499999999998H7.4325v-1.1400000000000001H6.285v1.1400000000000001H5.1450000000000005V24h15.997499999999999v-3.4275h-1.1400000000000001v-2.2874999999999996h-1.1475Zm0 2.2874999999999996H16.575000000000003v-1.1475h2.2800000000000002Z"
-            fill="#000000"
-            strokeWidth={1}
-          />
-          <path
-            d="M18.855 9.1425h1.1475v1.1400000000000001h-1.1475Z"
-            fill="#000000"
-            strokeWidth={1}
-          />
-          <path
-            d="M16.575000000000003 10.2825h1.1400000000000001v3.435H16.575000000000003Z"
-            fill="#000000"
-            strokeWidth={1}
-          />
-          <path
-            d="M16.575000000000003 8.0025h2.2800000000000002v1.1400000000000001H16.575000000000003Z"
-            fill="#000000"
-            strokeWidth={1}
-          />
-          <path
-            d="M13.1475 10.2825h1.1400000000000001v3.435h-1.1400000000000001Z"
-            fill="#000000"
-            strokeWidth={1}
-          />
-          <path
-            d="M9.712499999999999 10.2825h1.1475v3.435h-1.1475Z"
-            fill="#000000"
-            strokeWidth={1}
-          />
-          <path
-            d="m9.712499999999999 8.0025 6.862500000000001 0 0 -1.1475 -5.715 0 0 -5.715 -1.1475 0 0 6.862500000000001z"
-            fill="#000000"
-            strokeWidth={1}
-          />
-          <path
-            d="M7.4325 0h2.2800000000000002v1.1400000000000001H7.4325Z"
-            fill="#000000"
-            strokeWidth={1}
-          />
-          <path
-            d="m6.285 14.857499999999998 1.1475 0 0 -13.7175 -1.1475 0 0 8.0025 -1.1400000000000001 0 0 1.1400000000000001 1.1400000000000001 0 0 4.574999999999999z"
-            fill="#000000"
-            strokeWidth={1}
-          />
-          <path
-            d="M5.1450000000000005 18.285h1.1400000000000001v1.1475H5.1450000000000005Z"
-            fill="#000000"
-            strokeWidth={1}
-          />
-          <path
-            d="M4.005 15.997499999999999h1.1400000000000001v2.2874999999999996H4.005Z"
-            fill="#000000"
-            strokeWidth={1}
-          />
-          <path
-            d="M4.005 10.2825h1.1400000000000001v1.1475H4.005Z"
-            fill="#000000"
-            strokeWidth={1}
-          />
-          <path
-            d="M2.8575 11.43h1.1475v4.5675H2.8575Z"
-            fill="#000000"
-            strokeWidth={1}
-          />
-        </g>
-      </svg>
+      <Icon id="carousel-left" size={24} />
       <span className="sr-only">Previous slide</span>
     </Button>
   );
@@ -331,90 +250,7 @@ const CarouselNext = React.forwardRef<
       onClick={scrollNext}
       {...props}
     >
-      {/* // TODO: svg sprite 작업 아후 아이콘 변경 */}
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        height={24}
-        width={24}
-        id="Cursor-Hand--Streamline-Pixel"
-        className="rotate-90"
-      >
-        <desc>{"Cursor Hand Streamline Icon: https://streamlinehq.com"}</desc>
-        <title>{"cursor-hand"}</title>
-        <g>
-          <path
-            d="M20.0025 10.2825h1.1400000000000001v8.0025h-1.1400000000000001Z"
-            fill="#000000"
-            strokeWidth={1}
-          />
-          <path
-            d="M18.855 20.572499999999998H7.4325v-1.1400000000000001H6.285v1.1400000000000001H5.1450000000000005V24h15.997499999999999v-3.4275h-1.1400000000000001v-2.2874999999999996h-1.1475Zm0 2.2874999999999996H16.575000000000003v-1.1475h2.2800000000000002Z"
-            fill="#000000"
-            strokeWidth={1}
-          />
-          <path
-            d="M18.855 9.1425h1.1475v1.1400000000000001h-1.1475Z"
-            fill="#000000"
-            strokeWidth={1}
-          />
-          <path
-            d="M16.575000000000003 10.2825h1.1400000000000001v3.435H16.575000000000003Z"
-            fill="#000000"
-            strokeWidth={1}
-          />
-          <path
-            d="M16.575000000000003 8.0025h2.2800000000000002v1.1400000000000001H16.575000000000003Z"
-            fill="#000000"
-            strokeWidth={1}
-          />
-          <path
-            d="M13.1475 10.2825h1.1400000000000001v3.435h-1.1400000000000001Z"
-            fill="#000000"
-            strokeWidth={1}
-          />
-          <path
-            d="M9.712499999999999 10.2825h1.1475v3.435h-1.1475Z"
-            fill="#000000"
-            strokeWidth={1}
-          />
-          <path
-            d="m9.712499999999999 8.0025 6.862500000000001 0 0 -1.1475 -5.715 0 0 -5.715 -1.1475 0 0 6.862500000000001z"
-            fill="#000000"
-            strokeWidth={1}
-          />
-          <path
-            d="M7.4325 0h2.2800000000000002v1.1400000000000001H7.4325Z"
-            fill="#000000"
-            strokeWidth={1}
-          />
-          <path
-            d="m6.285 14.857499999999998 1.1475 0 0 -13.7175 -1.1475 0 0 8.0025 -1.1400000000000001 0 0 1.1400000000000001 1.1400000000000001 0 0 4.574999999999999z"
-            fill="#000000"
-            strokeWidth={1}
-          />
-          <path
-            d="M5.1450000000000005 18.285h1.1400000000000001v1.1475H5.1450000000000005Z"
-            fill="#000000"
-            strokeWidth={1}
-          />
-          <path
-            d="M4.005 15.997499999999999h1.1400000000000001v2.2874999999999996H4.005Z"
-            fill="#000000"
-            strokeWidth={1}
-          />
-          <path
-            d="M4.005 10.2825h1.1400000000000001v1.1475H4.005Z"
-            fill="#000000"
-            strokeWidth={1}
-          />
-          <path
-            d="M2.8575 11.43h1.1475v4.5675H2.8575Z"
-            fill="#000000"
-            strokeWidth={1}
-          />
-        </g>
-      </svg>
+      <Icon id="carousel-right" size={24} />
       <span className="sr-only">Next slide</span>
     </Button>
   );
