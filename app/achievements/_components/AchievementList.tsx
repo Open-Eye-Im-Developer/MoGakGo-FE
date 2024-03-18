@@ -39,7 +39,7 @@ function AchievementList() {
         ) : (
           <div
             className="mt-2 w-[100px] rounded-full bg-white"
-            onClick={hanldeClickMyAchievement}
+            onClick={handleClickMyAchievement}
           >
             <AspectRatio
               ratio={1 / 1}

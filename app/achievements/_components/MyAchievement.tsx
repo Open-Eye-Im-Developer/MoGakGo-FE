@@ -1,5 +1,3 @@
-"use client";
-
 import { ComponentProps } from "react";
 import Image from "next/image";
 
@@ -28,7 +26,7 @@ function MyAchievement({ achievement, className }: MyAchievementProps) {
       >
         <Icon id="achievement" size={24} className="text-neoYellow" />
         <div className="w-full rounded-full bg-transparent">
-          <AspectRatio ratio={1 / 1} className={cn("relative flex")}>
+          <AspectRatio ratio={1 / 1} className="relative flex">
             <Image
               width={200}
               height={200}
