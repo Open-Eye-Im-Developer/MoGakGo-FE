@@ -8,8 +8,9 @@ import { usePositionStore } from "@/app/_common/store/usePositionStore";
 import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { cn } from "@/app/_common/shadcn/utils";
 import { Carousel, CarouselApi } from "@/app/_common/shadcn/ui/carousel";
+import WithSearchTokens from "@/app/_common/hoc/WithSearchTokens";
+import WithNavigation from "@/app/_common/hoc/WithNavigation";
 
-import WithSearchTokens from "@/app/_common/components/WithSearchTokens";
 import MapComponent from "@/app/_common/components/MapComponent";
 import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
 
@@ -154,4 +155,4 @@ function Map() {
   );
 }
 
-export default WithSearchTokens(Map);
+export default WithNavigation(WithSearchTokens(Map), true);
