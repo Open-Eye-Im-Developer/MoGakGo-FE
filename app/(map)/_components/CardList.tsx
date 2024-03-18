@@ -41,11 +41,16 @@ function CardList({ cardList, onClick }: Props) {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="left-10 hidden md:inline-flex" />
-      <CarouselNext className="right-10 hidden md:inline-flex" />
-      <Button onClick={onClick} className="absolute bottom-10">
-        돌아가기
-      </Button>
+      <div className="relative mt-5 min-h-[40px] w-[90px]">
+        <CarouselPrevious className="left-[-80px]" />
+        <Button
+          onClick={onClick}
+          className="absolute left-1/2 -translate-x-1/2"
+        >
+          돌아가기
+        </Button>
+        <CarouselNext className="right-[-80px]" />
+      </div>
     </>
   );
 }
