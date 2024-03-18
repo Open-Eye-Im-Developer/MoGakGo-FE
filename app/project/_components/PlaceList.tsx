@@ -2,12 +2,13 @@ import React from "react";
 
 import { Button } from "@/app/_common/shadcn/ui/button";
 
+import { PlaceItemData } from "../_types/type";
 import PlaceItem from "./PlaceItem";
 
 interface PlaceListProps {
-  placeList: PlaceItem[];
+  placeList: PlaceItemData[];
   isOverlayered: boolean;
-  onClickPlace: (place: PlaceItem) => void;
+  onClickPlace: (place: PlaceItemData) => void;
 }
 
 function PlaceList(props: PlaceListProps) {
