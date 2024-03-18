@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 
+import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import {
   Dialog,
   DialogContent,
@@ -17,6 +18,7 @@ import {
 } from "@/app/_common/shadcn/ui/card";
 import { Button } from "@/app/_common/shadcn/ui/button";
 
+import ProfileCard from "@/app/_common/components/ProfileCard";
 import Icon from "@/app/_common/components/Icon";
 
 import useFlip from "../_hooks/useFlip";
@@ -26,6 +28,7 @@ import ButtonRotate from "./ButtonRotate";
 function ProjectCreateDialog() {
   const [open, setOpen] = useState(false);
   const { flipped, handleFlip } = useFlip();
+  const { user } = useAuthStore();
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -51,6 +54,11 @@ function ProjectCreateDialog() {
                 <ProjectCreateForm onClose={setOpen} />
               </CardContent>
             </Card>
+            <ProfileCard
+              profile={user!}
+              isBehind={true}
+              onRotate={handleFlip}
+            />
           </div>
         </DialogContent>
       </DialogPortal>

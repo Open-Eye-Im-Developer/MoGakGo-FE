@@ -16,7 +16,7 @@ type InfoType = "LANG" | "INTEREST";
 
 interface InfoPopoverProps {
   type: InfoType;
-  infoList: string[] | WantedJobs[];
+  infoList: string[] | WantedJobs[] | undefined;
 }
 
 function InfoPopover(props: InfoPopoverProps) {
@@ -38,7 +38,7 @@ function InfoPopover(props: InfoPopoverProps) {
           <Icon id={iconId} className="h-6 w-6" />
         </header>
         <main className="flex flex-wrap gap-1">
-          {infoList.map(info => (
+          {infoList!.map(info => (
             <Badge key={info} variant="outline">
               {info}
             </Badge>

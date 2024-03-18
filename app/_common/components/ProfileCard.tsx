@@ -2,7 +2,9 @@ import React from "react";
 import Link from "next/link";
 
 import InfoPopover from "@/app/project/_components/InfoPopover";
+import ButtonRotate from "@/app/project/_components/ButtonRotate";
 
+import { cn } from "../shadcn/utils";
 import { YProgress } from "../shadcn/ui/y-progress";
 import {
   Card,
@@ -15,6 +17,8 @@ import Icon from "./Icon";
 
 interface ProfileCardProps {
   profile: Profile;
+  isBehind: boolean;
+  onRotate?: () => void;
 }
 
 function ProfileCard(props: ProfileCardProps) {
@@ -30,12 +34,22 @@ function ProfileCard(props: ProfileCardProps) {
       developLanguages,
       wantedJobs,
     },
+    isBehind,
+    onRotate,
   } = props;
 
   return (
-    <Card className="h-full w-full border-none shadow-none">
-      <CardHeader>
-        <CardDescription className="flex justify-end text-lg font-bold text-black">
+    <Card
+      className={cn(
+        "h-full w-full border-none shadow-none",
+        isBehind
+          ? "absolute inset-0 left-0 top-0 overflow-hidden [backface-visibility:hidden] [transform:rotateY(180deg)]"
+          : "",
+      )}
+    >
+      <CardHeader className="px-4 py-3">
+        <CardDescription className="flex items-center justify-between text-lg font-bold text-black">
+          {isBehind && onRotate && <ButtonRotate onRotate={onRotate} />}
           <Link href={githubUrl} target="_blank" className="text-[#a2a2a2]">
             @{githubId}
           </Link>
@@ -57,7 +71,7 @@ function ProfileCard(props: ProfileCardProps) {
               <div className="flex flex-col gap-2">
                 <YProgress value={jandiRate} background="green" />
                 <span className="text-xs text-[#868686]">
-                  {jandiRate * 100}%
+                  {jandiRate !== undefined ? jandiRate * 100 : ""}%
                 </span>
               </div>
             </div>

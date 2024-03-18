@@ -36,11 +36,11 @@ interface Profile {
   githubId: string;
   avatarUrl: string;
   githubUrl: string;
-  bio: string;
-  jandiRate: number;
-  achievementTitle: string;
-  developLanguages: string[];
-  wantedJobs: string[];
+  bio?: string;
+  jandiRate?: number;
+  achievementTitle?: string;
+  developLanguages?: string[];
+  wantedJobs?: string[];
 }
 
 interface RequestList {
