@@ -30,12 +30,12 @@ function CustomSonner(props: CustomSonnerProps) {
       <div className="flex items-center justify-start">
         <Icon id={`toast-${type}`} size={25} />
         <div className="px-4">
-          <h5 className="">{title}</h5>
-          {description && <h6>{description}</h6>}
+          <h5 className="text-sm">{title}</h5>
+          {description && <h6 className="text-xs">{description}</h6>}
         </div>
       </div>
       {label && onClick && (
-        <Button className="text-black" onClick={onClick}>
+        <Button className="text-xs text-black" onClick={onClick}>
           {label}
         </Button>
       )}
