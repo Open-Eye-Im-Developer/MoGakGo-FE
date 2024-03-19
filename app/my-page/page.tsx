@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 
+import WithNavigation from "../_common/hoc/WithNavigation";
 import StackNavigator from "../_common/components/StackNavigator";
 import Icon from "../_common/components/Icon";
 import { useQueryUserData } from "./_hooks/useQueryUserData";
@@ -22,7 +23,7 @@ function MyPage() {
   return (
     <>
       <StackNavigator element={"마이페이지"} />
-      <main className="container flex min-h-screen max-w-2xl flex-col gap-8 pb-32">
+      <main className="container flex min-h-screen max-w-2xl flex-col gap-8 pb-24">
         <Profile />
         <LikeCounter />
         <div className="flex gap-8">
@@ -39,7 +40,7 @@ function MyPage() {
   );
 }
 
-export default MyPage;
+export default WithNavigation(MyPage, true);
 
 interface MyPageItemProps {
   label: string;
