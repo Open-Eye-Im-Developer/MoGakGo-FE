@@ -64,11 +64,7 @@ function ProfileCardItem({ profile }: Props) {
           <Card>
             <CardHeader className="px-5 pt-4">
               <CardDescription className="flex justify-end text-lg font-bold text-black">
-                <Link
-                  href={githubUrl}
-                  target="_blank"
-                  className="flex items-center text-[#A2A2A2]"
-                >
+                <Link href={githubUrl} target="_blank">
                   @{githubId}
                 </Link>
               </CardDescription>
