@@ -1,5 +1,6 @@
 "use client";
 
+import WithNavigation from "../_common/hoc/WithNavigation";
 import StackNavigator from "../_common/components/StackNavigator";
 import { useQueryUserData } from "./_hooks/useQueryUserData";
 import { useQuerySendLikeCount } from "./_hooks/useQuerySendLikeCount";
@@ -44,4 +45,4 @@ function MyPage() {
   );
 }
 
-export default MyPage;
+export default WithNavigation(MyPage, true);
