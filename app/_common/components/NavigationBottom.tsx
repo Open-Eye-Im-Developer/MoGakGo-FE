@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { toast } from "../utils/toast";
 import { navigate } from "../utils/redirect";
 import { getCookie } from "../utils/cookie";
-import { cn } from "../shadcn/utils";
 import { Menubar, MenubarMenu, MenubarTrigger } from "../shadcn/ui/menubar";
 
 function NavigationBottom() {
@@ -42,7 +41,7 @@ function NavigationBottom() {
       <MenubarMenu value="/chat">
         <MenubarTrigger
           onClick={() => checkAuthNavigate("/chat")}
-          className={cn("inline-block min-w-20")}
+          className="inline-block min-w-20"
         >
           채팅
         </MenubarTrigger>
