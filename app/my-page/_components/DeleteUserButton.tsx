@@ -31,9 +31,7 @@ function DeleteUserButton() {
   return (
     <AlertDialog>
       <AlertDialogTrigger>
-        <Button className="w-full" variant="destructive">
-          회원 탈퇴
-        </Button>
+        <Button className="w-full bg-neoRed text-white">회원 탈퇴</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
