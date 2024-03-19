@@ -24,7 +24,7 @@ function MyAchievements() {
       <div className="flex justify-center">
         <Avatar className="h-16 w-16">
           <AvatarImage src={myAchievement?.imgUrl} alt={myAchievement?.title} />
-          <AvatarFallback></AvatarFallback>
+          <AvatarFallback>{myAchievement?.title.charAt(0)}</AvatarFallback>
         </Avatar>
       </div>
     </div>

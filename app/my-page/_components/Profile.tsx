@@ -43,7 +43,7 @@ export function ProfileLayout(props: ProfileLayoutProps) {
       <div className="flex gap-6">
         <Avatar className="h-28 w-28">
           <AvatarImage src={data.avatarUrl} />
-          <AvatarFallback></AvatarFallback>
+          <AvatarFallback>{data.username.charAt(0)}</AvatarFallback>
         </Avatar>
         <div className="flex flex-grow flex-col justify-end gap-2">
           <div className="flex flex-col gap-1">
@@ -90,7 +90,7 @@ export function ProfileSkeleton() {
     <div className="flex max-w-2xl flex-col gap-8">
       <div className="flex gap-6">
         <Avatar className="h-28 w-28">
-          <AvatarFallback></AvatarFallback>
+          <AvatarFallback>U</AvatarFallback>
         </Avatar>
         <div className="flex flex-grow flex-col justify-end">
           <Skeleton className="h-[28px] w-[100px] rounded-none" />

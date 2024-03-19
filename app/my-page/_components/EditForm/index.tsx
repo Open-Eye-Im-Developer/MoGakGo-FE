@@ -45,7 +45,9 @@ function EditForm({ defaultValues, disabled }: EditFormProps) {
                 src={defaultValues?.avatarUrl}
                 alt={`${defaultValues?.username}'s avatar image`}
               />
-              <AvatarFallback></AvatarFallback>
+              <AvatarFallback>
+                {defaultValues?.username.charAt(0)}
+              </AvatarFallback>
             </Avatar>
           </div>
           <UsernameField form={form} />
