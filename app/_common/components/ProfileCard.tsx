@@ -60,7 +60,7 @@ function ProfileCard(props: ProfileCardProps) {
   return (
     <Card
       className={cn(
-        "card relative z-[9999] flex h-full w-full flex-col",
+        "card relative flex h-full w-full flex-col",
         isBehind
           ? "absolute inset-0 left-0 top-0 overflow-hidden [backface-visibility:hidden] [transform:rotateY(180deg)]"
           : "",
@@ -105,8 +105,7 @@ function ProfileCard(props: ProfileCardProps) {
               </h3>
             </div>
             <p className="line-clamp-3 w-40 grow overflow-hidden text-center text-sm">
-              {bio ??
-                "엄마 엄마 엄마 밖에 눈이와요. 하얀 눈이 와요 이야 이쁘다아아아아ㅏ아앙"}
+              {bio ?? "소개문구가 없습니다."}
             </p>
           </div>
           <div className="mb-3 flex items-center justify-center gap-2">

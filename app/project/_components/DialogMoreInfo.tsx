@@ -10,7 +10,7 @@ import { Button } from "@/app/_common/shadcn/ui/button";
 import ProfileCard from "@/app/_common/components/ProfileCard";
 import Icon from "@/app/_common/components/Icon";
 
-import { Profile } from "../_types/type";
+import { Profile } from "@/app/_common/types/profile";
 
 interface DialogMoreInfoProps extends Profile {}
 

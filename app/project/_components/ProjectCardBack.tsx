@@ -22,7 +22,6 @@ import DialogMoreInfo from "./DialogMoreInfo";
 import ButtonRotate from "./ButtonRotate";
 import "../_styles/card.css";
 
-
 interface CardBackProps {
   requestList?: RequestList[];
   onRotate: () => void;
@@ -56,69 +55,45 @@ const ProjectCardBack = forwardRef<HTMLDivElement, CardBackProps>(
               className="flex h-full w-full flex-col gap-3 overflow-y-scroll px-5 pt-5"
             >
               {Array.isArray(requestList) &&
-                requestList?.map(
-                  ({
-                    id,
-                    senderPreview: {
-                      id: senderId,
-                      username,
-                      githubId,
-                      avatarUrl,
-                      githubUrl,
-                      bio,
-                      jandiRate,
-                      achievementTitle,
-                      developLanguages,
-                      wantedJobs,
-                    },
-                  }) => (
-                    <aside
-                      key={id}
-                      className="flex flex-col justify-center gap-3"
-                    >
-                      <main
-                        key={senderId}
-                        className="flex items-center justify-between"
-                      >
-                        <aside className="flex items-center gap-5">
-                          <div className="ml-2 rounded-full">
-                            <Avatar className="h-14 w-14">
-                              <AvatarImage src={avatarUrl} alt="profile" />
-                              <AvatarFallback>CN</AvatarFallback>
-                            </Avatar>
-                          </div>
-                          <div className="flex flex-col gap-2">
-                            <p className="text-lg font-semibold">{username}</p>
-                            <p className="text-xs text-[#F76A6A]">
-                              {achievementTitle || "null"}
-                            </p>
-                          </div>
-                        </aside>
-                        <aside className="flex items-center gap-2">
-                          <DialogMoreInfo
-                            githubId={githubId}
-                            githubUrl={githubUrl}
-                            username={username}
-                            avatarUrl={avatarUrl}
-                            bio={bio}
-                            jandiRate={jandiRate}
-                            achievementTitle={achievementTitle}
-                            developLanguages={developLanguages}
-                            wantedJobs={wantedJobs}
-                          />
-                          <Button
-                            size="sm"
-                            className="rounded-lg bg-neoYellow"
-                            onClick={() => handleAccept(id)}
-                          >
-                            수락
-                          </Button>
-                        </aside>
-                      </main>
-                      <Separator className="bg-black" />
-                    </aside>
-                  ),
-                )}
+                requestList?.map(({ id, senderPreview }) => (
+                  <aside
+                    key={id}
+                    className="flex flex-col justify-center gap-3"
+                  >
+                    <main className="flex items-center justify-between">
+                      <aside className="flex items-center gap-5">
+                        <div className="ml-2 rounded-full">
+                          <Avatar className="h-14 w-14">
+                            <AvatarImage
+                              src={senderPreview.avatarUrl}
+                              alt="profile"
+                            />
+                            <AvatarFallback>CN</AvatarFallback>
+                          </Avatar>
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          <p className="text-lg font-semibold">
+                            {senderPreview.username}
+                          </p>
+                          <p className="text-xs text-[#F76A6A]">
+                            {senderPreview.achievementTitle || "null"}
+                          </p>
+                        </div>
+                      </aside>
+                      <aside className="flex items-center gap-2">
+                        <DialogMoreInfo response={senderPreview} />
+                        <Button
+                          size="sm"
+                          className="rounded-lg bg-neoYellow"
+                          onClick={() => handleAccept(id)}
+                        >
+                          수락
+                        </Button>
+                      </aside>
+                    </main>
+                    <Separator className="bg-black" />
+                  </aside>
+                ))}
             </div>
           )}
         </CardContent>
