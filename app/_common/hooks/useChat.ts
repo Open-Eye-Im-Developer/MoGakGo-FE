@@ -35,6 +35,7 @@ function useChat({ url, chatRoomId, userId }: useChatProps) {
     client.current.onConnect = () => {
       client.current?.subscribe(`/topic/chatroom/${chatRoomId}`, data => {
         const { id, message, senderId, createdAt } = JSON.parse(data.body);
+        if (userId === senderId) return;
         addNewMessage([
           {
             id,
