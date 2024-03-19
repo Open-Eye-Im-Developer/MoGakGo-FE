@@ -127,7 +127,7 @@ function Map() {
       <div className="map-background" />
       <LoadingSpinner
         className={cn(
-          "absolute bottom-0 left-0 right-0 top-0 z-10 flex h-full w-full place-content-center bg-white/40 backdrop-blur-sm transition-all duration-300",
+          "absolute bottom-0 left-0 right-0 top-0 z-10 flex h-full w-full place-content-center bg-black/40 backdrop-blur-sm transition-all duration-300",
           isRankLoading ? "visible opacity-100" : "invisible opacity-0",
         )}
       />
@@ -154,7 +154,7 @@ function Map() {
           className="flex h-full w-full flex-col items-center justify-center"
         >
           {cardList.projectList.length !== 0 ||
-            cardList.profileList.length !== 0 ? (
+          cardList.profileList.length !== 0 ? (
             <CardList cardList={cardList} />
           ) : (
             <EmptyCardList onClick={handleEmptyCardClose} />
