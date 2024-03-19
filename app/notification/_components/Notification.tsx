@@ -1,12 +1,12 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import "dayjs/locale/ko";
-import Image from "next/image";
 import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
 
-import Arrow from "@/public/images/redirect-arrow.svg";
 import { cn } from "@/app/_common/shadcn/utils";
+
+import Icon from "@/app/_common/components/Icon";
 
 import { NotificationTitle, NotificationType } from "../_types/notification";
 
@@ -45,28 +45,28 @@ function Notification({ notification }: NotificationProps) {
     >
       <div>
         <div className="flex gap-3">
-          <Image
-            src={NotificationTitle[tag].image}
-            alt={`${tag} image`}
-            width={20}
-            height={20}
+          <Icon
+            id={NotificationTitle[tag].image}
+            size={25}
+            className={NotificationTitle[tag].color}
           />
           <span className="text-sm text-gray-400">
             {NotificationTitle[tag].message}
           </span>
         </div>
-        <p className="pl-8">{message}</p>
+        <p className="pl-9">{message}</p>
       </div>
-      <div className="relative float-right">
-        <time className="min-w-fit text-center text-sm text-gray-400">
+      <div className="relative float-right min-w-fit">
+        <time className="text-center text-sm text-gray-400">
           {dayjs(createdAt).fromNow()}
         </time>
-        <Image
-          src={Arrow}
-          width={24}
-          height={12}
-          alt="redirect button"
-          className={cn("absolute right-0", !redirectPaths[tag] && "hidden")}
+        <Icon
+          id="chevron-right"
+          size={15}
+          className={cn(
+            "absolute bottom-1 right-0 text-neoBlue",
+            !redirectPaths[tag] && "hidden",
+          )}
         />
       </div>
     </div>

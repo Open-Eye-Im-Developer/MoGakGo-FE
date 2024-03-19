@@ -1,11 +1,3 @@
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
-
-import ReviewImage from "@/public/images/review.svg";
-import RequestImage from "@/public/images/request.svg";
-import SuccessedImage from "@/public/images/matching_successed.svg";
-import FailedImage from "@/public/images/matching_failed.svg";
-import AchievementImage from "@/public/images/achievement.svg";
-
 import { NotificaitonTag } from "../_constant/notificaiton";
 
 export interface NotificationType {
@@ -21,26 +13,35 @@ export interface NotificationType {
 }
 
 export const NotificationTitle: {
-  [key in NotificaitonTag]: { message: string; image: StaticImport };
+  [key in NotificaitonTag]: {
+    message: string;
+    image: string;
+    color?: "text-neoBlue" | "text-neoRed";
+  };
 } = {
   REVIEW_REQUEST: {
     message: "리뷰 요청",
-    image: ReviewImage,
+    image: "alert-jandi",
+    color: "text-neoBlue",
   },
   REQUEST_ARRIVAL: {
     message: "찔러보기",
-    image: RequestImage,
+    image: "alert-follow",
+    color: "text-neoBlue",
   },
   ACHIEVEMENT: {
     message: "업적 겟또",
-    image: AchievementImage,
+    image: "achievement",
+    color: "text-neoBlue",
   },
   MATCHING_SUCCESSED: {
     message: "매칭 성공",
-    image: SuccessedImage,
+    image: "match-accept",
+    color: "text-neoRed",
   },
   MATCHING_FAILED: {
     message: "매칭 실패",
-    image: FailedImage,
+    image: "match-fail",
+    color: "text-neoRed",
   },
 };
