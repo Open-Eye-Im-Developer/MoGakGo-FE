@@ -51,12 +51,12 @@ function ProjectInfo() {
       collapsible
     >
       <AccordionItem value="item-1">
-        <AccordionTrigger className="p-4 hover:no-underline">
+        <AccordionTrigger className="hover:no-underline">
           <div className="flex gap-2">
             <span>📍 {meetDetail}</span>
             <Link
               target="_blank"
-              href={`${process.env.NEXT_PUBLIC_KAKAO_MAP_URL}/${meetLocationLatitude},${meetLocationLongitude}`}
+              href={`${process.env.NEXT_PUBLIC_KAKAO_MAP_URL}/${meetDetail},${meetLocationLongitude},${meetLocationLatitude}`}
             >
               <Badge className="bg-[#E24A57]">장소보기</Badge>
             </Link>
