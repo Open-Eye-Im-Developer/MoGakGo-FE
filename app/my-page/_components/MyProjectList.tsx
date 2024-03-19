@@ -1,23 +1,22 @@
 import Link from "next/link";
-import { IconChevronRight } from "@tabler/icons-react";
 
-import { ResponseData } from "@/app/_common/types/response";
-import { ProjectSummary } from "@/app/_common/types/project";
+import Icon from "@/app/_common/components/Icon";
 
+import { useQueryUserData } from "../_hooks/useQueryUserData";
+import { useQueryProjectList } from "../_hooks/useQueryProjectList";
 import ProjectCardSkeleton from "./ProjectCardSkeleton";
 import ProjectCard from "./ProjectCard";
 
-interface MyProjectListProps {
-  data?: ResponseData<ProjectSummary>;
-}
+function MyProjectList() {
+  const { data: userData } = useQueryUserData();
+  const { data } = useQueryProjectList(userData?.id, 3);
 
-function MyProjectList({ data }: MyProjectListProps) {
   return (
     <div className="flex w-full flex-col gap-4">
       <Link href="/my-page/my-project">
-        <div className="flex items-center gap-1 text-xl font-bold">
+        <div className="text-md flex items-center gap-1 font-bold">
           내가 생성한 만남 카드
-          <IconChevronRight />
+          <Icon id="chevron-right" size={26} />
         </div>
       </Link>
       <div className="flex flex-col gap-2">
