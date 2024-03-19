@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import dayjs from "dayjs";
 import { Client } from "@stomp/stompjs";
 
 import { useAuthStore } from "@/app/_common/store/useAuthStore";
@@ -58,7 +59,7 @@ function MessageInput({
     publishSocketMessage(user!.id, message);
 
     const newMessage: MessageType = {
-      id: Number(Math.random().toString(36).slice(2, 9)), // TODO: 적절한 id로 변경 필요
+      id: dayjs().format("YYYY-MM-DDTHH:mm:ssZ"),
       message,
       senderId: user.id,
       createdAt: new Date().toISOString(),

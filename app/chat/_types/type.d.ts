@@ -1,5 +1,5 @@
 interface MessageType {
-  id: number;
+  id: string;
   message: string;
   senderId: number;
   createdAt?: string;
