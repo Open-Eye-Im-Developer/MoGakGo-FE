@@ -25,9 +25,6 @@ instance.interceptors.request.use(config => {
 
 instance.interceptors.response.use(
   async response => {
-    const refreshToken = getCookie("refreshToken");
-
-    console.log("refreshToken", refreshToken);
     return response;
   },
   async error => {
