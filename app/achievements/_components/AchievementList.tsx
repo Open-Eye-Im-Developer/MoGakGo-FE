@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 
-import WithOnMounted from "@/app/_common/hoc/withOnMounted";
+import WithOnMounted from "@/app/_common/hoc/WithOnMounted";
 
 import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
 import Icon from "@/app/_common/components/Icon";
