@@ -5,13 +5,8 @@ import { cn } from "@/app/_common/shadcn/utils";
 import { Progress } from "@/app/_common/shadcn/ui/progress";
 import { AspectRatio } from "@/app/_common/shadcn/ui/aspect-ratio";
 
-import { getLanguageLogo, sortingLanguages } from "../_utils/sortingLanguages";
-
-export interface Language {
-  // image: string;
-  language: string;
-  byteSize: number;
-}
+import { sortingLanguages } from "../_utils/sortingLanguages";
+import { Language } from "../_type/signup";
 
 interface LanguagesListProps {
   languages: Language[];
@@ -25,7 +20,7 @@ function LanguagesList({ languages, className }: LanguagesListProps) {
 
   return (
     <ul className={cn("p-4", className)}>
-      {sortedLanguages.map(({ language, percentage }, index) => (
+      {sortedLanguages.map(({ language, percentage, imageUrl }, index) => (
         <li key={index} className="mb-4">
           <section className="mb-3 flex items-end justify-between">
             <div className="h-[46px] w-[46px]">
@@ -33,7 +28,7 @@ function LanguagesList({ languages, className }: LanguagesListProps) {
                 <Image
                   width={46}
                   height={46}
-                  src={getLanguageLogo[language]}
+                  src={imageUrl}
                   alt="개발 언어 로고"
                   className="rounded-md shadow-neo-thin"
                 />

@@ -1,8 +1,7 @@
 import { UserAchievement, WantedJobs } from "@/app/_common/types/user";
 
 export interface Language {
-  // TODO: 백엔드 서버에서 image 파일 구축이 완료되면 주석 해제
-  // image: string;
+  imageUrl: string;
   language: string;
   byteSize: number;
 }
