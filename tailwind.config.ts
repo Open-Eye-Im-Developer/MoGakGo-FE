@@ -94,6 +94,16 @@ const config = {
         "neo-white": "4px 4px 0px 0px #ffffff",
         "neo-white-thin": "2px 2px 0px 0px #ffffff",
       },
+      screens: {
+        short: { raw: "(max-height: 700px)" },
+      },
+      zIndex: {
+        "60": "60",
+        "70": "70",
+        "80": "80",
+        "90": "90",
+        "100": "100",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
