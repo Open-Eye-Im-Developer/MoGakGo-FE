@@ -38,7 +38,7 @@ function ProjectCreateDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="h-12 w-12 rounded-full p-3 shadow-md">
+        <Button className="h-12 w-12 rounded-full p-3 shadow-md hover:neo-hover">
           <Icon id="plus" />
         </Button>
       </DialogTrigger>
