@@ -29,6 +29,7 @@ instance.interceptors.response.use(
   },
   async error => {
     const { status, config } = error.response;
+    // TODO: 응답 헤더의 Set-Cookie로 refreshToken 저장으로 변경되어 삭제 필요?
     const refreshToken = await getCookie("refreshToken", "");
 
     // TODO: 백엔드 reissue api 수정 후 조건 변경
