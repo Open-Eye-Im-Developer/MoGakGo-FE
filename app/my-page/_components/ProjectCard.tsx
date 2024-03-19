@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { IconExclamationCircle } from "@tabler/icons-react";
 
 import formatMeetingTime from "@/app/project/_utils/formatMeetingTime";
+import { cn } from "@/app/_common/shadcn/utils";
 import { Badge } from "@/app/_common/shadcn/ui/badge";
 import {
   Avatar,
@@ -75,7 +76,14 @@ function ProjectCard({ data }: CardProps) {
         <div className="flex items-center gap-2 text-sm">
           <p>{project.location}</p>
           {project.status ? (
-            <Badge className="shrink-0">{MATCH_STATUS[project.status]}</Badge>
+            <Badge
+              className={cn(
+                "pointer-events-none shrink-0 text-white",
+                MATCH_STATUS[project.status].color,
+              )}
+            >
+              {MATCH_STATUS[project.status].label}
+            </Badge>
           ) : null}
         </div>
         <div className="text-xs">
