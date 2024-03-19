@@ -59,7 +59,7 @@ function MessageInput({
     publishSocketMessage(user!.id, message);
 
     const newMessage: MessageType = {
-      id: dayjs().format("YYYY-MM-DDTHH:mm:ssZ"),
+      id: dayjs().format("YYYY-MM-DDTHH:mm:ss:SSS"),
       message,
       senderId: user.id,
       createdAt: new Date().toISOString(),
