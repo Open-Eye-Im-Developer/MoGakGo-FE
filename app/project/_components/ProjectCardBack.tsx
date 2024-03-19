@@ -16,10 +16,12 @@ import {
   AvatarImage,
 } from "@/app/_common/shadcn/ui/avatar";
 
+import { RequestList } from "../_types/type";
 import useAcceptRequestMutation from "../_hooks/useAcceptRequestMutation";
 import DialogMoreInfo from "./DialogMoreInfo";
 import ButtonRotate from "./ButtonRotate";
 import "../_styles/card.css";
+
 
 interface CardBackProps {
   requestList?: RequestList[];

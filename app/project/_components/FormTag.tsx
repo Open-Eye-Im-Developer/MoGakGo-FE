@@ -11,6 +11,7 @@ import {
 } from "@/app/_common/shadcn/ui/form";
 import { Badge } from "@/app/_common/shadcn/ui/badge";
 
+import { FormProps } from "../_types/type";
 import useTagSelect from "../_hooks/useTagSelect";
 
 interface FormTagProps extends FormProps {}

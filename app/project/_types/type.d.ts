@@ -1,4 +1,4 @@
-import { WantedJob } from "@/app/_common/constants/wantedJob";
+import { WantedJobs } from "@/app/_common/types/user";
 
 interface Form {
   place: string;
@@ -9,7 +9,7 @@ interface Form {
   tags?: string[] | undefined;
 }
 
-interface PlaceItem {
+interface PlaceItemData {
   place_name: string;
   distance: string;
   place_url: string;
@@ -42,7 +42,7 @@ interface Profile {
   jandiRate?: number;
   achievementTitle?: string;
   developLanguages?: string[];
-  wantedJobs?: WantedJob[];
+  wantedJobs?: WantedJobs[] | string[];
 }
 
 interface RequestList {
