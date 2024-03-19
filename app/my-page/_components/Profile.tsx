@@ -17,6 +17,9 @@ import { Achievement } from "@/app/_common/types/user";
 
 import { useQueryUserData } from "../_hooks/useQueryUserData";
 
+const buttonStyle = "h-8 text-xs shadow-neo-thin text-black";
+const badgeStyle = "border border-black bg-white text-black";
+
 function Profile() {
   const { data } = useQueryUserData();
   const { myAchievement } = useQueryAchievements();
@@ -42,7 +45,7 @@ export function ProfileLayout(props: ProfileLayoutProps) {
           <AvatarImage src={data.avatarUrl} />
           <AvatarFallback></AvatarFallback>
         </Avatar>
-        <div className="flex flex-grow flex-col gap-2">
+        <div className="flex flex-grow flex-col justify-end gap-2">
           <div className="flex flex-col gap-1">
             <div className="text-lg font-bold">{data.username}</div>
             {myAchievement ? (
@@ -58,21 +61,25 @@ export function ProfileLayout(props: ProfileLayoutProps) {
           </div>
           <div className="flex gap-2">
             <Link href="/my-page/edit">
-              <Button className="h-8 border-white bg-primary text-xs text-white">
-                수정
-              </Button>
+              <Button className={buttonStyle}>수정</Button>
             </Link>
             <Link href="/auth-mylocation">
-              <Button className="h-8 text-xs">위치 인증</Button>
+              <Button className={buttonStyle}>위치 인증</Button>
             </Link>
           </div>
         </div>
       </div>
       <div className="flex flex-wrap justify-center gap-1">
         {data.wantedJobs?.map(job => (
-          <Badge key={job}>{WANTED_JOB.find(el => el.id === job)?.label}</Badge>
+          <Badge key={job} className={badgeStyle}>
+            {WANTED_JOB.find(el => el.id === job)?.label}
+          </Badge>
         ))}
-        {data.developLanguages?.map(lang => <Badge key={lang}>{lang}</Badge>)}
+        {data.developLanguages?.map(lang => (
+          <Badge key={lang} className={badgeStyle}>
+            {lang}
+          </Badge>
+        ))}
       </div>
     </div>
   );
@@ -85,7 +92,7 @@ export function ProfileSkeleton() {
         <Avatar className="h-28 w-28">
           <AvatarFallback></AvatarFallback>
         </Avatar>
-        <div className="flex-grow">
+        <div className="flex flex-grow flex-col justify-end">
           <Skeleton className="h-[28px] w-[100px] rounded-none" />
           <Skeleton className="mt-1 h-[16px] w-[100px] rounded-none" />
           <Skeleton className="mt-2 h-[16px] w-full rounded-none" />
