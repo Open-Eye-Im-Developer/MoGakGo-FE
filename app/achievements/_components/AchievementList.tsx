@@ -1,9 +1,14 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
+
+import WithOnMounted from "@/app/_common/hoc/withOnMounted";
 
 import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
 import Icon from "@/app/_common/components/Icon";
+
+import { Achievement } from "@/app/_common/types/user";
 
 import { toast } from "@/app/_common/utils/toast";
 
@@ -14,10 +19,15 @@ import AchievementItem from "./AchievementItem";
 
 function AchievementList() {
   const { achievements, myAchievement } = useQueryAchievements();
+  const [sorting, setSorting] = useState<Achievement[]>([]);
 
   const handleClickMyAchievement = () => {
     toast.info("아직 설정된 업적이 없어요.");
   };
+
+  useEffect(() => {
+    setSorting(achievements);
+  }, [achievements]);
 
   if (!achievements) return <LoadingSpinner />;
 
@@ -55,10 +65,10 @@ function AchievementList() {
         )}
       </header>
       <section className="flex justify-end text-start">
-        <ListSortSelect />
+        <ListSortSelect setSorting={setSorting} achievements={achievements} />
       </section>
       <ul className="mt-3 grid w-full grid-cols-1 gap-4">
-        {achievements?.map((achievement, index) => (
+        {sorting?.map((achievement, index) => (
           <AchievementItem
             styleType="item"
             achievement={achievement}
@@ -73,4 +83,4 @@ function AchievementList() {
   );
 }
 
-export default AchievementList;
+export default WithOnMounted(AchievementList);
