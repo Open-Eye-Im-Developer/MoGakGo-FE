@@ -1,6 +1,11 @@
 import Image from "next/image";
 
+import { generateViewport } from "../_common/utils/generateViewport";
 import LoginForm from "./_components/LoginForm";
+
+import type { Viewport } from "next";
+
+export const viewport: Viewport = generateViewport("#E8E8E8");
 
 function LoginPage() {
   return (
