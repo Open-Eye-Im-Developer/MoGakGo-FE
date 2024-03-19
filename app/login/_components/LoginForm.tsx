@@ -20,14 +20,7 @@ function LoginForm() {
     mutate(code);
   }, [mutate, code]);
 
-  if (code)
-    return (
-      <LoadingSpinner
-        width="100%"
-        height="100%"
-        className="flex h-screen w-full place-content-center"
-      />
-    );
+  if (code) return <LoadingSpinner />;
 
   return (
     <form className="mt-16 flex w-full flex-col place-items-center space-y-16">

@@ -2,6 +2,7 @@
 
 import Lottie from "react-lottie-player";
 
+import { cn } from "../shadcn/utils";
 import animation from "../assets/spinner-animation.json";
 
 interface LoadingSpinnerProps {
@@ -10,14 +11,23 @@ interface LoadingSpinnerProps {
   className?: string;
 }
 
-function LoadingSpinner({ width, height, className }: LoadingSpinnerProps) {
+function LoadingSpinner({
+  width = "80%",
+  height = "100%",
+  className,
+}: LoadingSpinnerProps) {
   return (
-    <div className={className}>
+    <div
+      className={cn(
+        "flex h-screen w-full place-content-center bg-white",
+        className,
+      )}
+    >
       <Lottie
         play
         animationData={animation}
         speed={0.5}
-        style={{ width, height }}
+        style={{ width, height, padding: "2rem" }}
       />
     </div>
   );
