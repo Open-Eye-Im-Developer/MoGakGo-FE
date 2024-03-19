@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 
-import { checkAuthNavigate, navigate } from "../utils/redirect";
+import { navigate } from "../utils/redirect";
 import { Menubar, MenubarMenu, MenubarTrigger } from "../shadcn/ui/menubar";
 
 function NavigationBottom() {
@@ -31,7 +31,7 @@ function NavigationBottom() {
       </MenubarMenu>
       <MenubarMenu value="/chat">
         <MenubarTrigger
-          onClick={() => checkAuthNavigate("/chat")}
+          onClick={() => navigate("/chat")}
           className="inline-block min-w-20"
         >
           채팅
