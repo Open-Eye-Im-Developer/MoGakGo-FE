@@ -12,7 +12,7 @@ import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { cn } from "@/app/_common/shadcn/utils";
 import { Form } from "@/app/_common/shadcn/ui/form";
 import { Button } from "@/app/_common/shadcn/ui/button";
-import WithOnMounted from "@/app/_common/hoc/withOnMounted";
+import WithOnMounted from "@/app/_common/hoc/WithOnMounted";
 
 import MapComponent from "@/app/_common/components/MapComponent";
 import LoadingSpinner from "@/app/_common/components/LoadingSpinner";

@@ -12,6 +12,7 @@ import {
 
 import { Project } from "@/app/_common/types/project";
 
+import { RequestList } from "../_types/type";
 import useInfiniteScroll from "../_hooks/useInfiniteScroll";
 import useGetRequestListQuery from "../_hooks/useGetRequestListQuery";
 import useFlip from "../_hooks/useFlip";
