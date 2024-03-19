@@ -95,7 +95,7 @@ const config = {
         "neo-white-thin": "2px 2px 0px 0px #ffffff",
       },
       screens: {
-        short: { raw: "(max-height: 700px)" },
+        short: { raw: "(max-height: 890px)" },
       },
       zIndex: {
         "60": "60",
