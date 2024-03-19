@@ -1,5 +1,3 @@
-import { toast } from "sonner";
-
 import { useQuerySignUpUser } from "@/app/signup/_hooks/useQuerySignUpUser";
 import { Button } from "@/app/_common/shadcn/ui/button";
 import {
@@ -15,6 +13,8 @@ import {
 } from "@/app/_common/shadcn/ui/alert-dialog";
 
 import { useDeleteUser } from "@/app/_common/hooks/mutation/useDeleteUser";
+
+import { toast } from "@/app/_common/utils/toast";
 
 function DeleteUserButton() {
   const { data } = useQuerySignUpUser();
