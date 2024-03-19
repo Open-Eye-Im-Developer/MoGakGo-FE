@@ -2,11 +2,12 @@ import { Suspense } from "react";
 import Image from "next/image";
 
 import { generateViewport } from "../_common/utils/generateViewport";
+import { theme } from "../_common/constants/viewPortTheme";
 import LoginForm from "./_components/LoginForm";
 
 import type { Viewport } from "next";
 
-export const viewport: Viewport = generateViewport("#E8E8E8");
+export const viewport: Viewport = generateViewport(theme.GRAY);
 
 function LoginPage() {
   return (
