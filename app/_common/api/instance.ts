@@ -25,14 +25,17 @@ instance.interceptors.request.use(config => {
 
 instance.interceptors.response.use(
   async response => {
+    const refreshToken = getCookie("refreshToken");
+
+    console.log("refreshToken", refreshToken);
     return response;
   },
   async error => {
     const { status, config } = error.response;
-    // TODO: 응답 헤더의 Set-Cookie로 refreshToken 저장으로 변경되어 삭제 필요?
+    // TODO: 백엔드에서 가져온 cookie를 브라우저에서 get 하는지 확인하기
     const refreshToken = await getCookie("refreshToken", "");
 
-    // TODO: 백엔드 reissue api 수정 후 조건 변경
+    // TODO: accessToken을 쿠키에 저장하여 1시간 이후가 되면 자동 갱신하도록 수정?
     if (status === 404) {
       const newAccessToken = await reIssueAccessToken(refreshToken);
 

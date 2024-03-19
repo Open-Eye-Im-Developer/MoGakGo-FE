@@ -12,3 +12,9 @@ export interface reIssueAccessTokenResponse {
   accessToken: string;
   signUpComplete: boolean;
 }
+
+export interface LoginResponse {
+  accessToken: string;
+  refreshToken: string;
+  signUpComplete: boolean;
+}

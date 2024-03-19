@@ -49,9 +49,6 @@ export const getSignUpUser = async () => {
 
 export const reIssueAccessToken = async (refreshToken: string) => {
   try {
-    // TODO: 백엔드 reissue api 수정 후 주석 해제
-    // if (refreshToken === "") return navigate("/login");
-
     const { data } = await instance.post<reIssueAccessTokenResponse>(
       "/auth/reissue",
       {
