@@ -16,7 +16,7 @@ interface DialogMoreInfoProps extends Profile {}
 
 function DialogMoreInfo(props: DialogMoreInfoProps) {
   const profile = props;
-
+  
   return (
     <Dialog>
       <DialogTrigger asChild>
