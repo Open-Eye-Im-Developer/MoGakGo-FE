@@ -26,8 +26,10 @@ function SignupForm() {
   // TODO: accessToken도 마찬가지로 login 성공 시에 저장됨. useSearchTokens 자체 제거
   // const { newAccessToken, newRefreshToken } = useSearchTokens("session");
 
-  const newAccessToken = localStorage.getItem("accessToken") ?? "";
-  const newRefreshToken = localStorage.getItem("refreshToken") ?? "";
+  const newAccessToken =
+    typeof window !== "undefined" ? sessionStorage.getItem("accessToken") : "";
+  const newRefreshToken =
+    typeof window !== "undefined" ? sessionStorage.getItem("refreshToken") : "";
 
   const { data: userData } = useQuerySignUpUser();
   const { data: languages } = useQueryDevelopLanguages();
@@ -53,8 +55,8 @@ function SignupForm() {
   });
 
   const signUp = useMutationSignup(
-    newAccessToken,
-    newRefreshToken,
+    newAccessToken ?? "",
+    newRefreshToken ?? "",
     languages ?? [],
   );
 
@@ -100,8 +102,8 @@ function SignupForm() {
               className={cn(
                 `${nextStep === 2 ? "animate-signup-fade-in" : "hidden animate-signup-fade-out opacity-0"}`,
               )}
-              newAccessToken={newAccessToken}
-              newRefreshToken={newRefreshToken}
+              newAccessToken={newAccessToken ?? ""}
+              newRefreshToken={newRefreshToken ?? ""}
               setSignupOpen={setSignupOpen}
             />
           </form>
