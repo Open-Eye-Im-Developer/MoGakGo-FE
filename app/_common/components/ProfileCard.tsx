@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
+import { Profile } from "@/app/project/_types/type";
 import InfoPopover from "@/app/project/_components/InfoPopover";
 import ButtonRotate from "@/app/project/_components/ButtonRotate";
 
@@ -84,7 +85,7 @@ function ProfileCard(props: ProfileCardProps) {
             <p className="w-60 overflow-hidden text-center text-sm">{bio}</p>
           </div>
           <div className="flex flex-col items-center">
-            <InfoPopover type="INTEREST" infoList={wantedJobs} />
+            <InfoPopover type="INTEREST" infoList={wantedJobs!} />
             <InfoPopover type="LANG" infoList={developLanguages} />
           </div>
         </div>
