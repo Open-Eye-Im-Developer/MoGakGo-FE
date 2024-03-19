@@ -1,7 +1,9 @@
 import React from "react";
 
+import { PlaceItemData } from "../_types/type";
+
 interface PlaceItemProps {
-  place: Partial<PlaceItem>;
+  place: Partial<PlaceItemData>;
 }
 
 function PlaceItem(props: PlaceItemProps) {

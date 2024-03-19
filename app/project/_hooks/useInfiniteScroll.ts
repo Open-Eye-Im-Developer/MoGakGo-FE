@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
+import { RequestList } from "../_types/type";
+
 function useInfiniteScroll(data: RequestList[]) {
   const [cursorId, setCursorId] = useState<number | null>(null);
   const ref = useRef<HTMLDivElement>(null);

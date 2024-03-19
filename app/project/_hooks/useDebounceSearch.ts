@@ -3,9 +3,11 @@ import axios from "axios";
 
 import { usePositionStore } from "@/app/_common/store/usePositionStore";
 
+import { FormProps, PlaceItemData } from "../_types/type";
+
 function useDebounceSearch(form: FormProps["form"]) {
   const [placeInput, setPlaceInput] = useState<string>("");
-  const [placeList, setPlaceList] = useState<PlaceItem[]>([]);
+  const [placeList, setPlaceList] = useState<PlaceItemData[]>([]);
   const [overlay, setOverlay] = useState<boolean>(false);
   const { getPosition } = usePositionStore();
 
@@ -15,7 +17,7 @@ function useDebounceSearch(form: FormProps["form"]) {
   };
 
   // TODO: 프로젝트 생성 API와 연결하여, 장소 데이터를 전달하는 로직 추가하기.
-  const handleClickPlace = async (place: PlaceItem) => {
+  const handleClickPlace = async (place: PlaceItemData) => {
     setOverlay(false);
     setPlaceInput(place.place_name);
     form.setValue("place", place.place_name);

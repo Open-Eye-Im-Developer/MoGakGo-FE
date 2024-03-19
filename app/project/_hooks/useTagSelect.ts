@@ -1,5 +1,7 @@
 import React, { useRef, useState } from "react";
 
+import { FormProps } from "../_types/type";
+
 function useTagSelect(form: FormProps["form"]) {
   const ref = useRef<HTMLInputElement>(null);
   const [tagList, setTagList] = useState<string[]>([]);

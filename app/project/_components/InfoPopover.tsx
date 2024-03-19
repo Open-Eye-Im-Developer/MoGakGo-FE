@@ -18,7 +18,7 @@ type InfoType = "LANG" | "INTEREST";
 
 interface InfoPopoverProps {
   type: InfoType;
-  infoList: string[] | WantedJobs[] | undefined;
+  infoList: WantedJobs[] | string[] | undefined;
 }
 
 function InfoPopover(props: InfoPopoverProps) {
