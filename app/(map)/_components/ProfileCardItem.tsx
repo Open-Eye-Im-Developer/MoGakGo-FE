@@ -52,7 +52,7 @@ function ProfileCardItem({ profile }: Props) {
   const handleToggleButton = () => {
     if (!user) return;
     toggleLikeProfile({
-      isLiked: isLiked ?? isAlreadyLiked,
+      isLiked: isLiked ?? isAlreadyLiked!,
       likeInfo: { senderId: user.id, receiverId },
     });
   };
@@ -110,7 +110,7 @@ function ProfileCardItem({ profile }: Props) {
             <CardFooter className="flex justify-end">
               <ButtonLike
                 onClick={handleToggleButton}
-                isLiked={isLiked ?? isAlreadyLiked}
+                isLiked={isLiked ?? isAlreadyLiked!}
               />
             </CardFooter>
           </Card>

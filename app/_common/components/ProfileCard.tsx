@@ -1,16 +1,20 @@
 import React from "react";
 import Link from "next/link";
 
-import { Profile } from "@/app/project/_types/type";
 import InfoPopover from "@/app/project/_components/InfoPopover";
 import ButtonRotate from "@/app/project/_components/ButtonRotate";
+import ButtonLike from "@/app/project/_components/ButtonLike";
+import useToggleLikeProfile from "@/app/(map)/_api/useToggleLikeProfile";
 
+import { Profile } from "../types/profile";
+import { useAuthStore } from "../store/useAuthStore";
 import { cn } from "../shadcn/utils";
 import { YProgress } from "../shadcn/ui/y-progress";
 import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
 } from "../shadcn/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "../shadcn/ui/avatar";
@@ -25,23 +29,38 @@ interface ProfileCardProps {
 function ProfileCard(props: ProfileCardProps) {
   const {
     profile: {
-      username,
-      githubId,
-      avatarUrl,
-      githubUrl,
-      bio,
-      jandiRate,
-      developLanguages,
-      wantedJobs,
+      response: {
+        id: receiverId,
+        username,
+        githubId,
+        avatarUrl,
+        githubUrl,
+        bio,
+        jandiRate,
+        developLanguages,
+        wantedJobs,
+      },
+      requestYn: isAlreadyLiked,
     },
     isBehind,
     onRotate,
   } = props;
 
+  const { user } = useAuthStore();
+  const { toggleLikeProfile, isLiked } = useToggleLikeProfile();
+
+  const handleToggleButton = () => {
+    if (!user) return;
+    toggleLikeProfile({
+      isLiked: isLiked ?? isAlreadyLiked!,
+      likeInfo: { senderId: user.id, receiverId },
+    });
+  };
+
   return (
     <Card
       className={cn(
-        "card relative flex h-full w-full flex-col border-none shadow-none",
+        "card relative z-[9999] flex h-full w-full flex-col",
         isBehind
           ? "absolute inset-0 left-0 top-0 overflow-hidden [backface-visibility:hidden] [transform:rotateY(180deg)]"
           : "",
@@ -56,7 +75,7 @@ function ProfileCard(props: ProfileCardProps) {
         </CardDescription>
       </CardHeader>
       <CardContent className="flex grow flex-col items-center gap-8 px-3 py-2">
-        <div className="flex w-full flex-col gap-3">
+        <div className="flex w-full grow flex-col gap-3">
           <div className="flex w-full justify-between sm:justify-center">
             <div className="relative ml-2 rounded-full">
               <Avatar className="h-52 w-52 bg-[#ffffff]">
@@ -76,7 +95,7 @@ function ProfileCard(props: ProfileCardProps) {
               </div>
             </div>
           </div>
-          <div className="flex flex-col items-center gap-4">
+          <div className="flex grow flex-col items-center gap-4">
             <div className="flex flex-col items-center gap-1 p-1">
               <h1 className="relative inline-block text-2xl font-bold before:absolute before:-inset-2 before:block before:-skew-y-3 before:border-2 before:border-black before:bg-gradient-to-r before:from-[#FF915E] before:to-[#552AFF]">
                 <span className="relative text-black">{username}</span>
@@ -85,17 +104,25 @@ function ProfileCard(props: ProfileCardProps) {
                 {"이세계 개발자"}
               </h3>
             </div>
-            <p className="line-clamp-3 w-40 overflow-hidden text-center text-sm">
+            <p className="line-clamp-3 w-40 grow overflow-hidden text-center text-sm">
               {bio ??
                 "엄마 엄마 엄마 밖에 눈이와요. 하얀 눈이 와요 이야 이쁘다아아아아ㅏ아앙"}
             </p>
           </div>
-          <div className="flex items-center justify-center gap-2">
+          <div className="mb-3 flex items-center justify-center gap-2">
             <InfoPopover type="INTEREST" infoList={wantedJobs} />
             <InfoPopover type="LANG" infoList={developLanguages} />
           </div>
         </div>
       </CardContent>
+      {!isBehind && (
+        <CardFooter className="flex justify-end">
+          <ButtonLike
+            onClick={handleToggleButton}
+            isLiked={isLiked ?? isAlreadyLiked!}
+          />
+        </CardFooter>
+      )}
     </Card>
   );
 }
