@@ -1,7 +1,13 @@
 import { Suspense } from "react";
 
+import { generateViewport } from "../_common/utils/generateViewport";
+import { theme } from "../_common/constants/viewPortTheme";
 import LoadingSpinner from "../_common/components/LoadingSpinner";
 import ReviewForm from "./_components/ReviewForm";
+
+import type { Viewport } from "next";
+
+export const viewport: Viewport = generateViewport(theme.SKY);
 
 function ReviewPage() {
   return (
