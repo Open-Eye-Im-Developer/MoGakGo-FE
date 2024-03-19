@@ -1,5 +1,6 @@
 "use client";
 
+import { MouseEvent } from "react";
 import { usePathname } from "next/navigation";
 
 import { navigate } from "../utils/redirect";
@@ -7,6 +8,10 @@ import { Menubar, MenubarMenu, MenubarTrigger } from "../shadcn/ui/menubar";
 
 function NavigationBottom() {
   const pathname = usePathname();
+  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+    const path = (event.target as HTMLButtonElement).value;
+    navigate(path);
+  };
 
   return (
     <Menubar
@@ -15,7 +20,8 @@ function NavigationBottom() {
     >
       <MenubarMenu value="/">
         <MenubarTrigger
-          onClick={() => navigate("/")}
+          value="/"
+          onClick={handleClick}
           className="inline-block min-w-20"
         >
           지도
@@ -23,7 +29,8 @@ function NavigationBottom() {
       </MenubarMenu>
       <MenubarMenu value="/my-page">
         <MenubarTrigger
-          onClick={() => navigate("/my-page")}
+          value="/my-page"
+          onClick={handleClick}
           className="inline-block min-w-20"
         >
           마이
@@ -31,7 +38,8 @@ function NavigationBottom() {
       </MenubarMenu>
       <MenubarMenu value="/chat">
         <MenubarTrigger
-          onClick={() => navigate("/chat")}
+          value="/chat"
+          onClick={handleClick}
           className="inline-block min-w-20"
         >
           채팅
@@ -39,7 +47,8 @@ function NavigationBottom() {
       </MenubarMenu>
       <MenubarMenu value="/project">
         <MenubarTrigger
-          onClick={() => navigate("/project")}
+          value="/project"
+          onClick={handleClick}
           className="inline-block min-w-20"
         >
           모각고
