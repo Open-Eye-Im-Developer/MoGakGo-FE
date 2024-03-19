@@ -30,7 +30,11 @@ function ButtonRequest(props: ButtonReuqestProps) {
     }
   };
 
-  return <Button onClick={handleRequest}>요청</Button>;
+  return (
+    <Button onClick={handleRequest} className="bg-neoBlue text-white">
+      요청
+    </Button>
+  );
 }
 
 export default ButtonRequest;

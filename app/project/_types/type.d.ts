@@ -1,3 +1,5 @@
+import { WantedJobs } from "@/app/_common/types/user";
+
 interface Form {
   place: string;
   startHour: string;
@@ -7,7 +9,7 @@ interface Form {
   tags?: string[] | undefined;
 }
 
-interface PlaceItem {
+interface PlaceItemData {
   place_name: string;
   distance: string;
   place_url: string;
@@ -30,20 +32,22 @@ interface PlaceResponseProps {
   documents: PlaceItem[];
 }
 
+interface Profile {
+  id?: number;
+  username: string;
+  githubId: string;
+  avatarUrl: string;
+  githubUrl: string;
+  bio?: string;
+  jandiRate?: number;
+  achievementTitle?: string;
+  developLanguages?: string[];
+  wantedJobs?: WantedJobs[] | string[];
+}
+
 interface RequestList {
   id: number;
-  senderPreview: {
-    id: number;
-    username: string;
-    githubId: string;
-    avatarUrl: string;
-    githubUrl: string;
-    bio: string;
-    jandiRate: number;
-    achievementTitle: string;
-    developLanguages: string[];
-    wantedJobs: string[];
-  };
+  senderPreview: Profile;
   requestStatus: string;
 }
 

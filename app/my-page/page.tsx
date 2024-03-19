@@ -21,7 +21,7 @@ function MyPage() {
 
   return (
     <>
-      <StackNavigator content={"마이페이지"} />
+      <StackNavigator element={"마이페이지"} />
       <main className="container flex min-h-screen max-w-2xl flex-col gap-8 pb-32">
         <Profile />
         <LikeCounter />

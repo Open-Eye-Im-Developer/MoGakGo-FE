@@ -8,6 +8,7 @@ import {
   FormLabel,
 } from "@/app/_common/shadcn/ui/form";
 
+import { FormProps } from "../_types/type";
 import useDebounceSearch from "../_hooks/useDebounceSearch";
 import PlaceList from "./PlaceList";
 
@@ -29,7 +30,7 @@ function FormPlace(props: FormTagProps) {
       name="place"
       render={({ field }) => (
         <FormItem>
-          <FormLabel className="text-base">📍 장소</FormLabel>
+          <FormLabel className="text-base">장소</FormLabel>
           <FormControl>
             <>
               <Input
@@ -37,6 +38,7 @@ function FormPlace(props: FormTagProps) {
                 placeholder="장소를 입력하세요."
                 value={placeInput || ""}
                 onChangeCapture={handleChangePlace}
+                className="shadow-neo-thin"
               />
               <PlaceList
                 placeList={placeList}

@@ -24,7 +24,7 @@ import { Checkbox } from "@/app/_common/shadcn/ui/checkbox";
 import { Button } from "@/app/_common/shadcn/ui/button";
 import { Badge } from "@/app/_common/shadcn/ui/badge";
 
-import { WANTED_JOB } from "@/app/_common/constants/wantedJob.constants";
+import { WANTED_JOB } from "@/app/_common/constants/wantedJob";
 
 import { editFormSchema } from "../../_util/validation";
 

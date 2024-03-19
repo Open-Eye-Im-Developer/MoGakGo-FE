@@ -12,6 +12,7 @@ import {
 
 import { Project } from "@/app/_common/types/project";
 
+import { RequestList } from "../_types/type";
 import useInfiniteScroll from "../_hooks/useInfiniteScroll";
 import useGetRequestListQuery from "../_hooks/useGetRequestListQuery";
 import useFlip from "../_hooks/useFlip";
@@ -28,8 +29,11 @@ function ProjectCardContainer({ project }: Props) {
   const { flipped, handleFlip } = useFlip();
   const [requestList, setRequestList] = useState<RequestList[]>([]);
   const { ref, cursorId } = useInfiniteScroll(requestList!);
-  const { data } = useGetRequestListQuery(project.projectId, cursorId);
-
+  const { data } = useGetRequestListQuery(
+    project.projectId,
+    cursorId,
+    project.creator.id,
+  );
   useEffect(() => {
     if (!data || "timestamp" in data) return;
     if (data) {
@@ -43,8 +47,8 @@ function ProjectCardContainer({ project }: Props) {
   }, [data]);
 
   return (
-    <Tabs defaultValue="card" className="h-[550px] w-[330px] sm:w-[450px]">
-      <TabsList className="glass-morphism grid w-full grid-cols-2">
+    <Tabs defaultValue="card" className="h-[600px] w-[330px] sm:w-[450px]">
+      <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="card">Card</TabsTrigger>
         <TabsTrigger value="chat">Chat</TabsTrigger>
       </TabsList>

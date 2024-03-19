@@ -1,15 +1,13 @@
-import {
-  IconMoodSad,
-  IconMoodSadDizzy,
-  IconMoodSmile,
-  IconMoodHappy,
-  IconMoodXd,
-  TablerIconsProps,
-} from "@tabler/icons-react";
-
 import { cn } from "@/app/_common/shadcn/utils";
 
-type RatingType = "sad-dizzy" | "sad" | "smile" | "happy" | "xd";
+import Icon from "@/app/_common/components/Icon";
+
+type RatingType =
+  | "review-terrible"
+  | "review-bad"
+  | "review-ok"
+  | "review-good"
+  | "review-awesome";
 
 interface RatingItemProps {
   type: RatingType;
@@ -19,45 +17,18 @@ interface RatingItemProps {
 
 function RatingItem({ type, checked, onChangeChecked }: RatingItemProps) {
   return (
-    <RatingIcon
+    <Icon
+      id={type}
       onChange={onChangeChecked}
-      type={type}
-      width={50}
-      height={50}
-      strokeWidth={1.5}
+      width={40}
+      height={40}
       className={cn(
         checked
-          ? "text-secondary"
-          : "text-primary text-opacity-60 hover:text-secondary",
+          ? "text-neoYellow"
+          : "text-black text-opacity-60 hover:text-neoYellow",
       )}
     />
   );
-}
-
-function RatingIcon(props: TablerIconsProps) {
-  let IconComponent: (props: TablerIconsProps) => JSX.Element;
-
-  switch (props.type) {
-    case "sad-dizzy":
-      IconComponent = IconMoodSadDizzy;
-      break;
-    case "sad":
-      IconComponent = IconMoodSad;
-      break;
-    case "smile":
-      IconComponent = IconMoodSmile;
-      break;
-    case "happy":
-      IconComponent = IconMoodHappy;
-      break;
-    case "xd":
-      IconComponent = IconMoodXd;
-      break;
-    default:
-      IconComponent = IconMoodSmile;
-  }
-
-  return <IconComponent {...props} />;
 }
 
 export default RatingItem;

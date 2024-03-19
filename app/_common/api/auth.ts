@@ -1,8 +1,7 @@
-import { toast } from "sonner";
-
 import { SignupRequest } from "@/app/signup/_type/signup";
 import { reIssueAccessTokenResponse } from "@/app/login/_types/login.types";
 
+import { toast } from "../utils/toast";
 import { navigate } from "../utils/redirect";
 import { User } from "../types/user";
 import { instance } from "../api/instance";
@@ -30,6 +29,8 @@ export const getSignUpUser = async () => {
 
 export const reIssueAccessToken = async (refreshToken: string) => {
   try {
+    if (refreshToken === "") return navigate("/login");
+
     const { data } = await instance.post<reIssueAccessTokenResponse>(
       "/auth/reissue",
       {
@@ -42,7 +43,6 @@ export const reIssueAccessToken = async (refreshToken: string) => {
     console.error(error);
 
     localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
 
     toast.error("인증이 만료되었습니다. 재로그인이 필요합니다.");
 

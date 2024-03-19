@@ -8,7 +8,7 @@ function useGetCurrentProjectQuery() {
   const { user } = useAuthStore();
 
   const getCurrentProject = async () => {
-    const { data } = await instance.get(`/projects/12/info`);
+    const { data } = await instance.get(`/projects/${user!.id}/info`);
 
     return data;
   };

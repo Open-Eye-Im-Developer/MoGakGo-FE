@@ -11,6 +11,7 @@ import { Form, FormMessage } from "@/app/_common/shadcn/ui/form";
 import { Button } from "@/app/_common/shadcn/ui/button";
 
 import formatTime from "../_utils/formatTime";
+import { FormmatedValues } from "../_types/type";
 import useCreateProjectMutation from "../_hooks/useCreateProjectMutation";
 import formSchema from "../_constants/formSchema";
 import FormTime from "./FormTime";
@@ -82,7 +83,7 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
               <div className="flex justify-between gap-3">
                 <FormTime
                   form={form}
-                  label="🕡 시작"
+                  label="시작"
                   hourFieldName="startHour"
                   minuteFieldName="startMinute"
                 />
@@ -93,7 +94,7 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
                 />
                 <FormTime
                   form={form}
-                  label="🕡 종료"
+                  label="종료"
                   hourFieldName="endHour"
                   minuteFieldName="endMinute"
                 />
@@ -107,10 +108,14 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
             <FormTag form={form} />
           </main>
         </section>
-        <footer className="flex justify-end gap-1">
-          <Button type="submit">생성</Button>
+        <footer className="flex justify-end gap-2 text-white">
+          <Button type="submit" className="bg-neoBlue">
+            생성
+          </Button>
           <DialogClose asChild>
-            <Button type="button">취소</Button>
+            <Button type="button" className="bg-neoRed">
+              취소
+            </Button>
           </DialogClose>
         </footer>
       </form>

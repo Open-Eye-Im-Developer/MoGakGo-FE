@@ -11,7 +11,7 @@ import {
   AvatarImage,
 } from "@/app/_common/shadcn/ui/avatar";
 
-import { WANTED_JOB } from "@/app/_common/constants/wantedJob.constants";
+import { WANTED_JOB } from "@/app/_common/constants/wantedJob";
 
 import { Achievement } from "@/app/_common/types/user";
 

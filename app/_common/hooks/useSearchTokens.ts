@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import { useQuerySignUpUser } from "@/app/signup/_hooks/useQuerySignUpUser";
 
+import { setCookie } from "../utils/cookie";
 import { useAuthStore } from "../store/useAuthStore";
 
 const saveNewTokens = (newAccessToken: string, newRefreshToken: string) => {
@@ -14,7 +15,11 @@ const saveNewTokens = (newAccessToken: string, newRefreshToken: string) => {
 
 const saveUpdatedTokens = (newAccessToken: string, newRefreshToken: string) => {
   localStorage.setItem("accessToken", newAccessToken);
-  localStorage.setItem("refreshToken", newRefreshToken);
+
+  setCookie("refreshToken", newRefreshToken, {
+    httpOnly: true,
+    maxAge: 60 * 60 * 24 * 14,
+  });
 };
 
 export const useSearchTokens = (type: "local" | "session") => {

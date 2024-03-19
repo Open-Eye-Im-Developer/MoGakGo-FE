@@ -1,6 +1,5 @@
 "use client";
 
-import { toast } from "sonner";
 import { MouseEvent, useEffect, useRef, useState } from "react";
 import { EmblaCarouselType } from "embla-carousel";
 
@@ -8,19 +7,16 @@ import useQueryGeoAreaCode from "@/app/auth-mylocation/_hooks/useQueryGeoAreaCod
 import { usePositionStore } from "@/app/_common/store/usePositionStore";
 import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { cn } from "@/app/_common/shadcn/utils";
-import {
-  Carousel,
-  CarouselApi,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/app/_common/shadcn/ui/carousel";
+import { Carousel, CarouselApi } from "@/app/_common/shadcn/ui/carousel";
+import WithSearchTokens from "@/app/_common/hoc/WithSearchTokens";
+import WithNavigation from "@/app/_common/hoc/WithNavigation";
 
-import WithSearchTokens from "@/app/_common/components/WithSearchTokens";
 import MapComponent from "@/app/_common/components/MapComponent";
 import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
 
 import REGION_CODE from "@/app/_common/constants/regionCode";
 
+import { toast } from "@/app/_common/utils/toast";
 import { navigate } from "@/app/_common/utils/redirect";
 
 import { formatRegionName } from "../_utils/formatRegionName";
@@ -59,7 +55,6 @@ function Map() {
 
   useEffect(() => {
     if (!areaCode) return;
-
     toast.info("내가 위치한 지역으로 이동합니다.");
     setRegionCode(areaCode);
     const regionName = formatRegionName(areaCode);
@@ -90,9 +85,6 @@ function Map() {
           label: "로그인하기",
           onClick: () => navigate("/login"),
         },
-        actionButtonStyle: {
-          backgroundColor: "#0973DC",
-        },
       });
       return;
     }
@@ -114,12 +106,7 @@ function Map() {
     }
   };
 
-  const handleCancelCard = (event: MouseEvent<HTMLDivElement>) => {
-    if (!(event.target instanceof HTMLDivElement)) return;
-    if (event.target.id === "carousel-wrap") setIsListShow(false);
-  };
-
-  const handleEmptyCardClose = () => {
+  const handleCardClose = () => {
     setIsListShow(false);
     zoomOut();
   };
@@ -147,10 +134,9 @@ function Map() {
       </div>
       <Carousel
         className={cn(
-          "h-screen w-screen transition-opacity delay-1000 duration-300",
-          isListShow ? "visible opacity-100" : "invisible opacity-0",
+          "z-60 h-screen w-screen transition-all delay-0 duration-300",
+          isListShow ? "visible opacity-100 delay-1000" : "invisible opacity-0",
         )}
-        onClick={handleCancelCard}
         setApi={setCarouselApi}
       >
         <div
@@ -158,17 +144,15 @@ function Map() {
           className="flex h-full w-full flex-col items-center justify-center"
         >
           {cardList.projectList.length !== 0 ||
-          cardList.profileList.length !== 0 ? (
-            <CardList cardList={cardList} />
+            cardList.profileList.length !== 0 ? (
+            <CardList cardList={cardList} onClick={handleCardClose} />
           ) : (
-            <EmptyCardList onClick={handleEmptyCardClose} />
+            <EmptyCardList onClick={handleCardClose} />
           )}
         </div>
-        <CarouselPrevious className="left-10 hidden md:inline-flex" />
-        <CarouselNext className="right-10 hidden md:inline-flex" />
       </Carousel>
     </div>
   );
 }
 
-export default WithSearchTokens(Map);
+export default WithNavigation(WithSearchTokens(Map), true);

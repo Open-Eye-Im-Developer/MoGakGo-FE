@@ -1,9 +1,10 @@
-import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { AxiosError } from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { updateUser } from "@/app/_common/api/user";
+
+import { toast } from "@/app/_common/utils/toast";
 
 export const useMutationUpdateUser = () => {
   const queryClient = useQueryClient();

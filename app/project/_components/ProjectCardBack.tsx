@@ -1,7 +1,6 @@
 "use client";
 
 import React, { forwardRef } from "react";
-import Image from "next/image";
 
 import { Separator } from "@/app/_common/shadcn/ui/separator";
 import {
@@ -11,11 +10,18 @@ import {
   CardTitle,
 } from "@/app/_common/shadcn/ui/card";
 import { Button } from "@/app/_common/shadcn/ui/button";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/app/_common/shadcn/ui/avatar";
 
+import { RequestList } from "../_types/type";
 import useAcceptRequestMutation from "../_hooks/useAcceptRequestMutation";
+import DialogMoreInfo from "./DialogMoreInfo";
 import ButtonRotate from "./ButtonRotate";
-import BadgeAdditional from "./BadgeAdditional";
 import "../_styles/card.css";
+
 
 interface CardBackProps {
   requestList?: RequestList[];
@@ -56,7 +62,11 @@ const ProjectCardBack = forwardRef<HTMLDivElement, CardBackProps>(
                     senderPreview: {
                       id: senderId,
                       username,
+                      githubId,
                       avatarUrl,
+                      githubUrl,
+                      bio,
+                      jandiRate,
                       achievementTitle,
                       developLanguages,
                       wantedJobs,
@@ -70,33 +80,35 @@ const ProjectCardBack = forwardRef<HTMLDivElement, CardBackProps>(
                         key={senderId}
                         className="flex items-center justify-between"
                       >
-                        <aside className="flex items-center gap-3">
-                          <Image
-                            src={avatarUrl}
-                            alt="프로필 이미지"
-                            width={60}
-                            height={60}
-                            className="rounded-2xl"
-                          />
-                          <div className="flex flex-col gap-3">
-                            <div className="flex items-center gap-2">
-                              <p className="text-lg font-semibold">
-                                {username}
-                              </p>
-                              <p className="text-xs text-[#F76A6A]">
-                                {achievementTitle || "null"}
-                              </p>
-                            </div>
+                        <aside className="flex items-center gap-5">
+                          <div className="ml-2 rounded-full">
+                            <Avatar className="h-14 w-14">
+                              <AvatarImage src={avatarUrl} alt="profile" />
+                              <AvatarFallback>CN</AvatarFallback>
+                            </Avatar>
+                          </div>
+                          <div className="flex flex-col gap-2">
+                            <p className="text-lg font-semibold">{username}</p>
+                            <p className="text-xs text-[#F76A6A]">
+                              {achievementTitle || "null"}
+                            </p>
                           </div>
                         </aside>
                         <aside className="flex items-center gap-2">
-                          <BadgeAdditional
-                            wantedJobs={wantedJobs}
+                          <DialogMoreInfo
+                            githubId={githubId}
+                            githubUrl={githubUrl}
+                            username={username}
+                            avatarUrl={avatarUrl}
+                            bio={bio}
+                            jandiRate={jandiRate}
+                            achievementTitle={achievementTitle}
                             developLanguages={developLanguages}
+                            wantedJobs={wantedJobs}
                           />
                           <Button
                             size="sm"
-                            className="rounded-lg"
+                            className="rounded-lg bg-neoYellow"
                             onClick={() => handleAccept(id)}
                           >
                             수락

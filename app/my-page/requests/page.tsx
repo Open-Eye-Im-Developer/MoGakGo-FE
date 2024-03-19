@@ -23,7 +23,7 @@ function ProjectRequestsPage() {
 
   return (
     <>
-      <StackNavigator content={"내가 보낸 요청"} />
+      <StackNavigator element={"내가 보낸 요청"} />
       <main className="container flex min-h-screen max-w-2xl flex-col gap-8 pb-8">
         <section className="flex flex-col gap-2">
           {projects
