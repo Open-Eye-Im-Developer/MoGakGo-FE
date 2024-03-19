@@ -3,12 +3,26 @@
 import { MouseEvent } from "react";
 import { usePathname } from "next/navigation";
 
+import { toast } from "../utils/toast";
 import { navigate } from "../utils/redirect";
+import { useAuthStore } from "../store/useAuthStore";
 import { Menubar, MenubarMenu, MenubarTrigger } from "../shadcn/ui/menubar";
 
 function NavigationBottom() {
   const pathname = usePathname();
+  const { getUser } = useAuthStore();
+
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+    if (!getUser()) {
+      toast.warning("로그인 후 이용해주세요!", {
+        action: {
+          label: "로그인하기",
+          onClick: () => navigate("login"),
+        },
+      });
+      return;
+    }
+
     const path = (event.target as HTMLButtonElement).value;
     navigate(path);
   };
