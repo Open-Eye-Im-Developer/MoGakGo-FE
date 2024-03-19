@@ -9,6 +9,7 @@ import {
 } from "@/app/_common/shadcn/ui/select";
 import { FormField, FormItem, FormLabel } from "@/app/_common/shadcn/ui/form";
 
+import { FormProps } from "../_types/type";
 import useTime from "../_hooks/useTime";
 
 interface FormTimeProps extends FormProps {

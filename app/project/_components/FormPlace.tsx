@@ -8,6 +8,7 @@ import {
   FormLabel,
 } from "@/app/_common/shadcn/ui/form";
 
+import { FormProps } from "../_types/type";
 import useDebounceSearch from "../_hooks/useDebounceSearch";
 import PlaceList from "./PlaceList";
 
