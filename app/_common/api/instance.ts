@@ -31,17 +31,16 @@ instance.interceptors.response.use(
     const { status, config } = error.response;
     const refreshToken = await getCookie("refreshToken", "");
 
-    if (status === 401) {
-      if (config.url !== "/auth/reissue") {
-        const newAccessToken = await reIssueAccessToken(refreshToken);
+    // TODO: 백엔드 reissue api 수정 후 조건 변경
+    if (status === 404) {
+      const newAccessToken = await reIssueAccessToken(refreshToken);
 
-        if (newAccessToken) {
-          localStorage.setItem("accessToken", newAccessToken);
+      if (newAccessToken) {
+        localStorage.setItem("accessToken", newAccessToken);
 
-          config.headers.Authorization = `Bearer ${newAccessToken}`;
+        config.headers.Authorization = `Bearer ${newAccessToken}`;
 
-          return instance(config);
-        }
+        return instance(config);
       }
 
       return Promise.reject(error);

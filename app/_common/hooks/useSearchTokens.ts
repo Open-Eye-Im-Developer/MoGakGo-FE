@@ -30,7 +30,7 @@ export const useSearchTokens = (type: "local" | "session") => {
   const { data } = useQuerySignUpUser(!!newAccessToken);
   const { setUser, user } = useAuthStore();
 
-  const hasNoTokens = !newAccessToken || !newRefreshToken;
+  const hasNoTokens = !newAccessToken;
 
   useEffect(() => {
     if (hasNoTokens) return;
