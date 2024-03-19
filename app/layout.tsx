@@ -40,7 +40,13 @@ export default function RootLayout({
             {children}
             <Toaster />
             <SVGProvider />
-            <Sonner position="bottom-center" />
+            <Sonner
+              position="top-center"
+              toastOptions={{
+                style: { background: "transparent" },
+                unstyled: true,
+              }}
+            />
           </ThemeProvider>
         </ClientProvider>
         <Toaster />

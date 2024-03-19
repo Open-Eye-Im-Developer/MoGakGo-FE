@@ -36,7 +36,7 @@ function HistoryPage() {
 
   return (
     <main className="container flex min-h-screen max-w-2xl flex-col gap-8 bg-gray-50 pb-8 dark:bg-gray-950">
-      <StackNavigator content={"지난 만남 카드"} />
+      <StackNavigator element={"지난 만남 카드"} />
       <Tabs
         defaultValue={currentTab}
         className="space-y-4"

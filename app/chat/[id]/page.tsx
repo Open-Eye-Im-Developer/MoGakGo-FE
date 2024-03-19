@@ -18,7 +18,7 @@ async function ChattingRoomPage({
   return (
     <main>
       <StackNavigator
-        content={
+        element={
           <Profile avatarUrl={profileImage} username={name}>
             <span>{name}</span>
           </Profile>
