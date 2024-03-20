@@ -2,6 +2,7 @@ import axios from "axios";
 
 import { getCookie } from "../utils/cookie";
 import { reIssueAccessToken } from "./auth";
+
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const SERVER_VERSION = "/api/v1";
 

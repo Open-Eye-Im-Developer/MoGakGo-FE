@@ -1,6 +1,7 @@
 import React from "react";
 
 import { generateViewport } from "../_common/utils/generateViewport";
+import WithNavigation from "../_common/hoc/WithNavigation";
 import { theme } from "../_common/constants/viewPortTheme";
 import ProjectManageSection from "./_components/ProjectManageSection";
 
@@ -16,4 +17,4 @@ function ProjectPage() {
   );
 }
 
-export default ProjectPage;
+export default WithNavigation(ProjectPage, true);

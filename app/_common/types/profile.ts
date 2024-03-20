@@ -6,7 +6,7 @@ export interface Creator {
   githubId: string;
   avatarUrl: string;
   githubUrl: string;
-  bio: string;
+  bio?: string;
   jandiRate: number;
   achievementTitle: string;
   developLanguages: string[];
@@ -27,7 +27,7 @@ export interface Like {
 }
 export interface Profile {
   response: Creator;
-  requestYn: boolean;
+  requestYn?: boolean;
 }
 
 export interface ProfileLikeInfo {

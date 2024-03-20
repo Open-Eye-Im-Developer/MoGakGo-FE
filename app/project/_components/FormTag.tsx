@@ -31,7 +31,7 @@ function FormTag(props: FormTagProps) {
             <span className="text-xs text-[#a2a2a2]"> 최대 7글자</span>
           </FormLabel>
           <FormControl>
-            <>
+            <div className="flex flex-col gap-2">
               <Input
                 ref={ref}
                 placeholder="e.g. 조용한, 수다스러운 (최대 3개)"
@@ -50,7 +50,7 @@ function FormTag(props: FormTagProps) {
                   </Badge>
                 ))}
               </aside>
-            </>
+            </div>
           </FormControl>
           <FormMessage />
         </FormItem>

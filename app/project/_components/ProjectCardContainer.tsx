@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import { useQueryAchievements } from "@/app/achievements/_hooks/useQueryAchievements";
 import { cn } from "@/app/_common/shadcn/utils";
 import {
   Tabs,
@@ -34,6 +35,8 @@ function ProjectCardContainer({ project }: Props) {
     cursorId,
     project.creator.id,
   );
+  const { myAchievement } = useQueryAchievements();
+
   useEffect(() => {
     if (!data || "timestamp" in data) return;
     if (data) {
@@ -59,7 +62,11 @@ function ProjectCardContainer({ project }: Props) {
             `${flipped ? "[transform:rotateY(180deg)]" : ""}`,
           )}
         >
-          <ProjectCardFront onRotate={handleFlip} project={project} />
+          <ProjectCardFront
+            onRotate={handleFlip}
+            project={project}
+            achievementTitle={myAchievement?.title}
+          />
           <ProjectCardBack
             onRotate={handleFlip}
             requestList={requestList}

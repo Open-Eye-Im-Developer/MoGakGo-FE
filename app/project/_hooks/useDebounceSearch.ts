@@ -28,7 +28,7 @@ function useDebounceSearch(form: FormProps["form"]) {
   useEffect(() => {
     const { latitude, longitude } = getPosition();
 
-    if (overlay) {
+    if (overlay && placeInput.trim().length !== 0) {
       const timer = setTimeout(async () => {
         const { data } = await axios.get(
           `https://dapi.kakao.com/v2/local/search/keyword.json?query=${placeInput}&x=${longitude}&y=${latitude}&radius=10000`,

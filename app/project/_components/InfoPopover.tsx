@@ -29,19 +29,22 @@ function InfoPopover(props: InfoPopoverProps) {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="ghost" className="flex items-center gap-10">
-          <span className="text-lg">{title}</span>
+        <Button
+          variant="outline"
+          className="flex items-center gap-7 bg-transparent backdrop-blur-md"
+        >
+          <span className="text-xs">{title}</span>
           <Icon id="chevron-right" className="h-6 w-6" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="max-w-[200px] space-y-2">
+      <PopoverContent className="max-w-[200px] space-y-2 bg-transparent backdrop-blur-md">
         <header className="flex items-center gap-3 text-lg">
           <p>{title}</p>
           <Icon id={iconId} className="h-6 w-6" />
         </header>
         <main className="flex flex-wrap gap-1">
           {infoList!.map(info => (
-            <Badge key={info} variant="outline">
+            <Badge key={info} variant="outline" className="bg-neoGreen/70">
               {type === "LANG"
                 ? info
                 : WANTED_JOB_LABELS[info as keyof typeof WANTED_JOB_LABELS]}
