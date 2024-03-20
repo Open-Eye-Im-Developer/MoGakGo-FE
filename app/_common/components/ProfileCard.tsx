@@ -4,6 +4,7 @@ import Link from "next/link";
 import InfoPopover from "@/app/project/_components/InfoPopover";
 import ButtonRotate from "@/app/project/_components/ButtonRotate";
 import ButtonLike from "@/app/project/_components/ButtonLike";
+import { useQueryAchievements } from "@/app/achievements/_hooks/useQueryAchievements";
 import useToggleLikeProfile from "@/app/(map)/_api/useToggleLikeProfile";
 
 import { Profile } from "../types/profile";
@@ -48,6 +49,7 @@ function ProfileCard(props: ProfileCardProps) {
 
   const { user } = useAuthStore();
   const { toggleLikeProfile, isLiked } = useToggleLikeProfile();
+  const { myAchievement } = useQueryAchievements();
 
   const handleToggleButton = () => {
     if (!user) return;
@@ -101,7 +103,7 @@ function ProfileCard(props: ProfileCardProps) {
                 <span className="relative text-black">{username}</span>
               </h1>
               <h3 className="mt-3 text-xs font-bold text-[#F76A6A]">
-                {"이세계 개발자"}
+                {myAchievement?.title ?? "칭호가 없습니다."}
               </h3>
             </div>
             <p className="line-clamp-3 w-40 grow overflow-hidden text-center text-sm">
