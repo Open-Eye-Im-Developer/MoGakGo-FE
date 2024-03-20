@@ -39,6 +39,7 @@ function FormPlace(props: FormTagProps) {
                 value={placeInput || ""}
                 onChangeCapture={handleChangePlace}
                 className="shadow-neo-thin"
+                autoComplete="off"
               />
               <PlaceList
                 placeList={placeList}
