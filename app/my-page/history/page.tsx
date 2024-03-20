@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 
-import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { cn } from "@/app/_common/shadcn/utils";
 import {
   Menubar,
@@ -15,6 +14,7 @@ import StackNavigator from "@/app/_common/components/StackNavigator";
 
 import { MatchStatus } from "@/app/_common/types/matching";
 
+import { useQueryUserData } from "../_hooks/useQueryUserData";
 import { useInfiniteQueryProjectHistory } from "../_hooks/useInfiniteQueryProjectHistory";
 import ProjectCardSkeleton from "../_components/ProjectCardSkeleton";
 import ProjectCard from "../_components/ProjectCard";
@@ -34,7 +34,7 @@ function HistoryPage() {
     [currentTab],
   );
 
-  const { user } = useAuthStore();
+  const { data: user } = useQueryUserData();
   const { data, fetchNextPage, hasNextPage, isFetching, isPending } =
     useInfiniteQueryProjectHistory(user?.id, statusQuery);
 
