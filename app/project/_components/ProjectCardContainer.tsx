@@ -83,7 +83,7 @@ function ProjectCardContainer({ project, matchingId }: Props) {
         </div>
       </TabsContent>
       <TabsContent value="chat" className="h-full">
-        <ProjectChatCard chatRoomId={chatRoomId} />
+        {chatRoomId && <ProjectChatCard chatRoomId={chatRoomId} />}
       </TabsContent>
     </Tabs>
   );
