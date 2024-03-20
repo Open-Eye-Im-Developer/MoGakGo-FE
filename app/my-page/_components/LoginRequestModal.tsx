@@ -14,14 +14,14 @@ import { navigate } from "@/app/_common/utils/redirect";
 import { useQueryUserData } from "../_hooks/useQueryUserData";
 
 function LoginRequestModal() {
-  const { data } = useQueryUserData();
+  const { data, isLoading } = useQueryUserData();
 
   const handleClickLoginButton = () => {
     navigate("/login");
   };
 
   return (
-    <AlertDialog open={!data}>
+    <AlertDialog open={!data && !isLoading}>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>로그인이 필요한 페이지입니다.</AlertDialogTitle>
