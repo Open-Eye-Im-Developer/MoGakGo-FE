@@ -1,6 +1,6 @@
 import { PositionState } from "@/app/_common/types/position";
 
-import LocationModal from "../components/LocationModal";
+import GPSInfoModal from "../components/GPSInfoModal";
 import { toast } from "./toast";
 
 type Parameter = (state: PositionState) => void;
@@ -39,6 +39,9 @@ const errorCallback = (error: GeolocationPositionError) => {
     case error.PERMISSION_DENIED:
       toast.error("GPS 사용 요청이 거부되었습니다.", {
         description: "GPS 사용 요청을 허용해야 서비스 이용이 가능합니다.",
+        action: {
+          label: <GPSInfoModal />,
+        },
       });
       break;
     case error.POSITION_UNAVAILABLE:
@@ -47,12 +50,9 @@ const errorCallback = (error: GeolocationPositionError) => {
       });
       break;
     case error.TIMEOUT:
-      toast.error(
-        "위치 정보를 가져오기 위한 요청이 허용 시간을 초과했습니다",
-        {
-          description: "잠시 후 다시 이용해주세요.",
-        },
-      );
+      toast.error("위치 정보를 가져오기 위한 요청이 허용 시간을 초과했습니다", {
+        description: "잠시 후 다시 이용해주세요.",
+      });
       break;
     default:
       toast.error("알 수 없는 오류가 발생했습니다.", {
