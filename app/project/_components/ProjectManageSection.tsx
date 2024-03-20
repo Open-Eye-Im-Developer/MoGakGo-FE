@@ -29,7 +29,7 @@ function ProjectManageSection() {
   }, [matchingId]);
 
   return (
-    <main className="container relative flex h-full w-full flex-col items-center justify-center">
+    <main className="relative flex h-full w-full flex-col items-center">
       <div className="map-background" />
       <div className="map-background" />
       {!project && (
@@ -41,7 +41,7 @@ function ProjectManageSection() {
           <ProjectCreateDialog />
         </div>
       )}
-      <div className="mt-5">
+      <div className="z-[50] mt-10">
         {project && <ProjectCardContainer project={project} />}
       </div>
     </main>

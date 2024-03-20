@@ -54,7 +54,6 @@ function ProjectCardFront(props: CardFrontProps) {
         avatarUrl,
         githubUrl,
         username,
-        achievementTitle,
         bio,
         wantedJobs,
         jandiRate,
@@ -70,47 +69,50 @@ function ProjectCardFront(props: CardFrontProps) {
   return (
     <Card
       className={cn(
-        `absolute inset-0 left-0 top-0 flex flex-col [backface-visibility:hidden]`,
+        `absolute inset-0 left-0 top-0 flex flex-col [backface-visibility:hidden] `,
         initialRotate ? "[transform:rotateY(180deg)]" : "",
       )}
     >
       <CardHeader className="px-3 pt-2">
         <CardDescription className="flex justify-between text-lg font-bold text-black">
-          <span className="flex items-center">
+          <div className="flex items-center gap-2">
             <ButtonRotate
               isDisabled={!user || user.id !== id}
               onRotate={onRotate}
             />
             <Popover>
-              <PopoverTrigger className="rounded-md p-3 hover:bg-[#5454543e]">
-                <Icon id="project-tag" className="h-5 w-5" />
+              <PopoverTrigger className="flex h-10 w-[42px] items-center justify-center rounded-md border border-black bg-neoBlue shadow-neo-thin ">
+                <Icon id="project-tag" className="h-5 w-5 text-white" />
               </PopoverTrigger>
-              <PopoverContent className="max-w-[150px]">
-                <h1 className="mb-2 text-base font-bold">분위기 태그</h1>
+              <PopoverContent className="max-w-[200px] bg-transparent backdrop-blur-md">
+                <h1 className="mb-2 flex items-center gap-3 text-base font-bold">
+                  <span>분위기 태그</span>
+                  <Icon id="project-tag" className="h-5 w-5" />
+                </h1>
                 <div className="flex flex-wrap gap-1">
                   {projectTags.map(tag => (
-                    <Badge key={tag} variant="outline">
+                    <Badge
+                      key={tag}
+                      variant="outline"
+                      className="bg-neoGreen/70"
+                    >
                       {tag}
                     </Badge>
                   ))}
                 </div>
               </PopoverContent>
             </Popover>
-          </span>
-          <Link
-            href={githubUrl}
-            target="_blank"
-            className="flex items-center text-[#A2A2A2]"
-          >
+          </div>
+          <Link href={githubUrl} target="_blank" className="flex items-center">
             @{githubId}
           </Link>
         </CardDescription>
       </CardHeader>
-      <CardContent className="flex flex-col items-center gap-8 px-3 py-2 grow">
+      <CardContent className="relative flex grow flex-col items-center gap-8 px-3 py-2">
         <div className="flex w-full flex-col gap-3">
-          <div className="flex w-full justify-between ">
+          <div className="flex w-full justify-between sm:justify-center">
             <div className="relative ml-2 rounded-full">
-              <Avatar className="h-52 w-52">
+              <Avatar className="h-52 w-52 bg-[#ffffff]">
                 <AvatarImage src={avatarUrl} alt="profile" />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
@@ -121,27 +123,33 @@ function ProjectCardFront(props: CardFrontProps) {
               </div>
               <div className="flex flex-col gap-2">
                 <YProgress value={jandiRate} background="green" />
-                <span className="text-xs text-[#868686]">
-                  {jandiRate * 100}%
+                <span className="text-xs">
+                  {jandiRate < 0 ? "NaN" : jandiRate}%
                 </span>
               </div>
             </div>
           </div>
           <div className="flex flex-col items-center gap-4">
             <div className="flex flex-col items-center gap-1 p-1">
-              <h1 className="text-2xl font-bold">{username}</h1>
-              <h3 className="text-xs text-[#F76A6A]">{achievementTitle}</h3>
+              <h1 className="text-2xl font-bold">
+                <span className="relative text-black">{username}</span>
+              </h1>
+              <h3 className="mt-3 text-xs font-bold text-[#F76A6A]">
+                {"이세계 개발자"}
+              </h3>
             </div>
-            <p className="w-60 overflow-hidden text-center text-sm">{bio}</p>
+            <p className="line-clamp-3 w-40 overflow-hidden text-center text-sm">
+              {bio ?? "소개 문구가 없습니다."}
+            </p>
           </div>
-          <div className="flex flex-col items-center">
+          <div className="flex items-center justify-center gap-2">
             <InfoPopover type="INTEREST" infoList={wantedJobs} />
             <InfoPopover type="LANG" infoList={developLanguages} />
           </div>
         </div>
       </CardContent>
       {!initialRotate && (
-        <CardFooter className="flex items-center justify-between px-4">
+        <CardFooter className="m-2 flex shrink-0 items-center justify-between rounded-lg border-2 border-black bg-[#8f8f8f35] p-3 backdrop-blur-md">
           <div>
             <p className="font-bold">{meetDetail}</p>
             <p className="text-xs">

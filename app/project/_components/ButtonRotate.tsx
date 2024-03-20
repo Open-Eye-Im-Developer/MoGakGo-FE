@@ -14,12 +14,12 @@ function ButtonRotate(props: ButtonRotateProps) {
 
   return (
     <Button
-      variant="ghost"
-      className="mt-0 flex items-center justify-center p-3 hover:bg-[#5454543e]"
+      variant="default"
+      className="flex items-center justify-center bg-neoBlue px-3 text-white shadow-neo-thin"
       onClick={onRotate}
       disabled={isDisabled}
     >
-      <Icon id="rotate" className="h-5 w-5" />
+      <Icon id="rotate" className="h-4 w-4" />
     </Button>
   );
 }

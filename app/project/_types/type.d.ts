@@ -1,4 +1,4 @@
-import { WantedJobs } from "@/app/_common/types/user";
+import { Creator } from "@/app/_common/types/profile";
 
 interface Form {
   place: string;
@@ -32,22 +32,9 @@ interface PlaceResponseProps {
   documents: PlaceItem[];
 }
 
-interface Profile {
-  id?: number;
-  username: string;
-  githubId: string;
-  avatarUrl: string;
-  githubUrl: string;
-  bio?: string;
-  jandiRate?: number;
-  achievementTitle?: string;
-  developLanguages?: string[];
-  wantedJobs?: WantedJobs[] | string[];
-}
-
 interface RequestList {
   id: number;
-  senderPreview: Profile;
+  senderPreview: Creator;
   requestStatus: string;
 }
 

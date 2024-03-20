@@ -7,12 +7,11 @@ import {
 } from "@/app/_common/shadcn/ui/carousel";
 import { Button } from "@/app/_common/shadcn/ui/button";
 
+import ProfileCard from "@/app/_common/components/ProfileCard";
 import Icon from "@/app/_common/components/Icon";
 
 import { Project } from "@/app/_common/types/project";
 import { Profile } from "@/app/_common/types/profile";
-
-import ProfileCardItem from "./ProfileCardItem";
 
 interface Props {
   cardList: {
@@ -38,7 +37,11 @@ function CardList({ cardList, onClick }: Props) {
         {profileList.map((profile: Profile) => (
           <CarouselItem className="pt-11" key={profile.response.id}>
             <div className="flex items-center justify-center">
-              <ProfileCardItem profile={profile} />
+              <div className="h-[600px] w-[330px] sm:w-[450px]">
+                <div className="relative h-full">
+                  <ProfileCard profile={profile} isBehind={false} />
+                </div>
+              </div>
             </div>
           </CarouselItem>
         ))}

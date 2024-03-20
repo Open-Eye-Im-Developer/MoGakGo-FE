@@ -13,9 +13,6 @@
 }
 
 @layer components {
-  .card {
-    @apply glass-backdrop rounded-[26px] bg-white shadow-[35px_35px_68px_0px_rgba(120,120,120,0.5),inset_-5px_-5px_16px_0px_rgba(120,120,120,0.6),inset_0px_11px_28px_0px_rgb(255,255,255)] backdrop-blur-[5px];
-  }
   .glass-morphism {
     @apply glass-backdrop border border-solid border-[rgba(255,255,255,0.18)] bg-white/25 shadow-[0_8px_32px_0_#35353574] backdrop-blur-[7.5px];
   }
@@ -33,11 +30,14 @@
   }
 
   .map-background {
-    @apply before:animate-slide-infinite after:animate-slide-infinite absolute h-full w-full overflow-hidden before:absolute before:right-[100%] before:h-full before:w-full before:bg-[url("/images/mapBackgroundImage.png")] before:bg-[length:100%] before:content-[""] after:absolute after:h-full after:w-full after:bg-[url("/images/mapBackgroundImage.png")] after:bg-[length:100%] after:content-[""];
+    @apply absolute h-full w-full overflow-hidden before:absolute before:right-[100%] before:h-full before:w-full before:animate-slide-infinite before:bg-[url("/images/mapBackgroundImage.png")] before:bg-[length:100%] before:content-[""] after:absolute after:h-full after:w-full after:animate-slide-infinite after:bg-[url("/images/mapBackgroundImage.png")] after:bg-[length:100%] after:content-[""];
   }
 
   .main-logo {
-    @apply before:animate-slide-infinite after:animate-slide-infinite absolute  z-0 h-full w-full overflow-hidden before:absolute before:right-[100%] before:h-full before:w-full before:bg-[url("/images/main_logo.webp")] before:bg-[length:100%] before:content-[""] after:absolute after:h-full after:w-full after:bg-[url("/images/main_logo.webp")] after:bg-[length:100%] after:content-[""];
+    @apply absolute z-0 h-full  w-full overflow-hidden before:absolute before:right-[100%] before:h-full before:w-full before:animate-slide-infinite before:bg-[url("/images/main_logo.webp")] before:bg-[length:100%] before:content-[""] after:absolute after:h-full after:w-full after:animate-slide-infinite after:bg-[url("/images/main_logo.webp")] after:bg-[length:100%] after:content-[""];
+  }
+  .card {
+   
   }
 }
 
