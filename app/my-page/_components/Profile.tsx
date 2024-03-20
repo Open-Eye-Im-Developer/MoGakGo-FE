@@ -4,21 +4,17 @@ import { SignUpUser } from "@/app/signup/_type/signup";
 import { useQueryAchievements } from "@/app/achievements/_hooks/useQueryAchievements";
 import { Skeleton } from "@/app/_common/shadcn/ui/skeleton";
 import { Button } from "@/app/_common/shadcn/ui/button";
-import { Badge } from "@/app/_common/shadcn/ui/badge";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from "@/app/_common/shadcn/ui/avatar";
 
-import { WANTED_JOB } from "@/app/_common/constants/wantedJob";
-
 import { Achievement } from "@/app/_common/types/user";
 
 import { useQueryUserData } from "../_hooks/useQueryUserData";
 
 const buttonStyle = "h-8 text-xs shadow-neo-thin text-black";
-const badgeStyle = "border border-black bg-white text-black";
 
 function Profile() {
   const { data } = useQueryUserData();
@@ -69,18 +65,6 @@ export function ProfileLayout(props: ProfileLayoutProps) {
           </div>
         </div>
       </div>
-      <div className="flex flex-wrap justify-center gap-1">
-        {data.wantedJobs?.map(job => (
-          <Badge key={job} className={badgeStyle}>
-            {WANTED_JOB.find(el => el.id === job)?.label}
-          </Badge>
-        ))}
-        {data.developLanguages?.map(lang => (
-          <Badge key={lang} className={badgeStyle}>
-            {lang}
-          </Badge>
-        ))}
-      </div>
     </div>
   );
 }
@@ -98,11 +82,6 @@ export function ProfileSkeleton() {
           <Skeleton className="mt-2 h-[16px] w-full rounded-none" />
           <Skeleton className="mt-1 h-[16px] w-full rounded-none" />
         </div>
-      </div>
-      <div className="flex justify-center  gap-1">
-        {Array.from({ length: 6 }).map((_, index) => (
-          <Skeleton key={index} className="h-[22.2px] w-[80px] rounded-full" />
-        ))}
       </div>
     </div>
   );

@@ -70,3 +70,9 @@ export interface Achievement {
   progressCount: number;
   completed?: boolean;
 }
+
+export interface DevelopLanguage {
+  language: string;
+  byteSize: number;
+  imageUrl: string;
+}
