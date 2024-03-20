@@ -16,7 +16,7 @@ function ProjectChatCard(props: ChatCardProps) {
       <CardHeader className="border-b border-black p-0">
         <ProjectInfo chatRoomId={chatRoomId} />
       </CardHeader>
-      <CardContent className="relative flex h-[550px] w-[330px] flex-col p-0 px-0 sm:w-[450px]">
+      <CardContent className="relative flex h-[500px] w-[330px] flex-col p-0 px-0 sm:w-[450px]">
         <MessageContainer chatRoomId={chatRoomId} />
       </CardContent>
     </Card>
