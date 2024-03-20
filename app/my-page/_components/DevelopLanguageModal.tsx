@@ -33,8 +33,6 @@ function DevelopLanguageModal(props: DevelopLanguageModalProps) {
     return 0;
   }, [data]);
 
-  console.log(totalByte);
-
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
