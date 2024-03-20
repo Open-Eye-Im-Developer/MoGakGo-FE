@@ -16,54 +16,49 @@ function ProjectManageSection() {
   const { toast } = useToast();
   const webSocket = useRef<WebSocket | null>(null);
   const { user } = useAuthStore();
-
+  let reconnectInterval: NodeJS.Timeout;
   useEffect(() => {
-    let reconnectInterval: NodeJS.Timeout;
-
-    const connect = (userId: number) => {
-      webSocket.current = new WebSocket(`ws://3.38.76.76:8080/ws/achievement`);
-      webSocket.current.onopen = () => {
-        console.log("WebSocket is open now.");
-        webSocket.current?.send(userId.toString());
-        clearInterval(reconnectInterval);
-      };
-
-      webSocket.current.onmessage = (event: MessageEvent) => {
-        console.log("websocket message received!: ", event.data);
-      };
-
-      webSocket.current.onclose = error => {
-        reconnectInterval = setInterval(() => reconnect(user!.id), 5000);
-        console.log(error);
-      };
-
-      webSocket.current.onerror = error => {
-        console.log(error);
-      };
-    };
-
-    const disconnect = () => {
-      clearInterval(reconnectInterval);
-      webSocket.current?.close();
-    };
-
-    const reconnect = (userId: number) => {
-      if (webSocket.current?.readyState !== WebSocket.CONNECTING && user) {
-        webSocket.current = new WebSocket(
-          "ws://3.38.76.76:8080/ws/achievement",
-        );
-        connect(userId);
-      }
-    };
-
     if (user) {
       connect(user.id);
     }
-
     return () => {
       disconnect();
     };
   }, [user]);
+
+  const connect = (userId: number) => {
+    webSocket.current = new WebSocket(`ws://localhost:8080/ws/achievement`);
+    webSocket.current.onopen = () => {
+      console.log("WebSocket is open now.");
+      webSocket.current?.send(userId.toString());
+      clearInterval(reconnectInterval);
+    };
+
+    webSocket.current.onmessage = (event: MessageEvent) => {
+      console.log("websocket message received!: ", event.data);
+    };
+
+    webSocket.current.onclose = error => {
+      reconnectInterval = setInterval(() => reconnect(user!.id), 5000);
+      console.log(error);
+    };
+
+    webSocket.current.onerror = error => {
+      console.log(error);
+    };
+  };
+
+  const disconnect = () => {
+    clearInterval(reconnectInterval);
+    webSocket.current?.close();
+  };
+
+  const reconnect = (userId: number) => {
+    if (webSocket.current?.readyState !== WebSocket.CONNECTING && user) {
+      webSocket.current = new WebSocket("ws://localhost:8080/ws/achievement");
+      connect(userId);
+    }
+  };
 
   useEffect(() => {
     if (isError) {
