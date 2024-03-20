@@ -6,9 +6,9 @@ import { useRouter } from "next/navigation";
 import { IconAlertCircle } from "@tabler/icons-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { useQueryUserData } from "@/app/my-page/_hooks/useQueryUserData";
 import { usePositionStore } from "@/app/_common/store/usePositionStore";
 import { useModalStore } from "@/app/_common/store/useModalStore";
-import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { cn } from "@/app/_common/shadcn/utils";
 import { Form } from "@/app/_common/shadcn/ui/form";
 import { Button } from "@/app/_common/shadcn/ui/button";
@@ -34,10 +34,10 @@ function MyLocationAuth() {
   const { isAllowGPS } = usePositionStore();
   const { isAuthLocation, setAuthLocationOpen } = useModalStore();
 
-  const { user, setUser } = useAuthStore();
+  const { data: user } = useQueryUserData();
   const { data: areaCode, isLoading, isError } = useQueryGeoAreaCode();
 
-  const { mutate, isSuccess } = useMutationAuthMyLocation();
+  const { mutate } = useMutationAuthMyLocation();
 
   const form = useForm({
     values: {
@@ -46,18 +46,16 @@ function MyLocationAuth() {
     },
     resolver: zodResolver(MyLocationAuthFormSchema),
   });
-
   const { handleSubmit, formState } = form;
 
   const onSubmit = () => {
-    if (!user || !areaCode || !isError) return;
+    if (!user || !areaCode || isError) return;
 
     mutate({
       userId: user.id,
       areaCode: areaCode,
     });
-
-    if (isSuccess) setUser({ ...user, region: CODE_TO_REGION_NAME[areaCode] });
+    handleBack();
   };
 
   const handleBack = () => {
