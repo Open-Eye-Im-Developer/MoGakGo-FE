@@ -75,7 +75,7 @@ function ProjectCardFront(props: CardFrontProps) {
     >
       <CardHeader className="px-3 pt-2">
         <CardDescription className="flex justify-between text-lg font-bold text-black">
-          <div className="flex items-center gap-2">
+          <span className="flex items-center gap-2">
             <ButtonRotate
               isDisabled={!user || user.id !== id}
               onRotate={onRotate}
@@ -102,7 +102,7 @@ function ProjectCardFront(props: CardFrontProps) {
                 </div>
               </PopoverContent>
             </Popover>
-          </div>
+          </span>
           <Link href={githubUrl} target="_blank" className="flex items-center">
             @{githubId}
           </Link>
