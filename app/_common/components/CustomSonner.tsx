@@ -34,10 +34,12 @@ function CustomSonner(props: CustomSonnerProps) {
           {description && <h6 className="text-xs">{description}</h6>}
         </div>
       </div>
-      {label && onClick && (
+      {typeof label === "string" ? (
         <Button className="text-xs text-black" onClick={onClick}>
           {label}
         </Button>
+      ) : (
+        label
       )}
     </section>
   );
