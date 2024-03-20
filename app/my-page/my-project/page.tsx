@@ -28,7 +28,9 @@ function MyProjectPage() {
         {/* TODO: currentTab 기준으로 필터링 */}
         <section className="flex flex-col gap-2">
           {projects
-            ? projects.map(el => <ProjectCard key={el.projectId} data={el} />)
+            ? projects.map(el => (
+                <ProjectCard key={el.projectId} data={el} isModal />
+              ))
             : null}
           {isPending || isFetching
             ? Array.from({ length: 5 }).map((_, i) => (

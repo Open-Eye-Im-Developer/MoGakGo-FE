@@ -25,7 +25,7 @@ function MyProjectList() {
           <p className="text-sm text-gray-500">만남 카드가 없습니다.</p>
         ) : (
           data?.data.map(project => (
-            <ProjectCard key={project.projectId} data={project} />
+            <ProjectCard key={project.projectId} data={project} isModal />
           ))
         )}
       </div>
