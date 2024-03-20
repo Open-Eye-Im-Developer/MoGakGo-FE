@@ -8,7 +8,6 @@ import { useToast } from "@/app/_common/shadcn/ui/use-toast";
 
 import useGetCurrentProjectQuery from "../_hooks/useGetCurrentProjectQuery";
 import ProjectCreateDialog from "./ProjectCreateDialog";
-import ProjectCardContainer from "./ProjectCardContainer";
 
 function ProjectManageSection() {
   const { project, matchingId, isError, error } = useGetCurrentProjectQuery();
@@ -47,9 +46,6 @@ function ProjectManageSection() {
           <ProjectCreateDialog />
         </div>
       )}
-      <div className="z-[50] mt-10">
-        {project && <ProjectCardContainer project={project} />}
-      </div>
     </main>
   );
 }
