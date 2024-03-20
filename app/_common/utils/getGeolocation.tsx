@@ -1,5 +1,6 @@
 import { PositionState } from "@/app/_common/types/position";
 
+import LocationModal from "../components/LocationModal";
 import { toast } from "./toast";
 
 type Parameter = (state: PositionState) => void;
@@ -38,11 +39,6 @@ const errorCallback = (error: GeolocationPositionError) => {
     case error.PERMISSION_DENIED:
       toast.error("GPS 사용 요청이 거부되었습니다.", {
         description: "GPS 사용 요청을 허용해야 서비스 이용이 가능합니다.",
-        // TODO: 허용 안내 모달 팝업
-        action: {
-          label: "허용 방법",
-          onClick: () => console.log("허용 안내 모달 팝업"),
-        },
       });
       break;
     case error.POSITION_UNAVAILABLE:
