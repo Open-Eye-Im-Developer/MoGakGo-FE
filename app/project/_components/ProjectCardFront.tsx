@@ -69,7 +69,7 @@ function ProjectCardFront(props: CardFrontProps) {
   return (
     <Card
       className={cn(
-        `card absolute inset-0 left-0 top-0 flex flex-col [backface-visibility:hidden] `,
+        `absolute inset-0 left-0 top-0 flex flex-col [backface-visibility:hidden] `,
         initialRotate ? "[transform:rotateY(180deg)]" : "",
       )}
     >
@@ -131,7 +131,7 @@ function ProjectCardFront(props: CardFrontProps) {
           </div>
           <div className="flex flex-col items-center gap-4">
             <div className="flex flex-col items-center gap-1 p-1">
-              <h1 className="relative inline-block text-2xl font-bold before:absolute before:-inset-2 before:block before:-skew-y-3 before:border-2 before:border-black before:bg-gradient-to-r before:from-[#FF915E] before:to-[#552AFF]">
+              <h1 className="text-2xl font-bold">
                 <span className="relative text-black">{username}</span>
               </h1>
               <h3 className="mt-3 text-xs font-bold text-[#F76A6A]">
@@ -139,8 +139,7 @@ function ProjectCardFront(props: CardFrontProps) {
               </h3>
             </div>
             <p className="line-clamp-3 w-40 overflow-hidden text-center text-sm">
-              {bio ??
-                "엄마 엄마 엄마 밖에 눈이와요. 하얀 눈이 와요 이야 이쁘다아아아아ㅏ아앙"}
+              {bio ?? "소개 문구가 없습니다."}
             </p>
           </div>
           <div className="flex items-center justify-center gap-2">

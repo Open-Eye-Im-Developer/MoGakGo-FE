@@ -60,7 +60,7 @@ function ProfileCard(props: ProfileCardProps) {
   return (
     <Card
       className={cn(
-        "card relative flex h-full w-full flex-col",
+        "relative flex h-full w-full flex-col",
         isBehind
           ? "absolute inset-0 left-0 top-0 overflow-hidden [backface-visibility:hidden] [transform:rotateY(180deg)]"
           : "",
@@ -97,7 +97,7 @@ function ProfileCard(props: ProfileCardProps) {
           </div>
           <div className="flex grow flex-col items-center gap-4">
             <div className="flex flex-col items-center gap-1 p-1">
-              <h1 className="relative inline-block text-2xl font-bold before:absolute before:-inset-2 before:block before:-skew-y-3 before:border-2 before:border-black before:bg-gradient-to-r before:from-[#FF915E] before:to-[#552AFF]">
+              <h1 className="text-2xl font-bold">
                 <span className="relative text-black">{username}</span>
               </h1>
               <h3 className="mt-3 text-xs font-bold text-[#F76A6A]">
