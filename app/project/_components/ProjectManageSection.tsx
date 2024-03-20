@@ -29,7 +29,7 @@ function ProjectManageSection() {
   }, [matchingId]);
 
   return (
-    <main className="container relative flex h-full w-full flex-col items-center justify-center">
+    <main className="relative flex h-full w-full flex-col items-center justify-center">
       <div className="map-background" />
       <div className="map-background" />
       {!project && (
