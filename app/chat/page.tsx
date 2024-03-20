@@ -6,7 +6,7 @@ import ChatList from "./_components/ChatList";
 function ChatPage() {
   return (
     <main>
-      <StackNavigator content={"채팅"} />
+      <StackNavigator element={"채팅"} />
       <ChatList />
     </main>
   );
