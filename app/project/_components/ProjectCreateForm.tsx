@@ -38,7 +38,6 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
     },
   });
 
-  // TODO: 서버로 form 데이터 전송하는 로직 추가 & form의 시간정보 처리
   const handleOnSubmit = async (values: z.infer<typeof formSchema>) => {
     const { startHour, startMinute, endHour, endMinute, ...rest } = values;
     const { meetStartTime, meetEndTime } = formatTime(
@@ -48,7 +47,6 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
       endMinute,
     );
 
-    // TODO: meetLat, meetLng를 사용자 위치 정보(geolocation)로 변경
     const formattedValues: FormmatedValues = {
       creatorId: user!.id,
       meetStartTime,
@@ -59,7 +57,6 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
       tags: rest.tags,
     };
 
-    // TODO: 사용자 위치 정보(geolocation)을 전송하여, 범위에 맞는 장소 찾기
     createNewProject(formattedValues);
   };
 
