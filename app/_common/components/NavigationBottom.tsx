@@ -32,6 +32,12 @@ function NavigationBottom() {
       defaultValue={pathname}
       className="fixed bottom-8 left-2/4 z-100 -translate-x-2/4 shadow-neo-b"
     >
+      <div
+        className={cn(
+          "fixed bottom-0 left-20 right-0 top-0 min-h-10",
+          getUser() && "hidden",
+        )}
+      />
       <MenubarMenu value="/">
         <MenubarTrigger
           value="/"
