@@ -2,11 +2,13 @@
 
 import StackNavigator from "@/app/_common/components/StackNavigator";
 
+import LoginRequestModal from "../_components/LoginRequestModal";
 import DeleteUserButton from "../_components/DeleteUserButton";
 
 function DeletePage() {
   return (
     <>
+      <LoginRequestModal />
       <StackNavigator element={"회원 탈퇴"} />
       <main className="container flex min-h-screen max-w-2xl flex-col gap-8 pb-8">
         <div className="flex flex-col gap-4">

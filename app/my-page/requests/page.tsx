@@ -10,6 +10,7 @@ import { useQueryUserData } from "../_hooks/useQueryUserData";
 import { useInfiniteQueryProjectRequests } from "../_hooks/useInfiniteQueryProjectRequests";
 import ProjectCardSkeleton from "../_components/ProjectCardSkeleton";
 import ProjectCard from "../_components/ProjectCard";
+import LoginRequestModal from "../_components/LoginRequestModal";
 
 function ProjectRequestsPage() {
   const { data: user } = useQueryUserData();
@@ -23,6 +24,7 @@ function ProjectRequestsPage() {
 
   return (
     <>
+      <LoginRequestModal />
       <StackNavigator element={"내가 보낸 요청"} />
       <main className="container flex min-h-screen max-w-2xl flex-col gap-8 pb-8">
         <section className="flex flex-col gap-2">

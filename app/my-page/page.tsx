@@ -5,23 +5,18 @@ import Link from "next/link";
 import WithNavigation from "../_common/hoc/WithNavigation";
 import StackNavigator from "../_common/components/StackNavigator";
 import Icon from "../_common/components/Icon";
-import { useQueryUserData } from "./_hooks/useQueryUserData";
 import Profile from "./_components/Profile";
 import MyProjectRequests from "./_components/MyProjectRequests";
 import MyProjectList from "./_components/MyProjectList";
 import MyAchievements from "./_components/MyAchievements";
+import LoginRequestModal from "./_components/LoginRequestModal";
 import LikeCounter from "./_components/LikeCounter";
 import JandiRating from "./_components/JandiRating";
 
 function MyPage() {
-  const { isError, error } = useQueryUserData();
-
-  if (isError) {
-    return <div>{error.message}</div>;
-  }
-
   return (
     <>
+      <LoginRequestModal />
       <StackNavigator element={"마이페이지"} />
       <main className="container flex min-h-screen max-w-2xl flex-col gap-8 pb-24">
         <Profile />

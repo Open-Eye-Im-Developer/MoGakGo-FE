@@ -18,6 +18,7 @@ import { useQueryUserData } from "../_hooks/useQueryUserData";
 import { useInfiniteQueryProjectHistory } from "../_hooks/useInfiniteQueryProjectHistory";
 import ProjectCardSkeleton from "../_components/ProjectCardSkeleton";
 import ProjectCard from "../_components/ProjectCard";
+import LoginRequestModal from "../_components/LoginRequestModal";
 
 const MENUS = [
   { id: "ALL", label: "전체", style: "data-[state=open]:bg-neoGreen" },
@@ -45,6 +46,7 @@ function HistoryPage() {
 
   return (
     <>
+      <LoginRequestModal />
       <StackNavigator element={"지난 만남 카드"} />
       <main className="container flex min-h-screen max-w-2xl flex-col gap-8 pb-8">
         <Menubar value={currentTab}>
