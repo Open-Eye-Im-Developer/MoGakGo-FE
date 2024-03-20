@@ -2,17 +2,17 @@
 
 import { useMemo } from "react";
 
-import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { Button } from "@/app/_common/shadcn/ui/button";
 
 import StackNavigator from "@/app/_common/components/StackNavigator";
 
+import { useQueryUserData } from "../_hooks/useQueryUserData";
 import { useInfiniteQueryProjectList } from "../_hooks/useInfiniteQueryProjectList";
 import ProjectCardSkeleton from "../_components/ProjectCardSkeleton";
 import ProjectCard from "../_components/ProjectCard";
 
 function MyProjectPage() {
-  const { user } = useAuthStore();
+  const { data: user } = useQueryUserData();
   const { data, fetchNextPage, hasNextPage, isFetching, isPending } =
     useInfiniteQueryProjectList(user?.id);
 
