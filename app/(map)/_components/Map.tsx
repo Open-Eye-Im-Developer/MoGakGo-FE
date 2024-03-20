@@ -117,7 +117,7 @@ function Map() {
       <div className="map-background" />
       <LoadingSpinner
         className={cn(
-          "absolute bottom-0 left-0 right-0 top-0 z-10 flex h-full w-full place-content-center bg-black/40 backdrop-blur-sm transition-all duration-300",
+          "absolute bottom-0 left-0 right-0 top-0 z-100 flex h-full w-full place-content-center bg-black/40 backdrop-blur-sm transition-all duration-300",
           isRankLoading ? "visible opacity-100" : "invisible opacity-0",
         )}
       />
