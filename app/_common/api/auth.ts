@@ -56,15 +56,19 @@ export const reIssueAccessToken = async (refreshToken: string) => {
       },
     );
 
-    return data.accessToken;
+    const { accessToken } = data;
+
+    if (!accessToken)
+      throw new Error("accessToken이 새로 발급되지 않았습니다.");
+
+    return accessToken;
   } catch (error) {
     console.error(error);
 
-    localStorage.removeItem("accessToken");
+    if (error instanceof AxiosError) {
+      error.response?.status === 404 && navigate("/login");
+    }
 
     toast.error("인증이 만료되었습니다. 재로그인이 필요합니다.");
-
-    // TODO: 백엔드 reissue api 수정 후 주석 해제
-    // navigate("/login");
   }
 };
