@@ -23,9 +23,10 @@ import ProjectCardBack from "./ProjectCardBack";
 
 interface Props {
   project: Project;
+  matchingId?: number;
 }
 
-function ProjectCardContainer({ project }: Props) {
+function ProjectCardContainer({ project, matchingId }: Props) {
   const { flipped, handleFlip } = useFlip();
   const [requestList, setRequestList] = useState<RequestList[]>([]);
   const { ref, cursorId } = useInfiniteScroll(requestList!);
@@ -34,6 +35,7 @@ function ProjectCardContainer({ project }: Props) {
     cursorId,
     project.creator.id,
   );
+  
   useEffect(() => {
     if (!data || "timestamp" in data) return;
     if (data) {
@@ -50,7 +52,9 @@ function ProjectCardContainer({ project }: Props) {
     <Tabs defaultValue="card" className="h-[600px] w-[330px] sm:w-[450px]">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="card">Card</TabsTrigger>
-        <TabsTrigger value="chat">Chat</TabsTrigger>
+        <TabsTrigger value="chat" disabled={matchingId === null}>
+          Chat
+        </TabsTrigger>
       </TabsList>
       <TabsContent value="card" className="group h-full [perspective:1000px]">
         <div
