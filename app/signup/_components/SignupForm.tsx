@@ -12,7 +12,6 @@ import { Form } from "@/app/_common/shadcn/ui/form";
 import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
 import CustomModal from "@/app/_common/components/CustomModal";
 
-import { useSearchTokens } from "@/app/_common/hooks/useSearchTokens";
 import { useQueryDevelopLanguages } from "@/app/_common/hooks/queries/useQueryDevelopLanguages";
 
 import { SignupFormSchema } from "../_utils/validation";
@@ -24,7 +23,13 @@ import SignupFinalStep from "./SignupFinalStep";
 import SignupCompleteModal from "./SignupCompleteModal";
 
 function SignupForm() {
-  const { newAccessToken, newRefreshToken } = useSearchTokens("session");
+  // TODO: accessToken도 마찬가지로 login 성공 시에 저장됨. useSearchTokens 자체 제거
+  // const { newAccessToken, newRefreshToken } = useSearchTokens("session");
+
+  const newAccessToken =
+    typeof window !== "undefined" ? sessionStorage.getItem("accessToken") : "";
+  const newRefreshToken =
+    typeof window !== "undefined" ? sessionStorage.getItem("refreshToken") : "";
 
   const { data: userData } = useQuerySignUpUser();
   const { data: languages } = useQueryDevelopLanguages();
@@ -50,8 +55,8 @@ function SignupForm() {
   });
 
   const signUp = useMutationSignup(
-    newAccessToken,
-    newRefreshToken,
+    newAccessToken ?? "",
+    newRefreshToken ?? "",
     languages ?? [],
   );
 
@@ -97,8 +102,8 @@ function SignupForm() {
               className={cn(
                 `${nextStep === 2 ? "animate-signup-fade-in" : "hidden animate-signup-fade-out opacity-0"}`,
               )}
-              newAccessToken={newAccessToken}
-              newRefreshToken={newRefreshToken}
+              newAccessToken={newAccessToken ?? ""}
+              newRefreshToken={newRefreshToken ?? ""}
               setSignupOpen={setSignupOpen}
             />
           </form>
