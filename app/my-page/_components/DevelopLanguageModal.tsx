@@ -1,4 +1,5 @@
 import { ReactNode, useMemo } from "react";
+import Image from "next/image";
 
 import { Progress } from "@/app/_common/shadcn/ui/progress";
 import {
@@ -46,14 +47,22 @@ function DevelopLanguageModal(props: DevelopLanguageModalProps) {
         {isLoading ? <LoadingSpinner /> : null}
         {!isLoading && data ? (
           <div className="flex flex-col gap-5 py-4">
-            {data.map(language => {
-              const parcent = Math.floor((language.byteSize / totalByte) * 100);
+            {data.map(({ language, byteSize, imageUrl }) => {
+              const parcent = Math.floor((byteSize / totalByte) * 100);
 
               return (
-                <div key={language.language} className="flex flex-col gap-2">
-                  <div className="flex items-baseline gap-2">
-                    <p>{language.language}</p>
-                    <p className="text-xs">{language.byteSize}byte</p>
+                <div key={language} className="flex flex-col gap-3">
+                  <div className="flex items-center gap-2">
+                    <Image
+                      src={imageUrl}
+                      alt={language}
+                      width={48}
+                      height={48}
+                    />
+                    <div className="flex items-baseline gap-2">
+                      <p>{language}</p>
+                      <p className="text-xs">{byteSize}byte</p>
+                    </div>
                   </div>
                   <Progress value={parcent} className="h-2" max={totalByte} />
                 </div>
