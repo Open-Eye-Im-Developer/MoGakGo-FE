@@ -30,7 +30,10 @@ function LoginRequestModal() {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogAction onClick={handleClickLoginButton}>
+          <AlertDialogAction
+            onClick={handleClickLoginButton}
+            className="bg-neoBlue px-8 text-white"
+          >
             로그인
           </AlertDialogAction>
         </AlertDialogFooter>
