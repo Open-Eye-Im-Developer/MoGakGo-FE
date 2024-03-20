@@ -2,12 +2,18 @@ import { useQuery } from "@tanstack/react-query";
 
 import { instance } from "@/app/_common/api/instance";
 
+interface ChatRoomIdResponse {
+  chatRoomId: string;
+}
+
 function useGetChatRoomIdQuery(
   projectId: number,
   matchingId: number | undefined,
 ) {
   const getChatRoomId = async () => {
-    const { data } = await instance.get(`/chat/project/${projectId}`);
+    const { data } = await instance.get<ChatRoomIdResponse>(
+      `/chat/project/${projectId}`,
+    );
 
     return data;
   };

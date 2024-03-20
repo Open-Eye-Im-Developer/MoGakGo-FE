@@ -2,9 +2,19 @@ import { useQuery } from "@tanstack/react-query";
 
 import { instance } from "@/app/_common/api/instance";
 
+import { Project } from "@/app/_common/types/project";
+
+interface CurrentMatchingProjectResponse {
+  matchingId: number;
+  response: Project;
+  projectRequesterId: number;
+}
+
 export const useQueryCurrentMatchingProject = (userId?: number) => {
   const getCurrentMatchingProject = async () => {
-    const { data } = await instance.get(`/matches/my/${userId}/now`);
+    const { data } = await instance.get<CurrentMatchingProjectResponse>(
+      `/matches/my/${userId}/now`,
+    );
     return data;
   };
 
@@ -15,11 +25,13 @@ export const useQueryCurrentMatchingProject = (userId?: number) => {
     throwOnError: false,
   });
 
-  if (isLoading || !data) return { matchingId: null, project: null, isLoading, isError };
+  if (isLoading || !data)
+    return { matchingId: null, project: null, isLoading, isError };
 
   const { matchingId, response } = data;
 
-  if (matchingId === null) return { matchingId: null, project: null, isLoading, isError };
+  if (matchingId === null)
+    return { matchingId: null, project: null, isLoading, isError };
 
   return { matchingId, project: response, isLoading, isError };
 };

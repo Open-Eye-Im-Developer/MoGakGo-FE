@@ -19,6 +19,5 @@ export const useQueryProjectDetail = (
     throwOnError: false,
   });
 
-  console.log(data, isLoading);
   return { projectDetail: data, isLoading };
 };

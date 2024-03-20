@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 
 import { useToast } from "@/app/_common/shadcn/ui/use-toast";
 
@@ -11,15 +11,13 @@ function ProjectManageSection() {
   const { project, matchingId, isError } = useGetCurrentProjectQuery();
   const { toast } = useToast();
 
-  useEffect(() => {
-    if (isError) {
-      toast({
-        title: "프로젝트 정보를 가져오는 중 오류가 발생했습니다.",
-        description: "잠시 후 다시 시도해주세요.",
-        variant: "destructive",
-      });
-    }
-  }, [isError]);
+  if (isError) {
+    toast({
+      title: "프로젝트 정보를 가져오는 중 오류가 발생했습니다.",
+      description: "잠시 후 다시 시도해주세요.",
+      variant: "destructive",
+    });
+  }
 
   return (
     <main className="relative flex h-full w-full flex-col items-center justify-center">
