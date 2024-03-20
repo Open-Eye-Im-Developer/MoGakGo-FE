@@ -1,0 +1,6 @@
+.card-front,
+.card-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden !important;
+  -webkit-transform: rotateY(180deg) translateZ(1px);
+}

@@ -1,0 +1,42 @@
+@tailwind utilities;
+
+@keyframes blink1 {
+  from {
+    fill: #a1c16e;
+  }
+  to {
+    fill: #c01eeb;
+  }
+}
+
+@keyframes blink2 {
+  from {
+    fill: #a1c16e;
+  }
+  to {
+    fill: #d978f3;
+  }
+}
+
+@keyframes blink3 {
+  from {
+    fill: #a1c16e;
+  }
+  to {
+    fill: #e5a5f7;
+  }
+}
+
+@layer utilities {
+  .first {
+    animation: blink1 2s ease-in-out infinite alternate;
+  }
+
+  .second {
+    animation: blink2 2s ease-in-out infinite alternate;
+  }
+
+  .third {
+    animation: blink3 2s ease-in-out infinite alternate;
+  }
+}

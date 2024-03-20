@@ -1,3 +1,70 @@
 {
-  "extends": "next/core-web-vitals"
+  "root": true,
+  "env": { "browser": true, "es2020": true },
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "ignorePatterns": ["dist", ".eslintrc.cjs"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["import", "unused-imports"],
+  "rules": {
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "error",
+    "unused-imports/no-unused-imports": "error",
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          ["parent", "sibling", "index"],
+          "type",
+          "unknown"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "**/components/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "**/hooks/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "**/constants/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "**/types/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "**/utils/**",
+            "group": "internal",
+            "position": "after"
+          }
+        ],
+        "alphabetize": {
+          "order": "desc",
+          "caseInsensitive": true
+        },
+        "newlines-between": "always"
+      }
+    ],
+    "no-restricted-imports": [
+      "error",
+      {
+        "name": "sonner",
+        "message": "커스텀 토스트를 사용해주세요."
+      }
+    ]
+  }
 }
