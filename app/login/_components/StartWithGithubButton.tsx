@@ -15,7 +15,7 @@ function StartWithGithubButton() {
   const githubUrl = new URL(envGithubUrl);
 
   return (
-    <Button className="w-full px-10 py-5" variant={"outline"}>
+    <Button className="w-full px-10 py-5" variant={"outline"} type="button">
       <Link
         className="flex w-full items-center justify-center gap-x-2"
         href={githubUrl}
