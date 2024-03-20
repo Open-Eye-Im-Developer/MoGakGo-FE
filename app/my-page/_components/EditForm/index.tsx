@@ -1,10 +1,14 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
-import { IconPencil } from "@tabler/icons-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Form } from "@/app/_common/shadcn/ui/form";
 import { Button } from "@/app/_common/shadcn/ui/button";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/app/_common/shadcn/ui/avatar";
 
 import { editFormSchema } from "../../_util/validation";
 import { useMutationUpdateUser } from "../../_hooks/useMutationUpdateUser";
@@ -35,14 +39,16 @@ function EditForm({ defaultValues, disabled }: EditFormProps) {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)}>
         <fieldset className="space-y-4" disabled={disabled || isPending}>
-          <div className="flex max-w-2xl flex-col items-center gap-1.5">
-            <div className="relative h-52 w-52">
-              {/* 프로필 */}
-              <div className="h-full w-full bg-slate-200"></div>
-              <div className="absolute bottom-0 right-0 inline-block bg-primary p-2 text-white">
-                <IconPencil />
-              </div>
-            </div>
+          <div className="flex max-w-2xl flex-col items-center">
+            <Avatar className="h-28 w-28">
+              <AvatarImage
+                src={defaultValues?.avatarUrl}
+                alt={`${defaultValues?.username}'s avatar image`}
+              />
+              <AvatarFallback>
+                {defaultValues?.username.charAt(0)}
+              </AvatarFallback>
+            </Avatar>
           </div>
           <UsernameField form={form} />
           <BioField form={form} />

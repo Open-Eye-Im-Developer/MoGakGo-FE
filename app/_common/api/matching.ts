@@ -1,25 +1,30 @@
-import { AxiosError } from "axios";
+import { generateQueryString } from "@/app/my-page/_util/generateQueryString";
 
 import { ResponseData } from "../types/response";
-import { Match } from "../types/matching";
+import { Match, MatchStatus } from "../types/matching";
 import { instance } from "./instance";
 
 export const getMatchesByUserId = async (
-  userId?: number,
-): Promise<ResponseData<Match> | undefined> => {
-  if (typeof userId !== "number") return;
+  userId: number,
+  status?: MatchStatus,
+  cursorId?: number,
+  pageSize?: number,
+  sortOrder?: "ASC" | "DESC",
+): Promise<ResponseData<Match>> => {
+  const query = [
+    ["status", status],
+    ["cursorId", cursorId],
+    ["pageSize", pageSize ?? 5],
+    ["sortOrder", sortOrder ?? "ASC"],
+  ];
 
-  try {
-    const { data } = await instance.get<ResponseData<Match>>(
-      `/matches/my/${userId}?cursorId=&pageSize=5&sortOrder=ASC`,
-    );
+  const queryString = generateQueryString(query);
 
-    return data;
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      return error.response?.data;
-    }
-  }
+  const { data } = await instance.get<ResponseData<Match>>(
+    `/matches/my/${userId}?${queryString}`,
+  );
+
+  return data;
 };
 
 export const cancelMatch = async (id: number) => {

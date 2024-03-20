@@ -1,17 +1,20 @@
-"use client";
-
 import React from "react";
 
-// import ProjectCardContainer from "./_components/ProjectCardContainer";
-import ProjectCreateDialog from "./_components/ProjectCreateDialog";
+import { generateViewport } from "../_common/utils/generateViewport";
+import WithNavigation from "../_common/hoc/WithNavigation";
+import { theme } from "../_common/constants/viewPortTheme";
+import ProjectManageSection from "./_components/ProjectManageSection";
+
+import type { Viewport } from "next";
+
+export const viewport: Viewport = generateViewport(theme.SKY);
 
 function ProjectPage() {
   return (
-    <div className="flex h-screen items-center justify-center pb-12">
-      <ProjectCreateDialog />
-      {/* <ProjectCardContainer /> */}
-    </div>
+    <section className="h-screen w-full">
+      <ProjectManageSection />
+    </section>
   );
 }
 
-export default ProjectPage;
+export default WithNavigation(ProjectPage, true);

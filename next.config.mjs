@@ -10,26 +10,19 @@ const nextPWAConfig = withPWA({
   disable: process.env.NODE_ENV === "development",
 });
 
-const nextConfig = {
+const nextConfig = nextPWAConfig({
   images: {
-    domains: ["avatars.githubusercontent.com"],
+    domains: ["avatars.githubusercontent.com", "github.com"],
   },
   async redirects() {
     return [
       {
-        source: "/signup/:slug*",
-        destination: "/login",
-        permanent: false,
-      },
-      {
-        source: "/review/:slug*",
-        destination: "/",
+        source: "/signup/:slug",
+        destination: "/signup",
         permanent: false,
       },
     ];
   },
-};
+});
 
-export default process.env.NODE_ENV === "development"
-  ? nextConfig
-  : nextPWAConfig;
+export default nextConfig;

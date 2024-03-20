@@ -1,3 +1,5 @@
+import { Creator } from "@/app/_common/types/profile";
+
 interface Form {
   place: string;
   startHour: string;
@@ -7,7 +9,7 @@ interface Form {
   tags?: string[] | undefined;
 }
 
-interface PlaceItem {
+interface PlaceItemData {
   place_name: string;
   distance: string;
   place_url: string;
@@ -32,33 +34,23 @@ interface PlaceResponseProps {
 
 interface RequestList {
   id: number;
-  senderPreview: {
-    id: number;
-    username: string;
-    githubId: string;
-    avatarUrl: string;
-    githubUrl: string;
-    bio: string;
-    jandiRate: number;
-    achievementTitle: string;
-    developLanguages: string[];
-    wantedJobs: string[];
-  };
+  senderPreview: Creator;
   requestStatus: string;
 }
 
-interface RequestListSuccessData {
-  data: RequestList[];
-}
-
-interface RequestListErrorData {
+interface RequestListError {
   timestamp: string;
   statusCode: number;
   code: string;
   message: string;
 }
 
-interface RequestListResponseData {
-  data: RequestList[] | RequestListErrorData;
-  status: number;
+interface FormmatedValues {
+  creatorId: number;
+  meetStartTime: string;
+  meetEndTime: string;
+  meetLat: number;
+  meetLng: number;
+  meetDetail: string;
+  tags: string[];
 }

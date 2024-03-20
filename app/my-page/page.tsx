@@ -1,44 +1,61 @@
 "use client";
 
+import Link from "next/link";
+
+import WithNavigation from "../_common/hoc/WithNavigation";
+import StackNavigator from "../_common/components/StackNavigator";
+import Icon from "../_common/components/Icon";
 import { useQueryUserData } from "./_hooks/useQueryUserData";
-import { useQueryMySendLikeCount } from "./_hooks/useQueryMySendLikeCount";
-import { useQueryMyReceiveLikeCount } from "./_hooks/useQueryMyReceiveLikeCount";
-import { useQueryMyProjectRequests } from "./_hooks/useQueryMyProjectRequests";
-import { useQueryMyProjectList } from "./_hooks/useQueryMyProjectList";
-import { useQueryMyProjectHistory } from "./_hooks/useQueryMyProjectHistory";
-import { useQueryMyJandiRating } from "./_hooks/useQueryMyJandiRating";
 import Profile from "./_components/Profile";
 import MyProjectRequests from "./_components/MyProjectRequests";
 import MyProjectList from "./_components/MyProjectList";
-import MyProjectHistory from "./_components/MyProjectHistory";
-import LikeCount from "./_components/LikeCount";
+import MyAchievements from "./_components/MyAchievements";
+import LikeCounter from "./_components/LikeCounter";
 import JandiRating from "./_components/JandiRating";
 
 function MyPage() {
-  // const { data: userData } = useQuerySignUpUser();
-  const { data: userData, isError } = useQueryUserData();
-  const { data: jandiRating } = useQueryMyJandiRating(userData?.id);
-  const { data: projectList } = useQueryMyProjectList(userData?.id);
-  const { data: projectRequests } = useQueryMyProjectRequests(userData?.id);
-  const { data: sendLikeCount } = useQueryMySendLikeCount(userData?.id);
-  const { data: receiveLikeCount } = useQueryMyReceiveLikeCount(userData?.id);
-  const { data: projectHistory } = useQueryMyProjectHistory(userData?.id);
+  const { isError, error } = useQueryUserData();
 
-  if (isError) return <div>error</div>;
+  if (isError) {
+    return <div>{error.message}</div>;
+  }
 
   return (
-    <main className="container flex min-h-screen max-w-2xl flex-col gap-8 bg-gray-50 dark:bg-gray-950">
-      <Profile data={userData} />
-      <LikeCount
-        sendLikeCount={sendLikeCount}
-        receiveLikeCount={receiveLikeCount}
-      />
-      <JandiRating data={jandiRating} />
-      <MyProjectList data={projectList} />
-      <MyProjectRequests data={projectRequests} />
-      <MyProjectHistory data={projectHistory} />
-    </main>
+    <>
+      <StackNavigator element={"마이페이지"} />
+      <main className="container flex min-h-screen max-w-2xl flex-col gap-8 pb-24">
+        <Profile />
+        <LikeCounter />
+        <div className="flex gap-8">
+          <JandiRating />
+          <MyAchievements />
+        </div>
+        <MyProjectList />
+        <MyProjectRequests />
+        <MyPageItem label="매칭 기록" href="/my-page/history" />
+        <MyPageItem label="위치 인증" href="/auth-mylocation" />
+        <MyPageItem label="회원 탈퇴" href="/my-page/delete" />
+      </main>
+    </>
   );
 }
 
-export default MyPage;
+export default WithNavigation(MyPage, true);
+
+interface MyPageItemProps {
+  label: string;
+  href: string;
+}
+
+function MyPageItem(props: MyPageItemProps) {
+  const { label, href } = props;
+
+  return (
+    <Link href={href}>
+      <div className="text-md flex items-center justify-between gap-1 font-bold">
+        {label}
+        <Icon id="chevron-right" size={26} />
+      </div>
+    </Link>
+  );
+}

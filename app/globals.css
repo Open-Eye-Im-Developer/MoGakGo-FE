@@ -1,31 +1,45 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
 
-@layer utilities {
-  .card {
-    backdrop-filter: blur(5px);
-    background-color: rgba(255, 255, 255, 1);
-    border-radius: 26px;
-    box-shadow:
-      35px 35px 68px 0px rgba(120, 120, 120, 0.5),
-      inset -5px -5px 16px 0px rgba(120, 120, 120, 0.6),
-      inset 0px 11px 28px 0px rgb(255, 255, 255);
-  }
+@font-face {
+  font-family: "Galmuri9";
+  src: url("/Galmuri9.woff2");
+}
 
+@font-face {
+  font-family: "RoboRobo";
+  src: url("/pixelroborobo.otf");
+}
+
+@layer components {
   .glass-morphism {
-    background: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 8px 32px 0 #35353574;
-    backdrop-filter: blur(7.5px);
-    -webkit-backdrop-filter: blur(7.5px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    @apply glass-backdrop border border-solid border-[rgba(255,255,255,0.18)] bg-white/25 shadow-[0_8px_32px_0_#35353574] backdrop-blur-[7.5px];
   }
 
   .neumorphism-shadow {
-    box-shadow:
-      35px 35px 68px 0px rgba(104, 104, 104, 0.5),
-      inset -8px -8px 16px 0px rgba(104, 104, 104, 0.6),
-      inset 0px 11px 28px 0px rgb(255, 255, 255);
+    @apply shadow-[35px_35px_68px_0px_rgba(104,104,104,0.5),inset_-8px_-8px_16px_0px_rgba(104,104,104,0.6),inset_0px_11px_28px_0px_rgb(255,255,255)];
+  }
+
+  .neo-hover {
+    @apply translate-x-[3px] translate-y-[3px] shadow-none transition-all duration-150 ease-in-out;
+  }
+
+  .logo-vertical {
+    @apply absolute left-[15px] top-[15px] z-50 h-full w-[20px] bg-[url("/images/serviceLogoVertical.png")] bg-[length:15px] bg-no-repeat md:bg-[length:20px];
+  }
+
+  .map-background {
+    @apply absolute h-full w-full overflow-hidden before:absolute before:right-[100%] before:h-full before:w-full before:animate-slide-infinite before:bg-[url("/images/mapBackgroundImage.png")] before:bg-[length:100%] before:content-[""] after:absolute after:h-full after:w-full after:animate-slide-infinite after:bg-[url("/images/mapBackgroundImage.png")] after:bg-[length:100%] after:content-[""];
+  }
+
+  .main-logo {
+    @apply absolute z-0 h-full  w-full overflow-hidden before:absolute before:right-[100%] before:h-full before:w-full before:animate-slide-infinite before:bg-[url("/images/main_logo.webp")] before:bg-[length:100%] before:content-[""] after:absolute after:h-full after:w-full after:animate-slide-infinite after:bg-[url("/images/main_logo.webp")] after:bg-[length:100%] after:content-[""];
+  }
+}
+
+@layer utilities {
+  .glass-backdrop {
+    -webkit-backdrop-filter: blur(7.5px);
   }
 }

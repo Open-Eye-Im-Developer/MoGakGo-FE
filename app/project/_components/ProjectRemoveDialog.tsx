@@ -3,7 +3,7 @@
 import React from "react";
 import { IconLogout } from "@tabler/icons-react";
 
-import { ToastAction } from "@/app/_common/shadcn/ui/toast";
+import { useMatchingStore } from "@/app/_common/store/useMatchingStore";
 import { Button } from "@/app/_common/shadcn/ui/button";
 import {
   AlertDialog,
@@ -19,79 +19,67 @@ import {
   AlertDialogTrigger,
 } from "@/app/_common/shadcn/ui/alert-dialog";
 
-import usePopupToast from "../_hooks/usePopupToast";
+import useCancelProjectMutation from "../_hooks/useCancelProjectMutation";
+import useCacnelMatchingMutation from "../_hooks/useCancelMatchingMutation";
 
 interface ProjectRemoveDialogProps {
   projectId: number;
-  isMatchedProject: boolean;
 }
 
-// TODO: 요청이 있을 경우 삭제하지 못하는 로직 추가하기 & 서버에서 매칭 Id를 받아와서 "매칭" 취소 요청하기
-// TODO: 매칭 여부를 서버에서 받아와서 처리하기 & 매칭이 된 경우 달라져야 하는 버튼을 HOC로 만들어서 사용하기
 function ProjectRemoveDialog(props: ProjectRemoveDialogProps) {
-  const { projectId, isMatchedProject } = props;
-  const { showToast } = usePopupToast(
-    <ToastAction altText="다시 시도">다시 시도</ToastAction>,
-  );
+  const { projectId } = props;
+  const { matchingId } = useMatchingStore();
+  const { createCancelMatching } = useCacnelMatchingMutation(matchingId!);
+  const { createCancelProject } = useCancelProjectMutation(projectId);
+  const isMatchedProject = matchingId !== null;
 
   const triggerComponent = isMatchedProject ? (
     <Button>
       <IconLogout />
     </Button>
   ) : (
-    <Button>삭제</Button>
+    <Button>취소</Button>
   );
 
   const titleComponent = isMatchedProject
     ? "정말 매칭을 취소하시겠어요?"
-    : "정말 프로젝트를 삭제하시겠어요?";
-  const descriptionComponent = isMatchedProject
-    ? "한 번 취소된 매칭은 되돌릴 수 없어요!"
-    : "한 번 삭제된 프로젝트는 되돌릴 수 없어요!";
+    : "정말 프로젝트를 취소하시겠어요?";
+
+  const descriptionComponent = "이 작업은 되돌릴 수 없어요!";
 
   const handleCancelProject = async () => {
-    const response = await fetch("/api/project/cancel", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id: projectId }),
-    });
-    const { data, status } = await response.json();
-    showToast(data, status);
+    createCancelProject();
   };
 
   const handleCancelMatch = async () => {
-    const response = await fetch("/api/match/cancel", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ matchingId: 65 }),
-    });
-    const { data, status } = await response.json();
-    showToast(data, status);
+    createCancelMatching();
   };
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger asChild>{triggerComponent}</AlertDialogTrigger>
+      <AlertDialogTrigger asChild className="bg-neoRed text-white">
+        {triggerComponent}
+      </AlertDialogTrigger>
       <AlertDialogPortal />
       <AlertDialogOverlay className="h-full w-full bg-transparent backdrop-blur-md" />
-      <AlertDialogContent className="flex max-w-[300px] flex-col items-start gap-10 rounded-lg">
+      <AlertDialogContent className="flex max-w-[300px] flex-col items-start gap-10 rounded-lg border border-black shadow-neo">
         <AlertDialogHeader>
-          <AlertDialogTitle>{titleComponent}</AlertDialogTitle>
-          <AlertDialogDescription>
+          <AlertDialogTitle className="text-base">
+            {titleComponent}
+          </AlertDialogTitle>
+          <AlertDialogDescription className="text-xs">
             {descriptionComponent}
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogFooter className="flex flex-row items-center gap-2 self-end">
+        <AlertDialogFooter className="flex w-full flex-col gap-2 sm:flex-col">
           <AlertDialogAction
             onClick={isMatchedProject ? handleCancelMatch : handleCancelProject}
           >
-            진행
+            취소할래요.
           </AlertDialogAction>
-          <AlertDialogCancel className="mt-0">취소</AlertDialogCancel>
+          <AlertDialogCancel className="ml-0 mt-0 sm:ml-0">
+            안 할래요.
+          </AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

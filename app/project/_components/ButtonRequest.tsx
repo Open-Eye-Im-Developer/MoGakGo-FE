@@ -6,6 +6,8 @@ import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { useToast } from "@/app/_common/shadcn/ui/use-toast";
 import { Button } from "@/app/_common/shadcn/ui/button";
 
+import useSendRequestMutation from "../_hooks/useSendRequestMutation";
+
 interface ButtonReuqestProps {
   projectId: number;
 }
@@ -14,7 +16,11 @@ function ButtonRequest(props: ButtonReuqestProps) {
   const { projectId } = props;
   const { toast } = useToast();
   const { user } = useAuthStore();
+  const { createSendRequest } = useSendRequestMutation(user?.id, projectId);
+
   const handleRequest = async () => {
+    createSendRequest();
+
     if (!user) {
       return toast({
         title: "요청에 실패했습니다.",
@@ -22,26 +28,13 @@ function ButtonRequest(props: ButtonReuqestProps) {
         variant: "destructive",
       });
     }
-
-    const response = await fetch("/api/project/request/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ senderId: user?.id, projectId: projectId }),
-    });
-
-    const { data, status } = await response.json();
-
-    toast({
-      title: status === 201 ? "요청이 완료되었습니다." : "요청에 실패했습니다.",
-      description:
-        status === 201 ? "요청을 수락할 때까지 기다려주세요!" : data.message,
-      variant: status === 201 ? "default" : "destructive",
-    });
   };
 
-  return <Button onClick={handleRequest}>요청</Button>;
+  return (
+    <Button onClick={handleRequest} className="bg-neoBlue text-white">
+      요청
+    </Button>
+  );
 }
 
 export default ButtonRequest;

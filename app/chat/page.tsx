@@ -5,10 +5,10 @@ import ChatList from "./_components/ChatList";
 
 function ChatPage() {
   return (
-    <>
-      <StackNavigator content={"채팅"} />
+    <main>
+      <StackNavigator element={"채팅"} />
       <ChatList />
-    </>
+    </main>
   );
 }
 

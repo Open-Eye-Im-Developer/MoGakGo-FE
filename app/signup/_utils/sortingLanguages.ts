@@ -1,4 +1,4 @@
-import { Language } from "../_components/LanguageList";
+import { Language } from "../_type/signup";
 
 export const sortingLanguages = (data: Language[]) => {
   const sortedData = [...data].sort((a, b) => b.byteSize - a.byteSize);
@@ -12,12 +12,4 @@ export const sortingLanguages = (data: Language[]) => {
     ...item,
     percentage: parseFloat(((item.byteSize / totalLines) * 100).toFixed(2)),
   }));
-};
-
-export const getLanguageLogo: { [key: string]: string } = {
-  TypeScript: "/images/TSIcon.webp",
-  JavaScript: "/images/JSIcon.webp",
-  Java: "/images/Java.webp",
-  CSS: "/images/CSSIcon.webp",
-  Python: "/images/Python.webp",
 };

@@ -5,7 +5,7 @@ import AllowBox from "./_components/AllowBox";
 function NotificationPage() {
   return (
     <>
-      <StackNavigator content={"알림"} />
+      <StackNavigator element={"알림"} />
       <AllowBox />
       <NotificationList />
     </>

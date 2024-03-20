@@ -1,11 +1,11 @@
 import Link from "next/link";
+import relativeTime from "dayjs/plugin/relativeTime";
+import dayjs from "dayjs";
 
+import Profile from "@/app/chat/[id]/_components/Profile";
 import { cn } from "@/app/_common/shadcn/utils";
 
-import ActivityCard from "@/app/_common/components/ActivityCard";
-
 import { ChatType } from "../_types/chat";
-import { ProfileType } from "../[id]/_types/chatRoom";
 
 interface ChatProps {
   chat: ChatType;
@@ -13,34 +13,43 @@ interface ChatProps {
 
 function Chat({ chat }: ChatProps) {
   const {
-    projectId,
     chatRoomId,
     lastMessage,
     lastMessageCreatedAt,
     status,
-    profiles,
+    chatUserInfo: matchedUser,
   } = chat;
 
-  const MY_ID = 1;
-  const matchedUser = profiles?.find(
-    profile => profile.userId !== MY_ID,
-  ) as ProfileType;
+  dayjs.extend(relativeTime);
 
   return (
-    <Link href={`/chat/${chatRoomId}`} key={projectId}>
-      <div className="relative">
-        <ActivityCard
-          name={matchedUser.username}
-          profileImage={matchedUser.avatarUrl}
-          detail={lastMessage}
-          createdAt={lastMessageCreatedAt}
-        />
-        <div
-          className={cn(
-            "absolute bottom-2 right-4 m-2 rounded-[100%] bg-green-400 p-[3px]",
-            status === "CLOSE" && "hidden",
-          )}
-        ></div>
+    <Link
+      href={{
+        pathname: `/chat/${chatRoomId}`,
+        query: {
+          name: matchedUser.username,
+          profileImage: matchedUser.avatarUrl,
+        },
+      }}
+    >
+      <div
+        className={cn(
+          "m-2 flex cursor-pointer justify-between border-b p-2 px-3",
+          status === "CLOSE" && "text-gray-400",
+        )}
+      >
+        <Profile
+          username={matchedUser.username}
+          avatarUrl={matchedUser.avatarUrl}
+        >
+          <div>
+            <div className="font-medium">{matchedUser.username}</div>
+            <span className="text-gray-500">{lastMessage}</span>
+          </div>
+        </Profile>
+        <div className="min-w-fit text-center text-sm text-gray-500">
+          {dayjs(lastMessageCreatedAt).fromNow()}
+        </div>
       </div>
     </Link>
   );

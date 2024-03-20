@@ -1,28 +1,44 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import * as ProgressPrimitive from "@radix-ui/react-progress"
+import * as React from "react";
+import { VariantProps, cva } from "class-variance-authority";
+import * as ProgressPrimitive from "@radix-ui/react-progress";
 
-import { cn } from "@/app/_common/shadcn/utils"
+import { cn } from "@/app/_common/shadcn/utils";
+
+const indicatorVariants = cva("h-full w-full flex-1 transition-all", {
+  variants: {
+    background: {
+      default: "bg-neoYellow",
+      green: "bg-neoGreen",
+      blue: "bg-neoBlue",
+      red: "bg-neoRed",
+    },
+  },
+  defaultVariants: {
+    background: "default",
+  },
+});
 
 const Progress = React.forwardRef<
   React.ElementRef<typeof ProgressPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>
->(({ className, value, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root> &
+    VariantProps<typeof indicatorVariants>
+>(({ className, value, background, ...props }, ref) => (
   <ProgressPrimitive.Root
     ref={ref}
     className={cn(
-      "relative h-4 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800",
-      className
+      "relative h-4 w-full overflow-hidden rounded-full border border-black bg-slate-100 shadow-neo dark:bg-slate-800",
+      className,
     )}
     {...props}
   >
     <ProgressPrimitive.Indicator
-      className="h-full w-full flex-1 bg-slate-900 transition-all dark:bg-slate-50"
+      className={cn(indicatorVariants({ background }))}
       style={{ transform: `translateX(-${100 - (value || 0)}%)` }}
     />
   </ProgressPrimitive.Root>
-))
-Progress.displayName = ProgressPrimitive.Root.displayName
+));
+Progress.displayName = ProgressPrimitive.Root.displayName;
 
-export { Progress }
+export { Progress };

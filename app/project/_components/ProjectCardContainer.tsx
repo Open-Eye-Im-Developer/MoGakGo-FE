@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import { useQueryAchievements } from "@/app/achievements/_hooks/useQueryAchievements";
 import { cn } from "@/app/_common/shadcn/utils";
 import {
   Tabs,
@@ -12,6 +13,7 @@ import {
 
 import { Project } from "@/app/_common/types/project";
 
+import { RequestList } from "../_types/type";
 import useInfiniteScroll from "../_hooks/useInfiniteScroll";
 import useGetRequestListQuery from "../_hooks/useGetRequestListQuery";
 import useFlip from "../_hooks/useFlip";
@@ -26,28 +28,30 @@ interface Props {
 
 function ProjectCardContainer({ project }: Props) {
   const { flipped, handleFlip } = useFlip();
-  const [requestList, setRequestList] = useState<RequestListResponseData>();
+  const [requestList, setRequestList] = useState<RequestList[]>([]);
   const { ref, cursorId } = useInfiniteScroll(requestList!);
-  const { data } = useGetRequestListQuery(project.projectId, cursorId);
+  const { data } = useGetRequestListQuery(
+    project.projectId,
+    cursorId,
+    project.creator.id,
+  );
+  const { myAchievement } = useQueryAchievements();
 
   useEffect(() => {
-    if (data && data.status === 200 && !("timestamp" in data.data)) {
+    if (!data || "timestamp" in data) return;
+    if (data) {
       setRequestList(prev => {
-        if (!prev || "timestamp" in data.data) return data;
-        const prevRequestList = prev.data as RequestList[];
+        const prevRequestList = prev as RequestList[];
         const currentRequestList = data.data;
         const updatedRequestList = [...prevRequestList, ...currentRequestList];
-        return {
-          ...prev,
-          data: updatedRequestList,
-        };
+        return updatedRequestList;
       });
     }
   }, [data]);
 
   return (
-    <Tabs defaultValue="card" className="h-[550px] w-[330px] sm:w-[450px]">
-      <TabsList className="glass-morphism grid w-full grid-cols-2">
+    <Tabs defaultValue="card" className="h-[600px] w-[330px] sm:w-[450px]">
+      <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="card">Card</TabsTrigger>
         <TabsTrigger value="chat">Chat</TabsTrigger>
       </TabsList>
@@ -58,7 +62,11 @@ function ProjectCardContainer({ project }: Props) {
             `${flipped ? "[transform:rotateY(180deg)]" : ""}`,
           )}
         >
-          <ProjectCardFront onRotate={handleFlip} project={project} />
+          <ProjectCardFront
+            onRotate={handleFlip}
+            project={project}
+            achievementTitle={myAchievement?.title}
+          />
           <ProjectCardBack
             onRotate={handleFlip}
             requestList={requestList}

@@ -1,6 +1,6 @@
 import { SignUpUser } from "@/app/signup/_type/signup";
 
-import { WANTED_JOB } from "../constants/wantedJob.constants";
+import { WANTED_JOB } from "../constants/wantedJob";
 
 export type Region =
   | "종로구"
@@ -29,7 +29,7 @@ export type Region =
   | "송파구"
   | "강동구"
   | "분당구"
-  | "기타";
+  | "판교";
 
 export type WantedJobs = (typeof WANTED_JOB)[number]["id"];
 
@@ -51,4 +51,22 @@ export interface UserWantedJob {
 export interface UserJandiRating {
   userId: number;
   jandiRate: number;
+}
+
+export interface UserAchievement {
+  achievementId: Achievement["achievementId"];
+  achievementTitle: Achievement["title"];
+  achievementImageUrl: Achievement["imgUrl"];
+}
+
+export interface Achievement {
+  userId: number;
+  achievementId: number;
+  title: string;
+  imgUrl: string;
+  description: string;
+  requirementValue: number;
+  requirementType?: "SEQUENCE" | "ACCUMULATE";
+  progressCount: number;
+  completed?: boolean;
 }

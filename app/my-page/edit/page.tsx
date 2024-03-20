@@ -4,6 +4,8 @@ import { useMemo } from "react";
 
 import { useQuerySignUpUser } from "@/app/signup/_hooks/useQuerySignUpUser";
 
+import StackNavigator from "@/app/_common/components/StackNavigator";
+
 import EditForm from "../_components/EditForm";
 
 function EditPage() {
@@ -21,13 +23,16 @@ function EditPage() {
   }, [userData]);
 
   return (
-    <main className="container min-h-screen max-w-2xl bg-gray-50 dark:bg-gray-950">
-      {data ? (
-        <EditForm defaultValues={data} />
-      ) : (
-        <EditForm key="skeleton" disabled={true} />
-      )}
-    </main>
+    <>
+      <StackNavigator element={"수정"} />
+      <main className="container flex min-h-screen max-w-2xl flex-col gap-8 pb-8">
+        {data ? (
+          <EditForm defaultValues={data} />
+        ) : (
+          <EditForm key="skeleton" disabled={true} />
+        )}
+      </main>
+    </>
   );
 }
 

@@ -1,13 +1,9 @@
 import { useState } from "react";
 import dayjs from "dayjs";
 
-import { MessageType, CustomMessageType } from "../_types/message";
-
-export const useCustomMessage = () => {
-  const MY_ID = "1";
-
+export const useCustomMessage = (userId: number) => {
   const [messageList, setMessageList] = useState<CustomMessageType[]>([]);
-  const [currentSender, setCurrentSender] = useState(MY_ID);
+  const [currentSender, setCurrentSender] = useState(userId);
 
   const checkOption = (newList: CustomMessageType[], message: MessageType) => {
     const prevTime = newList[newList.length - 1]?.createdAt;

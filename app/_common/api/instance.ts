@@ -1,6 +1,6 @@
-import { redirect } from "next/navigation";
 import axios from "axios";
 
+import { getCookie } from "../utils/cookie";
 import { reIssueAccessToken } from "./auth";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
@@ -26,13 +26,16 @@ instance.interceptors.request.use(config => {
 
 instance.interceptors.response.use(
   async response => {
-    const { config, status } = response;
-    const refreshToken = localStorage.getItem("refreshToken");
+    return response;
+  },
+  async error => {
+    const { status, config } = error.response;
+    // TODO: 백엔드에서 가져온 cookie를 브라우저에서 get 하는지 확인하기
+    const refreshToken = await getCookie("refreshToken", "");
 
-    if (status === 401 || status === 404) {
-      if (status === 404) redirect("/login");
-
-      const newAccessToken = await reIssueAccessToken(refreshToken ?? "");
+    // TODO: accessToken을 쿠키에 저장하여 1시간 이후가 되면 자동 갱신하도록 수정?
+    if (status === 404) {
+      const newAccessToken = await reIssueAccessToken(refreshToken);
 
       if (newAccessToken) {
         localStorage.setItem("accessToken", newAccessToken);
@@ -41,11 +44,10 @@ instance.interceptors.response.use(
 
         return instance(config);
       }
+
+      return Promise.reject(error);
     }
 
-    return response;
-  },
-  async error => {
     return Promise.reject(error);
   },
 );

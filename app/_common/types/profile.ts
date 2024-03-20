@@ -6,14 +6,31 @@ export interface Creator {
   githubId: string;
   avatarUrl: string;
   githubUrl: string;
-  bio: string;
+  bio?: string;
   jandiRate: number;
   achievementTitle: string;
   developLanguages: string[];
   wantedJobs: WantedJobs[];
 }
 
-export interface Like {
+export interface LikeCount {
   userId: number;
   likeCount: number;
+}
+
+export interface Like {
+  id: number;
+  receiverId: number;
+  username: string;
+  avatarUrl: string;
+  createdAt: string;
+}
+export interface Profile {
+  response: Creator;
+  requestYn?: boolean;
+}
+
+export interface ProfileLikeInfo {
+  senderId: number;
+  receiverId: number;
 }
