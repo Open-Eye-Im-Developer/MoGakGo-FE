@@ -9,6 +9,7 @@ import { useQueryUserData } from "./_hooks/useQueryUserData";
 import Profile from "./_components/Profile";
 import MyProjectRequests from "./_components/MyProjectRequests";
 import MyProjectList from "./_components/MyProjectList";
+import MyCurrentMatchingProject from "./_components/MyCurrentMatchingProject";
 import MyAchievements from "./_components/MyAchievements";
 import LikeCounter from "./_components/LikeCounter";
 import JandiRating from "./_components/JandiRating";
@@ -30,6 +31,7 @@ function MyPage() {
           <JandiRating />
           <MyAchievements />
         </div>
+        <MyCurrentMatchingProject />
         <MyProjectList />
         <MyProjectRequests />
         <MyPageItem label="매칭 기록" href="/my-page/history" />
