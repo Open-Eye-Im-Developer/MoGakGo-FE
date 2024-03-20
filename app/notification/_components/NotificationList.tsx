@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "@/app/_common/shadcn/ui/button";
+
 import AnnounceEmptyActive from "@/app/_common/components/AnnounceEmptyNotification";
 import ActivityCardSkeleton from "@/app/_common/components/ActivityCardSkeleton";
 
@@ -9,7 +11,7 @@ import notificationEmptyAnimaiton from "../_assets/notification.json";
 import useGetNotifications from "../_api/useGetNotifications";
 
 function NotificationList() {
-  const { notifications, isLoading } = useGetNotifications();
+  const { data, isLoading, fetchNextPage, hasNextPage } = useGetNotifications();
 
   if (isLoading)
     return (
@@ -20,14 +22,25 @@ function NotificationList() {
       </div>
     );
 
+  const notifications = data?.pages.map(page => (page ? page.data : [])).flat();
+
   return (
     <>
       {notifications?.length ? (
-        [...notifications]
-          .reverse()
-          .map((notification: NotificationType) => (
-            <Notification notification={notification} key={notification.id} />
-          ))
+        <>
+          {[...notifications]
+            .reverse()
+            .map((notification: NotificationType) => (
+              <Notification notification={notification} key={notification.id} />
+            ))}
+          <Button
+            className="w-full"
+            onClick={() => fetchNextPage()}
+            disabled={!hasNextPage || isLoading}
+          >
+            더보기
+          </Button>
+        </>
       ) : (
         <AnnounceEmptyActive
           description="아직 받은 알람이 없어요"

@@ -3,12 +3,17 @@ import { initializeApp } from "firebase/app";
 
 import { instance } from "@/app/_common/api/instance";
 
+import { ResponseData } from "@/app/_common/types/response";
+
 import { NotificationType } from "../_types/notification";
 
-export const getNotifications = async () => {
-  const { data } = await instance.get<NotificationType[]>("/notification", {
-    params: { pageSize: 10 },
-  });
+export const getNotifications = async (pageId: number) => {
+  const { data } = await instance.get<ResponseData<NotificationType>>(
+    "/notification",
+    {
+      params: { pageSize: 10, pageId },
+    },
+  );
   return data;
 };
 

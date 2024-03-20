@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "@/app/_common/shadcn/ui/button";
+
 import AnnounceEmptyActive from "@/app/_common/components/AnnounceEmptyNotification";
 import ActivityCardSkeleton from "@/app/_common/components/ActivityCardSkeleton";
 
@@ -8,7 +10,8 @@ import useGetChats from "../_api/useGetChats";
 import Chat from "./Chat";
 
 function ChatList() {
-  const { chats, isLoading } = useGetChats();
+  const { data, isLoading, fetchNextPage, hasNextPage } = useGetChats();
+  const chats = data?.pages.map(page => (page ? page.data : [])).flat();
 
   if (isLoading)
     return (
@@ -21,10 +24,19 @@ function ChatList() {
 
   return (
     <>
-      {chats.length ? (
-        [...chats]
-          .reverse()
-          .map(chat => <Chat chat={chat} key={chat.chatRoomId} />)
+      {chats?.length ? (
+        <>
+          {[...chats].reverse().map(chat => (
+            <Chat chat={chat} key={chat.chatRoomId} />
+          ))}
+          <Button
+            className="w-full"
+            onClick={() => fetchNextPage()}
+            disabled={!hasNextPage || isLoading}
+          >
+            더보기
+          </Button>
+        </>
       ) : (
         <AnnounceEmptyActive
           description="채팅목록이 비었어요"
