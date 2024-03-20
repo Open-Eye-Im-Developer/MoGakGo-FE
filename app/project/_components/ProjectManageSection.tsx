@@ -1,17 +1,22 @@
 "use client";
 
 import React, { useEffect } from "react";
+import Link from "next/link";
 
-import { useMatchingStore } from "@/app/_common/store/useMatchingStore";
-import { cn } from "@/app/_common/shadcn/utils";
+import { useQueryUserData } from "@/app/my-page/_hooks/useQueryUserData";
+import { useQueryCurrentMatchingProject } from "@/app/my-page/_hooks/useQueryCurrentMatchingProject";
 import { useToast } from "@/app/_common/shadcn/ui/use-toast";
+import { Button } from "@/app/_common/shadcn/ui/button";
 
-import useGetCurrentProjectQuery from "../_hooks/useGetCurrentProjectQuery";
+import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
+
 import ProjectCreateDialog from "./ProjectCreateDialog";
 
 function ProjectManageSection() {
-  const { project, matchingId, isError, error } = useGetCurrentProjectQuery();
-  const { setMatchingId } = useMatchingStore();
+  const { data: userData } = useQueryUserData();
+  const { project, isLoading, isError } = useQueryCurrentMatchingProject(
+    userData?.id,
+  );
   const { toast } = useToast();
 
   useEffect(() => {
@@ -22,26 +27,37 @@ function ProjectManageSection() {
         variant: "destructive",
       });
     }
-  }, [error, isError]);
+  }, [isError]);
 
-  useEffect(() => {
-    setMatchingId(matchingId);
-  }, [matchingId]);
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
+  console.log(project);
   return (
-    <main
-      className={cn(
-        "relative flex h-full w-full flex-col items-center",
-        !project ? "justify-center" : "",
-      )}
-    >
+    <main className="relative flex h-full w-full flex-col items-center justify-center">
       <div className="map-background" />
       <div className="map-background" />
       {!project && (
-        <div className="z-50 flex h-[300px] flex-col items-center justify-between rounded-xl border-4 border-dotted border-black p-10 md:h-[550px]">
+        <div className="z-50 mx-10 flex h-[300px] flex-col items-center justify-between rounded-xl border-4 border-dotted border-black p-10 md:h-[550px]">
           <header className="space-y-3 text-center">
-            <h1 className="text-lg font-bold">생성한 프로젝트가 없어요!</h1>
-            <h2 className="text-sm">프로젝트를 새로 생성해주세요.</h2>
+            {!project ? (
+              <>
+                <h1 className="text-lg font-bold">
+                  생성, 매칭된 프로젝트가 없어요!
+                </h1>
+                <h2 className="text-sm">
+                  프로젝트를 새로 생성하거나 매칭을 기다려주세요!
+                </h2>
+              </>
+            ) : (
+              <>
+                <h1 className="text-lg font-bold">프로젝트가 매칭되었어요!</h1>
+                <Button>
+                  <Link href="/my-page" />
+                </Button>
+              </>
+            )}
           </header>
           <ProjectCreateDialog />
         </div>

@@ -8,18 +8,18 @@ export const useQueryCurrentMatchingProject = (userId?: number) => {
     return data;
   };
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ["current-match-project", userId],
     queryFn: getCurrentMatchingProject,
     enabled: userId !== null && typeof userId === "number",
     throwOnError: false,
   });
 
-  if (isLoading || !data) return { matchingId: null, project: null, isLoading };
+  if (isLoading || !data) return { matchingId: null, project: null, isLoading, isError };
 
   const { matchingId, response } = data;
 
-  if (matchingId === null) return { matchingId: null, project: null, isLoading };
+  if (matchingId === null) return { matchingId: null, project: null, isLoading, isError };
 
-  return { matchingId, project: response, isLoading };
+  return { matchingId, project: response, isLoading, isError };
 };
