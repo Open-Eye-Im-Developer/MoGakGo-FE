@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import dayjs from "dayjs";
 import { Client } from "@stomp/stompjs";
 
 import { useAuthStore } from "@/app/_common/store/useAuthStore";
@@ -12,12 +13,14 @@ import useGetChats from "../../_api/useGetChats";
 
 interface MessageInputProp {
   addNewMessage: (newMessage: MessageType[]) => void;
+  publishSocketMessage: (userId: number, message: string) => void;
   clientRef: React.MutableRefObject<Client | null>;
   chatRoomId: string;
 }
 
 function MessageInput({
   addNewMessage,
+  publishSocketMessage,
   clientRef,
   chatRoomId,
 }: MessageInputProp) {
@@ -52,17 +55,11 @@ function MessageInput({
       !(clientRef.current && clientRef.current.connected && user)
     )
       return;
-    clientRef.current?.publish({
-      destination: `/app/chatroom/${chatRoomId}`,
-      body: JSON.stringify({
-        messageType: "TALK",
-        userId: user!.id,
-        message,
-      }),
-    });
+
+    publishSocketMessage(user!.id, message);
 
     const newMessage: MessageType = {
-      id: Number(Math.random().toString(36).slice(2, 9)), // TODO: 적절한 id로 변경 필요
+      id: dayjs().format("YYYY-MM-DDTHH:mm:ss:SSS"),
       message,
       senderId: user.id,
       createdAt: new Date().toISOString(),
