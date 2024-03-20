@@ -76,7 +76,7 @@ function MyLocationAuth() {
       }
       <Form {...form}>
         <form
-          className="relative flex h-screen w-full flex-col justify-between pt-4"
+          className="flex h-full w-full flex-col pt-4"
           onSubmit={handleSubmit(onSubmit)}
         >
           <section className="flex flex-col gap-2 px-5">
@@ -100,7 +100,7 @@ function MyLocationAuth() {
           </section>
           <div
             id="map-wrap"
-            className="absolute left-0 top-1/3 z-0 flex w-full translate-y-16 touch-none items-center justify-center bg-transparent transition-all duration-1000"
+            className="relative left-0 top-0 z-0 my-4 flex min-h-[307px] w-full translate-y-7 touch-none items-center justify-center bg-transparent transition-all duration-1000"
           >
             <MapComponent type="only-bounce" regionCode={areaCode ?? 0} />
           </div>
