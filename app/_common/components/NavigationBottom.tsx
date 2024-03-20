@@ -6,25 +6,25 @@ import { usePathname } from "next/navigation";
 import { toast } from "../utils/toast";
 import { navigate } from "../utils/redirect";
 import { useAuthStore } from "../store/useAuthStore";
+import { cn } from "../shadcn/utils";
 import { Menubar, MenubarMenu, MenubarTrigger } from "../shadcn/ui/menubar";
 
 function NavigationBottom() {
   const pathname = usePathname();
   const { getUser } = useAuthStore();
 
-  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+  const handleNavigateClick = (event: MouseEvent<HTMLButtonElement>) => {
     const path = (event.target as HTMLButtonElement).value;
-
-    if (!getUser() && path !== "/") {
-      toast.warning("로그인 후 이용해주세요!", {
-        action: {
-          label: "로그인하기",
-          onClick: () => navigate("login"),
-        },
-      });
-      return;
-    }
     navigate(path);
+  };
+
+  const handleNoAuthClick = () => {
+    toast.warning("로그인 후 이용해주세요!", {
+      action: {
+        label: "로그인하기",
+        onClick: () => navigate("login"),
+      },
+    });
   };
 
   return (
@@ -37,11 +37,12 @@ function NavigationBottom() {
           "fixed bottom-0 left-20 right-0 top-0 min-h-10",
           getUser() && "hidden",
         )}
+        onClick={handleNoAuthClick}
       />
       <MenubarMenu value="/">
         <MenubarTrigger
           value="/"
-          onClick={handleClick}
+          onClick={handleNavigateClick}
           className="inline-block min-w-20"
         >
           지도
@@ -50,7 +51,7 @@ function NavigationBottom() {
       <MenubarMenu value="/my-page">
         <MenubarTrigger
           value="/my-page"
-          onClick={handleClick}
+          onClick={handleNavigateClick}
           className="inline-block min-w-20"
         >
           마이
@@ -59,7 +60,7 @@ function NavigationBottom() {
       <MenubarMenu value="/chat">
         <MenubarTrigger
           value="/chat"
-          onClick={handleClick}
+          onClick={handleNavigateClick}
           className="inline-block min-w-20"
         >
           채팅
@@ -68,7 +69,7 @@ function NavigationBottom() {
       <MenubarMenu value="/project">
         <MenubarTrigger
           value="/project"
-          onClick={handleClick}
+          onClick={handleNavigateClick}
           className="inline-block min-w-20"
         >
           모각고
