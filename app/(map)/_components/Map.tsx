@@ -13,6 +13,7 @@ import WithNavigation from "@/app/_common/hoc/WithNavigation";
 
 import MapComponent from "@/app/_common/components/MapComponent";
 import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
+import Icon from "@/app/_common/components/Icon";
 
 import REGION_CODE from "@/app/_common/constants/regionCode";
 
@@ -113,7 +114,11 @@ function Map() {
 
   return (
     <div className="relative h-screen w-screen touch-none overflow-hidden">
-      <div className="logo-vertical cursor-pointer" />
+      <Icon
+        id="vertical-logo"
+        height={200}
+        className="logo-vertical cursor-pointer"
+      />
       <div className="map-background" />
       <div className="map-background" />
       <LoadingSpinner
@@ -144,7 +149,7 @@ function Map() {
           className="flex h-full w-full flex-col items-center justify-center"
         >
           {cardList.projectList.length !== 0 ||
-            cardList.profileList.length !== 0 ? (
+          cardList.profileList.length !== 0 ? (
             <CardList cardList={cardList} onClick={handleCardClose} />
           ) : (
             <EmptyCardList onClick={handleCardClose} />
