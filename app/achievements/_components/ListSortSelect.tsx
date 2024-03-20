@@ -1,29 +1,89 @@
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/app/_common/shadcn/ui/select";
+import { Dispatch, SetStateAction, useState } from "react";
 
-function ListSortSelect() {
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+  DropdownMenuCheckboxItem,
+} from "@/app/_common/shadcn/ui/dropdown-menu";
+import { Button } from "@/app/_common/shadcn/ui/button";
+
+import { Achievement } from "@/app/_common/types/user";
+
+interface ListSortSelectProps {
+  achievements: Achievement[];
+  setSorting: Dispatch<SetStateAction<Achievement[]>>;
+}
+
+function ListSortSelect({ setSorting, achievements }: ListSortSelectProps) {
+  const [sortChecked, setSortChecked] = useState({
+    words: true,
+    completed: false,
+    progress: false,
+  });
+
+  const handleSetSortByWords = () => {
+    const sortedAchievements = [...achievements].sort((a, b) =>
+      a.title.localeCompare(b.title),
+    );
+    setSorting(sortedAchievements);
+
+    setSortChecked({ words: true, completed: false, progress: false });
+  };
+
+  const handleSetSortByMoreLeft = () => {
+    const sortedAchievements = [...achievements].sort(
+      (a, b) =>
+        a.requirementValue -
+        a.progressCount -
+        (b.requirementValue - b.progressCount),
+    );
+    setSorting(sortedAchievements);
+
+    setSortChecked({ words: false, completed: true, progress: false });
+  };
+
+  const handleSetSortByLessLeft = () => {
+    const sortedAchievements = [...achievements].sort(
+      (a, b) =>
+        b.requirementValue -
+        b.progressCount -
+        (a.requirementValue - a.progressCount),
+    );
+    setSorting(sortedAchievements);
+
+    setSortChecked({ words: false, completed: false, progress: true });
+  };
+
   return (
-    <Select>
-      <SelectTrigger className="w-30 translate-x-0 translate-y-0 border-none px-2 shadow-none">
-        <SelectValue placeholder="정렬" />
-      </SelectTrigger>
-      <SelectContent className="min-w-[6rem] text-end">
-        <SelectItem className="pr-0" value="light" defaultChecked>
+    <DropdownMenu>
+      <DropdownMenuTrigger className="w-30 translate-x-0 translate-y-0 border-none px-2 pr-1 shadow-none">
+        <Button className="text-sm" variant={"ghost"}>
+          정렬
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="min-w-[6rem]">
+        <DropdownMenuCheckboxItem
+          onSelect={handleSetSortByWords}
+          defaultChecked
+          checked={sortChecked.words}
+        >
           글자순
-        </SelectItem>
-        <SelectItem className="pr-0" value="dark">
-          완료순
-        </SelectItem>
-        <SelectItem className="pr-0" value="system">
-          달성순
-        </SelectItem>
-      </SelectContent>
-    </Select>
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem
+          onSelect={handleSetSortByMoreLeft}
+          checked={sortChecked.completed}
+        >
+          달성 높은 순
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem
+          onSelect={handleSetSortByLessLeft}
+          checked={sortChecked.progress}
+        >
+          달성 적은 순
+        </DropdownMenuCheckboxItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
 

@@ -1,6 +1,11 @@
-import Image from "next/image";
 import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
+
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/app/_common/shadcn/ui/avatar";
 
 import { Like } from "@/app/_common/types/profile";
 
@@ -18,17 +23,13 @@ function UserCard(props: CardProps) {
   const { data } = props;
 
   return (
-    <div className="align-center flex items-center gap-4 rounded-md bg-white p-3 dark:bg-gray-900">
-      <div className="h-12 w-12 rounded-full">
-        <Image
-          src={data.avatarUrl}
-          alt={`${data.username}'s avatar`}
-          width={48}
-          height={48}
-        />
-      </div>
-      <div className="flex grow flex-col justify-center space-y-2">
-        <div className="text-s flex items-center gap-2">{data.username}</div>
+    <div className="align-center flex items-center gap-4 rounded-md border-2 border-black p-3 shadow-neo-thin dark:border-white">
+      <Avatar className="h-12 w-12">
+        <AvatarImage src={data.avatarUrl} />
+        <AvatarFallback>{data.username.charAt(0)}</AvatarFallback>
+      </Avatar>
+      <div className="flex grow flex-col justify-center space-y-1">
+        <div className="flex items-center gap-2 text-sm">{data.username}</div>
         <div className="text-xs">{dayjs(data.createdAt).fromNow()}</div>
       </div>
       <LikeCancelButton id={data.receiverId} />

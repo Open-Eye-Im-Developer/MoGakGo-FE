@@ -1,23 +1,22 @@
 import Link from "next/link";
-import { IconChevronRight } from "@tabler/icons-react";
 
-import { ResponseData } from "@/app/_common/types/response";
-import { RequestProjectSummary } from "@/app/_common/types/project";
+import Icon from "@/app/_common/components/Icon";
 
+import { useQueryUserData } from "../_hooks/useQueryUserData";
+import { useQueryProjectRequests } from "../_hooks/useQueryProjectRequests";
 import ProjectCardSkeleton from "./ProjectCardSkeleton";
 import ProjectCard from "./ProjectCard";
 
-interface MyProjectRequestsProps {
-  data?: ResponseData<RequestProjectSummary>;
-}
+function MyProjectRequests() {
+  const { data: userData } = useQueryUserData();
+  const { data } = useQueryProjectRequests(userData?.id, 3);
 
-function MyProjectRequests({ data }: MyProjectRequestsProps) {
   return (
     <div className="flex w-full flex-col gap-4">
       <Link href="/my-page/requests">
-        <div className="flex items-center gap-1 text-xl font-bold">
+        <div className="text-md flex items-center gap-1 font-bold">
           내가 보낸 요청
-          <IconChevronRight />
+          <Icon id="chevron-right" size={26} />
         </div>
       </Link>
       <div className="flex flex-col gap-2">

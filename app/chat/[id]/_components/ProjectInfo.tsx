@@ -46,14 +46,14 @@ function ProjectInfo() {
 
   return (
     <Accordion
-      className="absolute z-10 w-full bg-white"
+      className="absolute z-10 w-full border-t-[1px] border-black bg-white"
       type="single"
       collapsible
     >
       <AccordionItem value="item-1">
         <AccordionTrigger className="hover:no-underline">
           <div className="flex gap-2">
-            <span>📍 {meetDetail}</span>
+            <span>{meetDetail}</span>
             <Link
               target="_blank"
               href={`${process.env.NEXT_PUBLIC_KAKAO_MAP_URL}/${meetDetail},${meetLocationLongitude},${meetLocationLatitude}`}
@@ -62,9 +62,9 @@ function ProjectInfo() {
             </Link>
           </div>
         </AccordionTrigger>
-        <AccordionContent className="px-4 text-gray-500">
-          <div>🕡 {formatMeetingTime(meetStartTime, meetEndTime)}</div>
-          <div> 🕡 {dayjs(meetStartTime).format("YYYY. MM. DD")}</div>
+        <AccordionContent className="text-gray-500">
+          <div>{formatMeetingTime(meetStartTime, meetEndTime)}</div>
+          <div> {dayjs(meetStartTime).format("YYYY. MM. DD")}</div>
         </AccordionContent>
       </AccordionItem>
     </Accordion>

@@ -21,7 +21,7 @@ export const useGetPrevMessageList = (chatRoomId: string) => {
 
       messages.push(...prevMessages);
 
-      cursorId = prevMessages[prevMessages.length - 1]?.id;
+      cursorId = Number(prevMessages[prevMessages.length - 1]?.id);
       hasData = hasNext;
     }
 
