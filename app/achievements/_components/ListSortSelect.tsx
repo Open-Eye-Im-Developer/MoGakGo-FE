@@ -74,13 +74,13 @@ function ListSortSelect({ setSorting, achievements }: ListSortSelectProps) {
           onSelect={handleSetSortByMoreLeft}
           checked={sortChecked.completed}
         >
-          달성 높은 순
+          적게 남은 순
         </DropdownMenuCheckboxItem>
         <DropdownMenuCheckboxItem
           onSelect={handleSetSortByLessLeft}
           checked={sortChecked.progress}
         >
-          달성 적은 순
+          많이 남은 순
         </DropdownMenuCheckboxItem>
       </DropdownMenuContent>
     </DropdownMenu>
