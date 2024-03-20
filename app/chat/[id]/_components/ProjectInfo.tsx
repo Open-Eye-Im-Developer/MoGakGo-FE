@@ -22,11 +22,7 @@ function ProjectInfo() {
 
   if (isLoading)
     return (
-      <Accordion
-        className="absolute z-10 w-full bg-white"
-        type="single"
-        collapsible
-      >
+      <Accordion className="z-10 w-full bg-white" type="single" collapsible>
         <AccordionItem value="item-1">
           <AccordionTrigger className="p-4 hover:no-underline">
             <Skeleton className="h-[20px] w-[230px]" />
@@ -46,7 +42,7 @@ function ProjectInfo() {
 
   return (
     <Accordion
-      className="absolute z-10 w-full border-t-[1px] border-black bg-white"
+      className="z-10 w-full border-t-[1px] border-black bg-white"
       type="single"
       collapsible
     >

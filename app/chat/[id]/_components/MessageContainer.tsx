@@ -47,9 +47,9 @@ function MessageContainer(props: MessageContainerProps) {
   }, [isScrollUpper]);
 
   return (
-    <div className="relative mt-20 h-full w-full">
+    <div className="relative flex h-full w-full grow flex-col">
       <div
-        className="fixed bottom-32 top-40 w-full overflow-y-scroll"
+        className="bottom-32 top-40 h-96 w-full grow overflow-y-scroll"
         ref={scrollRef}
         onScroll={handleScroll}
       >

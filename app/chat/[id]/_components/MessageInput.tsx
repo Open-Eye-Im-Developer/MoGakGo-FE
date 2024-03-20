@@ -69,9 +69,9 @@ function MessageInput({
   };
 
   return (
-    <div className="fixed bottom-0 h-32 w-full">
+    <div className="w-full basis-28 sm:basis-40">
       <textarea
-        className="h-20 w-full overflow-scroll border-t-[1px] border-black p-3 outline-none"
+        className="w-full resize-none overflow-scroll border-t-[1px] border-black p-3 outline-none"
         onKeyDown={handleKeydownTextArea}
         rows={4}
         value={message}
@@ -83,7 +83,7 @@ function MessageInput({
         onClick={handleSubmit}
         contentEditable={false}
         className={cn(
-          "fixed bottom-0 right-0 m-2 bg-neoGreen",
+          "absolute bottom-2 right-2 m-2 bg-neoGreen",
           isActiveRoom === "CLOSE" && "hidden",
         )}
       >
