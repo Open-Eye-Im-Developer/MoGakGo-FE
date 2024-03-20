@@ -21,7 +21,8 @@ export const useMutationSignup = (
       localStorage.setItem("accessToken", accessToken);
       setCookie("refreshToken", refreshToken, {
         httpOnly: true,
-        maxAge: 60 * 60 * 24 * 14,
+        "max-age": 60 * 60 * 24 * 14,
+        path: "/",
       });
 
       sessionStorage.removeItem("accessToken");
