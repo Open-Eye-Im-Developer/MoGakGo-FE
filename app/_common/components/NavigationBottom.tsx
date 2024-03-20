@@ -8,6 +8,7 @@ import { navigate } from "../utils/redirect";
 import { useAuthStore } from "../store/useAuthStore";
 import { cn } from "../shadcn/utils";
 import { Menubar, MenubarMenu, MenubarTrigger } from "../shadcn/ui/menubar";
+import WithOnMounted from "../hoc/WithOnMounted";
 
 function NavigationBottom() {
   const pathname = usePathname();
@@ -79,4 +80,4 @@ function NavigationBottom() {
   );
 }
 
-export default NavigationBottom;
+export default WithOnMounted(NavigationBottom);
