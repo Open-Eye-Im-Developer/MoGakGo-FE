@@ -30,6 +30,7 @@ function MyCurrentMatchingProject() {
   const { project, matchingId, isLoading } = useQueryCurrentMatchingProject(
     userData?.id,
   );
+
   return (
     <div className="flex w-full flex-col gap-4">
       <h1 className="text-md font-bold">현재 매칭된 카드</h1>
@@ -72,7 +73,10 @@ function MyCurrentMatchingProject() {
               </DialogTrigger>
               <DialogPortal />
               <DialogContent className="top-[45%] border-none bg-transparent shadow-none">
-                <ProjectCardContainer project={project} />
+                <ProjectCardContainer
+                  project={project}
+                  matchingId={matchingId}
+                />
               </DialogContent>
             </Dialog>
           </div>

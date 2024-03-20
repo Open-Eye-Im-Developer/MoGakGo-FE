@@ -15,8 +15,8 @@ import { Project } from "@/app/_common/types/project";
 import { RequestList } from "../_types/type";
 import useInfiniteScroll from "../_hooks/useInfiniteScroll";
 import useGetRequestListQuery from "../_hooks/useGetRequestListQuery";
+import useGetChatRoomIdQuery from "../_hooks/useGetChatRoomIdQuery";
 import useFlip from "../_hooks/useFlip";
-import TEST_MESSAGES from "../_constants/messages";
 import ProjectChatCard from "./ProjectChatCard";
 import ProjectCardFront from "./ProjectCardFront";
 import ProjectCardBack from "./ProjectCardBack";
@@ -35,7 +35,8 @@ function ProjectCardContainer({ project, matchingId }: Props) {
     cursorId,
     project.creator.id,
   );
-  
+  const { chatRoomId } = useGetChatRoomIdQuery(project.projectId, matchingId);
+
   useEffect(() => {
     if (!data || "timestamp" in data) return;
     if (data) {
@@ -63,7 +64,11 @@ function ProjectCardContainer({ project, matchingId }: Props) {
             `${flipped ? "[transform:rotateY(180deg)]" : ""}`,
           )}
         >
-          <ProjectCardFront onRotate={handleFlip} project={project} />
+          <ProjectCardFront
+            onRotate={handleFlip}
+            project={project}
+            matchingId={matchingId}
+          />
           <ProjectCardBack
             onRotate={handleFlip}
             requestList={requestList}
@@ -72,7 +77,7 @@ function ProjectCardContainer({ project, matchingId }: Props) {
         </div>
       </TabsContent>
       <TabsContent value="chat" className="h-full">
-        <ProjectChatCard messages={TEST_MESSAGES} />
+        <ProjectChatCard chatRoomId={chatRoomId} />
       </TabsContent>
     </Tabs>
   );
