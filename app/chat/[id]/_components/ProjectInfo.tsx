@@ -15,10 +15,14 @@ import {
   AccordionTrigger,
 } from "../../../_common/shadcn/ui/accordion";
 
-function ProjectInfo() {
+interface ProjectInfoProps {
+  chatRoomId?: string;
+}
+
+function ProjectInfo({ chatRoomId }: ProjectInfoProps) {
   const { id } = useParams<{ id: string }>();
 
-  const { chatInfo, isLoading } = useGetChatInfo(id);
+  const { chatInfo, isLoading } = useGetChatInfo(id ?? chatRoomId);
 
   if (isLoading)
     return (

@@ -1,12 +1,8 @@
 import React from "react";
 
+import ProjectInfo from "@/app/chat/[id]/_components/ProjectInfo";
 import MessageContainer from "@/app/chat/[id]/_components/MessageContainer";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/app/_common/shadcn/ui/card";
+import { Card, CardContent, CardHeader } from "@/app/_common/shadcn/ui/card";
 
 interface ChatCardProps {
   chatRoomId: string;
@@ -17,8 +13,8 @@ function ProjectChatCard(props: ChatCardProps) {
 
   return (
     <Card className="overflow-hidden">
-      <CardHeader className="border-b border-black py-4">
-        <CardTitle className="text-base">📍 맥심플랜트 이태원점</CardTitle>
+      <CardHeader className="border-b border-black p-0">
+        <ProjectInfo chatRoomId={chatRoomId} />
       </CardHeader>
       <CardContent className="relative flex h-[550px] w-[330px] flex-col p-0 px-0 sm:w-[450px]">
         <MessageContainer chatRoomId={chatRoomId} />
