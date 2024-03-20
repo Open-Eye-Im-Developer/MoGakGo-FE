@@ -36,9 +36,6 @@
   .main-logo {
     @apply absolute z-0 h-full  w-full overflow-hidden before:absolute before:right-[100%] before:h-full before:w-full before:animate-slide-infinite before:bg-[url("/images/main_logo.webp")] before:bg-[length:100%] before:content-[""] after:absolute after:h-full after:w-full after:animate-slide-infinite after:bg-[url("/images/main_logo.webp")] after:bg-[length:100%] after:content-[""];
   }
-  .card {
-   
-  }
 }
 
 @layer utilities {

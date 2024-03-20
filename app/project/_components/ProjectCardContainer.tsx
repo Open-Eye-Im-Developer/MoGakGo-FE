@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import { useQueryAchievements } from "@/app/achievements/_hooks/useQueryAchievements";
 import { cn } from "@/app/_common/shadcn/utils";
 import {
   Tabs,
@@ -36,6 +37,7 @@ function ProjectCardContainer({ project, matchingId }: Props) {
     project.creator.id,
   );
   const { chatRoomId } = useGetChatRoomIdQuery(project.projectId, matchingId);
+  const { myAchievement } = useQueryAchievements();
 
   useEffect(() => {
     if (!data || "timestamp" in data) return;
@@ -71,6 +73,7 @@ function ProjectCardContainer({ project, matchingId }: Props) {
             onRotate={handleFlip}
             project={project}
             matchingId={matchingId}
+            achievementTitle={myAchievement?.title}
           />
           <ProjectCardBack
             onRotate={handleFlip}

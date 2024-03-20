@@ -8,7 +8,6 @@ import { usePositionStore } from "@/app/_common/store/usePositionStore";
 import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { cn } from "@/app/_common/shadcn/utils";
 import { Carousel, CarouselApi } from "@/app/_common/shadcn/ui/carousel";
-import WithSearchTokens from "@/app/_common/hoc/WithSearchTokens";
 import WithNavigation from "@/app/_common/hoc/WithNavigation";
 
 import MapComponent from "@/app/_common/components/MapComponent";
@@ -144,7 +143,7 @@ function Map() {
           className="flex h-full w-full flex-col items-center justify-center"
         >
           {cardList.projectList.length !== 0 ||
-            cardList.profileList.length !== 0 ? (
+          cardList.profileList.length !== 0 ? (
             <CardList cardList={cardList} onClick={handleCardClose} />
           ) : (
             <EmptyCardList onClick={handleCardClose} />
@@ -155,4 +154,4 @@ function Map() {
   );
 }
 
-export default WithNavigation(WithSearchTokens(Map), true);
+export default WithNavigation(Map, true);

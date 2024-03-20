@@ -42,6 +42,7 @@ interface CardFrontProps {
   onRotate: () => void;
   project: Project;
   matchingId?: number;
+  achievementTitle?: string;
 }
 
 function ProjectCardFront(props: CardFrontProps) {
@@ -66,6 +67,7 @@ function ProjectCardFront(props: CardFrontProps) {
       meetingInfo: { meetDetail, meetEndTime, meetStartTime },
     },
     matchingId,
+    achievementTitle,
   } = props;
   const { user } = useAuthStore();
 
@@ -138,7 +140,7 @@ function ProjectCardFront(props: CardFrontProps) {
                 <span className="relative text-black">{username}</span>
               </h1>
               <h3 className="mt-3 text-xs font-bold text-[#F76A6A]">
-                {"이세계 개발자"}
+                {achievementTitle ?? "칭호가 없습니다."}
               </h3>
             </div>
             <p className="line-clamp-3 w-40 overflow-hidden text-center text-sm">
