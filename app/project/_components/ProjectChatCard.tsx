@@ -15,7 +15,6 @@ interface ChatCardProps {
 function ProjectChatCard(props: ChatCardProps) {
   const { chatRoomId } = props;
 
-  console.log(chatRoomId);
   return (
     <Card className="overflow-hidden">
       <CardHeader className="border-b border-black py-4">
