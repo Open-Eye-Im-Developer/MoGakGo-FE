@@ -53,7 +53,10 @@ function ProjectCardContainer({ project, matchingId }: Props) {
     <Tabs defaultValue="card" className="h-[600px] w-[330px] sm:w-[450px]">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="card">Card</TabsTrigger>
-        <TabsTrigger value="chat" disabled={matchingId === null}>
+        <TabsTrigger
+          value="chat"
+          disabled={project.projectStatus !== "MATCHED"}
+        >
           Chat
         </TabsTrigger>
       </TabsList>
