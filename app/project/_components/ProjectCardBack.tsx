@@ -26,11 +26,12 @@ interface CardBackProps {
   requestList?: RequestList[];
   projectStatus: string;
   onRotate: () => void;
+  handleMoreButton: () => void;
 }
 
 const ProjectCardBack = forwardRef<HTMLDivElement, CardBackProps>(
   function ProjectCardBack(props, ref) {
-    const { requestList, onRotate, projectStatus } = props;
+    const { requestList, onRotate, projectStatus, handleMoreButton } = props;
     const { createAcceptRequest } = useAcceptRequestMutation();
     const [isAccepted, setIsAccepted] = useState(
       projectStatus === "PENDING" ? false : true,
@@ -38,7 +39,7 @@ const ProjectCardBack = forwardRef<HTMLDivElement, CardBackProps>(
     const handleAccept = async (projectRequestId: number) => {
       createAcceptRequest(projectRequestId);
     };
-    console.log(requestList);
+
     return (
       <Card className="absolute inset-0 left-0 top-0 overflow-hidden [backface-visibility:hidden] [transform:rotateY(180deg)]">
         <CardHeader className="flex flex-row items-center justify-between border-b border-black px-4 py-2">
@@ -47,7 +48,7 @@ const ProjectCardBack = forwardRef<HTMLDivElement, CardBackProps>(
             <ButtonRotate onRotate={onRotate} />
           </CardTitle>
         </CardHeader>
-        <CardContent className="flex h-full flex-col px-0 pb-20">
+        <CardContent className="flex h-full flex-col items-center px-0 pb-20">
           {Array.isArray(requestList) && requestList?.length === 0 ? (
             <div className="flex h-full w-full items-center justify-center">
               <span className="text-xl text-[#959595]">요청이 없어요 🥲</span>
@@ -103,6 +104,11 @@ const ProjectCardBack = forwardRef<HTMLDivElement, CardBackProps>(
                   </aside>
                 ))}
             </div>
+          )}
+          {!isAccepted && (
+            <Button className="w-fit" onClick={handleMoreButton}>
+              더보기
+            </Button>
           )}
         </CardContent>
       </Card>

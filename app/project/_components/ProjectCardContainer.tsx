@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { useQueryAchievements } from "@/app/achievements/_hooks/useQueryAchievements";
 import { cn } from "@/app/_common/shadcn/utils";
@@ -14,7 +14,6 @@ import {
 import { Project } from "@/app/_common/types/project";
 
 import { RequestList } from "../_types/type";
-import useInfiniteScroll from "../_hooks/useInfiniteScroll";
 import useGetRequestListQuery from "../_hooks/useGetRequestListQuery";
 import useGetChatRoomIdQuery from "../_hooks/useGetChatRoomIdQuery";
 import useFlip from "../_hooks/useFlip";
@@ -30,7 +29,8 @@ interface Props {
 function ProjectCardContainer({ project, matchingId }: Props) {
   const { flipped, handleFlip } = useFlip();
   const [requestList, setRequestList] = useState<RequestList[]>([]);
-  const { ref, cursorId } = useInfiniteScroll(requestList!);
+  const [cursorId, setCursorId] = useState<number | null>(null);
+  const ref = useRef(null);
   const { data } = useGetRequestListQuery(
     project.projectId,
     cursorId,
@@ -38,6 +38,15 @@ function ProjectCardContainer({ project, matchingId }: Props) {
   );
   const { chatRoomId } = useGetChatRoomIdQuery(project.projectId, matchingId);
   const { myAchievement } = useQueryAchievements();
+
+  const handleMoreButton = () => {
+    if (Array.isArray(data)) {
+      const lastItem = data[data.length - 1];
+      if (lastItem) {
+        setCursorId(lastItem.id);
+      }
+    }
+  };
 
   useEffect(() => {
     if (!data || "timestamp" in data) return;
@@ -79,6 +88,7 @@ function ProjectCardContainer({ project, matchingId }: Props) {
             onRotate={handleFlip}
             requestList={requestList}
             projectStatus={project.projectStatus}
+            handleMoreButton={handleMoreButton}
             ref={ref}
           />
         </div>
