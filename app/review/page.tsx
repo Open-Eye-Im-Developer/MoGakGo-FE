@@ -2,7 +2,7 @@ import { Suspense } from "react";
 
 import { generateViewport } from "../_common/utils/generateViewport";
 import { theme } from "../_common/constants/viewPortTheme";
-import LoadingSpinner from "../_common/components/LoadingSpinner";
+import ReviewSkeleton from "./_components/ReviewSkeleton";
 import ReviewForm from "./_components/ReviewForm";
 
 import type { Viewport } from "next";
@@ -11,7 +11,7 @@ export const viewport: Viewport = generateViewport(theme.SKY);
 
 function ReviewPage() {
   return (
-    <Suspense fallback={<LoadingSpinner />}>
+    <Suspense fallback={<ReviewSkeleton />}>
       <main className="map-background grid h-screen w-full place-items-center p-4">
         <ReviewForm />
       </main>
