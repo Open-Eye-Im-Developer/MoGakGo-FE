@@ -20,6 +20,7 @@ import { RequestList } from "../_types/type";
 import useAcceptRequestMutation from "../_hooks/useAcceptRequestMutation";
 import DialogMoreInfo from "./DialogMoreInfo";
 import ButtonRotate from "./ButtonRotate";
+
 import "../_styles/card.css";
 
 interface CardBackProps {
@@ -39,6 +40,7 @@ const ProjectCardBack = forwardRef<HTMLDivElement, CardBackProps>(
       handleMoreButton,
       handleAcceptButton,
       isAccepted,
+      projectStatus,
     } = props;
     const { createAcceptRequest, isError } = useAcceptRequestMutation();
 
@@ -87,13 +89,13 @@ const ProjectCardBack = forwardRef<HTMLDivElement, CardBackProps>(
                             {senderPreview.username}
                           </p>
                           <p className="text-xs text-[#F76A6A]">
-                            {senderPreview.achievementTitle || "null"}
+                            {senderPreview.achievementId || "null"}
                           </p>
                         </div>
                       </aside>
                       <aside className="flex items-center gap-2">
                         <DialogMoreInfo response={senderPreview} />
-                        {!isAccepted && (
+                        {!isAccepted && projectStatus === "PENDING" && (
                           <Button
                             size="sm"
                             className="rounded-lg bg-neoYellow"

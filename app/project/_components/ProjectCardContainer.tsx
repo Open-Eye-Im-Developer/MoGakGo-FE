@@ -31,7 +31,11 @@ function ProjectCardContainer({ project, matchingId }: Props) {
   const [requestList, setRequestList] = useState<RequestList[]>([]);
   const [cursorId, setCursorId] = useState<number | null>(null);
   const [isAccepted, setIsAccepted] = useState(
-    project.projectStatus === "PENDING" ? false : true,
+    project.projectStatus === "PENDING" ||
+      project.projectStatus === "CANCELED" ||
+      project.projectStatus === "FINISHED"
+      ? false
+      : true,
   );
 
   const ref = useRef(null);
@@ -77,7 +81,14 @@ function ProjectCardContainer({ project, matchingId }: Props) {
     <Tabs defaultValue="card" className="h-[600px] w-[330px] sm:w-[450px]">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="card">Card</TabsTrigger>
-        <TabsTrigger value="chat" disabled={!isAccepted}>
+        <TabsTrigger
+          value="chat"
+          disabled={
+            !isAccepted ||
+            project.projectStatus === "CANCELED" ||
+            project.projectStatus === "FINISHED"
+          }
+        >
           Chat
         </TabsTrigger>
       </TabsList>

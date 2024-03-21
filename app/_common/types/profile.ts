@@ -8,7 +8,7 @@ export interface Creator {
   githubUrl: string;
   bio?: string;
   jandiRate: number;
-  achievementTitle: string;
+  achievementId: number;
   developLanguages: string[];
   wantedJobs: WantedJobs[];
 }
