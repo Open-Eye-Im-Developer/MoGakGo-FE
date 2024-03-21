@@ -8,7 +8,7 @@ export interface RequestUserAchievement {
   achievementId: Achievement["achievementId"];
 }
 
-export const getAchievements = async (id?: Achievement["achievementId"]) => {
+export const getAchievements = async (id?: SignUpUser["id"]) => {
   if (!id) return Promise.reject("id is required");
 
   const { data } = await instance.get<Achievement[]>(`/achievements/${id}`);
