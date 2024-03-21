@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-import { useAuthStore } from "@/app/_common/store/useAuthStore";
+import { useQueryUserData } from "@/app/my-page/_hooks/useQueryUserData";
 import {
   Dialog,
   DialogContent,
@@ -30,7 +30,8 @@ import ButtonRotate from "./ButtonRotate";
 function ProjectCreateDialog() {
   const [open, setOpen] = useState(false);
   const { flipped, handleFlip } = useFlip();
-  const { user } = useAuthStore();
+  const { data: user } = useQueryUserData();
+
   const profile = {
     response: user!,
   };
@@ -38,7 +39,7 @@ function ProjectCreateDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="h-12 w-12 rounded-full p-3 shadow-md hover:neo-hover">
+        <Button className="hover:neo-hover h-12 w-12 rounded-full p-3 shadow-md">
           <Icon id="plus" />
         </Button>
       </DialogTrigger>
