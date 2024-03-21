@@ -31,6 +31,8 @@ const toastVariants = cva(
           "border-2 border-black bg-white text-slate-950 dark:bg-slate-950 dark:text-slate-50",
         destructive:
           "destructive group border-red-500 bg-red-500 text-slate-50 dark:border-red-900 dark:bg-red-900 dark:text-slate-50 border-2 border-black",
+        achievement:
+          "border-2 border-black bg-white text-slate-950 dark:bg-slate-950 dark:text-slate-50 p-4 bottom-0 right-0 data-[state=open]:slide-in-from-bottom-full",
       },
     },
     defaultVariants: {
