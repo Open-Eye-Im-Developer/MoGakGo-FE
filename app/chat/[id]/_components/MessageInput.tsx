@@ -24,7 +24,8 @@ function MessageInput({
   clientRef,
   chatRoomId,
 }: MessageInputProp) {
-  const { chats } = useGetChats();
+  const { data } = useGetChats();
+  const chats = data?.pages[0]?.data as ChatType[];
 
   const isActiveRoom = useMemo(() => {
     const room = chats.find(chat => chat.chatRoomId === chatRoomId) as ChatType;
