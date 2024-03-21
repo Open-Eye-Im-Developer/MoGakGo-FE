@@ -26,12 +26,16 @@ export const useMutationLogin = () => {
   const router = useRouter();
   const mutation = useMutation({
     mutationFn: (code: string) => postLogin(code),
-    onSuccess: (data: LoginResponse) => {
-      if (data.signUpComplete) {
-        saveUpdatedTokens(data.accessToken, data.refreshToken);
+    onSuccess: ({
+      signUpComplete,
+      accessToken,
+      refreshToken,
+    }: LoginResponse) => {
+      if (signUpComplete) {
+        saveUpdatedTokens(accessToken, refreshToken);
         router.push("/");
       } else {
-        saveNewTokens(data.accessToken, data.refreshToken);
+        saveNewTokens(accessToken, refreshToken);
         router.push("/signup");
       }
     },
