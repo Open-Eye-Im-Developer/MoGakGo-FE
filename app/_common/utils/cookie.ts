@@ -30,6 +30,7 @@ export async function getCookie<T>(key: string, defaultValue?: Promise<T>) {
     return response.data;
   } catch (error) {
     console.error(error);
+
     return defaultValue;
   }
 }

@@ -30,14 +30,18 @@ instance.interceptors.response.use(
   },
   async error => {
     const { status, config } = error.response;
-    // TODO: 백엔드에서 가져온 cookie를 브라우저에서 get 하는지 확인하기
+
     const refreshToken = await getCookie("refreshToken", "");
 
-    // TODO: accessToken을 쿠키에 저장하여 1시간 이후가 되면 자동 갱신하도록 수정?
-    if (status === 404) {
+    // TODO: 비회원 api 업데이트 후 제거
+    if (!refreshToken) return Promise.reject(error);
+
+    if (status === 401) {
       const newAccessToken = await reIssueAccessToken(refreshToken);
 
-      if (newAccessToken) {
+      if (!newAccessToken) return Promise.reject(error);
+
+      if (config.url !== "/auth/reissue") {
         localStorage.setItem("accessToken", newAccessToken);
 
         config.headers.Authorization = `Bearer ${newAccessToken}`;
