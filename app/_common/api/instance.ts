@@ -33,6 +33,9 @@ instance.interceptors.response.use(
 
     const refreshToken = await getCookie("refreshToken", "");
 
+    // TODO: 비회원 api 업데이트 후 제거
+    if (!refreshToken) return Promise.reject(error);
+
     if (status === 401) {
       const newAccessToken = await reIssueAccessToken(refreshToken);
 
