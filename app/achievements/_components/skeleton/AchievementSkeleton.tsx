@@ -1,5 +1,5 @@
-import MyAchievementSkeleton from "../MyAchievementSkeleton";
-import AchievementItemSkeleton from "../AchievementItemSkeleton";
+import MyAchievementSkeleton from "./MyAchievementSkeleton";
+import AchievementItemSkeleton from "./AchievementItemSkeleton";
 
 function AchievementSkeleton() {
   return (

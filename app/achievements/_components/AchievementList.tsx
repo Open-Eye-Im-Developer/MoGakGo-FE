@@ -13,9 +13,9 @@ import { toast } from "@/app/_common/utils/toast";
 
 import { useQueryAchievements } from "../_hooks/useQueryAchievements";
 import AchievementSkeleton from "./skeleton/AchievementSkeleton";
+import AchievementItemSkeleton from "./skeleton/AchievementItemSkeleton";
 import MyAchievement from "./MyAchievement";
 import ListSortSelect from "./ListSortSelect";
-import AchievementItemSkeleton from "./AchievementItemSkeleton";
 import AchievementItem from "./AchievementItem";
 
 function AchievementList() {
