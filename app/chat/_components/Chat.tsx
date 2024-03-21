@@ -44,7 +44,9 @@ function Chat({ chat }: ChatProps) {
         >
           <div>
             <div className="font-medium">{matchedUser.username}</div>
-            <span className="text-gray-500">{lastMessage}</span>
+            <span className="block w-40 truncate text-gray-500">
+              {lastMessage}
+            </span>
           </div>
         </Profile>
         <div className="min-w-fit text-center text-sm text-gray-500">

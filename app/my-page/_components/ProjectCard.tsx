@@ -1,14 +1,25 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { IconExclamationCircle } from "@tabler/icons-react";
 
 import formatMeetingTime from "@/app/project/_utils/formatMeetingTime";
+import ProjectCardContainer from "@/app/project/_components/ProjectCardContainer";
 import { cn } from "@/app/_common/shadcn/utils";
+import {
+  Dialog,
+  DialogContent,
+  DialogPortal,
+  DialogTrigger,
+} from "@/app/_common/shadcn/ui/dialog";
+import { Button } from "@/app/_common/shadcn/ui/button";
 import { Badge } from "@/app/_common/shadcn/ui/badge";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from "@/app/_common/shadcn/ui/avatar";
+
+import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
+import Icon from "@/app/_common/components/Icon";
 
 import { MATCH_STATUS } from "@/app/_common/constants/matchStatus";
 
@@ -18,13 +29,16 @@ import {
 } from "@/app/_common/types/project";
 import { Match } from "@/app/_common/types/matching";
 
+import { useQueryUserData } from "../_hooks/useQueryUserData";
+import { useQueryProjectDetail } from "../_hooks/useQueryProjectDetail";
 import MatchCancelButton from "./MatchCancelButton";
 
 interface CardProps {
   data: Match | ProjectSummary | RequestProjectSummary;
+  isModal?: boolean;
 }
 
-function ProjectCard({ data }: CardProps) {
+function ProjectCard({ data, isModal }: CardProps) {
   const project = useMemo(() => {
     if ("status" in data) {
       return {
@@ -55,6 +69,14 @@ function ProjectCard({ data }: CardProps) {
       };
     }
   }, [data]);
+  const { data: userData } = useQueryUserData();
+  const [projectId, setProjectId] = useState<number | null>(null);
+
+  const { projectDetail, isLoading } = useQueryProjectDetail(
+    projectId,
+    isModal ?? false,
+    userData?.id,
+  );
 
   if (!project)
     return (
@@ -93,6 +115,22 @@ function ProjectCard({ data }: CardProps) {
       {project.status && project.status === "MATCHED" ? (
         <MatchCancelButton id={project.id} />
       ) : null}
+      {project.status && project.status !== "MATCHED" && isModal && (
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button className="px-2" onClick={() => setProjectId(project.id)}>
+              <Icon id="chevron-right" size={24} />
+            </Button>
+          </DialogTrigger>
+          <DialogPortal />
+          <DialogContent className="top-[45%] border-none bg-transparent shadow-none">
+            {projectDetail && !isLoading && (
+              <ProjectCardContainer project={projectDetail} />
+            )}
+            {isLoading && <LoadingSpinner />}
+          </DialogContent>
+        </Dialog>
+      )}
     </div>
   );
 }

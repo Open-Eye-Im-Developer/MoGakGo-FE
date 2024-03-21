@@ -22,7 +22,7 @@ function MatchCancelButton({ id }: MatchCancelButtonProps) {
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger>
+      <AlertDialogTrigger asChild>
         <Button>취소</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>

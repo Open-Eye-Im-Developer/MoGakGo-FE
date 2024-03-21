@@ -10,6 +10,7 @@ export interface Project {
   projectId: number;
   creator: Creator;
   projectTags: string[];
+  projectStatus: string;
   meetingInfo: MeetingInfo;
 }
 

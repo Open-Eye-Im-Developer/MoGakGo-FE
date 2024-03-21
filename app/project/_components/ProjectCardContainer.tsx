@@ -16,17 +16,18 @@ import { Project } from "@/app/_common/types/project";
 import { RequestList } from "../_types/type";
 import useInfiniteScroll from "../_hooks/useInfiniteScroll";
 import useGetRequestListQuery from "../_hooks/useGetRequestListQuery";
+import useGetChatRoomIdQuery from "../_hooks/useGetChatRoomIdQuery";
 import useFlip from "../_hooks/useFlip";
-import TEST_MESSAGES from "../_constants/messages";
 import ProjectChatCard from "./ProjectChatCard";
 import ProjectCardFront from "./ProjectCardFront";
 import ProjectCardBack from "./ProjectCardBack";
 
 interface Props {
   project: Project;
+  matchingId?: number;
 }
 
-function ProjectCardContainer({ project }: Props) {
+function ProjectCardContainer({ project, matchingId }: Props) {
   const { flipped, handleFlip } = useFlip();
   const [requestList, setRequestList] = useState<RequestList[]>([]);
   const { ref, cursorId } = useInfiniteScroll(requestList!);
@@ -35,6 +36,7 @@ function ProjectCardContainer({ project }: Props) {
     cursorId,
     project.creator.id,
   );
+  const { chatRoomId } = useGetChatRoomIdQuery(project.projectId, matchingId);
   const { myAchievement } = useQueryAchievements();
 
   useEffect(() => {
@@ -53,7 +55,12 @@ function ProjectCardContainer({ project }: Props) {
     <Tabs defaultValue="card" className="h-[600px] w-[330px] sm:w-[450px]">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="card">Card</TabsTrigger>
-        <TabsTrigger value="chat">Chat</TabsTrigger>
+        <TabsTrigger
+          value="chat"
+          disabled={project.projectStatus !== "MATCHED"}
+        >
+          Chat
+        </TabsTrigger>
       </TabsList>
       <TabsContent value="card" className="group h-full [perspective:1000px]">
         <div
@@ -65,6 +72,7 @@ function ProjectCardContainer({ project }: Props) {
           <ProjectCardFront
             onRotate={handleFlip}
             project={project}
+            matchingId={matchingId}
             achievementTitle={myAchievement?.title}
           />
           <ProjectCardBack
@@ -75,7 +83,7 @@ function ProjectCardContainer({ project }: Props) {
         </div>
       </TabsContent>
       <TabsContent value="chat" className="h-full">
-        <ProjectChatCard messages={TEST_MESSAGES} />
+        {chatRoomId && <ProjectChatCard chatRoomId={chatRoomId} />}
       </TabsContent>
     </Tabs>
   );
