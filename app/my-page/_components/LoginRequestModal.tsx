@@ -8,6 +8,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
+  AlertDialogOverlay,
 } from "@/app/_common/shadcn/ui/alert-dialog";
 
 import { navigate } from "@/app/_common/utils/redirect";
@@ -23,7 +24,10 @@ function LoginRequestModal() {
 
   return (
     <AlertDialog open={!data && !isLoading}>
-      <AlertDialogContent>
+      <AlertDialogContent
+        customOverlay={<AlertDialogOverlay className="z-100" />}
+        className="z-100"
+      >
         <AlertDialogHeader>
           <AlertDialogTitle>로그인이 필요한 페이지입니다.</AlertDialogTitle>
           <AlertDialogDescription>
