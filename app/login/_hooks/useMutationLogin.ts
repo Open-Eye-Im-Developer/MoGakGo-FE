@@ -1,7 +1,8 @@
 import { useRouter } from "next/navigation";
-import { useMutation } from "@tanstack/react-query";
+import { QueryClient, useMutation } from "@tanstack/react-query";
 
-import { postLogin } from "@/app/_common/api/auth";
+import { useAuthStore } from "@/app/_common/store/useAuthStore";
+import { getSignUpUser, postLogin } from "@/app/_common/api/auth";
 
 import { setCookie } from "@/app/_common/utils/cookie";
 
@@ -23,10 +24,12 @@ const saveUpdatedTokens = (newAccessToken: string, newRefreshToken: string) => {
 };
 
 export const useMutationLogin = () => {
+  const { setUser } = useAuthStore();
+  const queryClient = new QueryClient();
   const router = useRouter();
   const mutation = useMutation({
     mutationFn: (code: string) => postLogin(code),
-    onSuccess: ({
+    onSuccess: async ({
       signUpComplete,
       accessToken,
       refreshToken,
@@ -38,6 +41,11 @@ export const useMutationLogin = () => {
         saveNewTokens(accessToken, refreshToken);
         router.push("/signup");
       }
+      const userInfo = await queryClient.fetchQuery({
+        queryFn: getSignUpUser,
+        queryKey: ["getSignUpUser"],
+      });
+      setUser({ ...userInfo });
     },
     onError: () => {
       console.error("로그인 에러 발생");
