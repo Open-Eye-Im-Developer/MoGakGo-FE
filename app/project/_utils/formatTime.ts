@@ -1,15 +1,26 @@
-const formatTime = (startHour: string, startMinute: string, endHour: string, endMinute: string) => {
-  const startTime = new Date();
-  const endTime = new Date();
+import utc from "dayjs/plugin/utc";
+import dayjs from "dayjs";
 
-  startTime.setUTCHours(Number(startHour));
-  startTime.setMinutes(Number(startMinute));
+dayjs.extend(utc);
+dayjs.locale("ko");
 
-  endTime.setUTCHours(Number(endHour));
-  endTime.setMinutes(Number(endMinute));
+const formatTime = (
+  startHour: string,
+  startMinute: string,
+  endHour: string,
+  endMinute: string,
+) => {
+  const startTime = dayjs()
+    .utcOffset(9)
+    .hour(Number(startHour))
+    .minute(Number(startMinute));
+  const endTime = dayjs()
+    .utcOffset(9)
+    .hour(Number(endHour))
+    .minute(Number(endMinute));
 
-  const meetStartTime = startTime.toISOString().split(".")[0];
-  const meetEndTime = endTime.toISOString().split(".")[0];
+  const meetStartTime = startTime.format("YYYY-MM-DDTHH:mm:ss")
+  const meetEndTime = endTime.format("YYYY-MM-DDTHH:mm:ss")
 
   return {
     meetStartTime,
