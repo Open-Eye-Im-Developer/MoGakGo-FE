@@ -18,7 +18,6 @@ const saveUpdatedTokens = (newAccessToken: string, newRefreshToken: string) => {
   setCookie("refreshToken", newRefreshToken, {
     httpOnly: true,
     "max-age": 60 * 60 * 24 * 14,
-    path: "/",
   });
 };
 

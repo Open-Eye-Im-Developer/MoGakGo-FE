@@ -11,7 +11,7 @@ export async function POST(request: Request) {
       "Set-Cookie": `${body.key}=${body.value}; ${Object.entries(
         body.options ?? {},
       )
-        .map(el => `${el[0]}=${el[1]}`)
+        .map(([key, value]) => `${key}=${value}`)
         .join("; ")}`,
     },
   });
