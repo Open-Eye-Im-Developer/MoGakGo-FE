@@ -23,16 +23,9 @@ export function getCookie<T>(key: string): Promise<T> | undefined;
 export function getCookie<T>(key: string, defaultValue: T): Promise<T>;
 export async function getCookie<T>(key: string, defaultValue?: Promise<T>) {
   try {
-    const response = await axios.post(
-      "/api/get-cookie",
-      {
-        key,
-      },
-      {
-        // TODO: 비회원 api 업데이트 후 제거
-        validateStatus: status => status < 500,
-      },
-    );
+    const response = await axios.post("/api/get-cookie", {
+      key,
+    });
 
     return response.data;
   } catch (error) {
