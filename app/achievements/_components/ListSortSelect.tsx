@@ -8,6 +8,8 @@ import {
 } from "@/app/_common/shadcn/ui/dropdown-menu";
 import { Button } from "@/app/_common/shadcn/ui/button";
 
+import Icon from "@/app/_common/components/Icon";
+
 import { Achievement } from "@/app/_common/types/user";
 
 interface ListSortSelectProps {
@@ -59,7 +61,7 @@ function ListSortSelect({ setSorting, achievements }: ListSortSelectProps) {
     <DropdownMenu>
       <DropdownMenuTrigger className="w-30 translate-x-0 translate-y-0 border-none px-2 pr-1 shadow-none">
         <Button className="text-sm" variant={"ghost"}>
-          정렬
+          정렬 <Icon id="chevron-down" className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-[6rem]">
