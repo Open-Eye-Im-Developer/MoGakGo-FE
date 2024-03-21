@@ -32,10 +32,13 @@ function useCreateProjectMutation(onClose: (open: boolean) => void) {
     },
     onError: (error: AxiosError<ResponseError>) => {
       const errorMessage = error.response?.data.message;
+      const isAreaAuthed = error.response?.data.code === "E030105";
 
       toast({
         title: "프로젝트 생성에 실패했습니다.",
-        description: errorMessage,
+        description: isAreaAuthed
+          ? "마이 페이지에서 동네 인증을 진행해주세요."
+          : errorMessage,
         variant: "destructive",
       });
     },
