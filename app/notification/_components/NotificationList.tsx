@@ -1,5 +1,8 @@
 "use client";
 
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
+
 import AnnounceEmptyActive from "@/app/_common/components/AnnounceEmptyNotification";
 import ActivityCardSkeleton from "@/app/_common/components/ActivityCardSkeleton";
 
@@ -9,7 +12,16 @@ import notificationEmptyAnimaiton from "../_assets/notification.json";
 import useGetNotifications from "../_api/useGetNotifications";
 
 function NotificationList() {
-  const { notifications, isLoading } = useGetNotifications();
+  const { ref, inView } = useInView();
+  const { data, isLoading, fetchNextPage, hasNextPage } = useGetNotifications();
+
+  const notifications = data?.pages.map(page => (page ? page.data : [])).flat();
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [inView]);
 
   if (isLoading)
     return (
@@ -23,11 +35,12 @@ function NotificationList() {
   return (
     <>
       {notifications?.length ? (
-        [...notifications]
-          .reverse()
-          .map((notification: NotificationType) => (
+        <div className="mt-6">
+          {[...notifications].map((notification: NotificationType) => (
             <Notification notification={notification} key={notification.id} />
-          ))
+          ))}
+          {hasNextPage && <div ref={ref} />}
+        </div>
       ) : (
         <AnnounceEmptyActive
           description="아직 받은 알람이 없어요"

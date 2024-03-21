@@ -8,11 +8,11 @@ import { usePositionStore } from "@/app/_common/store/usePositionStore";
 import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import { cn } from "@/app/_common/shadcn/utils";
 import { Carousel, CarouselApi } from "@/app/_common/shadcn/ui/carousel";
-import WithSearchTokens from "@/app/_common/hoc/WithSearchTokens";
 import WithNavigation from "@/app/_common/hoc/WithNavigation";
 
 import MapComponent from "@/app/_common/components/MapComponent";
 import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
+import Icon from "@/app/_common/components/Icon";
 
 import REGION_CODE from "@/app/_common/constants/regionCode";
 
@@ -113,12 +113,16 @@ function Map() {
 
   return (
     <div className="relative h-screen w-screen touch-none overflow-hidden">
-      <div className="logo-vertical cursor-pointer" />
+      <Icon
+        id="vertical-logo"
+        height={200}
+        className="logo-vertical cursor-pointer"
+      />
       <div className="map-background" />
       <div className="map-background" />
       <LoadingSpinner
         className={cn(
-          "absolute bottom-0 left-0 right-0 top-0 z-10 flex h-full w-full place-content-center bg-black/40 backdrop-blur-sm transition-all duration-300",
+          "absolute bottom-0 left-0 right-0 top-0 z-100 flex h-full w-full place-content-center bg-black/40 backdrop-blur-sm transition-all duration-300",
           isRankLoading ? "visible opacity-100" : "invisible opacity-0",
         )}
       />
@@ -144,7 +148,7 @@ function Map() {
           className="flex h-full w-full flex-col items-center justify-center"
         >
           {cardList.projectList.length !== 0 ||
-            cardList.profileList.length !== 0 ? (
+          cardList.profileList.length !== 0 ? (
             <CardList cardList={cardList} onClick={handleCardClose} />
           ) : (
             <EmptyCardList onClick={handleCardClose} />
@@ -155,4 +159,4 @@ function Map() {
   );
 }
 
-export default WithNavigation(WithSearchTokens(Map), true);
+export default WithNavigation(Map, true);

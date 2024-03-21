@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { useAuthStore } from "@/app/_common/store/useAuthStore";
+import { useQueryUserData } from "@/app/my-page/_hooks/useQueryUserData";
 import { Separator } from "@/app/_common/shadcn/ui/separator";
 import { Form, FormMessage } from "@/app/_common/shadcn/ui/form";
 import { Button } from "@/app/_common/shadcn/ui/button";
@@ -25,7 +25,7 @@ interface ProjectCreateFormProps {
 function ProjectCreateForm(props: ProjectCreateFormProps) {
   const { onClose } = props;
   const { createNewProject } = useCreateProjectMutation(onClose);
-  const { user } = useAuthStore();
+  const { data: user } = useQueryUserData();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

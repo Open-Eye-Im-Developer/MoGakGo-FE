@@ -5,9 +5,9 @@ import { getAchievements } from "@/app/_common/api/achievements";
 
 import { Achievement } from "@/app/_common/types/user";
 
-export const useQueryAchievements = () => {
-  const { data: userData } = useQuerySignUpUser();
-  const userId = userData?.id;
+export const useQueryAchievements = (staticUserId?: number) => {
+  const { data: userData } = useQuerySignUpUser(!!staticUserId);
+  const userId = staticUserId ?? userData?.id;
 
   const { data, isLoading } = useQuery<Achievement[]>({
     queryKey: ["achievements", userId],

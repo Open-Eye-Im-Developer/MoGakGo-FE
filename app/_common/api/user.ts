@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import { editFormSchema } from "@/app/my-page/_util/validation";
 
-import { UserJandiRating } from "../types/user";
+import { DevelopLanguage, UserJandiRating } from "../types/user";
 import { instance } from "./instance";
 
 export const getJandiRatingByUserId = async (userId?: number) => {
@@ -17,6 +17,14 @@ export const getJandiRatingByUserId = async (userId?: number) => {
 
 export const updateUser = async (body: z.infer<typeof editFormSchema>) => {
   const { data } = await instance.patch("/user", body);
+
+  return data;
+};
+
+export const getDevelopLanguage = async () => {
+  const { data } = await instance.get<DevelopLanguage[]>(
+    "/user/develop-language",
+  );
 
   return data;
 };

@@ -79,3 +79,9 @@ export interface AchievementDetail {
   requirementType: string;
   requirementValue: number;
 }
+
+export interface DevelopLanguage {
+  language: string;
+  byteSize: number;
+  imageUrl: string;
+}

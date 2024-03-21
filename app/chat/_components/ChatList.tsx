@@ -1,5 +1,8 @@
 "use client";
 
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
+
 import AnnounceEmptyActive from "@/app/_common/components/AnnounceEmptyNotification";
 import ActivityCardSkeleton from "@/app/_common/components/ActivityCardSkeleton";
 
@@ -8,7 +11,16 @@ import useGetChats from "../_api/useGetChats";
 import Chat from "./Chat";
 
 function ChatList() {
-  const { chats, isLoading } = useGetChats();
+  const { ref, inView } = useInView();
+  const { data, isLoading, fetchNextPage, hasNextPage } = useGetChats();
+
+  const chats = data?.pages.map(page => (page ? page.data : [])).flat();
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [inView]);
 
   if (isLoading)
     return (
@@ -21,10 +33,13 @@ function ChatList() {
 
   return (
     <>
-      {chats.length ? (
-        [...chats]
-          .reverse()
-          .map(chat => <Chat chat={chat} key={chat.chatRoomId} />)
+      {chats?.length ? (
+        <>
+          {[...chats].map(chat => (
+            <Chat chat={chat} key={chat.chatRoomId} />
+          ))}
+          {hasNextPage && <div ref={ref} />}
+        </>
       ) : (
         <AnnounceEmptyActive
           description="채팅목록이 비었어요"

@@ -2,6 +2,7 @@ import axios from "axios";
 
 import { getCookie } from "../utils/cookie";
 import { reIssueAccessToken } from "./auth";
+
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const SERVER_VERSION = "/api/v1";
 
@@ -29,20 +30,23 @@ instance.interceptors.response.use(
   },
   async error => {
     const { status, config } = error.response;
-    // TODO: 응답 헤더의 Set-Cookie로 refreshToken 저장으로 변경되어 삭제 필요?
+
     const refreshToken = await getCookie("refreshToken", "");
 
+    // TODO: 비회원 api 업데이트 후 제거
+    if (!refreshToken) return Promise.reject(error);
+
     if (status === 401) {
+      const newAccessToken = await reIssueAccessToken(refreshToken);
+
+      if (!newAccessToken) return Promise.reject(error);
+
       if (config.url !== "/auth/reissue") {
-        const newAccessToken = await reIssueAccessToken(refreshToken);
+        localStorage.setItem("accessToken", newAccessToken);
 
-        if (newAccessToken) {
-          localStorage.setItem("accessToken", newAccessToken);
+        config.headers.Authorization = `Bearer ${newAccessToken}`;
 
-          config.headers.Authorization = `Bearer ${newAccessToken}`;
-
-          return instance(config);
-        }
+        return instance(config);
       }
 
       return Promise.reject(error);

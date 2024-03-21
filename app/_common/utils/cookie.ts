@@ -1,17 +1,19 @@
-"use server";
-
-import { cookies } from "next/headers";
 import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
-
-const cookieStore = cookies();
+import axios from "axios";
 
 export async function setCookie<T>(
   key: string,
   value: T,
-  options?: Partial<ResponseCookie>,
+  options?: { "max-age"?: number } & Partial<Omit<ResponseCookie, "maxAge">>,
 ) {
   try {
-    cookieStore.set(key, JSON.stringify(value), options);
+    const response = await axios.post("/api/set-cookie", {
+      key,
+      value,
+      options,
+    });
+
+    return response;
   } catch (error) {
     console.error(error);
   }
@@ -21,18 +23,25 @@ export function getCookie<T>(key: string): Promise<T> | undefined;
 export function getCookie<T>(key: string, defaultValue: T): Promise<T>;
 export async function getCookie<T>(key: string, defaultValue?: Promise<T>) {
   try {
-    const data = cookieStore.get(key)?.value;
-    if (!data) return defaultValue;
-    return JSON.parse(data);
+    const response = await axios.post("/api/get-cookie", {
+      key,
+    });
+
+    return response.data;
   } catch (error) {
     console.error(error);
+
     return defaultValue;
   }
 }
 
 export async function deleteCookie(key: string) {
   try {
-    cookieStore.delete(key);
+    const response = await axios.post("/api/delete-cookie", {
+      key,
+    });
+
+    return response;
   } catch (error) {
     console.error(error);
   }

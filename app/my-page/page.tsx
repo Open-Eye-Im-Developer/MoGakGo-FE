@@ -5,26 +5,28 @@ import Link from "next/link";
 import WithNavigation from "../_common/hoc/WithNavigation";
 import StackNavigator from "../_common/components/StackNavigator";
 import Icon from "../_common/components/Icon";
-import { useQueryUserData } from "./_hooks/useQueryUserData";
 import Profile from "./_components/Profile";
 import MyProjectRequests from "./_components/MyProjectRequests";
 import MyProjectList from "./_components/MyProjectList";
 import MyAchievements from "./_components/MyAchievements";
 import LikeCounter from "./_components/LikeCounter";
 import JandiRating from "./_components/JandiRating";
+import Badges from "./_components/Badges";
 
 function MyPage() {
-  const { isError, error } = useQueryUserData();
-
-  if (isError) {
-    return <div>{error.message}</div>;
-  }
-
   return (
-    <>
+    <div className="relative">
+      <Link href={"/notification"}>
+        <Icon
+          id="notification"
+          size={24}
+          className="absolute right-4 top-4 z-10"
+        />
+      </Link>
       <StackNavigator element={"마이페이지"} />
       <main className="container flex min-h-screen max-w-2xl flex-col gap-8 pb-24">
         <Profile />
+        <Badges />
         <LikeCounter />
         <div className="flex gap-8">
           <JandiRating />
@@ -34,9 +36,13 @@ function MyPage() {
         <MyProjectRequests />
         <MyPageItem label="매칭 기록" href="/my-page/history" />
         <MyPageItem label="위치 인증" href="/auth-mylocation" />
+        <MyPageItem
+          label="자주 묻는 질문"
+          href="https://beomahn.notion.site/24b02e4a402845b8ab9e1ed34dac31d0?pvs=4"
+        />
         <MyPageItem label="회원 탈퇴" href="/my-page/delete" />
       </main>
-    </>
+    </div>
   );
 }
 
