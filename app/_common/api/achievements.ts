@@ -1,6 +1,6 @@
 import { SignUpUser } from "@/app/signup/_type/signup";
 
-import { Achievement } from "../types/user";
+import { Achievement, AchievementDetail } from "../types/user";
 import { instance } from "./instance";
 
 export interface RequestUserAchievement {
@@ -24,6 +24,17 @@ export const patchUserAchievement = async ({
     userId,
     achievementId,
   });
+
+  return data;
+};
+
+export const getAchievementDetail = async (
+  id: Achievement["achievementId"],
+) => {
+  if (!id) return Promise.reject("id is required");
+  const { data } = await instance.get<AchievementDetail>(
+    `/achievements/${id}/info`,
+  );
 
   return data;
 };

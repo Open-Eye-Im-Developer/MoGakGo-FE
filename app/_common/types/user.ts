@@ -70,3 +70,12 @@ export interface Achievement {
   progressCount: number;
   completed?: boolean;
 }
+
+export interface AchievementDetail {
+  achievementId: number;
+  title: string;
+  imgUrl: string;
+  description: string;
+  requirementType: string;
+  requirementValue: number;
+}
