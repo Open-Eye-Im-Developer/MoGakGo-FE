@@ -74,36 +74,31 @@ function MyLocationAuth() {
       }
       <Form {...form}>
         <form
-          className="relative flex h-screen w-full flex-col justify-between gap-5 p-4"
+          className="flex h-full w-full flex-col pt-4"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <header className="px-4 py-2 text-center">
-            <h1 className="text-lg">내 위치 인증하기</h1>
-          </header>
-          <section className="h-full">
-            <section className="flex flex-col gap-2 px-5">
-              <p className="px-1 text-xs">내 현재 위치</p>
-              <div
-                className={cn(
-                  !isAllowGPS()
-                    ? "bg-neoRed"
-                    : areaCode && !isError
-                      ? "bg-neoGreen"
-                      : "bg-neoYellow",
-                  "rounded-md border border-black p-3 text-sm text-white shadow-neo",
-                )}
-              >
-                {!isAllowGPS()
-                  ? "현재 위치를 확인할 수 없습니다."
+          <section className="flex flex-col gap-2 px-5">
+            <p className="px-1 text-xs">내 현재 위치</p>
+            <div
+              className={cn(
+                !isAllowGPS()
+                  ? "bg-neoRed"
                   : areaCode && !isError
-                    ? `현재 위치는 '${CODE_TO_REGION_NAME[areaCode]}'입니다.`
-                    : "현재 위치는 서비스 지역이 아닙니다."}
-              </div>
-            </section>
+                    ? "bg-neoGreen"
+                    : "bg-neoYellow",
+                "rounded-md border border-black p-3 text-sm text-white shadow-neo",
+              )}
+            >
+              {!isAllowGPS()
+                ? "현재 위치를 확인할 수 없습니다."
+                : areaCode && !isError
+                  ? `현재 위치는 '${CODE_TO_REGION_NAME[areaCode]}'입니다.`
+                  : "현재 위치는 서비스 지역이 아닙니다."}
+            </div>
           </section>
           <div
             id="map-wrap"
-            className="absolute left-0 top-1/2 z-0 flex w-full translate-y-10 touch-none items-center justify-center bg-transparent transition-all duration-1000"
+            className="relative left-0 top-0 z-0 my-4 flex min-h-[307px] w-full translate-y-7 touch-none items-center justify-center bg-transparent transition-all duration-1000"
           >
             <MapComponent type="only-bounce" regionCode={areaCode ?? 0} />
           </div>
