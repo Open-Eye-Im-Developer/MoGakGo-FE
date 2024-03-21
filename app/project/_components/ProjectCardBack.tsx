@@ -1,6 +1,6 @@
 "use client";
 
-import React, { forwardRef } from "react";
+import React, { forwardRef, useState } from "react";
 
 import { Separator } from "@/app/_common/shadcn/ui/separator";
 import {
@@ -24,18 +24,21 @@ import "../_styles/card.css";
 
 interface CardBackProps {
   requestList?: RequestList[];
+  projectStatus: string;
   onRotate: () => void;
 }
 
 const ProjectCardBack = forwardRef<HTMLDivElement, CardBackProps>(
   function ProjectCardBack(props, ref) {
-    const { requestList, onRotate } = props;
+    const { requestList, onRotate, projectStatus } = props;
     const { createAcceptRequest } = useAcceptRequestMutation();
-
+    const [isAccepted, setIsAccepted] = useState(
+      projectStatus === "PENDING" ? false : true,
+    );
     const handleAccept = async (projectRequestId: number) => {
       createAcceptRequest(projectRequestId);
     };
-
+    console.log(requestList);
     return (
       <Card className="absolute inset-0 left-0 top-0 overflow-hidden [backface-visibility:hidden] [transform:rotateY(180deg)]">
         <CardHeader className="flex flex-row items-center justify-between border-b border-black px-4 py-2">
@@ -82,13 +85,18 @@ const ProjectCardBack = forwardRef<HTMLDivElement, CardBackProps>(
                       </aside>
                       <aside className="flex items-center gap-2">
                         <DialogMoreInfo response={senderPreview} />
-                        <Button
-                          size="sm"
-                          className="rounded-lg bg-neoYellow"
-                          onClick={() => handleAccept(id)}
-                        >
-                          수락
-                        </Button>
+                        {!isAccepted && (
+                          <Button
+                            size="sm"
+                            className="rounded-lg bg-neoYellow"
+                            onClick={() => {
+                              handleAccept(id);
+                              setIsAccepted(true);
+                            }}
+                          >
+                            수락
+                          </Button>
+                        )}
                       </aside>
                     </main>
                     <Separator className="bg-black" />

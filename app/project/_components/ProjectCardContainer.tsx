@@ -78,6 +78,7 @@ function ProjectCardContainer({ project, matchingId }: Props) {
           <ProjectCardBack
             onRotate={handleFlip}
             requestList={requestList}
+            projectStatus={project.projectStatus}
             ref={ref}
           />
         </div>
