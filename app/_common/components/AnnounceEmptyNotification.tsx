@@ -15,12 +15,15 @@ function AnnounceEmptyActive({
 }: AnnounceEmptyActiveProps) {
   return (
     <div className="flex h-[70vh] text-gray-600">
-      <div className="m-auto w-40 text-center">
-        <Lottie play animationData={animation} />
+      <div className="m-auto text-center">
+        <Lottie play animationData={animation} className="w-40" />
         <span>{description}</span>
         <Link
           href={"/"}
-          className={cn(buttonVariants({ variant: "ghost" }), "text-gray-400")}
+          className={cn(
+            buttonVariants({ variant: "ghost" }),
+            "block text-gray-400",
+          )}
         >
           활동하러 가기
         </Link>

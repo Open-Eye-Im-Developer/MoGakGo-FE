@@ -15,7 +15,14 @@ import Badges from "./_components/Badges";
 
 function MyPage() {
   return (
-    <>
+    <div className="relative">
+      <Link href={"/notification"}>
+        <Icon
+          id="notification"
+          size={24}
+          className="absolute right-4 top-4 z-10"
+        />
+      </Link>
       <StackNavigator element={"마이페이지"} />
       <main className="container flex min-h-screen max-w-2xl flex-col gap-8 pb-24">
         <Profile />
@@ -35,7 +42,7 @@ function MyPage() {
         />
         <MyPageItem label="회원 탈퇴" href="/my-page/delete" />
       </main>
-    </>
+    </div>
   );
 }
 
