@@ -3,7 +3,6 @@
 import React from "react";
 import { IconLogout } from "@tabler/icons-react";
 
-import { useMatchingStore } from "@/app/_common/store/useMatchingStore";
 import { Button } from "@/app/_common/shadcn/ui/button";
 import {
   AlertDialog,
@@ -24,14 +23,15 @@ import useCacnelMatchingMutation from "../_hooks/useCancelMatchingMutation";
 
 interface ProjectRemoveDialogProps {
   projectId: number;
+  projectStatus: string;
+  matchingId: number | null | undefined;
 }
 
 function ProjectRemoveDialog(props: ProjectRemoveDialogProps) {
-  const { projectId } = props;
-  const { matchingId } = useMatchingStore();
+  const { projectId, projectStatus, matchingId } = props;
   const { createCancelMatching } = useCacnelMatchingMutation(matchingId!);
   const { createCancelProject } = useCancelProjectMutation(projectId);
-  const isMatchedProject = matchingId !== null;
+  const isMatchedProject = projectStatus === "MATCHED";
 
   const triggerComponent = isMatchedProject ? (
     <Button>

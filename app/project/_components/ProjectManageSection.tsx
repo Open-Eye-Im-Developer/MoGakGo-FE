@@ -1,54 +1,57 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 
-import { useMatchingStore } from "@/app/_common/store/useMatchingStore";
-import { cn } from "@/app/_common/shadcn/utils";
 import { useToast } from "@/app/_common/shadcn/ui/use-toast";
 
 import useGetCurrentProjectQuery from "../_hooks/useGetCurrentProjectQuery";
 import ProjectCreateDialog from "./ProjectCreateDialog";
-import ProjectCardContainer from "./ProjectCardContainer";
 
 function ProjectManageSection() {
-  const { project, matchingId, isError, error } = useGetCurrentProjectQuery();
-  const { setMatchingId } = useMatchingStore();
+  const { project, matchingId, isError } = useGetCurrentProjectQuery();
   const { toast } = useToast();
 
-  useEffect(() => {
-    if (isError) {
-      toast({
-        title: "프로젝트 정보를 가져오는 중 오류가 발생했습니다.",
-        description: "잠시 후 다시 시도해주세요.",
-        variant: "destructive",
-      });
-    }
-  }, [error, isError]);
-
-  useEffect(() => {
-    setMatchingId(matchingId);
-  }, [matchingId]);
+  if (isError) {
+    toast({
+      title: "프로젝트 정보를 가져오는 중 오류가 발생했습니다.",
+      description: "잠시 후 다시 시도해주세요.",
+      variant: "destructive",
+    });
+  }
 
   return (
-    <main
-      className={cn(
-        "relative flex h-full w-full flex-col items-center",
-        !project ? "justify-center" : "",
-      )}
-    >
+    <main className="relative flex h-full w-full flex-col items-center justify-center">
       <div className="map-background" />
       <div className="map-background" />
-      {!project && (
-        <div className="z-10 flex h-[300px] flex-col items-center justify-between rounded-xl border-4 border-dotted border-black p-10 md:h-[550px]">
-          <header className="space-y-3 text-center">
-            <h1 className="text-lg font-bold">생성한 프로젝트가 없어요!</h1>
-            <h2 className="text-sm">프로젝트를 새로 생성해주세요.</h2>
-          </header>
-          <ProjectCreateDialog />
-        </div>
-      )}
-      <div className="z-[50] mt-10">
-        {project && <ProjectCardContainer project={project} />}
+      <div className="z-50 mx-10 flex h-[300px] flex-col items-center justify-center rounded-xl border-4 border-dotted border-black p-10 md:h-[550px]">
+        <header className="space-y-3 text-center">
+          {!project && (
+            <>
+              <h1 className="text-base font-bold">생성된 프로젝트가 없어요!</h1>
+              <h2 className="text-sm">
+                프로젝트를 새로 생성하거나 매칭을 기다려주세요!
+              </h2>
+              <ProjectCreateDialog />
+            </>
+          )}
+          {project && matchingId === null && (
+            <>
+              <h1 className="text-base font-bold">매칭된 프로젝트가 없어요!</h1>
+              <h2 className="text-sm">
+                프로젝트 매칭을 기다려주세요! 프로젝트 관리는 마이 페이지에서 할
+                수 있어요!
+              </h2>
+            </>
+          )}
+          {project && matchingId && (
+            <>
+              <h1 className="text-base font-bold">프로젝트가 매칭되었어요!</h1>
+              <h2 className="text-sm">
+                채팅방으로 이동해서 자세한 얘기를 나눠봐요!
+              </h2>
+            </>
+          )}
+        </header>
       </div>
     </main>
   );

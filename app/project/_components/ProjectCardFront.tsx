@@ -41,6 +41,7 @@ interface CardFrontProps {
   initialRotate?: boolean;
   onRotate: () => void;
   project: Project;
+  matchingId?: number;
   achievementTitle?: string;
 }
 
@@ -62,8 +63,10 @@ function ProjectCardFront(props: CardFrontProps) {
       },
       projectTags,
       projectId,
+      projectStatus,
       meetingInfo: { meetDetail, meetEndTime, meetStartTime },
     },
+    matchingId,
     achievementTitle,
   } = props;
   const { user } = useAuthStore();
@@ -77,7 +80,7 @@ function ProjectCardFront(props: CardFrontProps) {
     >
       <CardHeader className="px-3 pt-2">
         <CardDescription className="flex justify-between text-lg font-bold text-black">
-          <div className="flex items-center gap-2">
+          <span className="flex items-center gap-2">
             <ButtonRotate
               isDisabled={!user || user.id !== id}
               onRotate={onRotate}
@@ -104,7 +107,7 @@ function ProjectCardFront(props: CardFrontProps) {
                 </div>
               </PopoverContent>
             </Popover>
-          </div>
+          </span>
           <Link href={githubUrl} target="_blank" className="flex items-center">
             @{githubId}
           </Link>
@@ -161,7 +164,11 @@ function ProjectCardFront(props: CardFrontProps) {
           {user && user.id !== id ? (
             <ButtonRequest projectId={projectId} />
           ) : (
-            <ProjectRemoveDialog projectId={projectId} />
+            <ProjectRemoveDialog
+              projectId={projectId}
+              projectStatus={projectStatus}
+              matchingId={matchingId}
+            />
           )}
         </CardFooter>
       )}

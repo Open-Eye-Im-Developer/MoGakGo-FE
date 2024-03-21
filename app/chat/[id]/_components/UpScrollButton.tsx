@@ -24,7 +24,7 @@ function UpScrollButton(props: UpperScrollButtonProps) {
       <Button
         variant="outline"
         className={cn(
-          "fixed bottom-36 flex max-w-80 gap-2",
+          "absolute bottom-36 flex max-w-80 gap-2 sm:bottom-44",
           !exposureElement() && "hidden",
         )}
       >
