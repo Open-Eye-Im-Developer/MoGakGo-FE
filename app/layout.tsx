@@ -6,6 +6,7 @@ import "dayjs/locale/ko";
 import { generateViewport } from "./_common/utils/generateViewport";
 import { Toaster } from "./_common/shadcn/ui/toaster";
 import { Toaster as Sonner } from "./_common/shadcn/ui/sonner";
+import { WebSocketProvider } from "./_common/components/WebSocketProvider";
 import { ThemeProvider } from "./_common/components/theme-provider";
 import SVGProvider from "./_common/components/SVGProvider";
 import ClientProvider from "./_common/components/ClientProvider";
@@ -31,23 +32,25 @@ export default function RootLayout({
       <link rel="manifest" href="/manifest.json" />
       <body>
         <ClientProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-            <Toaster />
-            <SVGProvider />
-            <Sonner
-              position="top-center"
-              toastOptions={{
-                style: { background: "transparent" },
-                unstyled: true,
-              }}
-            />
-          </ThemeProvider>
+          <WebSocketProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              {children}
+              <Toaster />
+              <SVGProvider />
+              <Sonner
+                position="top-center"
+                toastOptions={{
+                  style: { background: "transparent" },
+                  unstyled: true,
+                }}
+              />
+            </ThemeProvider>
+          </WebSocketProvider>
         </ClientProvider>
         <Toaster />
       </body>

@@ -71,6 +71,15 @@ export interface Achievement {
   completed?: boolean;
 }
 
+export interface AchievementDetail {
+  achievementId: number;
+  title: string;
+  imgUrl: string;
+  description: string;
+  requirementType: string;
+  requirementValue: number;
+}
+
 export interface DevelopLanguage {
   language: string;
   byteSize: number;
