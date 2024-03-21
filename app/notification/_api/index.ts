@@ -7,11 +7,11 @@ import { ResponseData } from "@/app/_common/types/response";
 
 import { NotificationType } from "../_types/notification";
 
-export const getNotifications = async (pageId: number) => {
+export const getNotifications = async (cursorId: number) => {
   const { data } = await instance.get<ResponseData<NotificationType>>(
     "/notification",
     {
-      params: { pageSize: 10, pageId },
+      params: { pageSize: 5, cursorId },
     },
   );
   return data;

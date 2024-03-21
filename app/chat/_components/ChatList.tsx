@@ -1,6 +1,7 @@
 "use client";
 
-import { Button } from "@/app/_common/shadcn/ui/button";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
 
 import AnnounceEmptyActive from "@/app/_common/components/AnnounceEmptyNotification";
 import ActivityCardSkeleton from "@/app/_common/components/ActivityCardSkeleton";
@@ -10,8 +11,16 @@ import useGetChats from "../_api/useGetChats";
 import Chat from "./Chat";
 
 function ChatList() {
+  const { ref, inView } = useInView();
   const { data, isLoading, fetchNextPage, hasNextPage } = useGetChats();
+
   const chats = data?.pages.map(page => (page ? page.data : [])).flat();
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [inView]);
 
   if (isLoading)
     return (
@@ -26,16 +35,10 @@ function ChatList() {
     <>
       {chats?.length ? (
         <>
-          {[...chats].reverse().map(chat => (
+          {[...chats].map(chat => (
             <Chat chat={chat} key={chat.chatRoomId} />
           ))}
-          <Button
-            className="w-full"
-            onClick={() => fetchNextPage()}
-            disabled={!hasNextPage || isLoading}
-          >
-            더보기
-          </Button>
+          {hasNextPage && <div ref={ref} />}
         </>
       ) : (
         <AnnounceEmptyActive

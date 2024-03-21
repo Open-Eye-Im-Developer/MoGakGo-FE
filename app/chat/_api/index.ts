@@ -4,9 +4,9 @@ import { ResponseData } from "@/app/_common/types/response";
 
 import { ChatType } from "../_types/chat";
 
-export const getChats = async (pageId: number) => {
-  const { data } = await instance.get<ResponseData<ChatType>>(`/chat`, {
-    params: { pageSize: 10, pageId },
+export const getChats = async (cursorId: number) => {
+  const { data } = await instance.get<ResponseData<ChatType>>("/chat", {
+    params: { pageSize: 5, cursorId },
   });
   return data;
 };

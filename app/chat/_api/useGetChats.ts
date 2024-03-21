@@ -9,8 +9,8 @@ const useGetChats = () => {
   return useInfiniteQuery<ResponseData<ChatType> | undefined>({
     queryKey: ["chats"] as const,
     queryFn: context => {
-      const cursorId = context.pageParam as number | undefined;
-      return cursorId ? getChats(cursorId) : undefined;
+      const cursorId = context.pageParam as ChatType;
+      return getChats(cursorId.cursorId);
     },
     initialPageParam: 1,
     getNextPageParam: lastPage => {

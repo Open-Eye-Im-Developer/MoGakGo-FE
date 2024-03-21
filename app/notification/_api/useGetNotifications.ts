@@ -9,8 +9,8 @@ const useGetNotifications = () => {
   return useInfiniteQuery<ResponseData<NotificationType> | undefined>({
     queryKey: ["notifications"] as const,
     queryFn: context => {
-      const cursorId = context.pageParam as number | undefined;
-      return cursorId ? getNotifications(cursorId) : undefined;
+      const cursorId = context.pageParam as NotificationType;
+      return getNotifications(cursorId.id);
     },
     initialPageParam: 1,
     getNextPageParam: lastPage => {
