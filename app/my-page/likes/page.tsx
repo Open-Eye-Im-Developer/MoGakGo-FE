@@ -10,7 +10,6 @@ import { useQueryUserData } from "../_hooks/useQueryUserData";
 import { useInfiniteQueryLikes } from "../_hooks/useInfiniteQueryLikes";
 import UserCardSkeleton from "../_components/UserCardSkeleton";
 import UserCard from "../_components/UserCard";
-import LoginRequestModal from "../_components/LoginRequestModal";
 
 function LikesPage() {
   const { data: user } = useQueryUserData();
@@ -24,7 +23,6 @@ function LikesPage() {
 
   return (
     <>
-      <LoginRequestModal />
       <StackNavigator element={"내가 찔러보기한 사람"} />
       <main className="container flex min-h-screen max-w-2xl flex-col gap-8 pb-8">
         <section className="flex flex-col gap-2">

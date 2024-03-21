@@ -9,14 +9,12 @@ import Profile from "./_components/Profile";
 import MyProjectRequests from "./_components/MyProjectRequests";
 import MyProjectList from "./_components/MyProjectList";
 import MyAchievements from "./_components/MyAchievements";
-import LoginRequestModal from "./_components/LoginRequestModal";
 import LikeCounter from "./_components/LikeCounter";
 import JandiRating from "./_components/JandiRating";
 
 function MyPage() {
   return (
     <>
-      <LoginRequestModal />
       <StackNavigator element={"마이페이지"} />
       <main className="container flex min-h-screen max-w-2xl flex-col gap-8 pb-24">
         <Profile />

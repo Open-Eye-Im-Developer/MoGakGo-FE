@@ -1,3 +1,5 @@
+"use client";
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -7,7 +9,6 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/app/_common/shadcn/ui/alert-dialog";
-import WithOnMounted from "@/app/_common/hoc/WithOnMounted";
 
 import { navigate } from "@/app/_common/utils/redirect";
 
@@ -42,4 +43,4 @@ function LoginRequestModal() {
   );
 }
 
-export default WithOnMounted(LoginRequestModal);
+export default LoginRequestModal;

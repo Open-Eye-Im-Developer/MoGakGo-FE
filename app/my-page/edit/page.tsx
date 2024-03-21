@@ -5,7 +5,6 @@ import { useMemo } from "react";
 import StackNavigator from "@/app/_common/components/StackNavigator";
 
 import { useQueryUserData } from "../_hooks/useQueryUserData";
-import LoginRequestModal from "../_components/LoginRequestModal";
 import EditForm from "../_components/EditForm";
 
 function EditPage() {
@@ -24,7 +23,6 @@ function EditPage() {
 
   return (
     <>
-      <LoginRequestModal />
       <StackNavigator element={"수정"} />
       <main className="container flex min-h-screen max-w-2xl flex-col gap-8 pb-8">
         {data ? (
