@@ -9,6 +9,8 @@ import { useToast } from "../shadcn/ui/use-toast";
 import { Progress } from "../shadcn/ui/progress";
 import { Avatar, AvatarFallback, AvatarImage } from "../shadcn/ui/avatar";
 import { getAchievementDetail } from "../api/achievements";
+import { ModalState } from "./types/achievementModal";
+import AchievementModal from "./AchievementModal";
 
 interface WebSocketMessage {
   userId: number;
@@ -27,6 +29,8 @@ export const WebSocketProvider = ({
   const { toast } = useToast();
   const { data: userData } = useQueryUserData();
   const [message, setMessage] = useState<WebSocketMessage | null>(null);
+  const [open, setOpen] = useState(false);
+  const [modalState, setModalState] = useState<ModalState | null>(null);
   const webSocket = useRef<WebSocket | null>(null);
   const webSocketUrl = "ws://3.38.76.76:8080/ws/achievement";
   let reconnectInterval: NodeJS.Timeout;
@@ -85,12 +89,18 @@ export const WebSocketProvider = ({
         await getAchievementDetail(achievementId);
 
       const achievementTitle = title ?? "null";
-      const toastTitle = completed ? "업적 획득! 🎉" : "업적 진행률 갱신!";
-      const toastDescription = `<${achievementTitle} />`;
+      const toastTitle = "업적 진행률 갱신!";
       const percentage =
         progressCount === 0
           ? 0
           : Number((progressCount / requirementValue).toFixed(2)) * 100;
+
+      if (completed) {
+        setOpen(true);
+        setModalState({ title, imgUrl, requirementValue, progressCount });
+        return;
+      }
+
       toast({
         className: cn("bottom-4 right-0 fixed max-w-[350px] mr-3 z-[100]"),
         title: toastTitle,
@@ -102,7 +112,7 @@ export const WebSocketProvider = ({
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
               <h3 className="text-base font-bold">
-                <span>{toastDescription}</span>
+                <span>{achievementTitle}</span>
                 <span> 획득까지 앞으로 </span>
                 <span className="text-neoRed">{progressCount}회!</span>
               </h3>
@@ -124,6 +134,9 @@ export const WebSocketProvider = ({
   return (
     <WebSocketContext.Provider value={null}>
       {children}
+      {open && (
+        <AchievementModal isOpen={open} setOpen={setOpen} state={modalState} />
+      )}
     </WebSocketContext.Provider>
   );
 };
