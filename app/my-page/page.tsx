@@ -14,6 +14,8 @@ import LikeCounter from "./_components/LikeCounter";
 import JandiRating from "./_components/JandiRating";
 import Badges from "./_components/Badges";
 
+const FAQ_URL = process.env.NEXT_PUBLIC_FAQ_URL;
+
 function MyPage() {
   return (
     <div className="relative">
@@ -38,10 +40,7 @@ function MyPage() {
         <MyProjectRequests />
         <MyPageItem label="매칭 기록" href="/my-page/history" />
         <MyPageItem label="위치 인증" href="/auth-mylocation" />
-        <MyPageItem
-          label="자주 묻는 질문"
-          href="https://beomahn.notion.site/24b02e4a402845b8ab9e1ed34dac31d0?pvs=4"
-        />
+        <MyPageItem label="자주 묻는 질문" href={`${FAQ_URL}`} />
         <MyPageItem label="회원 탈퇴" href="/my-page/delete" />
       </main>
     </div>

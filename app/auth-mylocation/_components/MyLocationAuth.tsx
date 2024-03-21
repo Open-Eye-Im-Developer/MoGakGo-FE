@@ -3,6 +3,7 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { IconAlertCircle } from "@tabler/icons-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -23,6 +24,8 @@ import { CODE_TO_REGION_NAME } from "@/app/_common/constants/codeToRegionName";
 import useQueryGeoAreaCode from "../_hooks/useQueryGeoAreaCode";
 import { useMutationAuthMyLocation } from "../_hooks/useMutationAuthMyLocation";
 import AlertMyLocationAuth from "./AlertMyLocationAuth";
+
+const FAQ_URL = process.env.NEXT_PUBLIC_FAQ_URL;
 
 const MyLocationAuthFormSchema = z.object({
   userId: z.number(),
@@ -106,11 +109,13 @@ function MyLocationAuth() {
             <sub className="flex cursor-pointer items-center gap-1 text-gray-500 hover:text-primary">
               <IconAlertCircle width={15} />
               {/* TODO: Link 추가하여 클릭하면 자주 묻는 질문 페이지로 이동 */}
-              <span className="align-middle">
-                {!isAllowGPS()
-                  ? "왜 현재 위치를 확인할 수 없나요?"
-                  : "왜 위치 인증이 필요한가요?"}
-              </span>
+              <Link href={`${FAQ_URL}`}>
+                <span className="align-middle">
+                  {!isAllowGPS()
+                    ? "왜 현재 위치를 확인할 수 없나요?"
+                    : "왜 위치 인증이 필요한가요?"}
+                </span>
+              </Link>
             </sub>
             <section className="flex w-full items-end justify-between">
               <small
