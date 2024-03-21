@@ -64,14 +64,7 @@ function SignupForm() {
     signUp.mutate(data);
   };
 
-  if (!userData || !languages)
-    return (
-      <LoadingSpinner
-        width="100"
-        height="100"
-        className="grid h-screen w-screen place-content-center"
-      />
-    );
+  if (!userData || !languages) return <LoadingSpinner />;
 
   return (
     <>
