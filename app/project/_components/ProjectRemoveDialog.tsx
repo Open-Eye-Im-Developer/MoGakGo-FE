@@ -43,7 +43,7 @@ function ProjectRemoveDialog(props: ProjectRemoveDialogProps) {
 
   const titleComponent = isMatchedProject
     ? "정말 매칭을 취소하시겠어요?"
-    : "정말 프로젝트를 취소하시겠어요?";
+    : "정말 모각고를 취소하시겠어요?";
 
   const descriptionComponent = "이 작업은 되돌릴 수 없어요!";
 

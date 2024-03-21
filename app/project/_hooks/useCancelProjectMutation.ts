@@ -22,8 +22,8 @@ function useCancelProjectMutation(projectId: number | undefined) {
     mutationFn: cancelProject,
     onSuccess: () => {
       toast({
-        title: "프로젝트를 취소했습니다.",
-        description: "프로젝트가 취소되었어요!",
+        title: "모각고를 취소했습니다.",
+        description: "모각고가 취소되었어요!",
       });
       invalidateQuery(["current-project"]);
     },
@@ -31,7 +31,7 @@ function useCancelProjectMutation(projectId: number | undefined) {
       const errorMessage = error.response?.data.message;
 
       toast({
-        title: "프로젝트 취소에 실패했습니다.",
+        title: "모각고 취소에 실패했습니다.",
         description: errorMessage,
         variant: "destructive",
       });
