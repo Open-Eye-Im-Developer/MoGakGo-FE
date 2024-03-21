@@ -40,7 +40,7 @@ function ProfileCardItem({ profile }: Props) {
       githubUrl,
       bio,
       jandiRate,
-      achievementTitle,
+      achievementId,
       developLanguages,
       wantedJobs,
     },
@@ -93,9 +93,7 @@ function ProfileCardItem({ profile }: Props) {
                 <div className="flex flex-col items-center gap-4">
                   <div className="flex flex-col items-center gap-1 p-1">
                     <h1 className="text-2xl font-bold">{username}</h1>
-                    <h3 className="text-xs text-[#F76A6A]">
-                      {achievementTitle}
-                    </h3>
+                    <h3 className="text-xs text-[#F76A6A]">{achievementId}</h3>
                   </div>
                   <p className="w-60 overflow-hidden text-center text-sm">
                     {bio}
