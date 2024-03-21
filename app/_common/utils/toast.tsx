@@ -6,7 +6,7 @@ import CustomSonner from "../components/CustomSonner";
 interface SonnerData {
   description?: string;
   action?: {
-    label?: string;
+    label?: React.ReactNode;
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   };
 }
