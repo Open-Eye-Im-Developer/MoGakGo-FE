@@ -9,19 +9,21 @@ export const useQueryAchievements = (staticUserId?: number) => {
   const { data: userData } = useQuerySignUpUser(!!staticUserId);
   const userId = staticUserId ?? userData?.id;
 
-  const { data, isLoading } = useQuery<Achievement[]>({
+  const { data, isLoading, isFetching, isPending } = useQuery<Achievement[]>({
     queryKey: ["achievements", userId],
     enabled: !!userId,
     queryFn: () => getAchievements(userId),
   });
 
-  if (!data || !userData || isLoading)
-    return { achievements: [], myAchievement: null };
+  if (!data || !userData) return { achievements: [], myAchievement: null };
 
   return {
     achievements: data,
     myAchievement: data.find(
       achievement => achievement.achievementId === userData?.achievementId,
     ),
+    isLoading,
+    isFetching,
+    isPending,
   };
 };

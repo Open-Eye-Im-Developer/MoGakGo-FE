@@ -1,4 +1,4 @@
-export const Ratings = [
+export const RATINGS = [
   {
     rate: 1,
     type: "review-terrible",

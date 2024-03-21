@@ -2,6 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import { MouseEventHandler } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 import { useAuthStore } from "@/app/_common/store/useAuthStore";
@@ -15,17 +16,13 @@ import {
 import { Button } from "@/app/_common/shadcn/ui/button";
 
 import { useMutationReview } from "../_hooks/useMutationReview";
-import { Ratings } from "../_constants/rating";
+import { RATINGS } from "../_constants/rating";
 import RatingItem from "./RatingItem";
 
 function ReviewForm() {
-  // TODO: 1. 나가기 버튼 누를시, useRouter의 query params로 projectId와 receiverId를 받아와야 함
-  // TODO: 2. 상대 유저의 경우, 알람을 클릭할 때 projectId와 receiverId를 받아와야 함
-
-  // TODO: 1,2번이 될 시에 주석 해제
-  // const projectId = useSearchParams().get("projectId");
-  // const receiverId = useSearchParams().get("receiverId");
-  // const router = useRouter();
+  const projectId = useSearchParams().get("projectId");
+  const receiverId = useSearchParams().get("receiverId");
+  const router = useRouter();
 
   const { user } = useAuthStore();
   const { mutate } = useMutationReview();
@@ -41,21 +38,23 @@ function ReviewForm() {
   };
 
   const onSubmitReview = () => {
+    if (!projectId || !receiverId)
+      throw new Error("projectId 또는 receiverId가 없습니다.");
+
     const rating = form.getValues("rating");
     if (!user) return;
 
     mutate({
       rating,
-      receiverId: 2,
-      projectId: 110,
+      receiverId: parseInt(receiverId),
+      projectId: parseInt(projectId),
       senderId: user.id,
     });
   };
 
-  // TODO: 1,2번이 될 시에 주석 해제
-  // if (!projectId || !receiverId) {
-  //   router.push("/");
-  // }
+  if (!projectId || !receiverId) {
+    router.push("/");
+  }
 
   return (
     <Form {...form}>
@@ -78,7 +77,7 @@ function ReviewForm() {
                 <section className="sapce-y-1">
                   <FormControl className="flex w-full items-center">
                     <ul className="flex w-full justify-center gap-5 pt-5">
-                      {Ratings.map(({ type, content }, index) => (
+                      {RATINGS.map(({ type, content }, index) => (
                         <li
                           className="flex cursor-pointer flex-col items-center gap-1"
                           key={index}
