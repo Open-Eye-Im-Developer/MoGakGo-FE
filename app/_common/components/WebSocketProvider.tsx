@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { useQueryUserData } from "@/app/my-page/_hooks/useQueryUserData";
 
+import { Achievement } from "../types/user";
 import { cn } from "../shadcn/utils";
 import { useToast } from "../shadcn/ui/use-toast";
 import { Progress } from "../shadcn/ui/progress";
@@ -13,10 +14,10 @@ import { ModalState } from "./types/achievementModal";
 import AchievementModal from "./AchievementModal";
 
 interface WebSocketMessage {
-  userId: number;
-  achievementId: number;
-  completed: boolean;
-  progressCount: number;
+  userId: Achievement["userId"];
+  achievementId: Achievement["achievementId"];
+  completed: Achievement["completed"];
+  progressCount: Achievement["progressCount"];
 }
 
 export const WebSocketContext = React.createContext(null);
