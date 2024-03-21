@@ -30,13 +30,21 @@ function ProjectCardContainer({ project, matchingId }: Props) {
   const { flipped, handleFlip } = useFlip();
   const [requestList, setRequestList] = useState<RequestList[]>([]);
   const [cursorId, setCursorId] = useState<number | null>(null);
+  const [isAccepted, setIsAccepted] = useState(
+    project.projectStatus === "PENDING" ? false : true,
+  );
+
   const ref = useRef(null);
   const { data } = useGetRequestListQuery(
     project.projectId,
     cursorId,
     project.creator.id,
   );
-  const { chatRoomId } = useGetChatRoomIdQuery(project.projectId, matchingId);
+  const { chatRoomId } = useGetChatRoomIdQuery(
+    project.projectId,
+    matchingId,
+    isAccepted,
+  );
   const { myAchievement } = useQueryAchievements();
 
   const handleMoreButton = () => {
@@ -46,6 +54,11 @@ function ProjectCardContainer({ project, matchingId }: Props) {
         setCursorId(lastItem.id);
       }
     }
+  };
+
+  const handleAcceptButton = (isError: boolean) => {
+    if (isError) return;
+    setIsAccepted(true);
   };
 
   useEffect(() => {
@@ -64,10 +77,7 @@ function ProjectCardContainer({ project, matchingId }: Props) {
     <Tabs defaultValue="card" className="h-[600px] w-[330px] sm:w-[450px]">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="card">Card</TabsTrigger>
-        <TabsTrigger
-          value="chat"
-          disabled={project.projectStatus !== "MATCHED"}
-        >
+        <TabsTrigger value="chat" disabled={!isAccepted}>
           Chat
         </TabsTrigger>
       </TabsList>
@@ -83,12 +93,15 @@ function ProjectCardContainer({ project, matchingId }: Props) {
             project={project}
             matchingId={matchingId}
             achievementTitle={myAchievement?.title}
+            isAccepted={isAccepted}
           />
           <ProjectCardBack
             onRotate={handleFlip}
             requestList={requestList}
             projectStatus={project.projectStatus}
             handleMoreButton={handleMoreButton}
+            handleAcceptButton={handleAcceptButton}
+            isAccepted={isAccepted}
             ref={ref}
           />
         </div>

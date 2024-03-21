@@ -1,6 +1,6 @@
 "use client";
 
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef } from "react";
 
 import { Separator } from "@/app/_common/shadcn/ui/separator";
 import {
@@ -27,17 +27,24 @@ interface CardBackProps {
   projectStatus: string;
   onRotate: () => void;
   handleMoreButton: () => void;
+  handleAcceptButton: (isError: boolean) => void;
+  isAccepted: boolean;
 }
 
 const ProjectCardBack = forwardRef<HTMLDivElement, CardBackProps>(
   function ProjectCardBack(props, ref) {
-    const { requestList, onRotate, projectStatus, handleMoreButton } = props;
-    const { createAcceptRequest } = useAcceptRequestMutation();
-    const [isAccepted, setIsAccepted] = useState(
-      projectStatus === "PENDING" ? false : true,
-    );
+    const {
+      requestList,
+      onRotate,
+      handleMoreButton,
+      handleAcceptButton,
+      isAccepted,
+    } = props;
+    const { createAcceptRequest, isError } = useAcceptRequestMutation();
+
     const handleAccept = async (projectRequestId: number) => {
       createAcceptRequest(projectRequestId);
+      handleAcceptButton(isError);
     };
 
     return (
@@ -92,7 +99,6 @@ const ProjectCardBack = forwardRef<HTMLDivElement, CardBackProps>(
                             className="rounded-lg bg-neoYellow"
                             onClick={() => {
                               handleAccept(id);
-                              setIsAccepted(true);
                             }}
                           >
                             수락
