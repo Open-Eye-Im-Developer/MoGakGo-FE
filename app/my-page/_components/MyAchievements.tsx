@@ -9,8 +9,11 @@ import {
 
 import Icon from "@/app/_common/components/Icon";
 
+import { useQueryUserData } from "../_hooks/useQueryUserData";
+
 function MyAchievements() {
-  const { myAchievement } = useQueryAchievements();
+  const { data: userData } = useQueryUserData();
+  const { myAchievement } = useQueryAchievements(userData?.id);
 
   return (
     <div className="flex w-full flex-col gap-4">
