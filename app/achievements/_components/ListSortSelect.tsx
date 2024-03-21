@@ -59,7 +59,10 @@ function ListSortSelect({ setSorting, achievements }: ListSortSelectProps) {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="w-30 translate-x-0 translate-y-0 border-none px-2 pr-1 shadow-none">
+      <DropdownMenuTrigger
+        className="w-30 translate-x-0 translate-y-0 border-none px-2 pr-1 shadow-none"
+        asChild
+      >
         <Button className="flex gap-1 px-2 text-sm" variant={"ghost"}>
           정렬 <Icon id="chevron-down" className="h-4 w-4" />
         </Button>
