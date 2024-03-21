@@ -35,10 +35,14 @@ export async function getCookie<T>(key: string, defaultValue?: Promise<T>) {
   }
 }
 
-export async function deleteCookie(key: string) {
+export async function deleteCookie(
+  key: string,
+  options?: Partial<Omit<ResponseCookie, "maxAge">>,
+) {
   try {
     const response = await axios.post("/api/delete-cookie", {
       key,
+      options,
     });
 
     return response;
