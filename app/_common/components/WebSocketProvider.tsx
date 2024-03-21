@@ -38,19 +38,16 @@ export const WebSocketProvider = ({
   const connect = () => {
     webSocket.current = new WebSocket(webSocketUrl);
     webSocket.current.onopen = () => {
-      console.log("connected to " + webSocketUrl);
       webSocket.current?.send(JSON.stringify({ userId: userData?.id }));
       clearInterval(reconnectInterval);
     };
 
     webSocket.current.onclose = error => {
       reconnectInterval = setInterval(() => reconnect(), 5000);
-      console.log("disconnect from " + webSocketUrl);
       console.log(error);
     };
 
     webSocket.current.onerror = error => {
-      console.log("connection error occured from " + webSocketUrl);
       console.log(error);
     };
 
