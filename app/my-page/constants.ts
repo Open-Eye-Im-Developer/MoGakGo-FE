@@ -1,7 +1,5 @@
 import { z } from "zod";
 
-import { editFormSchema } from "./_util/validation";
-
 export const WantedJobLabelEnum = z.enum([
   "BACKEND",
   "FRONTEND",
@@ -30,11 +28,3 @@ export const WantedJobLabelEnum = z.enum([
   "ERP",
   "GRAPHICS",
 ]);
-
-export const DUMMY_USER_DATA: z.infer<typeof editFormSchema> = {
-  username: "bel1c10ud",
-  avatarUrl: "https://avatars.githubusercontent.com/u/86952779?v=4",
-  bio: undefined,
-  wantedJobs: ["FRONTEND", "FULLSTACK"],
-  achievementId: 2,
-};
