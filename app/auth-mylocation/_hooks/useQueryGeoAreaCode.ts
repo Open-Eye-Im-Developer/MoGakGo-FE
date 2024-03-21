@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import { usePositionStore } from "@/app/_common/store/usePositionStore";
@@ -8,11 +7,6 @@ import { checkInstanceOfResponseError } from "@/app/_common/utils/checkInstanceO
 
 const useQueryGeoAreaCode = () => {
   const { getPosition, isAllowGPS, setPosition } = usePositionStore();
-
-  useEffect(() => {
-    getPosition();
-  }, [getPosition]);
-
   const { latitude, longitude } = getPosition();
 
   if (!isAllowGPS() || (!latitude && !longitude)) setPosition();
