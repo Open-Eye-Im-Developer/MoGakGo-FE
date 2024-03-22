@@ -28,14 +28,14 @@ function FormTag(props: FormTagProps) {
         <FormItem>
           <FormLabel className="text-base">
             <span>태그</span>
-            <span className="text-xs text-[#a2a2a2]"> 최대 7글자</span>
+            <span className="text-xs text-[#a2a2a2]"> 최대 7글자, 입력 후 Enter를 눌러주세요.</span>
           </FormLabel>
           <FormControl>
             <div className="flex flex-col gap-2">
               <Input
                 ref={ref}
                 placeholder="e.g. 조용한, 수다스러운 (최대 3개)"
-                className="w-full shadow-neo-thin text-xs"
+                className="w-full shadow-neo-thin text-lg"
                 onKeyDown={handleAddTag}
               />
               <aside className="flex flex-wrap gap-1">

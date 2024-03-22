@@ -38,7 +38,7 @@ function FormPlace(props: FormTagProps) {
                 placeholder="장소를 입력하세요."
                 value={placeInput || ""}
                 onChangeCapture={handleChangePlace}
-                className="shadow-neo-thin text-xs"
+                className="shadow-neo-thin text-lg"
                 autoComplete="off"
               />
               <PlaceList
