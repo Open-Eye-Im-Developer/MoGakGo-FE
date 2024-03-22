@@ -33,7 +33,7 @@ export const WebSocketProvider = ({
   const [open, setOpen] = useState(false);
   const [modalState, setModalState] = useState<ModalState | null>(null);
   const webSocket = useRef<WebSocket | null>(null);
-  const webSocketUrl = "ws://3.38.76.76:8080/ws/achievement";
+  const webSocketUrl = "wss://3.38.76.76:8080/ws/achievement";
   let reconnectInterval: NodeJS.Timeout;
 
   const connect = () => {
