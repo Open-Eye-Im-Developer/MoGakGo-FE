@@ -34,7 +34,7 @@ function AchievementModal(props: AchievementModalProps) {
         <section className="flex flex-col items-center justify-center gap-5">
           <Avatar className="h-40 w-40 shadow-neo-thin">
             <AvatarImage src={state!.imgUrl} />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarFallback></AvatarFallback>
           </Avatar>
           <p className="text-xl font-bold text-neoBlue">{state!.title}</p>
           <div className="mb-3 flex w-full flex-col items-center justify-center gap-2">
