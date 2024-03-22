@@ -36,7 +36,7 @@ function FormTime(props: FormTimeProps) {
               </SelectTrigger>
               <SelectContent>
                 {hours().map(hour => (
-                  <SelectItem key={hour} value={hour.toString()}>
+                  <SelectItem key={hour} value={hour.toString()} className="text-xs">
                     {hour} 시
                   </SelectItem>
                 ))}
@@ -56,7 +56,7 @@ function FormTime(props: FormTimeProps) {
               </SelectTrigger>
               <SelectContent>
                 {minutes().map(minute => (
-                  <SelectItem key={minute} value={minute.toString()}>
+                  <SelectItem key={minute} value={minute.toString()} className="text-xs">
                     {minute} 분
                   </SelectItem>
                 ))}
