@@ -16,6 +16,8 @@ import {
   AvatarImage,
 } from "@/app/_common/shadcn/ui/avatar";
 
+import { ACHIEVEMENTS_ID_TO_TITLE } from "@/app/_common/constants/achievements";
+
 import { RequestList } from "../_types/type";
 import useAcceptRequestMutation from "../_hooks/useAcceptRequestMutation";
 import DialogMoreInfo from "./DialogMoreInfo";
@@ -89,7 +91,9 @@ const ProjectCardBack = forwardRef<HTMLDivElement, CardBackProps>(
                             {senderPreview.username}
                           </p>
                           <p className="text-xs text-[#F76A6A]">
-                            {senderPreview.achievementId || "null"}
+                            {ACHIEVEMENTS_ID_TO_TITLE[
+                              senderPreview.achievementId
+                            ] ?? "null"}
                           </p>
                         </div>
                       </aside>
