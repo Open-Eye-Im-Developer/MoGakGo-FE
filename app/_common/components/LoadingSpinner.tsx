@@ -19,7 +19,7 @@ function LoadingSpinner({
   return (
     <div
       className={cn(
-        "flex h-screen w-full place-content-center bg-white",
+        "flex h-full w-full place-content-center bg-white",
         className,
       )}
     >

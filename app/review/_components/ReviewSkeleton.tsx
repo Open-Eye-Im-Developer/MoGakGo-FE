@@ -4,7 +4,7 @@ import { Skeleton } from "@/app/_common/shadcn/ui/skeleton";
 
 function ReviewSkeleton() {
   return (
-    <main className="map-background grid h-screen w-full place-items-center p-4">
+    <main className="map-background grid h-full w-full place-items-center p-4">
       <div className="z-10 flex flex-col place-content-center rounded-md border-2 border-black bg-white p-6 shadow-neo">
         <div className="space-y-14">
           <div className="space-y-2">

@@ -16,7 +16,7 @@ async function ChattingRoomPage({
   const { name, profileImage } = searchParams;
 
   return (
-    <main className="flex h-screen flex-col items-center">
+    <main className="flex h-full flex-col items-center">
       <StackNavigator
         element={
           <Profile avatarUrl={profileImage} username={name}>

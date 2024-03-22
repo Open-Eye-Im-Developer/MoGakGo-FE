@@ -24,7 +24,7 @@ function EditPage() {
   return (
     <>
       <StackNavigator element={"수정"} />
-      <main className="container flex min-h-screen max-w-2xl flex-col gap-8 pb-8">
+      <main className="container flex min-h-full max-w-2xl flex-col gap-8 pb-8">
         {data ? (
           <EditForm defaultValues={data} />
         ) : (

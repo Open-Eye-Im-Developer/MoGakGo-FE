@@ -14,7 +14,7 @@ export const viewport: Viewport = generateViewport({
 
 function ProjectPage() {
   return (
-    <section className="h-screen w-full">
+    <section className="h-full w-full">
       <ProjectManageSection />
     </section>
   );

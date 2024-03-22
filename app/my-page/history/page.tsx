@@ -46,7 +46,7 @@ function HistoryPage() {
   return (
     <>
       <StackNavigator element={"지난 만남 카드"} />
-      <main className="container flex min-h-screen max-w-2xl flex-col gap-8 pb-8">
+      <main className="container flex min-h-full max-w-2xl flex-col gap-8 pb-8">
         <Menubar value={currentTab}>
           {MENUS.map(menu => (
             <MenubarMenu key={menu.id} value={menu.id}>

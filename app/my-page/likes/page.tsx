@@ -24,7 +24,7 @@ function LikesPage() {
   return (
     <>
       <StackNavigator element={"내가 찔러보기한 사람"} />
-      <main className="container flex min-h-screen max-w-2xl flex-col gap-8 pb-8">
+      <main className="container flex min-h-full max-w-2xl flex-col gap-8 pb-8">
         <section className="flex flex-col gap-2">
           {users
             ? users.map(el => <UserCard key={el.createdAt} data={el} />)
