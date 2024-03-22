@@ -8,7 +8,10 @@ import LoginForm from "./_components/LoginForm";
 
 import type { Viewport } from "next";
 
-export const viewport: Viewport = generateViewport(theme.GRAY);
+export const viewport: Viewport = generateViewport({
+  lightColor: theme.GRAY.light,
+  darkColor: theme.GRAY.dark,
+});
 
 function LoginPage() {
   return (
