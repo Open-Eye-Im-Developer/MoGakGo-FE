@@ -15,10 +15,6 @@ export const useMutationUserAchievement = (
   const mutation = useMutation({
     mutationFn: patchUserAchievement,
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["achievements", userId],
-      });
-
       toast.success("업적 변경이 완료 됐습니다.");
 
       setIsMyAchievement(true);
@@ -26,6 +22,9 @@ export const useMutationUserAchievement = (
     onError: error => {
       console.error(error);
       toast.error(error.message);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["achievements", userId] });
     },
   });
 
