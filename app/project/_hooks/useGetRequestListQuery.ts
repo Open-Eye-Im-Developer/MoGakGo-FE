@@ -34,6 +34,7 @@ function useGetRequestListQuery(
     queryKey: ["requestList", cursorId] as const,
     queryFn: getRequestList,
     enabled: user !== null && user.id === creatorId,
+    refetchInterval: 5000,
   });
 
   if (isLoading || !data) return { data: null };
