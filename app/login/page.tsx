@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import { generateViewport } from "../_common/utils/generateViewport";
 import { theme } from "../_common/constants/viewPortTheme";
+import LoadingSpinner from "../_common/components/LoadingSpinner";
 import LoginForm from "./_components/LoginForm";
 
 import type { Viewport } from "next";
@@ -11,7 +12,7 @@ export const viewport: Viewport = generateViewport(theme.GRAY);
 
 function LoginPage() {
   return (
-    <Suspense>
+    <Suspense fallback={<LoadingSpinner />}>
       <main className="relatie flex h-screen w-full flex-col items-center bg-[#E8E8E8]">
         <Image
           className="absolute bottom-16 right-0"
