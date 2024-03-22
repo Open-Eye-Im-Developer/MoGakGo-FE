@@ -28,7 +28,7 @@ function MessageContainer(props: MessageContainerProps) {
     currentSender,
     isLoadMessage,
   } = useChat({
-    url: "ws://3.38.76.76:8080/chat",
+    url: process.env.NEXT_PUBLIC_CHAT_SOCKET_URL!,
     chatRoomId,
     userId: user!.id,
   });
