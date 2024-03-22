@@ -6,6 +6,7 @@ import "dayjs/locale/ko";
 import { generateViewport } from "./_common/utils/generateViewport";
 import { Toaster } from "./_common/shadcn/ui/toaster";
 import { Toaster as Sonner } from "./_common/shadcn/ui/sonner";
+import { theme } from "./_common/constants/viewPortTheme";
 import { WebSocketProvider } from "./_common/components/WebSocketProvider";
 import { ThemeProvider } from "./_common/components/theme-provider";
 import SVGProvider from "./_common/components/SVGProvider";
@@ -20,7 +21,10 @@ export const metadata: Metadata = {
 
 dayjs.locale("ko");
 
-export const viewport: Viewport = generateViewport("#ffffff");
+export const viewport: Viewport = generateViewport({
+  lightColor: theme.DEFAULT.light,
+  darkColor: theme.DEFAULT.dark,
+});
 
 export default function RootLayout({
   children,

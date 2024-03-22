@@ -12,7 +12,10 @@ function ButtonLike({ onClick, isLiked }: ButtonLikeProps) {
   return (
     <Button
       onClick={onClick}
-      className={cn("w-full", isLiked ? "text-neoRed" : "text-black")}
+      className={cn(
+        "w-full dark:bg-white",
+        isLiked ? "text-neoRed" : "text-black",
+      )}
     >
       <Icon id="follow-fulfill" />
     </Button>

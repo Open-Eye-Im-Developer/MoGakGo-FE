@@ -15,6 +15,7 @@ function StackNavigator({
   element,
   path,
   className,
+  children,
   ...props
 }: StackNavigatorProps) {
   const router = useRouter();
@@ -31,7 +32,7 @@ function StackNavigator({
 
   return (
     <header
-      className={cn("relative p-4 text-center text-lg", className)}
+      className={cn("relative px-4 py-8 text-center text-lg", className)}
       {...props}
     >
       <Icon
@@ -41,6 +42,7 @@ function StackNavigator({
         onClick={!path ? handleBack : handlePushPath}
       />
       <h2>{element}</h2>
+      {children}
     </header>
   );
 }

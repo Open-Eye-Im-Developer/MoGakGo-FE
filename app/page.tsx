@@ -6,7 +6,10 @@ import Map from "./(map)/_components/Map";
 
 import type { Viewport } from "next";
 
-export const viewport: Viewport = generateViewport(theme.SKY);
+export const viewport: Viewport = generateViewport({
+  lightColor: theme.SKY.light,
+  darkColor: theme.SKY.dark,
+});
 
 export default function Home() {
   return (

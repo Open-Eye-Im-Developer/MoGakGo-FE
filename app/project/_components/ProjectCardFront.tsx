@@ -139,7 +139,9 @@ function ProjectCardFront(props: CardFrontProps) {
           <div className="flex flex-col items-center gap-4">
             <div className="flex flex-col items-center gap-1 p-1">
               <h1 className="text-2xl font-bold">
-                <span className="relative text-black">{username}</span>
+                <span className="relative text-black dark:text-white">
+                  {username}
+                </span>
               </h1>
               <h3 className="mt-3 text-xs font-bold text-[#F76A6A]">
                 {achievementTitle ?? "칭호가 없습니다."}
