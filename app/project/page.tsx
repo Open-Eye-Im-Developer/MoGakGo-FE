@@ -7,7 +7,10 @@ import ProjectManageSection from "./_components/ProjectManageSection";
 
 import type { Viewport } from "next";
 
-export const viewport: Viewport = generateViewport(theme.SKY);
+export const viewport: Viewport = generateViewport({
+  lightColor: theme.SKY.light,
+  darkColor: theme.SKY.dark,
+});
 
 function ProjectPage() {
   return (

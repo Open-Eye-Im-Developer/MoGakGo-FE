@@ -23,15 +23,14 @@ function MyPage() {
 
   return (
     <div className="relative">
-      <Link href={"/notification"}>
-        <Icon
-          id="notification"
-          h-full
-          size={24}
-          className="absolute right-4 top-4 z-10"
-        />
-      </Link>
-      <StackNavigator element={"마이페이지"} />
+      <StackNavigator element={"마이페이지"}>
+        <Link
+          href={"/notification"}
+          className="absolute right-5 top-9 z-10 -translate-y-[0.1rem]"
+        >
+          <Icon id="notification" size={24} />
+        </Link>
+      </StackNavigator>
       <main className="container flex min-h-screen max-w-2xl flex-col gap-8 pb-24">
         <Profile />
         <Badges />
