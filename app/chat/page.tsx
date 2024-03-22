@@ -1,5 +1,6 @@
 import React from "react";
 
+import WithNavigation from "../_common/hoc/WithNavigation";
 import StackNavigator from "../_common/components/StackNavigator";
 import ChatList from "./_components/ChatList";
 
@@ -12,4 +13,4 @@ function ChatPage() {
   );
 }
 
-export default ChatPage;
+export default WithNavigation(ChatPage, true);
