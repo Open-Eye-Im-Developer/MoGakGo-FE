@@ -25,7 +25,7 @@
   }
 
   .map-background {
-    @apply absolute h-full w-full overflow-hidden before:absolute before:right-[100%] before:h-full before:w-full before:animate-slide-infinite before:bg-[url("/images/mapBackgroundImage.png")] before:bg-[length:100%] before:content-[""] after:absolute after:h-full after:w-full after:animate-slide-infinite after:bg-[url("/images/mapBackgroundImage.png")] after:bg-[length:100%] after:content-[""];
+    @apply absolute h-full w-full overflow-hidden before:absolute before:right-[99%] before:h-full before:w-full before:animate-slide-infinite before:bg-[url("/images/cloud.png"),url("/images/mapBackgroundImage.png")] before:bg-[99%,cover] before:content-[""] after:absolute after:h-full after:w-full after:animate-slide-infinite after:bg-[url("/images/cloud.png"),url("/images/mapBackgroundImage.png")] after:bg-[99%,cover] after:content-[""] dark:before:bg-[url("/images/cloud_dark.png"),url("/images/mapBackgroundImage_dark.png")] dark:after:bg-[url("/images/cloud_dark.png"),url("/images/mapBackgroundImage_dark.png")];
   }
 
   .main-logo {
