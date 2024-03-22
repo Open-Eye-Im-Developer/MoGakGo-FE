@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useQueryUserData } from "@/app/my-page/_hooks/useQueryUserData";
 import {
@@ -21,20 +21,28 @@ import { Button } from "@/app/_common/shadcn/ui/button";
 import ProfileCard from "@/app/_common/components/ProfileCard";
 import Icon from "@/app/_common/components/Icon";
 
+import { User } from "@/app/_common/types/user";
 import { Profile } from "@/app/_common/types/profile";
 
 import useFlip from "../_hooks/useFlip";
 import ProjectCreateForm from "./ProjectCreateForm";
 import ButtonRotate from "./ButtonRotate";
 
+interface DialogProfileState {
+  response: User | undefined;
+}
+
 function ProjectCreateDialog() {
   const [open, setOpen] = useState(false);
   const { flipped, handleFlip } = useFlip();
-  const { data: user } = useQueryUserData();
+  const { data: user, isFetched } = useQueryUserData();
+  const [profile, setProfile] = useState<DialogProfileState | null>(null);
 
-  const profile = {
-    response: user!,
-  };
+  useEffect(() => {
+    if (isFetched) {
+      setProfile({ response: user! });
+    }
+  }, [isFetched]);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -45,7 +53,7 @@ function ProjectCreateDialog() {
       </DialogTrigger>
       <DialogPortal>
         <DialogOverlay className="bg-black/20" />
-        <DialogContent className="flex h-[600px] w-[330px] max-w-[330px] flex-col items-start gap-10 rounded-lg border-none bg-transparent p-0 [perspective:1000px] z-50">
+        <DialogContent className="z-50 flex h-[600px] w-[330px] max-w-[330px] flex-col items-start gap-10 rounded-lg border-none bg-transparent p-0 [perspective:1000px]">
           <div
             className={`relative h-full w-full transition-all duration-500 [transform-style:preserve-3d] ${flipped ? "[transform:rotateY(180deg)]" : ""}`}
           >
@@ -60,11 +68,13 @@ function ProjectCreateDialog() {
                 <ProjectCreateForm onClose={setOpen} />
               </CardContent>
             </Card>
-            <ProfileCard
-              profile={profile as Profile}
-              isBehind={true}
-              onRotate={handleFlip}
-            />
+            {profile && profile.response && (
+              <ProfileCard
+                profile={profile as Profile}
+                isBehind={true}
+                onRotate={handleFlip}
+              />
+            )}
           </div>
         </DialogContent>
       </DialogPortal>
