@@ -1,3 +1,5 @@
+import { useRouter } from "next/navigation";
+
 import { Button } from "@/app/_common/shadcn/ui/button";
 import {
   AlertDialog,
@@ -12,15 +14,16 @@ import {
 } from "@/app/_common/shadcn/ui/alert-dialog";
 import WithOnMounted from "@/app/_common/hoc/WithOnMounted";
 
-import { navigate } from "@/app/_common/utils/redirect";
 import { deleteCookie } from "@/app/_common/utils/cookie";
 
 function LogoutButton() {
+  const router = useRouter();
+
   const handleClickLogout = async () => {
     try {
       await deleteCookie("refreshToken", { path: "/" });
       await localStorage.removeItem("accessToken");
-      navigate("/");
+      router.push("/");
     } catch (error) {
       console.error(error);
     }

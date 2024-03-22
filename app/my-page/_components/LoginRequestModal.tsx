@@ -1,5 +1,7 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -11,15 +13,14 @@ import {
   AlertDialogOverlay,
 } from "@/app/_common/shadcn/ui/alert-dialog";
 
-import { navigate } from "@/app/_common/utils/redirect";
-
 import { useQueryUserData } from "../_hooks/useQueryUserData";
 
 function LoginRequestModal() {
+  const router = useRouter();
   const { data, isLoading } = useQueryUserData();
 
   const handleClickLoginButton = () => {
-    navigate("/login");
+    router.push("/login");
   };
 
   return (
