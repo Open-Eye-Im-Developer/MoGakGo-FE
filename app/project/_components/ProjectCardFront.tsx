@@ -73,7 +73,7 @@ function ProjectCardFront(props: CardFrontProps) {
   } = props;
   const { user } = useAuthStore();
   const isPublic = user === null;
-  const blurEffect = isPublic ? "blur-sm" : "";
+  const blurEffect = isPublic ? "blur-sm pointer-events-none" : "";
 
   return (
     <Card

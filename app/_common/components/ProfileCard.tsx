@@ -7,6 +7,7 @@ import ButtonLike from "@/app/project/_components/ButtonLike";
 import { useQueryAchievements } from "@/app/achievements/_hooks/useQueryAchievements";
 import useToggleLikeProfile from "@/app/(map)/_api/useToggleLikeProfile";
 
+import { toast } from "../utils/toast";
 import { Profile } from "../types/profile";
 import { useAuthStore } from "../store/useAuthStore";
 import { cn } from "../shadcn/utils";
@@ -51,10 +52,13 @@ function ProfileCard(props: ProfileCardProps) {
   const { toggleLikeProfile, isLiked } = useToggleLikeProfile();
   const { myAchievement } = useQueryAchievements();
   const isPublic = user === null;
-  const blurEffect = isPublic ? "blur-sm" : "";
-
+  const blurEffect = isPublic ? "blur-sm pointer-events-none" : "";
   const handleToggleButton = () => {
-    if (!user) return;
+    if (!user) {
+      toast.info("로그인 후 찜하기를 할 수 있어요!");
+      return;
+    }
+
     toggleLikeProfile({
       isLiked: isLiked ?? isAlreadyLiked!,
       likeInfo: { senderId: user.id, receiverId },
@@ -78,7 +82,12 @@ function ProfileCard(props: ProfileCardProps) {
           </Link>
         </CardDescription>
       </CardHeader>
-      <CardContent className={cn("flex grow flex-col items-center gap-8 px-3 py-2", blurEffect)}>
+      <CardContent
+        className={cn(
+          "flex grow flex-col items-center gap-8 px-3 py-2",
+          blurEffect,
+        )}
+      >
         <div className="flex w-full grow flex-col gap-3">
           <div className="flex w-full justify-between sm:justify-center">
             <div className="relative ml-2 rounded-full">
