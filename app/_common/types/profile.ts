@@ -1,4 +1,4 @@
-import { WantedJobs } from "./user";
+import { Achievement, WantedJobs } from "./user";
 
 export interface Creator {
   id: number;
@@ -8,7 +8,7 @@ export interface Creator {
   githubUrl: string;
   bio?: string;
   jandiRate: number;
-  achievementId: number;
+  achievementId: Achievement["achievementId"];
   developLanguages: string[];
   wantedJobs: WantedJobs[];
 }
