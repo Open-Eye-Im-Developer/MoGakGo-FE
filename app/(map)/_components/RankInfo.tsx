@@ -1,7 +1,7 @@
 function RankInfo() {
   return (
     <aside className="absolute bottom-0 left-4 text-[0.65rem] text-primary">
-      <div>모각고 밀집도 순위</div>
+      <div>일일 모각고 생성 순위</div>
       <ul>
         <li className="flex items-center">
           <span className="mr-1 mt-0.5 inline-block h-4 w-8 rounded-sm bg-mapRankFirst"></span>
