@@ -42,7 +42,12 @@ export default function RootLayout({
       <meta property="og:type" content="engineering.coding" />
       <meta property="og:url" content="https://mogak-go.vercel.app/" />
       <meta property="og:image" content="/thumbnail.png" />
-      <body>
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1.0, 
+    user-scalable=0"
+      />
+      <body className="touch-pan-x touch-pan-y">
         <ClientProvider>
           <WebSocketProvider>
             <ThemeProvider
