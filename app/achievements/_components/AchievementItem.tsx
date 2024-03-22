@@ -19,6 +19,7 @@ import Icon from "@/app/_common/components/Icon";
 import { Achievement } from "@/app/_common/types/user";
 
 import { calculateAchievement } from "../_utils/calculateAchievement";
+import { useMutationUserAchievement } from "../_hooks/useMutationUserAchievement";
 
 interface AchievementItemProps {
   styleType: "main" | "item";
@@ -34,6 +35,7 @@ function AchievementItem({
   isMyAchievement,
 }: AchievementItemProps) {
   const {
+    userId,
     achievementId,
     title,
     imgUrl,
@@ -43,8 +45,17 @@ function AchievementItem({
     progressCount,
   } = achievement;
 
+  const { mutate } = useMutationUserAchievement();
+
   const leftToComplete = requirementValue - progressCount;
   const isThreeOrLessLeftToComplete = leftToComplete <= 3;
+
+  const handleSubmitAchievement = () => {
+    mutate({
+      userId,
+      achievementId,
+    });
+  };
 
   return (
     <li
@@ -105,7 +116,8 @@ function AchievementItem({
           <AccordionContent className="space-y-2">
             <p className="px-2 text-white">획득방법: {description}</p>
             <div className="text-end">
-              {!isCompleted ? (
+              {/* TODO: 업적 서버 수정되면 isCompleted 조건 추가 */}
+              {leftToComplete > 0 ? (
                 <p
                   className={cn("text-xs", {
                     "font-semibold text-white": isThreeOrLessLeftToComplete,
@@ -116,11 +128,16 @@ function AchievementItem({
                   {isThreeOrLessLeftToComplete && "!"}
                 </p>
               ) : (
-                !isMyAchievement && (
-                  <Button className="row-span-3" variant={"outline"}>
+                leftToComplete <= 0 ||
+                (!isMyAchievement && (
+                  <Button
+                    className="row-span-3"
+                    variant={"outline"}
+                    onClick={handleSubmitAchievement}
+                  >
                     변경
                   </Button>
-                )
+                ))
               )}
             </div>
           </AccordionContent>
