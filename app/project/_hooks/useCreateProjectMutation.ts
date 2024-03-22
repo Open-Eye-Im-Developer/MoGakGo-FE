@@ -23,7 +23,7 @@ function useCreateProjectMutation(onClose: (open: boolean) => void) {
     mutationFn: createProject,
     onSuccess: () => {
       toast({
-        title: "프로젝트가 생성되었습니다.",
+        title: "모각고가 생성되었습니다.",
         description: "매칭 요청을 기다려볼까요?",
       });
 

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 
+import { useAuthStore } from "@/app/_common/store/useAuthStore";
 import WithOnMounted from "@/app/_common/hoc/WithOnMounted";
 
 import Icon from "@/app/_common/components/Icon";
@@ -19,8 +20,15 @@ import ListSortSelect from "./ListSortSelect";
 import AchievementItem from "./AchievementItem";
 
 function AchievementList() {
-  const { achievements, myAchievement, isLoading, isFetching, isPending } =
-    useQueryAchievements();
+  const { user } = useAuthStore();
+  const {
+    achievements,
+    myAchievement,
+    isLoading,
+    isFetching,
+    isPending,
+    isFetched,
+  } = useQueryAchievements(user?.id);
 
   const [sorting, setSorting] = useState<Achievement[]>([]);
 
@@ -29,10 +37,10 @@ function AchievementList() {
   };
 
   useEffect(() => {
-    setSorting(achievements);
-  }, [achievements]);
+    if (isFetched) setSorting(achievements);
+  }, [achievements, isFetched]);
 
-  if (isLoading || isFetching || isPending) return <AchievementSkeleton />;
+  if (isLoading) return <AchievementSkeleton />;
 
   return (
     <main className="flex flex-col">
