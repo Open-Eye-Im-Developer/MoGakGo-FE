@@ -78,7 +78,9 @@ export const WebSocketProvider = ({
                   <h3 className="text-base font-bold">
                     <span>{achievementTitle}</span>
                     <span> 획득까지 앞으로 </span>
-                    <span className="text-neoRed">{progressCount}회!</span>
+                    <span className="text-neoRed">
+                      {requirementValue - progressCount}회!
+                    </span>
                   </h3>
                 </aside>
                 <Progress
