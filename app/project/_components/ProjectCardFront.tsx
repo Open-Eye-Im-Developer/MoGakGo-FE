@@ -72,7 +72,8 @@ function ProjectCardFront(props: CardFrontProps) {
     isAccepted,
   } = props;
   const { user } = useAuthStore();
-  console.log(user);
+  const isPublic = user === null;
+  const blurEffect = isPublic ? "blur-sm" : "";
 
   return (
     <Card
@@ -81,7 +82,7 @@ function ProjectCardFront(props: CardFrontProps) {
         initialRotate ? "[transform:rotateY(180deg)]" : "",
       )}
     >
-      <CardHeader className="px-3 pt-2">
+      <CardHeader className={cn("px-3 pt-2", blurEffect)}>
         <CardDescription className="flex justify-between text-lg font-bold text-black">
           <span className="flex items-center gap-2">
             <ButtonRotate
@@ -116,7 +117,12 @@ function ProjectCardFront(props: CardFrontProps) {
           </Link>
         </CardDescription>
       </CardHeader>
-      <CardContent className="relative flex grow flex-col items-center gap-8 px-3 py-2">
+      <CardContent
+        className={cn(
+          "relative flex grow flex-col items-center gap-8 px-3 py-2",
+          blurEffect,
+        )}
+      >
         <div className="flex w-full flex-col gap-3">
           <div className="flex w-full justify-between sm:justify-center">
             <div className="relative ml-2 rounded-full">

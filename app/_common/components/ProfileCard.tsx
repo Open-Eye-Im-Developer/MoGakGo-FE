@@ -50,6 +50,8 @@ function ProfileCard(props: ProfileCardProps) {
   const { user } = useAuthStore();
   const { toggleLikeProfile, isLiked } = useToggleLikeProfile();
   const { myAchievement } = useQueryAchievements();
+  const isPublic = user === null;
+  const blurEffect = isPublic ? "blur-sm" : "";
 
   const handleToggleButton = () => {
     if (!user) return;
@@ -68,7 +70,7 @@ function ProfileCard(props: ProfileCardProps) {
           : "",
       )}
     >
-      <CardHeader className="px-4 py-3">
+      <CardHeader className={cn("px-4 py-3", blurEffect)}>
         <CardDescription className="flex items-center justify-between text-lg font-bold text-black">
           {isBehind && onRotate && <ButtonRotate onRotate={onRotate} />}
           <Link href={githubUrl} target="_blank">
@@ -76,7 +78,7 @@ function ProfileCard(props: ProfileCardProps) {
           </Link>
         </CardDescription>
       </CardHeader>
-      <CardContent className="flex grow flex-col items-center gap-8 px-3 py-2">
+      <CardContent className={cn("flex grow flex-col items-center gap-8 px-3 py-2", blurEffect)}>
         <div className="flex w-full grow flex-col gap-3">
           <div className="flex w-full justify-between sm:justify-center">
             <div className="relative ml-2 rounded-full">
