@@ -16,9 +16,7 @@ interface Props {
 
 function MapComponent({ regionCode, regionRank, type = "default" }: Props) {
   useEffect(() => {
-    if (!regionRank) return;
-
-    regionRank.forEach((regionName, index) => {
+    regionRank?.forEach((regionName, index) => {
       const region = document
         .querySelector(`#${regionName}`)
         ?.querySelector(".land");
@@ -55,7 +53,7 @@ function MapComponent({ regionCode, regionRank, type = "default" }: Props) {
 
   return (
     <div className="absolute w-full p-4 md:w-4/5 lg:w-3/5">
-      {regionRank && <RankInfo />}
+      {regionRank?.length ? <RankInfo /> : null}
       <svg
         viewBox="0 0 1476 1305"
         fill="none"
