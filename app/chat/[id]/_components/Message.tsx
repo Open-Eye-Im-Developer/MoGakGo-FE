@@ -15,7 +15,11 @@ function Message({ message, userId }: MessageProps) {
       key={id}
       className={cn("flex", userId === senderId && "flex-row-reverse")}
     >
-      <div className={"m-2 w-fit rounded-lg bg-black p-3 text-white"}>
+      <div
+        className={
+          "m-2 w-fit rounded-lg bg-black p-3 text-white dark:bg-white dark:text-black"
+        }
+      >
         {content}
       </div>
       <time
