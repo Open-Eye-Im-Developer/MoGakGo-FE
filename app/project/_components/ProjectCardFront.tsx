@@ -72,6 +72,8 @@ function ProjectCardFront(props: CardFrontProps) {
     isAccepted,
   } = props;
   const { user } = useAuthStore();
+  const isPublic = user === null;
+  const blurEffect = isPublic ? "blur-sm pointer-events-none" : "";
 
   return (
     <Card
@@ -80,7 +82,7 @@ function ProjectCardFront(props: CardFrontProps) {
         initialRotate ? "[transform:rotateY(180deg)]" : "",
       )}
     >
-      <CardHeader className="px-3 pt-2">
+      <CardHeader className={cn("px-3 pt-2", blurEffect)}>
         <CardDescription className="flex justify-between text-lg font-bold text-black">
           <span className="flex items-center gap-2">
             <ButtonRotate
@@ -115,7 +117,12 @@ function ProjectCardFront(props: CardFrontProps) {
           </Link>
         </CardDescription>
       </CardHeader>
-      <CardContent className="relative flex grow flex-col items-center gap-8 px-3 py-2">
+      <CardContent
+        className={cn(
+          "relative flex grow flex-col items-center gap-8 px-3 py-2",
+          blurEffect,
+        )}
+      >
         <div className="flex w-full flex-col gap-3">
           <div className="flex w-full justify-between sm:justify-center">
             <div className="relative ml-2 rounded-full">
@@ -131,7 +138,7 @@ function ProjectCardFront(props: CardFrontProps) {
               <div className="flex flex-col gap-2">
                 <YProgress value={jandiRate} background="green" />
                 <span className="text-xs">
-                  {jandiRate < 0 ? "NaN" : jandiRate}%
+                  {jandiRate < 0 ? "0" : jandiRate}%
                 </span>
               </div>
             </div>
@@ -168,14 +175,15 @@ function ProjectCardFront(props: CardFrontProps) {
           {user && user.id !== id && projectStatus === "PENDING" && (
             <ButtonRequest projectId={projectId} />
           )}
-          {((user && user.id === id && projectStatus === "MATCHED") ||
-            projectStatus === "PENDING") && (
-            <ProjectRemoveDialog
-              projectId={projectId}
-              isProjectAccepted={isAccepted}
-              matchingId={matchingId}
-            />
-          )}
+          {user &&
+            user.id === id &&
+            (projectStatus === "MATCHED" || projectStatus === "PENDING") && (
+              <ProjectRemoveDialog
+                projectId={projectId}
+                isProjectAccepted={isAccepted}
+                matchingId={matchingId}
+              />
+            )}
         </CardFooter>
       )}
     </Card>

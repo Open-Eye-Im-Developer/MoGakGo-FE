@@ -45,7 +45,7 @@ function ProjectCreateDialog() {
       </DialogTrigger>
       <DialogPortal>
         <DialogOverlay className="bg-black/20" />
-        <DialogContent className="flex h-[600px] w-[330px] max-w-[330px] flex-col items-start gap-10 rounded-lg border-none bg-transparent p-0 [perspective:1000px]">
+        <DialogContent className="flex h-[600px] w-[330px] max-w-[330px] flex-col items-start gap-10 rounded-lg border-none bg-transparent p-0 [perspective:1000px] z-60">
           <div
             className={`relative h-full w-full transition-all duration-500 [transform-style:preserve-3d] ${flipped ? "[transform:rotateY(180deg)]" : ""}`}
           >
