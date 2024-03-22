@@ -30,6 +30,14 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning={true}>
       <link rel="manifest" href="/manifest.json" />
+      <meta property="og:title" content="모각GO!!" />
+      <meta
+        property="og:description"
+        content="게이미피케이션 요소를 적용한 랜덤 모각코 서비스"
+      />
+      <meta property="og:type" content="engineering.coding" />
+      <meta property="og:url" content="https://mogak-go.vercel.app/" />
+      <meta property="og:image" content="/thumbnail.png" />
       <body>
         <ClientProvider>
           <WebSocketProvider>
