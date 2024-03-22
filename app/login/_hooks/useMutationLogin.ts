@@ -41,6 +41,7 @@ export const useMutationLogin = () => {
         saveNewTokens(accessToken, refreshToken);
         router.push("/signup");
       }
+
       const userInfo = await queryClient.fetchQuery({
         queryFn: getSignUpUser,
         queryKey: ["getSignUpUser"],

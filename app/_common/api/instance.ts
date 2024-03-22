@@ -15,6 +15,12 @@ export const instance = axios.create({
 });
 
 instance.interceptors.request.use(config => {
+  if (config.url?.includes("/auth/login")) {
+    config.headers.Authorization = null;
+
+    return config;
+  }
+
   const accessToken =
     localStorage.getItem("accessToken") ??
     sessionStorage.getItem("accessToken");
@@ -33,15 +39,18 @@ instance.interceptors.response.use(
 
     const refreshToken = await getCookie("refreshToken", "");
 
-    // TODO: 비회원 api 업데이트 후 제거
-    if (!refreshToken) return Promise.reject(error);
+    if (status === 401 && config.url.includes("/auth/login"))
+      return Promise.reject(error);
 
-    if (status === 401) {
-      const newAccessToken = await reIssueAccessToken(refreshToken);
+    if (status === 401 && !config.url.includes("/auth/login")) {
+      if (
+        config.url !== "/auth/reissue" ||
+        config.url.includes("/auth/login")
+      ) {
+        const newAccessToken = await reIssueAccessToken(refreshToken);
 
-      if (!newAccessToken) return Promise.reject(error);
+        if (!newAccessToken) return Promise.reject(error);
 
-      if (config.url !== "/auth/reissue") {
         localStorage.setItem("accessToken", newAccessToken);
 
         config.headers.Authorization = `Bearer ${newAccessToken}`;
