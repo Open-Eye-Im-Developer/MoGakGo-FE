@@ -16,7 +16,7 @@ function useAcceptRequestMutation() {
     return data;
   };
 
-  const { mutate: createAcceptRequest } = useMutation({
+  const { mutate: createAcceptRequest, isError } = useMutation({
     mutationFn: acceptRequest,
     onSuccess: () => {
       toast({
@@ -36,7 +36,7 @@ function useAcceptRequestMutation() {
     throwOnError: false,
   });
 
-  return { createAcceptRequest };
+  return { createAcceptRequest, isError };
 }
 
 export default useAcceptRequestMutation;

@@ -2,6 +2,7 @@
 
 import { z } from "zod";
 import { useForm } from "react-hook-form";
+import Link from "next/link";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -9,6 +10,8 @@ import { useQueryUserData } from "@/app/my-page/_hooks/useQueryUserData";
 import { Separator } from "@/app/_common/shadcn/ui/separator";
 import { Form, FormMessage } from "@/app/_common/shadcn/ui/form";
 import { Button } from "@/app/_common/shadcn/ui/button";
+
+import Icon from "@/app/_common/components/Icon";
 
 import formatTime from "../_utils/formatTime";
 import { FormmatedValues } from "../_types/type";
@@ -105,15 +108,26 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
             <FormTag form={form} />
           </main>
         </section>
-        <footer className="flex justify-end gap-2 text-white">
-          <Button type="submit" className="bg-neoBlue">
-            생성
-          </Button>
-          <DialogClose asChild>
-            <Button type="button" className="bg-neoRed">
-              취소
+        <footer className="flex items-center justify-between gap-2 text-white">
+          <div className="text-black">
+            <Link
+              href="https://beomahn.notion.site/24b02e4a402845b8ab9e1ed34dac31d0?pvs=4"
+              className="text-xs text-[#a2a2a2] flex items-center gap-2"
+            >
+              <Icon id="question-mark-fill" size={18} />
+              <span>프로젝트 생성 방법</span>
+            </Link>
+          </div>
+          <aside className="flex gap-2">
+            <Button type="submit" className="bg-neoBlue">
+              생성
             </Button>
-          </DialogClose>
+            <DialogClose asChild>
+              <Button type="button" className="bg-neoRed">
+                취소
+              </Button>
+            </DialogClose>
+          </aside>
         </footer>
       </form>
     </Form>

@@ -43,6 +43,7 @@ interface CardFrontProps {
   project: Project;
   matchingId?: number;
   achievementTitle?: string;
+  isAccepted: boolean;
 }
 
 function ProjectCardFront(props: CardFrontProps) {
@@ -68,6 +69,7 @@ function ProjectCardFront(props: CardFrontProps) {
     },
     matchingId,
     achievementTitle,
+    isAccepted,
   } = props;
   const { user } = useAuthStore();
 
@@ -161,12 +163,14 @@ function ProjectCardFront(props: CardFrontProps) {
               {formatMeetingTime(meetStartTime, meetEndTime)}
             </p>
           </div>
-          {user && user.id !== id ? (
+          {user && user.id !== id && projectStatus === "PENDING" && (
             <ButtonRequest projectId={projectId} />
-          ) : (
+          )}
+          {((user && user.id === id && projectStatus === "MATCHED") ||
+            projectStatus === "PENDING") && (
             <ProjectRemoveDialog
               projectId={projectId}
-              projectStatus={projectStatus}
+              isProjectAccepted={isAccepted}
               matchingId={matchingId}
             />
           )}

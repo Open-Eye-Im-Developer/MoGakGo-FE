@@ -13,7 +13,6 @@ import Chat from "./Chat";
 function ChatList() {
   const { ref, inView } = useInView();
   const { data, isLoading, fetchNextPage, hasNextPage } = useGetChats();
-
   const chats = data?.pages.map(page => (page ? page.data : [])).flat();
 
   useEffect(() => {

@@ -17,7 +17,7 @@ function ProjectChatCard(props: ChatCardProps) {
         <ProjectInfo chatRoomId={chatRoomId} />
       </CardHeader>
       <CardContent className="relative flex h-[500px] w-[330px] flex-col p-0 px-0 sm:w-[450px]">
-        <MessageContainer chatRoomId={chatRoomId} />
+        <MessageContainer chatRoomId={chatRoomId} isInCard />
       </CardContent>
     </Card>
   );

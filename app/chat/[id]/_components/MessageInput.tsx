@@ -16,6 +16,7 @@ interface MessageInputProp {
   publishSocketMessage: (userId: number, message: string) => void;
   clientRef: React.MutableRefObject<Client | null>;
   chatRoomId: string;
+  isInCard?: boolean;
 }
 
 function MessageInput({
@@ -23,13 +24,18 @@ function MessageInput({
   publishSocketMessage,
   clientRef,
   chatRoomId,
+  isInCard,
 }: MessageInputProp) {
   const { data } = useGetChats();
   const chats = data?.pages[0]?.data as ChatType[];
 
   const isActiveRoom = useMemo(() => {
-    const room = chats.find(chat => chat.chatRoomId === chatRoomId) as ChatType;
-    return room?.status;
+    if (!isInCard) {
+      const room = chats.find(chat => chat.chatRoomId === chatRoomId) as ChatType;
+      return room?.status;
+    } else {
+      return "OPEN"
+    }
   }, [chats, chatRoomId]);
 
   const [message, setMessage] = useState("");

@@ -13,11 +13,12 @@ import Message from "./Message";
 
 interface MessageContainerProps {
   chatRoomId: string;
+  isInCard?: boolean;
 }
 
 // TODO: props로 받은 chatMessageList를 useCustomMessage에 넘겨서 필터링 처리
 function MessageContainer(props: MessageContainerProps) {
-  const { chatRoomId } = props;
+  const { chatRoomId, isInCard } = props;
   const { user } = useAuthStore();
   const {
     clientRef,
@@ -27,7 +28,7 @@ function MessageContainer(props: MessageContainerProps) {
     currentSender,
     isLoadMessage,
   } = useChat({
-    url: "ws://3.38.76.76:8080/chat",
+    url: process.env.NEXT_PUBLIC_CHAT_SOCKET_URL!,
     chatRoomId,
     userId: user!.id,
   });
@@ -71,6 +72,7 @@ function MessageContainer(props: MessageContainerProps) {
         publishSocketMessage={publishSocketMessage}
         clientRef={clientRef}
         chatRoomId={chatRoomId}
+        isInCard={isInCard}
       />
     </div>
   );
