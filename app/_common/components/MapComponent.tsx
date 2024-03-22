@@ -16,9 +16,7 @@ interface Props {
 
 function MapComponent({ regionCode, regionRank, type = "default" }: Props) {
   useEffect(() => {
-    if (!regionRank) return;
-
-    regionRank.forEach((regionName, index) => {
+    regionRank?.forEach((regionName, index) => {
       const region = document
         .querySelector(`#${regionName}`)
         ?.querySelector(".land");
