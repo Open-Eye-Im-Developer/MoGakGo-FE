@@ -15,13 +15,16 @@ import { instance } from "./instance";
 interface ProfileCardRequest {
   region: string;
   cursorId?: number;
+  isPublic: boolean;
 }
 
 export const getProfileCard = async ({
   region,
   cursorId,
+  isPublic,
 }: ProfileCardRequest) => {
   const query = `${cursorId ? `cursorId=${cursorId}&` : ""}pageSize=5&sortOrder=ASC`;
+  const publicUrl = isPublic ? "/public" : "";
   const { data } = await instance.get<ResponseData<Profile>>(
     `/profiles/${region}?${query}`,
   );
