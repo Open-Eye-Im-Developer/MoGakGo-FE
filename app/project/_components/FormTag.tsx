@@ -35,7 +35,7 @@ function FormTag(props: FormTagProps) {
               <Input
                 ref={ref}
                 placeholder="e.g. 조용한, 수다스러운 (최대 3개)"
-                className="w-full shadow-neo-thin"
+                className="w-full shadow-neo-thin text-xs"
                 onKeyDown={handleAddTag}
               />
               <aside className="flex flex-wrap gap-1">
