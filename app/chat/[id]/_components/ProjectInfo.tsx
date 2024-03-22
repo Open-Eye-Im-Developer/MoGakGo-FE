@@ -46,7 +46,7 @@ function ProjectInfo({ chatRoomId }: ProjectInfoProps) {
 
   return (
     <Accordion
-      className="z-10 w-full border-t-[1px] border-black bg-white"
+      className="z-10 w-full border-t-[1px] border-black bg-white dark:bg-black"
       type="single"
       collapsible
     >

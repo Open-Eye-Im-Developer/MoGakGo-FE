@@ -5,7 +5,7 @@ export const theme = {
   },
   SKY: {
     light: "#7DD1F2",
-    dark: "#7DD1F2",
+    dark: "#714277",
   },
   GRAY: {
     light: "#E8E8E8",
