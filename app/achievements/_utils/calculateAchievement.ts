@@ -8,6 +8,8 @@ export const calculateAchievement = (nowAchieved: number, total: number) => {
   //   throw new Error("현재값이 총값보다 큽니다.");
   // }
 
+  if (total - nowAchieved < 0) return 100;
+
   const percentage = (nowAchieved / total) * 100;
   return Math.floor(percentage);
 };

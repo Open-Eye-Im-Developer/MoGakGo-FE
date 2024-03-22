@@ -1,8 +1,9 @@
 "use client";
 
-import { ComponentProps } from "react";
+import { ComponentProps, useState } from "react";
 import Image from "next/image";
 
+import { SignUpUser } from "@/app/signup/_type/signup";
 import { cn } from "@/app/_common/shadcn/utils";
 import { Progress } from "@/app/_common/shadcn/ui/progress";
 import { Button } from "@/app/_common/shadcn/ui/button";
@@ -22,18 +23,26 @@ import { calculateAchievement } from "../_utils/calculateAchievement";
 import { useMutationUserAchievement } from "../_hooks/useMutationUserAchievement";
 
 interface AchievementItemProps {
+  userId: SignUpUser["id"];
   styleType: "main" | "item";
   achievement: Achievement;
-  isMyAchievement?: boolean;
+  myAchievement: Achievement | null;
   className?: ComponentProps<typeof cn>;
 }
 
 function AchievementItem({
+  userId: loginUserId,
   styleType,
   achievement,
   className,
-  isMyAchievement,
+  myAchievement,
 }: AchievementItemProps) {
+  const [isMyAchievement, setIsMyAchievement] = useState(
+    myAchievement
+      ? myAchievement.achievementId === achievement.achievementId
+      : false,
+  );
+
   const {
     userId,
     achievementId,
@@ -45,9 +54,14 @@ function AchievementItem({
     progressCount,
   } = achievement;
 
-  const { mutate } = useMutationUserAchievement();
+  const { mutate } = useMutationUserAchievement(
+    setIsMyAchievement,
+    loginUserId,
+  );
 
-  const leftToComplete = requirementValue - progressCount;
+  const leftToComplete =
+    requirementValue - progressCount < 0 ? 0 : requirementValue - progressCount;
+
   const isThreeOrLessLeftToComplete = leftToComplete <= 3;
 
   const handleSubmitAchievement = () => {
@@ -116,8 +130,7 @@ function AchievementItem({
           <AccordionContent className="space-y-2">
             <p className="px-2 text-white">획득방법: {description}</p>
             <div className="text-end">
-              {/* TODO: 업적 서버 수정되면 isCompleted 조건 추가 */}
-              {leftToComplete > 0 ? (
+              {!isCompleted && leftToComplete !== 0 && (
                 <p
                   className={cn("text-xs", {
                     "font-semibold text-white": isThreeOrLessLeftToComplete,
@@ -127,17 +140,16 @@ function AchievementItem({
                   달성까지 앞으로 {leftToComplete}회 남았어요
                   {isThreeOrLessLeftToComplete && "!"}
                 </p>
-              ) : (
-                leftToComplete <= 0 ||
-                (!isMyAchievement && (
-                  <Button
-                    className="row-span-3"
-                    variant={"outline"}
-                    onClick={handleSubmitAchievement}
-                  >
-                    변경
-                  </Button>
-                ))
+              )}
+
+              {isCompleted && !isMyAchievement && (
+                <Button
+                  className="row-span-3"
+                  variant={"outline"}
+                  onClick={handleSubmitAchievement}
+                >
+                  변경
+                </Button>
               )}
             </div>
           </AccordionContent>
