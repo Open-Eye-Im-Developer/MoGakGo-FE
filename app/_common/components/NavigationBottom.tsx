@@ -31,7 +31,7 @@ function NavigationBottom() {
   return (
     <Menubar
       defaultValue={pathname}
-      className="fixed bottom-8 left-2/4 z-60 -translate-x-2/4 shadow-neo-b"
+      className="fixed bottom-8 left-2/4 z-[45] -translate-x-2/4 shadow-neo-b"
       onClick={!getUser() ? handleNoAuthClick : () => {}}
     >
       <MenubarMenu value="/">
