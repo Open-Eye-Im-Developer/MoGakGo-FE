@@ -5,11 +5,13 @@ import Link from "next/link";
 import WithNavigation from "../_common/hoc/WithNavigation";
 import StackNavigator from "../_common/components/StackNavigator";
 import Icon from "../_common/components/Icon";
+import { useQueryUserData } from "./_hooks/useQueryUserData";
 import Profile from "./_components/Profile";
 import MyProjectRequests from "./_components/MyProjectRequests";
 import MyProjectList from "./_components/MyProjectList";
 import MyCurrentMatchingProject from "./_components/MyCurrentMatchingProject";
 import MyAchievements from "./_components/MyAchievements";
+import LogoutButton from "./_components/LogoutButton";
 import LikeCounter from "./_components/LikeCounter";
 import JandiRating from "./_components/JandiRating";
 import Badges from "./_components/Badges";
@@ -17,6 +19,8 @@ import Badges from "./_components/Badges";
 const FAQ_URL = process.env.NEXT_PUBLIC_FAQ_URL;
 
 function MyPage() {
+  const { data: userData } = useQueryUserData();
+
   return (
     <div className="relative">
       <Link href={"/notification"}>
@@ -42,6 +46,7 @@ function MyPage() {
         <MyPageItem label="위치 인증" href="/auth-mylocation" />
         <MyPageItem label="자주 묻는 질문" href={`${FAQ_URL}`} />
         <MyPageItem label="회원 탈퇴" href="/my-page/delete" />
+        {userData ? <LogoutButton /> : null}
       </main>
     </div>
   );
