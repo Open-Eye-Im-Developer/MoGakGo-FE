@@ -31,7 +31,7 @@ function InfoPopover(props: InfoPopoverProps) {
       <PopoverTrigger asChild>
         <Button
           variant="outline"
-          className="flex items-center gap-7 bg-transparent backdrop-blur-md"
+          className="flex items-center gap-7 bg-transparent backdrop-blur-md  dark:bg-white dark:text-black"
         >
           <span className="text-xs">{title}</span>
           <Icon id="chevron-right" className="h-6 w-6" />

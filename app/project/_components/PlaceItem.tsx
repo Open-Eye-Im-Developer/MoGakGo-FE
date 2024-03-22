@@ -11,7 +11,7 @@ function PlaceItem(props: PlaceItemProps) {
 
   return (
     <li className="w-full text-left">
-      <h1 className="">{place_name}</h1>
+      <h1 className="dark:text-black">{place_name}</h1>
       <p className="w-full truncate text-xs text-[#858585]">
         {road_address_name}
       </p>
