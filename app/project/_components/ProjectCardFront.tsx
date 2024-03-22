@@ -72,6 +72,7 @@ function ProjectCardFront(props: CardFrontProps) {
     isAccepted,
   } = props;
   const { user } = useAuthStore();
+  console.log(user);
 
   return (
     <Card
@@ -131,7 +132,7 @@ function ProjectCardFront(props: CardFrontProps) {
               <div className="flex flex-col gap-2">
                 <YProgress value={jandiRate} background="green" />
                 <span className="text-xs">
-                  {jandiRate < 0 ? "NaN" : jandiRate}%
+                  {jandiRate < 0 ? "0" : jandiRate}%
                 </span>
               </div>
             </div>
@@ -168,14 +169,15 @@ function ProjectCardFront(props: CardFrontProps) {
           {user && user.id !== id && projectStatus === "PENDING" && (
             <ButtonRequest projectId={projectId} />
           )}
-          {((user && user.id === id && projectStatus === "MATCHED") ||
-            projectStatus === "PENDING") && (
-            <ProjectRemoveDialog
-              projectId={projectId}
-              isProjectAccepted={isAccepted}
-              matchingId={matchingId}
-            />
-          )}
+          {user &&
+            user.id === id &&
+            (projectStatus === "MATCHED" || projectStatus === "PENDING") && (
+              <ProjectRemoveDialog
+                projectId={projectId}
+                isProjectAccepted={isAccepted}
+                matchingId={matchingId}
+              />
+            )}
         </CardFooter>
       )}
     </Card>
