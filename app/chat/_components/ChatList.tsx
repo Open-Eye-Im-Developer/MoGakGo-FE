@@ -23,7 +23,7 @@ function ChatList() {
 
   if (isLoading)
     return (
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 pb-24">
         {Array.from({ length: 6 }).map((_, index) => (
           <ActivityCardSkeleton key={index} />
         ))}
