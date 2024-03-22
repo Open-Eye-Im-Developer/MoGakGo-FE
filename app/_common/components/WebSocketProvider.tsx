@@ -33,10 +33,7 @@ export const WebSocketProvider = ({
   const [open, setOpen] = useState(false);
   const [modalState, setModalState] = useState<ModalState | null>(null);
   const webSocket = useRef<WebSocket | null>(null);
-  const webSocketUrl =
-    process.env.NODE_ENV === "development"
-      ? "ws://3.38.76.76:8080/ws/achievement"
-      : "wss://3.38.76.76:8080/ws/achievement";
+  const webSocketUrl = process.env.NEXT_PUBLIC_ACHIEVEMENT_SOCKET_URL!;
   let reconnectInterval: NodeJS.Timeout;
 
   const connect = () => {
