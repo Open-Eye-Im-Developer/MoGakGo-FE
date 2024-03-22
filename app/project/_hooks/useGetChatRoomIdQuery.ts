@@ -9,6 +9,7 @@ interface ChatRoomIdResponse {
 function useGetChatRoomIdQuery(
   projectId: number,
   matchingId: number | undefined,
+  isMatched: boolean,
 ) {
   const getChatRoomId = async () => {
     const { data } = await instance.get<ChatRoomIdResponse>(
@@ -19,7 +20,7 @@ function useGetChatRoomIdQuery(
   };
 
   const { data, isLoading } = useQuery({
-    queryKey: ["get-chatroom-id", projectId],
+    queryKey: ["get-chatroom-id", projectId, isMatched],
     queryFn: getChatRoomId,
     enabled: !!matchingId,
     throwOnError: false,

@@ -23,17 +23,16 @@ import useCacnelMatchingMutation from "../_hooks/useCancelMatchingMutation";
 
 interface ProjectRemoveDialogProps {
   projectId: number;
-  projectStatus: string;
+  isProjectAccepted: boolean;
   matchingId: number | null | undefined;
 }
 
 function ProjectRemoveDialog(props: ProjectRemoveDialogProps) {
-  const { projectId, projectStatus, matchingId } = props;
+  const { projectId, isProjectAccepted, matchingId } = props;
   const { createCancelMatching } = useCacnelMatchingMutation(matchingId!);
   const { createCancelProject } = useCancelProjectMutation(projectId);
-  const isMatchedProject = projectStatus === "MATCHED";
 
-  const triggerComponent = isMatchedProject ? (
+  const triggerComponent = isProjectAccepted ? (
     <Button>
       <IconLogout />
     </Button>
@@ -41,7 +40,7 @@ function ProjectRemoveDialog(props: ProjectRemoveDialogProps) {
     <Button>취소</Button>
   );
 
-  const titleComponent = isMatchedProject
+  const titleComponent = isProjectAccepted
     ? "정말 매칭을 취소하시겠어요?"
     : "정말 프로젝트를 취소하시겠어요?";
 
@@ -61,8 +60,8 @@ function ProjectRemoveDialog(props: ProjectRemoveDialogProps) {
         {triggerComponent}
       </AlertDialogTrigger>
       <AlertDialogPortal />
-      <AlertDialogOverlay className="h-full w-full bg-transparent backdrop-blur-md" />
-      <AlertDialogContent className="flex max-w-[300px] flex-col items-start gap-10 rounded-lg border border-black shadow-neo">
+      <AlertDialogOverlay className="h-full w-full bg-transparent backdrop-blur-md " />
+      <AlertDialogContent className="flex max-w-[300px] flex-col items-start gap-10 rounded-lg border border-black shadow-neo z-100">
         <AlertDialogHeader>
           <AlertDialogTitle className="text-base">
             {titleComponent}
@@ -73,7 +72,9 @@ function ProjectRemoveDialog(props: ProjectRemoveDialogProps) {
         </AlertDialogHeader>
         <AlertDialogFooter className="flex w-full flex-col gap-2 sm:flex-col">
           <AlertDialogAction
-            onClick={isMatchedProject ? handleCancelMatch : handleCancelProject}
+            onClick={
+              isProjectAccepted ? handleCancelMatch : handleCancelProject
+            }
           >
             취소할래요.
           </AlertDialogAction>

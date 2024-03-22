@@ -20,20 +20,33 @@ import { RequestList } from "../_types/type";
 import useAcceptRequestMutation from "../_hooks/useAcceptRequestMutation";
 import DialogMoreInfo from "./DialogMoreInfo";
 import ButtonRotate from "./ButtonRotate";
+
 import "../_styles/card.css";
 
 interface CardBackProps {
   requestList?: RequestList[];
+  projectStatus: string;
   onRotate: () => void;
+  handleMoreButton: () => void;
+  handleAcceptButton: (isError: boolean) => void;
+  isAccepted: boolean;
 }
 
 const ProjectCardBack = forwardRef<HTMLDivElement, CardBackProps>(
   function ProjectCardBack(props, ref) {
-    const { requestList, onRotate } = props;
-    const { createAcceptRequest } = useAcceptRequestMutation();
+    const {
+      requestList,
+      onRotate,
+      handleMoreButton,
+      handleAcceptButton,
+      isAccepted,
+      projectStatus,
+    } = props;
+    const { createAcceptRequest, isError } = useAcceptRequestMutation();
 
     const handleAccept = async (projectRequestId: number) => {
       createAcceptRequest(projectRequestId);
+      handleAcceptButton(isError);
     };
 
     return (
@@ -44,7 +57,7 @@ const ProjectCardBack = forwardRef<HTMLDivElement, CardBackProps>(
             <ButtonRotate onRotate={onRotate} />
           </CardTitle>
         </CardHeader>
-        <CardContent className="flex h-full flex-col px-0 pb-20">
+        <CardContent className="flex h-full flex-col items-center px-0 pb-20">
           {Array.isArray(requestList) && requestList?.length === 0 ? (
             <div className="flex h-full w-full items-center justify-center">
               <span className="text-xl text-[#959595]">요청이 없어요 🥲</span>
@@ -76,25 +89,34 @@ const ProjectCardBack = forwardRef<HTMLDivElement, CardBackProps>(
                             {senderPreview.username}
                           </p>
                           <p className="text-xs text-[#F76A6A]">
-                            {senderPreview.achievementTitle || "null"}
+                            {senderPreview.achievementId || "null"}
                           </p>
                         </div>
                       </aside>
                       <aside className="flex items-center gap-2">
                         <DialogMoreInfo response={senderPreview} />
-                        <Button
-                          size="sm"
-                          className="rounded-lg bg-neoYellow"
-                          onClick={() => handleAccept(id)}
-                        >
-                          수락
-                        </Button>
+                        {!isAccepted && projectStatus === "PENDING" && (
+                          <Button
+                            size="sm"
+                            className="rounded-lg bg-neoYellow"
+                            onClick={() => {
+                              handleAccept(id);
+                            }}
+                          >
+                            수락
+                          </Button>
+                        )}
                       </aside>
                     </main>
                     <Separator className="bg-black" />
                   </aside>
                 ))}
             </div>
+          )}
+          {!isAccepted && (
+            <Button className="w-fit" onClick={handleMoreButton}>
+              더보기
+            </Button>
           )}
         </CardContent>
       </Card>

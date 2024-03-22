@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { useQueryAchievements } from "@/app/achievements/_hooks/useQueryAchievements";
 import { cn } from "@/app/_common/shadcn/utils";
@@ -14,7 +14,6 @@ import {
 import { Project } from "@/app/_common/types/project";
 
 import { RequestList } from "../_types/type";
-import useInfiniteScroll from "../_hooks/useInfiniteScroll";
 import useGetRequestListQuery from "../_hooks/useGetRequestListQuery";
 import useGetChatRoomIdQuery from "../_hooks/useGetChatRoomIdQuery";
 import useFlip from "../_hooks/useFlip";
@@ -30,14 +29,41 @@ interface Props {
 function ProjectCardContainer({ project, matchingId }: Props) {
   const { flipped, handleFlip } = useFlip();
   const [requestList, setRequestList] = useState<RequestList[]>([]);
-  const { ref, cursorId } = useInfiniteScroll(requestList!);
+  const [cursorId, setCursorId] = useState<number | null>(null);
+  const [isAccepted, setIsAccepted] = useState(
+    project.projectStatus === "PENDING" ||
+      project.projectStatus === "CANCELED" ||
+      project.projectStatus === "FINISHED"
+      ? false
+      : true,
+  );
+
+  const ref = useRef(null);
   const { data } = useGetRequestListQuery(
     project.projectId,
     cursorId,
     project.creator.id,
   );
-  const { chatRoomId } = useGetChatRoomIdQuery(project.projectId, matchingId);
+  const { chatRoomId } = useGetChatRoomIdQuery(
+    project.projectId,
+    matchingId,
+    isAccepted,
+  );
   const { myAchievement } = useQueryAchievements();
+
+  const handleMoreButton = () => {
+    if (Array.isArray(data)) {
+      const lastItem = data[data.length - 1];
+      if (lastItem) {
+        setCursorId(lastItem.id);
+      }
+    }
+  };
+
+  const handleAcceptButton = (isError: boolean) => {
+    if (isError) return;
+    setIsAccepted(true);
+  };
 
   useEffect(() => {
     if (!data || "timestamp" in data) return;
@@ -57,7 +83,11 @@ function ProjectCardContainer({ project, matchingId }: Props) {
         <TabsTrigger value="card">Card</TabsTrigger>
         <TabsTrigger
           value="chat"
-          disabled={project.projectStatus !== "MATCHED"}
+          disabled={
+            !isAccepted ||
+            project.projectStatus === "CANCELED" ||
+            project.projectStatus === "FINISHED"
+          }
         >
           Chat
         </TabsTrigger>
@@ -74,10 +104,15 @@ function ProjectCardContainer({ project, matchingId }: Props) {
             project={project}
             matchingId={matchingId}
             achievementTitle={myAchievement?.title}
+            isAccepted={isAccepted}
           />
           <ProjectCardBack
             onRotate={handleFlip}
             requestList={requestList}
+            projectStatus={project.projectStatus}
+            handleMoreButton={handleMoreButton}
+            handleAcceptButton={handleAcceptButton}
+            isAccepted={isAccepted}
             ref={ref}
           />
         </div>
