@@ -28,6 +28,7 @@ function AchievementList() {
     isFetching,
     isPending,
     isFetched,
+    userId,
   } = useQueryAchievements(user?.id);
 
   const [sorting, setSorting] = useState<Achievement[]>([]);
@@ -40,7 +41,7 @@ function AchievementList() {
     if (isFetched) setSorting(achievements);
   }, [achievements, isFetched]);
 
-  if (isLoading) return <AchievementSkeleton />;
+  if (isLoading || !userId) return <AchievementSkeleton />;
 
   return (
     <main className="flex flex-col">
@@ -83,11 +84,10 @@ function AchievementList() {
         {sorting &&
           sorting.map((achievement, index) => (
             <AchievementItem
+              userId={userId}
               styleType="item"
               achievement={achievement}
-              isMyAchievement={
-                myAchievement?.achievementId === achievement.achievementId
-              }
+              myAchievement={myAchievement ?? null}
               key={index}
             />
           ))}

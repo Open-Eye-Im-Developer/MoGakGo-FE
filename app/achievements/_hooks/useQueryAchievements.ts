@@ -28,5 +28,6 @@ export const useQueryAchievements = (staticUserId?: number) => {
     isFetching,
     isPending,
     isFetched,
+    userId,
   };
 };
