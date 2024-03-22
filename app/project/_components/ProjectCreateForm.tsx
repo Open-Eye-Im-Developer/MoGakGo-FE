@@ -11,6 +11,8 @@ import { Separator } from "@/app/_common/shadcn/ui/separator";
 import { Form, FormMessage } from "@/app/_common/shadcn/ui/form";
 import { Button } from "@/app/_common/shadcn/ui/button";
 
+import Icon from "@/app/_common/components/Icon";
+
 import formatTime from "../_utils/formatTime";
 import { FormmatedValues } from "../_types/type";
 import useCreateProjectMutation from "../_hooks/useCreateProjectMutation";
@@ -110,9 +112,10 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
           <div className="text-black">
             <Link
               href="https://beomahn.notion.site/24b02e4a402845b8ab9e1ed34dac31d0?pvs=4"
-              className="text-xs text-[#a2a2a2]"
+              className="text-xs text-[#a2a2a2] flex items-center gap-2"
             >
-              프로젝트 생성 방법
+              <Icon id="question-mark-fill" size={18} />
+              <span>프로젝트 생성 방법</span>
             </Link>
           </div>
           <aside className="flex gap-2">
