@@ -26,7 +26,7 @@ export const getProfileCard = async ({
   const query = `${cursorId ? `cursorId=${cursorId}&` : ""}pageSize=5&sortOrder=ASC`;
   const publicUrl = isPublic ? "/public" : "";
   const { data } = await instance.get<ResponseData<Profile>>(
-    `/profiles/${region}?${query}`,
+    `${publicUrl}/profiles/${region}?${query}`,
   );
   return data;
 };
