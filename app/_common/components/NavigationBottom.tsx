@@ -20,7 +20,7 @@ function NavigationBottom() {
   };
 
   const handleNoAuthClick = () => {
-    toast.warning("로그인 후 이용해주세요!", {
+    toast.info("로그인 후 이용해주세요!", {
       action: {
         label: "로그인하기",
         onClick: () => navigate("login"),
