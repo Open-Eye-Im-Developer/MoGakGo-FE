@@ -8,7 +8,7 @@ function DeletePage() {
   return (
     <>
       <StackNavigator element={"회원 탈퇴"} />
-      <main className="container flex min-h-screen max-w-2xl flex-col gap-8 pb-8">
+      <main className="container flex min-h-full max-w-2xl flex-col gap-8 pb-8">
         <div className="flex flex-col gap-4">
           {/* TODO: 추가 고지 사항 작성 */}
           <div className="text-sm">

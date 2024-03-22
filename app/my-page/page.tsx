@@ -26,6 +26,7 @@ function MyPage() {
       <Link href={"/notification"}>
         <Icon
           id="notification"
+          h-full
           size={24}
           className="absolute right-4 top-4 z-10"
         />

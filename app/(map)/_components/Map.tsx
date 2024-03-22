@@ -112,7 +112,7 @@ function Map() {
   };
 
   return (
-    <div className="relative h-screen w-screen touch-none overflow-hidden">
+    <div className="relative h-full w-screen touch-none overflow-hidden">
       <Icon
         id="vertical-logo"
         height={200}
@@ -129,7 +129,7 @@ function Map() {
       <div
         id="map-wrap"
         onClick={handleRegionClick}
-        className="absolute z-0 flex h-screen w-screen touch-none items-center justify-center transition-all duration-1000"
+        className="absolute z-0 flex h-full w-screen touch-none items-center justify-center transition-all duration-1000"
       >
         <MapComponent
           regionCode={regionCode}
@@ -138,7 +138,7 @@ function Map() {
       </div>
       <Carousel
         className={cn(
-          "z-60 h-screen w-screen transition-all delay-0 duration-300",
+          "z-60 h-full w-screen transition-all delay-0 duration-300",
           isListShow ? "visible opacity-100 delay-1000" : "invisible opacity-0",
         )}
         setApi={setCarouselApi}

@@ -12,7 +12,7 @@ export const viewport: Viewport = generateViewport(theme.SKY);
 function ReviewPage() {
   return (
     <Suspense fallback={<ReviewSkeleton />}>
-      <main className="map-background grid h-screen w-full place-items-center p-4">
+      <main className="map-background grid h-full w-full place-items-center p-4">
         <ReviewForm />
       </main>
     </Suspense>

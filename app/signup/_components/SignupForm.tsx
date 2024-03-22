@@ -74,7 +74,7 @@ function SignupForm() {
 
       <main className="p-6">
         <Form {...form}>
-          <form className="h-screen" onSubmit={form.handleSubmit(onSubmit)}>
+          <form className="h-full" onSubmit={form.handleSubmit(onSubmit)}>
             <SignupFirstStep
               form={form}
               className={cn(
