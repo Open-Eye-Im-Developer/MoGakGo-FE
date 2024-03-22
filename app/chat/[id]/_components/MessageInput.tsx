@@ -28,13 +28,14 @@ function MessageInput({
 }: MessageInputProp) {
   const { data } = useGetChats();
   const chats = data?.pages[0]?.data as ChatType[];
-
   const isActiveRoom = useMemo(() => {
     if (!isInCard) {
-      const room = chats.find(chat => chat.chatRoomId === chatRoomId) as ChatType;
+      const room = chats?.find(
+        chat => chat.chatRoomId === chatRoomId,
+      ) as ChatType;
       return room?.status;
     } else {
-      return "OPEN"
+      return "OPEN";
     }
   }, [chats, chatRoomId]);
 

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
+import "dayjs/locale/ko";
 
 import Profile from "@/app/chat/[id]/_components/Profile";
 import { cn } from "@/app/_common/shadcn/utils";
@@ -21,7 +22,7 @@ function Chat({ chat }: ChatProps) {
   } = chat;
 
   dayjs.extend(relativeTime);
-
+  dayjs.locale("ko");
   return (
     <Link
       href={{
@@ -45,12 +46,14 @@ function Chat({ chat }: ChatProps) {
           <div>
             <div className="font-medium">{matchedUser.username}</div>
             <span className="block w-40 truncate text-gray-500">
-              {lastMessage}
+              {lastMessage === null ? "" : lastMessage}
             </span>
           </div>
         </Profile>
         <div className="min-w-fit text-center text-sm text-gray-500">
-          {dayjs(lastMessageCreatedAt).fromNow()}
+          {lastMessageCreatedAt === null
+            ? ""
+            : dayjs(lastMessageCreatedAt).fromNow()}
         </div>
       </div>
     </Link>
