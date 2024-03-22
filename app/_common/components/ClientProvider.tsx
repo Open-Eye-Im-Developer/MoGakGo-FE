@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const ClientProvider = ({
@@ -12,7 +12,7 @@ const ClientProvider = ({
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        throwOnError: true,
+        throwOnError: false,
         refetchOnWindowFocus: false,
         retry: 0,
       },
