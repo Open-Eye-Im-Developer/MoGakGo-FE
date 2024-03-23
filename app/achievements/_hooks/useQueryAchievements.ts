@@ -21,7 +21,7 @@ export const useQueryAchievements = (staticUserId?: number) => {
 
   return {
     achievements: data,
-    myAchievement: data.find(
+    myCurrentAchievement: data.find(
       achievement => achievement.achievementId === userData?.achievementId,
     ),
     isLoading,
