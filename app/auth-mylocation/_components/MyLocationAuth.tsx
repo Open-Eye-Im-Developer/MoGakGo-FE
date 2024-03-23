@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { useQueryUserData } from "@/app/my-page/_hooks/useQueryUserData";
 import { usePositionStore } from "@/app/_common/store/usePositionStore";
 import { useModalStore } from "@/app/_common/store/useModalStore";
 import { cn } from "@/app/_common/shadcn/utils";
@@ -18,6 +17,8 @@ import MapComponent from "@/app/_common/components/MapComponent";
 import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
 import Icon from "@/app/_common/components/Icon";
 import CustomModal from "@/app/_common/components/CustomModal";
+
+import { useQuerySignUpUser } from "@/app/_common/hooks/queries/useQuerySignUpUser";
 
 import { CODE_TO_REGION_NAME } from "@/app/_common/constants/codeToRegionName";
 
@@ -37,7 +38,7 @@ function MyLocationAuth() {
   const { isAllowGPS } = usePositionStore();
   const { isAuthLocation, setAuthLocationOpen } = useModalStore();
 
-  const { data: user } = useQueryUserData();
+  const { data: user } = useQuerySignUpUser();
   const { data: areaCode, isLoading, isError } = useQueryGeoAreaCode();
 
   const { mutate } = useMutationAuthMyLocation();

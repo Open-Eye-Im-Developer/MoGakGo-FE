@@ -11,14 +11,13 @@ import {
   AlertDialogTrigger,
 } from "@/app/_common/shadcn/ui/alert-dialog";
 
+import { useQuerySignUpUser } from "@/app/_common/hooks/queries/useQuerySignUpUser";
 import { useDeleteUser } from "@/app/_common/hooks/mutation/useDeleteUser";
 
 import { toast } from "@/app/_common/utils/toast";
 
-import { useQueryUserData } from "../_hooks/useQueryUserData";
-
 function DeleteUserButton() {
-  const { data } = useQueryUserData();
+  const { data } = useQuerySignUpUser();
   const { mutate } = useDeleteUser();
 
   const handleCancelLike = () => {

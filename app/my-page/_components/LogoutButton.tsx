@@ -1,4 +1,5 @@
 import { useRouter } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { Button } from "@/app/_common/shadcn/ui/button";
 import {
@@ -18,11 +19,15 @@ import { deleteCookie } from "@/app/_common/utils/cookie";
 
 function LogoutButton() {
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const handleClickLogout = async () => {
     try {
       await deleteCookie("refreshToken", { path: "/" });
       await localStorage.removeItem("accessToken");
+      await queryClient.invalidateQueries({
+        queryKey: ["user"],
+      });
       router.push("/");
     } catch (error) {
       console.error(error);

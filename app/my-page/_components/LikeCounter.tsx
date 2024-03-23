@@ -2,12 +2,13 @@ import Link from "next/link";
 
 import { Skeleton } from "@/app/_common/shadcn/ui/skeleton";
 
-import { useQueryUserData } from "../_hooks/useQueryUserData";
+import { useQuerySignUpUser } from "@/app/_common/hooks/queries/useQuerySignUpUser";
+
 import { useQuerySendLikeCount } from "../_hooks/useQuerySendLikeCount";
 import { useQueryReceiveLikeCount } from "../_hooks/useQueryReceiveLikeCount";
 
 function LikeCounter() {
-  const { data: userData } = useQueryUserData();
+  const { data: userData } = useQuerySignUpUser();
   const { data: sendLikeCount } = useQuerySendLikeCount(userData?.id);
   const { data: receiveLikeCount } = useQueryReceiveLikeCount(userData?.id);
 
