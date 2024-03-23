@@ -34,7 +34,7 @@ export const NotificationTitle: {
     image: "achievement",
     color: "text-neoBlue",
   },
-  MATCHING_SUCCESSED: {
+  MATCHING_SUCCESS: {
     message: "매칭 성공",
     image: "match-accept",
     color: "text-neoRed",

@@ -2,5 +2,5 @@ export type NotificaitonTag =
   | "REVIEW_REQUEST"
   | "REQUEST_ARRIVAL"
   | "ACHIEVEMENT"
-  | "MATCHING_SUCCESSED"
+  | "MATCHING_SUCCESS"
   | "MATCHING_FAILED";
