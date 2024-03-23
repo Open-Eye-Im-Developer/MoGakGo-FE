@@ -13,7 +13,7 @@ import Chat from "./Chat";
 function ChatList() {
   const { ref, inView } = useInView();
   const { data, isLoading, fetchNextPage, hasNextPage } = useGetChats();
-  const chats = data?.pages.map(page => (page ? page.data : [])).flat();
+  const chats = data?.pages.map(page => (page ? page.data : [])).flat() ?? [];
 
   useEffect(() => {
     if (inView) {
@@ -32,7 +32,7 @@ function ChatList() {
 
   return (
     <>
-      {chats?.length ? (
+      {chats.length ? (
         <>
           {[...chats].map(chat => (
             <Chat chat={chat} key={chat.chatRoomId} />
