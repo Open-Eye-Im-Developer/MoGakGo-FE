@@ -1,5 +1,3 @@
-import { SignUpUser } from "@/app/signup/_type/signup";
-
 import { WANTED_JOB } from "../constants/wantedJob";
 
 export type Region =
@@ -33,7 +31,8 @@ export type Region =
 
 export type WantedJobs = (typeof WANTED_JOB)[number]["id"];
 
-export interface User extends SignUpUser {
+export interface User {
+  achievementId?: Achievement["achievementId"];
   region?: Region;
   region_authentication_at?: string;
   available_join_count?: number;
