@@ -44,7 +44,7 @@ export const useMutationLogin = () => {
 
       const userInfo = await queryClient.fetchQuery({
         queryFn: getSignUpUser,
-        queryKey: ["getSignUpUser"],
+        queryKey: ["user"],
       });
       setUser({ ...userInfo });
     },

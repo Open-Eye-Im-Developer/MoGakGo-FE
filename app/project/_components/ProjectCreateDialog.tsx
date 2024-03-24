@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 
-import { useQueryUserData } from "@/app/my-page/_hooks/useQueryUserData";
 import {
   Dialog,
   DialogContent,
@@ -21,6 +20,8 @@ import { Button } from "@/app/_common/shadcn/ui/button";
 import ProfileCard from "@/app/_common/components/ProfileCard";
 import Icon from "@/app/_common/components/Icon";
 
+import { useQuerySignUpUser } from "@/app/_common/hooks/queries/useQuerySignUpUser";
+
 import { User } from "@/app/_common/types/user";
 import { Profile } from "@/app/_common/types/profile";
 
@@ -35,7 +36,7 @@ interface DialogProfileState {
 function ProjectCreateDialog() {
   const [open, setOpen] = useState(false);
   const { flipped, handleFlip } = useFlip();
-  const { data: user, isFetched } = useQueryUserData();
+  const { data: user, isFetched } = useQuerySignUpUser();
   const [profile, setProfile] = useState<DialogProfileState | null>(null);
 
   useEffect(() => {

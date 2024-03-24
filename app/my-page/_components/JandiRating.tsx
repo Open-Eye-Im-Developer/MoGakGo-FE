@@ -1,11 +1,12 @@
 import { Skeleton } from "@/app/_common/shadcn/ui/skeleton";
 import { Progress } from "@/app/_common/shadcn/ui/progress";
 
-import { useQueryUserData } from "../_hooks/useQueryUserData";
+import { useQuerySignUpUser } from "@/app/_common/hooks/queries/useQuerySignUpUser";
+
 import { useQueryJandiRating } from "../_hooks/useQueryJandiRating";
 
 function JandiRating() {
-  const { data: userData } = useQueryUserData();
+  const { data: userData } = useQuerySignUpUser();
   const { data } = useQueryJandiRating(userData?.id);
 
   return (

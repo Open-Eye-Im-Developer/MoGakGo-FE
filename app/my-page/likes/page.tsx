@@ -6,13 +6,14 @@ import { Button } from "@/app/_common/shadcn/ui/button";
 
 import StackNavigator from "@/app/_common/components/StackNavigator";
 
-import { useQueryUserData } from "../_hooks/useQueryUserData";
+import { useQuerySignUpUser } from "@/app/_common/hooks/queries/useQuerySignUpUser";
+
 import { useInfiniteQueryLikes } from "../_hooks/useInfiniteQueryLikes";
 import UserCardSkeleton from "../_components/UserCardSkeleton";
 import UserCard from "../_components/UserCard";
 
 function LikesPage() {
-  const { data: user } = useQueryUserData();
+  const { data: user } = useQuerySignUpUser();
   const { data, fetchNextPage, hasNextPage, isFetching, isPending } =
     useInfiniteQueryLikes(user?.id);
 

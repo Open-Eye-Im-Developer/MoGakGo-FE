@@ -13,11 +13,11 @@ import {
   AlertDialogOverlay,
 } from "@/app/_common/shadcn/ui/alert-dialog";
 
-import { useQueryUserData } from "../_hooks/useQueryUserData";
+import { useQuerySignUpUser } from "@/app/_common/hooks/queries/useQuerySignUpUser";
 
 function LoginRequestModal() {
   const router = useRouter();
-  const { data, isLoading } = useQueryUserData();
+  const { data, isLoading } = useQuerySignUpUser();
 
   const handleClickLoginButton = () => {
     router.push("/login");

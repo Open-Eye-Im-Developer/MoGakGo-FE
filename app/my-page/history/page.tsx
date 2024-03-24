@@ -12,9 +12,10 @@ import { Button } from "@/app/_common/shadcn/ui/button";
 
 import StackNavigator from "@/app/_common/components/StackNavigator";
 
+import { useQuerySignUpUser } from "@/app/_common/hooks/queries/useQuerySignUpUser";
+
 import { MatchStatus } from "@/app/_common/types/matching";
 
-import { useQueryUserData } from "../_hooks/useQueryUserData";
 import { useInfiniteQueryProjectHistory } from "../_hooks/useInfiniteQueryProjectHistory";
 import ProjectCardSkeleton from "../_components/ProjectCardSkeleton";
 import ProjectCard from "../_components/ProjectCard";
@@ -34,7 +35,7 @@ function HistoryPage() {
     [currentTab],
   );
 
-  const { data: user } = useQueryUserData();
+  const { data: user } = useQuerySignUpUser();
   const { data, fetchNextPage, hasNextPage, isFetching, isPending } =
     useInfiniteQueryProjectHistory(user?.id, statusQuery);
 

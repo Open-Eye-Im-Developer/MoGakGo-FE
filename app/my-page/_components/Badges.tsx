@@ -2,15 +2,16 @@ import { SignUpUser } from "@/app/signup/_type/signup";
 import { Skeleton } from "@/app/_common/shadcn/ui/skeleton";
 import { Badge } from "@/app/_common/shadcn/ui/badge";
 
+import { useQuerySignUpUser } from "@/app/_common/hooks/queries/useQuerySignUpUser";
+
 import { WANTED_JOB } from "@/app/_common/constants/wantedJob";
 
-import { useQueryUserData } from "../_hooks/useQueryUserData";
 import DevelopLanguageModal from "./DevelopLanguageModal";
 
 const badgeStyle = "border border-black bg-white text-black";
 
 function Badges() {
-  const { data } = useQueryUserData();
+  const { data } = useQuerySignUpUser();
 
   if (!data) return <BadgesSkeleton />;
   return <BadgesLayout data={data} />;

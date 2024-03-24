@@ -9,10 +9,10 @@ import {
 
 import Icon from "@/app/_common/components/Icon";
 
-import { useQueryUserData } from "../_hooks/useQueryUserData";
+import { useQuerySignUpUser } from "@/app/_common/hooks/queries/useQuerySignUpUser";
 
 function MyAchievements() {
-  const { data: userData } = useQueryUserData();
+  const { data: userData } = useQuerySignUpUser();
   const { myAchievement } = useQueryAchievements(userData?.id);
 
   return (

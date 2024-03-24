@@ -3,13 +3,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Client } from "@stomp/stompjs";
 
-import { useQueryUserData } from "@/app/my-page/_hooks/useQueryUserData";
-
 import { Achievement } from "../types/user";
 import { cn } from "../shadcn/utils";
 import { useToast } from "../shadcn/ui/use-toast";
 import { Progress } from "../shadcn/ui/progress";
 import { Avatar, AvatarFallback, AvatarImage } from "../shadcn/ui/avatar";
+import { useQuerySignUpUser } from "../hooks/queries/useQuerySignUpUser";
 import { getAchievementDetail } from "../api/achievements";
 import { ModalState } from "./types/achievementModal";
 import AchievementModal from "./AchievementModal";
@@ -29,7 +28,7 @@ export const WebSocketProvider = ({
   children: React.ReactNode;
 }) => {
   const { toast } = useToast();
-  const { data: userData, isFetched } = useQueryUserData();
+  const { data: userData, isFetched } = useQuerySignUpUser();
   const [open, setOpen] = useState(false);
   const [modalState, setModalState] = useState<ModalState | null>(null);
   const client = useRef<Client | null>(null);

@@ -12,10 +12,10 @@ import { Form } from "@/app/_common/shadcn/ui/form";
 import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
 import CustomModal from "@/app/_common/components/CustomModal";
 
+import { useQuerySignUpUser } from "@/app/_common/hooks/queries/useQuerySignUpUser";
 import { useQueryDevelopLanguages } from "@/app/_common/hooks/queries/useQueryDevelopLanguages";
 
 import { SignupFormSchema } from "../_utils/validation";
-import { useQuerySignUpUser } from "../_hooks/useQuerySignUpUser";
 import { useMutationSignup } from "../_hooks/useMutationSignup";
 import SignupSecondStep from "./SignupSecondStep";
 import SignupFirstStep from "./SignupFirstStep";

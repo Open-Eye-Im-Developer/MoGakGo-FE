@@ -19,14 +19,15 @@ import {
 
 import Icon from "@/app/_common/components/Icon";
 
+import { useQuerySignUpUser } from "@/app/_common/hooks/queries/useQuerySignUpUser";
+
 import { MATCH_STATUS } from "@/app/_common/constants/matchStatus";
 
-import { useQueryUserData } from "../_hooks/useQueryUserData";
 import { useQueryCurrentMatchingProject } from "../_hooks/useQueryCurrentMatchingProject";
 import ProjectCardSkeleton from "./ProjectCardSkeleton";
 
 function MyCurrentMatchingProject() {
-  const { data: userData } = useQueryUserData();
+  const { data: userData } = useQuerySignUpUser();
   const { project, matchingId, isLoading } = useQueryCurrentMatchingProject(
     userData?.id,
   );

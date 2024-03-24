@@ -6,12 +6,13 @@ import Link from "next/link";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { useQueryUserData } from "@/app/my-page/_hooks/useQueryUserData";
 import { Separator } from "@/app/_common/shadcn/ui/separator";
 import { Form, FormMessage } from "@/app/_common/shadcn/ui/form";
 import { Button } from "@/app/_common/shadcn/ui/button";
 
 import Icon from "@/app/_common/components/Icon";
+
+import { useQuerySignUpUser } from "@/app/_common/hooks/queries/useQuerySignUpUser";
 
 import formatTime from "../_utils/formatTime";
 import { FormmatedValues } from "../_types/type";
@@ -28,7 +29,7 @@ interface ProjectCreateFormProps {
 function ProjectCreateForm(props: ProjectCreateFormProps) {
   const { onClose } = props;
   const { createNewProject } = useCreateProjectMutation(onClose);
-  const { data: user } = useQueryUserData();
+  const { data: user } = useQuerySignUpUser();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -112,7 +113,7 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
           <div className="text-black">
             <Link
               href="https://beomahn.notion.site/24b02e4a402845b8ab9e1ed34dac31d0?pvs=4"
-              className="text-xs text-[#a2a2a2] flex items-center gap-2"
+              className="flex items-center gap-2 text-xs text-[#a2a2a2]"
             >
               <Icon id="question-mark-fill" size={18} />
               <span>프로젝트 생성 방법</span>

@@ -21,6 +21,8 @@ import {
 import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
 import Icon from "@/app/_common/components/Icon";
 
+import { useQuerySignUpUser } from "@/app/_common/hooks/queries/useQuerySignUpUser";
+
 import { MATCH_STATUS } from "@/app/_common/constants/matchStatus";
 
 import {
@@ -29,7 +31,6 @@ import {
 } from "@/app/_common/types/project";
 import { Match } from "@/app/_common/types/matching";
 
-import { useQueryUserData } from "../_hooks/useQueryUserData";
 import { useQueryProjectDetail } from "../_hooks/useQueryProjectDetail";
 import MatchCancelButton from "./MatchCancelButton";
 
@@ -69,7 +70,7 @@ function ProjectCard({ data, isModal }: CardProps) {
       };
     }
   }, [data]);
-  const { data: userData } = useQueryUserData();
+  const { data: userData } = useQuerySignUpUser();
   const [projectId, setProjectId] = useState<number | null>(null);
 
   const { projectDetail, isLoading } = useQueryProjectDetail(
