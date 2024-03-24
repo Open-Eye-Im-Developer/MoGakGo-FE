@@ -30,9 +30,6 @@ function AchievementList() {
 
   const [myAchievement, setMyAchievement] = useState(myCurrentAchievement);
 
-  // const [isMyAchievement, setIsMyAchievement] = useState(
-  //   myAchievement.data?.achievementId === user?.achievementId,
-  // );
   const [sorting, setSorting] = useState<Achievement[]>([]);
 
   useEffect(() => {
