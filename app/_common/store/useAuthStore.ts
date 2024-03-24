@@ -1,10 +1,10 @@
 import { persist } from "zustand/middleware";
 import { create } from "zustand";
 
-import { User } from "../types/user";
+import { SignUpUser } from "@/app/signup/_type/signup";
 
 interface AuthState {
-  user: User | null;
+  user: SignUpUser | null;
 }
 
 interface AuthAction {

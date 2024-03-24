@@ -1,10 +1,9 @@
 import { AxiosError } from "axios";
 
-import { SignupRequest } from "@/app/signup/_type/signup";
+import { SignUpUser, SignupRequest } from "@/app/signup/_type/signup";
 import { reIssueAccessTokenResponse } from "@/app/login/_types/login.types";
 
 import { navigate } from "../utils/redirect";
-import { User } from "../types/user";
 import { instance } from "../api/instance";
 
 export const postLogin = async (code: string) => {
@@ -41,7 +40,7 @@ export const deleteUser = async () => {
 };
 
 export const getSignUpUser = async () => {
-  const { data } = await instance.get<User>("/user");
+  const { data } = await instance.get<SignUpUser>("/user");
 
   return data;
 };

@@ -1,4 +1,4 @@
-import { UserAchievement, WantedJobs } from "@/app/_common/types/user";
+import { User, WantedJobs } from "@/app/_common/types/user";
 
 export interface Language {
   imageUrl: string;
@@ -6,7 +6,7 @@ export interface Language {
   byteSize: number;
 }
 
-export interface SignUpUser extends UserAchievement {
+export interface SignUpUser extends User {
   id: number;
   username: string;
   githubId: string;
