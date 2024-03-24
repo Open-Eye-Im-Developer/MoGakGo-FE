@@ -25,7 +25,7 @@ export const NotificationTitle: {
     color: "text-neoBlue",
   },
   REQUEST_ARRIVAL: {
-    message: "찔러보기",
+    message: "매칭 참여 요청",
     image: "alert-follow",
     color: "text-neoBlue",
   },
@@ -34,7 +34,7 @@ export const NotificationTitle: {
     image: "achievement",
     color: "text-neoBlue",
   },
-  MATCHING_SUCCESSED: {
+  MATCHING_SUCCESS: {
     message: "매칭 성공",
     image: "match-accept",
     color: "text-neoRed",
