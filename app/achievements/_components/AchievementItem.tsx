@@ -134,7 +134,7 @@ function AchievementItem({
                 </p>
               )}
 
-              {!isCompleted &&
+              {isCompleted &&
                 myAchievement?.achievementId !== achievementId && (
                   <Button
                     className="row-span-3"
