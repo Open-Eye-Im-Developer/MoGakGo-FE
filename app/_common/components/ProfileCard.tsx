@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Link from "next/link";
 
 import InfoPopover from "@/app/project/_components/InfoPopover";
 import ButtonRotate from "@/app/project/_components/ButtonRotate";
 import ButtonLike from "@/app/project/_components/ButtonLike";
-import { useQueryAchievements } from "@/app/achievements/_hooks/useQueryAchievements";
 import useToggleLikeProfile from "@/app/(map)/_api/useToggleLikeProfile";
 
 import { toast } from "../utils/toast";
@@ -20,6 +19,7 @@ import {
   CardHeader,
 } from "../shadcn/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "../shadcn/ui/avatar";
+import { ACHIEVEMENTS_ID_TO_TITLE } from "../constants/achievements";
 import Icon from "./Icon";
 
 interface ProfileCardProps {
@@ -38,6 +38,7 @@ function ProfileCard(props: ProfileCardProps) {
         avatarUrl,
         githubUrl,
         bio,
+        achievementId,
         jandiRate,
         developLanguages,
         wantedJobs,
@@ -50,18 +51,8 @@ function ProfileCard(props: ProfileCardProps) {
 
   const { user } = useAuthStore();
   const { toggleLikeProfile, isLiked } = useToggleLikeProfile();
-  const { myCurrentAchievement, isFetched } = useQueryAchievements();
   const isPublic = user === null;
   const blurEffect = isPublic ? "blur-sm pointer-events-none" : "";
-  const [myAchievementTitle, setMyAchievementTitle] = useState<string | null>(
-    null,
-  );
-
-  useEffect(() => {
-    if (isFetched) {
-      setMyAchievementTitle(myCurrentAchievement!.title);
-    }
-  }, [isFetched, myCurrentAchievement]);
 
   const handleToggleButton = () => {
     if (!user) {
@@ -126,7 +117,7 @@ function ProfileCard(props: ProfileCardProps) {
                 </span>
               </h1>
               <h3 className="mt-3 text-xs font-bold text-[#F76A6A]">
-                {myAchievementTitle ?? ""}
+                {ACHIEVEMENTS_ID_TO_TITLE[achievementId] ?? ""}
               </h3>
             </div>
             <p className="line-clamp-3 w-40 grow overflow-hidden text-center text-sm">

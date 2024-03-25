@@ -27,6 +27,8 @@ import {
 
 import Icon from "@/app/_common/components/Icon";
 
+import { ACHIEVEMENTS_ID_TO_TITLE } from "@/app/_common/constants/achievements";
+
 import { Project } from "@/app/_common/types/project";
 
 import formatMeetingTime from "../_utils/formatMeetingTime";
@@ -60,6 +62,7 @@ function ProjectCardFront(props: CardFrontProps) {
         bio,
         wantedJobs,
         jandiRate,
+        achievementId,
         developLanguages,
       },
       projectTags,
@@ -68,7 +71,6 @@ function ProjectCardFront(props: CardFrontProps) {
       meetingInfo: { meetDetail, meetEndTime, meetStartTime },
     },
     matchingId,
-    achievementTitle,
     isAccepted,
   } = props;
   const { user } = useAuthStore();
@@ -151,7 +153,7 @@ function ProjectCardFront(props: CardFrontProps) {
                 </span>
               </h1>
               <h3 className="mt-3 text-xs font-bold text-[#F76A6A]">
-                {achievementTitle ?? ""}
+                {ACHIEVEMENTS_ID_TO_TITLE[achievementId] ?? ""}
               </h3>
             </div>
             <p className="line-clamp-3 w-40 overflow-hidden text-center text-sm">
