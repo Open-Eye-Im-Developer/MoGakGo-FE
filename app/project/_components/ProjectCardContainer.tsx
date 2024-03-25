@@ -49,7 +49,7 @@ function ProjectCardContainer({ project, matchingId }: Props) {
     matchingId,
     isAccepted,
   );
-  const { myAchievement } = useQueryAchievements();
+  const { myCurrentAchievement } = useQueryAchievements();
 
   const handleMoreButton = () => {
     if (Array.isArray(data)) {
@@ -103,7 +103,7 @@ function ProjectCardContainer({ project, matchingId }: Props) {
             onRotate={handleFlip}
             project={project}
             matchingId={matchingId}
-            achievementTitle={myAchievement?.title}
+            achievementTitle={myCurrentAchievement?.title}
             isAccepted={isAccepted}
           />
           <ProjectCardBack

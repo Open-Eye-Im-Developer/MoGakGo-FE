@@ -50,7 +50,7 @@ function ProfileCard(props: ProfileCardProps) {
 
   const { user } = useAuthStore();
   const { toggleLikeProfile, isLiked } = useToggleLikeProfile();
-  const { myAchievement } = useQueryAchievements();
+  const { myCurrentAchievement } = useQueryAchievements();
   const isPublic = user === null;
   const blurEffect = isPublic ? "blur-sm pointer-events-none" : "";
   const handleToggleButton = () => {
