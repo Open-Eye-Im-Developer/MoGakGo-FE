@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 import InfoPopover from "@/app/project/_components/InfoPopover";
@@ -50,9 +50,19 @@ function ProfileCard(props: ProfileCardProps) {
 
   const { user } = useAuthStore();
   const { toggleLikeProfile, isLiked } = useToggleLikeProfile();
-  const { myCurrentAchievement } = useQueryAchievements();
+  const { myCurrentAchievement, isFetched } = useQueryAchievements();
   const isPublic = user === null;
   const blurEffect = isPublic ? "blur-sm pointer-events-none" : "";
+  const [myAchievementTitle, setMyAchievementTitle] = useState<string | null>(
+    null,
+  );
+
+  useEffect(() => {
+    if (isFetched) {
+      setMyAchievementTitle(myCurrentAchievement!.title);
+    }
+  }, [isFetched, myCurrentAchievement]);
+
   const handleToggleButton = () => {
     if (!user) {
       toast.info("로그인 후 찜하기를 할 수 있어요!");
@@ -116,7 +126,7 @@ function ProfileCard(props: ProfileCardProps) {
                 </span>
               </h1>
               <h3 className="mt-3 text-xs font-bold text-[#F76A6A]">
-                {myCurrentAchievement?.title ?? ""}
+                {myAchievementTitle ?? ""}
               </h3>
             </div>
             <p className="line-clamp-3 w-40 grow overflow-hidden text-center text-sm">
