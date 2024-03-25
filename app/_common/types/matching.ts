@@ -1,4 +1,9 @@
-export type MatchStatus = "PENDING" | "MATCHED" | "CANCELED" | "FINISHED";
+export type MatchStatus =
+  | "PENDING"
+  | "MATCHED"
+  | "PROGRESS"
+  | "CANCELED"
+  | "FINISHED";
 
 export interface Match {
   matchingId: number;
