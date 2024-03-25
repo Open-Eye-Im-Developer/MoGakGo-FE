@@ -54,7 +54,7 @@ function ProjectCardContainer({ project, matchingId }: Props) {
   const handleMoreButton = () => {
     if (Array.isArray(data)) {
       const lastItem = data[data.length - 1];
-      if (lastItem) {
+      if (lastItem && cursorId !== lastItem) {
         setCursorId(lastItem.id);
       }
     }
