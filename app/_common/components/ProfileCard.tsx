@@ -116,7 +116,7 @@ function ProfileCard(props: ProfileCardProps) {
                 </span>
               </h1>
               <h3 className="mt-3 text-xs font-bold text-[#F76A6A]">
-                {myCurrentAchievement?.title ?? "칭호가 없습니다."}
+                {myCurrentAchievement?.title ?? ""}
               </h3>
             </div>
             <p className="line-clamp-3 w-40 grow overflow-hidden text-center text-sm">

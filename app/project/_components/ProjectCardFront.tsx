@@ -151,7 +151,7 @@ function ProjectCardFront(props: CardFrontProps) {
                 </span>
               </h1>
               <h3 className="mt-3 text-xs font-bold text-[#F76A6A]">
-                {achievementTitle ?? "칭호가 없습니다."}
+                {achievementTitle ?? ""}
               </h3>
             </div>
             <p className="line-clamp-3 w-40 overflow-hidden text-center text-sm">
