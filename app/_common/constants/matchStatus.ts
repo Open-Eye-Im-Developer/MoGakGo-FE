@@ -1,6 +1,7 @@
 const dict: { [key: string]: { label: string; color: string } } = {
-  PENDING: { label: "매칭중", color: "bg-neoBlue" },
+  PROGRESS: { label: "매칭중", color: "bg-neoGreen" },
   MATCHED: { label: "매칭됨", color: "bg-neoGreen" },
+  PENDING: { label: "보류", color: "bg-neoYellow" },
   CANCELED: { label: "취소", color: "bg-neoYellow" },
   FINISHED: { label: "종료", color: "bg-neoRed" },
 };
