@@ -9,13 +9,14 @@ import Icon from "./Icon";
 interface StackNavigatorProps extends ComponentProps<"header"> {
   element: React.ReactNode;
   path?: string;
+  rightItem?: React.ReactNode;
 }
 
 function StackNavigator({
   element,
   path,
+  rightItem,
   className,
-  children,
   ...props
 }: StackNavigatorProps) {
   const router = useRouter();
@@ -32,17 +33,21 @@ function StackNavigator({
 
   return (
     <header
-      className={cn("relative px-4 py-8 text-center text-lg", className)}
+      className={cn(
+        "relative flex w-full items-center justify-between px-4 py-8 text-center text-lg",
+        className,
+      )}
       {...props}
     >
-      <Icon
-        id="chevron-left"
-        size={24}
-        className="absolute cursor-pointer"
-        onClick={!path ? handleBack : handlePushPath}
-      />
+      <div className="cursor-pointer">
+        <Icon
+          id="chevron-left"
+          size={24}
+          onClick={!path ? handleBack : handlePushPath}
+        />
+      </div>
       <h2>{element}</h2>
-      {children}
+      <div className="cursor-pointer">{rightItem}</div>
     </header>
   );
 }
