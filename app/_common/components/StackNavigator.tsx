@@ -12,6 +12,8 @@ interface StackNavigatorProps extends ComponentProps<"header"> {
   rightItem?: React.ReactNode;
 }
 
+const itemStyle = "flex-1 basis-1 *:cursor-pointer";
+
 function StackNavigator({
   element,
   path,
@@ -39,7 +41,7 @@ function StackNavigator({
       )}
       {...props}
     >
-      <div className="cursor-pointer">
+      <div className={itemStyle}>
         <Icon
           id="chevron-left"
           size={24}
@@ -47,7 +49,7 @@ function StackNavigator({
         />
       </div>
       <h2>{element}</h2>
-      <div className="cursor-pointer">{rightItem}</div>
+      <div className={itemStyle}>{rightItem}</div>
     </header>
   );
 }
