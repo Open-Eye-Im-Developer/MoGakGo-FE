@@ -47,6 +47,7 @@ function AchievementItem({
     description,
     requirementValue,
     progressCount,
+    progressLevel,
   } = achievement;
 
   const { mutate } = useMutationUserAchievement(setMyAchievement);
@@ -134,16 +135,17 @@ function AchievementItem({
                 </p>
               )}
 
-              {isCompleted &&
-                myAchievement?.achievementId !== achievementId && (
-                  <Button
-                    className="row-span-3"
-                    variant={"outline"}
-                    onClick={handleSubmitAchievement}
-                  >
-                    변경
-                  </Button>
-                )}
+              {progressLevel >= 2 ||
+                (isCompleted &&
+                  myAchievement?.achievementId !== achievementId && (
+                    <Button
+                      className="row-span-3"
+                      variant={"outline"}
+                      onClick={handleSubmitAchievement}
+                    >
+                      변경
+                    </Button>
+                  ))}
             </div>
           </AccordionContent>
         </AccordionItem>
