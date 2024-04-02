@@ -1,6 +1,6 @@
 "use client";
 
-import { ComponentProps, useState } from "react";
+import { ComponentProps, Dispatch, SetStateAction } from "react";
 import Image from "next/image";
 
 import { SignUpUser } from "@/app/signup/_type/signup";
@@ -26,23 +26,18 @@ interface AchievementItemProps {
   userId: SignUpUser["id"];
   styleType: "main" | "item";
   achievement: Achievement;
-  myAchievement: Achievement | null;
+  myAchievement?: Achievement | undefined;
   className?: ComponentProps<typeof cn>;
+  setMyAchievement: Dispatch<SetStateAction<Achievement | undefined>>;
 }
 
 function AchievementItem({
-  userId: loginUserId,
   styleType,
   achievement,
   className,
   myAchievement,
+  setMyAchievement,
 }: AchievementItemProps) {
-  const [isMyAchievement, setIsMyAchievement] = useState(
-    myAchievement
-      ? myAchievement.achievementId === achievement.achievementId
-      : false,
-  );
-
   const {
     userId,
     achievementId,
@@ -54,10 +49,7 @@ function AchievementItem({
     progressCount,
   } = achievement;
 
-  const { mutate } = useMutationUserAchievement(
-    setIsMyAchievement,
-    loginUserId,
-  );
+  const { mutate } = useMutationUserAchievement(setMyAchievement);
 
   const leftToComplete =
     requirementValue - progressCount < 0 ? 0 : requirementValue - progressCount;
@@ -89,7 +81,7 @@ function AchievementItem({
             <div
               className={cn(
                 styleType !== "main" ? "w-[50px]" : "w-[100px]",
-                isMyAchievement
+                myAchievement
                   ? "border-2 border-neoYellow"
                   : "border-2 border-white",
                 "rounded-full bg-white shadow-neo-thin",
@@ -142,15 +134,16 @@ function AchievementItem({
                 </p>
               )}
 
-              {isCompleted && !isMyAchievement && (
-                <Button
-                  className="row-span-3"
-                  variant={"outline"}
-                  onClick={handleSubmitAchievement}
-                >
-                  변경
-                </Button>
-              )}
+              {isCompleted &&
+                myAchievement?.achievementId !== achievementId && (
+                  <Button
+                    className="row-span-3"
+                    variant={"outline"}
+                    onClick={handleSubmitAchievement}
+                  >
+                    변경
+                  </Button>
+                )}
             </div>
           </AccordionContent>
         </AccordionItem>

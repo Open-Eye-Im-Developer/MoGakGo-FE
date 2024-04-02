@@ -50,7 +50,7 @@ function ProfileCard(props: ProfileCardProps) {
 
   const { user } = useAuthStore();
   const { toggleLikeProfile, isLiked } = useToggleLikeProfile();
-  const { myAchievement } = useQueryAchievements();
+  const { myCurrentAchievement } = useQueryAchievements();
   const isPublic = user === null;
   const blurEffect = isPublic ? "blur-sm pointer-events-none" : "";
   const handleToggleButton = () => {
@@ -116,7 +116,7 @@ function ProfileCard(props: ProfileCardProps) {
                 </span>
               </h1>
               <h3 className="mt-3 text-xs font-bold text-[#F76A6A]">
-                {myAchievement?.title ?? "칭호가 없습니다."}
+                {myCurrentAchievement?.title ?? ""}
               </h3>
             </div>
             <p className="line-clamp-3 w-40 grow overflow-hidden text-center text-sm">

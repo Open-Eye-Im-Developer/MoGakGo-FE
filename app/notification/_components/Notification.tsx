@@ -27,7 +27,7 @@ function Notification({ notification }: NotificationProps) {
 
   const redirectPaths: { [key in string]: string } = {
     ACHIEVEMENT: "/my-page",
-    MATCHING_SUCCESSED: isToday ? "/project" : "",
+    MATCHING_SUCCESS: isToday ? "/project" : "",
     REVIEW_REQUEST: `/review?receiverId=${data?.receiverId}&projectId=${data?.projectId}`,
   };
 

@@ -93,7 +93,7 @@ const ProjectCardBack = forwardRef<HTMLDivElement, CardBackProps>(
                           <p className="text-xs text-[#F76A6A]">
                             {ACHIEVEMENTS_ID_TO_TITLE[
                               senderPreview.achievementId
-                            ] ?? "null"}
+                            ] ?? ""}
                           </p>
                         </div>
                       </aside>

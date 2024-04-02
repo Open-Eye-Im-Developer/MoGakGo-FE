@@ -72,7 +72,7 @@ export const WebSocketProvider = ({
                 <aside className="flex items-center gap-3">
                   <Avatar className="h-12 w-12 shadow-neo-thin">
                     <AvatarImage src={imgUrl} />
-                    <AvatarFallback>CN</AvatarFallback>
+                    <AvatarFallback></AvatarFallback>
                   </Avatar>
                   <h3 className="text-base font-bold">
                     <span>{achievementTitle}</span>
