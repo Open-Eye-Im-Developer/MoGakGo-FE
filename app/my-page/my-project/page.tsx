@@ -6,13 +6,14 @@ import { Button } from "@/app/_common/shadcn/ui/button";
 
 import StackNavigator from "@/app/_common/components/StackNavigator";
 
-import { useQueryUserData } from "../_hooks/useQueryUserData";
+import { useQuerySignUpUser } from "@/app/_common/hooks/queries/useQuerySignUpUser";
+
 import { useInfiniteQueryProjectList } from "../_hooks/useInfiniteQueryProjectList";
 import ProjectCardSkeleton from "../_components/ProjectCardSkeleton";
 import ProjectCard from "../_components/ProjectCard";
 
 function MyProjectPage() {
-  const { data: user } = useQueryUserData();
+  const { data: user } = useQuerySignUpUser();
   const { data, fetchNextPage, hasNextPage, isFetching, isPending } =
     useInfiniteQueryProjectList(user?.id);
 

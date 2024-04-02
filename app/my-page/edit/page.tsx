@@ -4,11 +4,12 @@ import { useMemo } from "react";
 
 import StackNavigator from "@/app/_common/components/StackNavigator";
 
-import { useQueryUserData } from "../_hooks/useQueryUserData";
+import { useQuerySignUpUser } from "@/app/_common/hooks/queries/useQuerySignUpUser";
+
 import EditForm from "../_components/EditForm";
 
 function EditPage() {
-  const { data: userData } = useQueryUserData();
+  const { data: userData } = useQuerySignUpUser();
 
   const data = useMemo(() => {
     if (!userData) return;

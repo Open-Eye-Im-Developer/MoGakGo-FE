@@ -10,14 +10,14 @@ import {
   AvatarImage,
 } from "@/app/_common/shadcn/ui/avatar";
 
-import { Achievement } from "@/app/_common/types/user";
+import { useQuerySignUpUser } from "@/app/_common/hooks/queries/useQuerySignUpUser";
 
-import { useQueryUserData } from "../_hooks/useQueryUserData";
+import { Achievement } from "@/app/_common/types/user";
 
 const buttonStyle = "h-8 text-xs shadow-neo-thin text-black";
 
 function Profile() {
-  const { data } = useQueryUserData();
+  const { data } = useQuerySignUpUser();
   const { myAchievement } = useQueryAchievements();
 
   if (!data) return <ProfileSkeleton />;

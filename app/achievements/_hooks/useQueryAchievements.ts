@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { useQuerySignUpUser } from "@/app/signup/_hooks/useQuerySignUpUser";
 import { getAchievements } from "@/app/_common/api/achievements";
+
+import { useQuerySignUpUser } from "@/app/_common/hooks/queries/useQuerySignUpUser";
 
 import { Achievement } from "@/app/_common/types/user";
 

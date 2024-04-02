@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 
+import { useQuerySignUpUser } from "../_common/hooks/queries/useQuerySignUpUser";
 import WithNavigation from "../_common/hoc/WithNavigation";
 import StackNavigator from "../_common/components/StackNavigator";
 import Icon from "../_common/components/Icon";
-import { useQueryUserData } from "./_hooks/useQueryUserData";
 import Profile from "./_components/Profile";
 import MyProjectRequests from "./_components/MyProjectRequests";
 import MyProjectList from "./_components/MyProjectList";
@@ -19,7 +19,7 @@ import Badges from "./_components/Badges";
 const FAQ_URL = process.env.NEXT_PUBLIC_FAQ_URL;
 
 function MyPage() {
-  const { data: userData } = useQueryUserData();
+  const { data: userData } = useQuerySignUpUser();
 
   return (
     <div className="relative">

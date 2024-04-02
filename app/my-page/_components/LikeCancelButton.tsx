@@ -11,9 +11,10 @@ import {
   AlertDialogTrigger,
 } from "@/app/_common/shadcn/ui/alert-dialog";
 
+import { useQuerySignUpUser } from "@/app/_common/hooks/queries/useQuerySignUpUser";
+
 import { toast } from "@/app/_common/utils/toast";
 
-import { useQueryUserData } from "../_hooks/useQueryUserData";
 import { useMutationCancelLike } from "../_hooks/useMutationCancelLike";
 
 interface LikeCancelButtonProps {
@@ -22,7 +23,7 @@ interface LikeCancelButtonProps {
 
 function LikeCancelButton(props: LikeCancelButtonProps) {
   const { id } = props;
-  const { data } = useQueryUserData();
+  const { data } = useQuerySignUpUser();
   const { mutate } = useMutationCancelLike();
 
   const handleCancelLike = () => {

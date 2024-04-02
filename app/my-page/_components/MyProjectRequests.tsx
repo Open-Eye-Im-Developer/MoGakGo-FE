@@ -2,13 +2,14 @@ import Link from "next/link";
 
 import Icon from "@/app/_common/components/Icon";
 
-import { useQueryUserData } from "../_hooks/useQueryUserData";
+import { useQuerySignUpUser } from "@/app/_common/hooks/queries/useQuerySignUpUser";
+
 import { useQueryProjectRequests } from "../_hooks/useQueryProjectRequests";
 import ProjectCardSkeleton from "./ProjectCardSkeleton";
 import ProjectCard from "./ProjectCard";
 
 function MyProjectRequests() {
-  const { data: userData } = useQueryUserData();
+  const { data: userData } = useQuerySignUpUser();
   const { data } = useQueryProjectRequests(userData?.id, 3);
 
   return (
