@@ -13,7 +13,7 @@ import { useQuerySignUpUser } from "@/app/_common/hooks/queries/useQuerySignUpUs
 
 function MyAchievements() {
   const { data: userData } = useQuerySignUpUser();
-  const { myAchievement } = useQueryAchievements(userData?.id);
+  const { myCurrentAchievement } = useQueryAchievements(userData?.id);
 
   return (
     <div className="flex w-full flex-col gap-4">

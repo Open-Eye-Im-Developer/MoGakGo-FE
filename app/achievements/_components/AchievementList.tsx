@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from "react";
 
-import { useQuerySignUpUser } from "@/app/signup/_hooks/useQuerySignUpUser";
 import WithOnMounted from "@/app/_common/hoc/WithOnMounted";
 
 import LoadingSpinner from "@/app/_common/components/LoadingSpinner";
+
+import { useQuerySignUpUser } from "@/app/_common/hooks/queries/useQuerySignUpUser";
 
 import { Achievement } from "@/app/_common/types/user";
 
