@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { useQueryAchievements } from "@/app/achievements/_hooks/useQueryAchievements";
 import { cn } from "@/app/_common/shadcn/utils";
 import {
   Tabs,
@@ -49,12 +48,11 @@ function ProjectCardContainer({ project, matchingId }: Props) {
     matchingId,
     isAccepted,
   );
-  const { myCurrentAchievement } = useQueryAchievements();
 
   const handleMoreButton = () => {
     if (Array.isArray(data)) {
       const lastItem = data[data.length - 1];
-      if (lastItem) {
+      if (lastItem && cursorId !== lastItem) {
         setCursorId(lastItem.id);
       }
     }
@@ -103,7 +101,6 @@ function ProjectCardContainer({ project, matchingId }: Props) {
             onRotate={handleFlip}
             project={project}
             matchingId={matchingId}
-            achievementTitle={myCurrentAchievement?.title}
             isAccepted={isAccepted}
           />
           <ProjectCardBack
