@@ -20,9 +20,12 @@ https://github.com/Envoy-VC/awesome-badges?tab=readme-ov-file#-cloud
 
 ![모각고 배너2](https://github.com/Open-Eye-Im-Developer/MoGakGo-FE/assets/114740795/33eea441-0b3d-412b-a2e8-1120170b67fa)
 
-👉 **[MoGakGo Link](https://mogak-go.vercel.app/)** 👈
+<s>👉 **[MoGakGo Link](https://mogak-go.vercel.app/)** 👈</s>
 
 </div>
+
+## NOTICE
+**현재 데브코스 AWS 지원이 종료되어, 서비스 이용이 불가합니다 😢**
 
 ## 👀 OEID Members
 
