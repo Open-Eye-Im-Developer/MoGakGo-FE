@@ -67,6 +67,7 @@ export interface Achievement {
   requirementValue: number;
   requirementType?: "SEQUENCE" | "ACCUMULATE";
   progressCount: number;
+  progressLevel: number;
   completed?: boolean;
 }
 
